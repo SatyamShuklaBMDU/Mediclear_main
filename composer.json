@@ -1,0 +1,6 @@
+{
+    "require": {
+        "yajra/laravel-datatables-oracle": "^10.11",
+        "simplesoftwareio/simple-qrcode": "^4.2"
+    }
+}
