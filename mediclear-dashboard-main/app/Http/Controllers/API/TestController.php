@@ -75,9 +75,7 @@ class TestController extends Controller
                 ),
                 404
             );
-
         }
-
     }
     public function hearingdata(Request $request)
     {

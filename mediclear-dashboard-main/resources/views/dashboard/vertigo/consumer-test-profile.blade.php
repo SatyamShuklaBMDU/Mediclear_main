@@ -129,12 +129,15 @@
     .circular-chart.blue .circle {
         stroke: #3c9ee5;
     }
+
     .circular-chart.red .circle {
         stroke: #e5533c;
     }
+
     .circular-chart.pink .circle {
         stroke: #e53ca4;
     }
+
     .circular-chart.yellow .circle {
         stroke: #e5dd3c;
     }
@@ -265,12 +268,14 @@
     .dropdown-select:hover {
         background-color: #fff;
     }
+
     .dropdown-select:active,
     .dropdown-select.open {
         background-color: #fff !important;
         border-color: #bbb;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) inset;
     }
+
     .dropdown-select:after {
         height: 0;
         width: 0;
@@ -288,10 +293,12 @@
         right: 10px;
         top: 50%;
     }
+
     .dropdown-select.open:after {
         -webkit-transform: rotate(-180deg);
         transform: rotate(-180deg);
     }
+
     .dropdown-select.open .list {
         -webkit-transform: scale(1);
         transform: scale(1);
@@ -302,14 +309,17 @@
     .dropdown-select.open .option {
         cursor: pointer;
     }
+
     .dropdown-select.wide {
         width: 100%;
     }
+
     .dropdown-select.wide .list {
         left: 0 !important;
         right: 0 !important;
         top: -213px;
     }
+
     .dropdown-select .list {
         box-sizing: border-box;
         transition: all 0.15s cubic-bezier(0.25, 0, 0.25, 1.75), opacity 0.1s linear;
@@ -333,9 +343,11 @@
         overflow: auto;
         border: 1px solid #ddd;
     }
+
     .dropdown-select .list:hover .option:not(:hover) {
         background-color: transparent !important;
     }
+
     .dropdown-select .dd-search {
         overflow: hidden;
         display: flex;
@@ -343,6 +355,7 @@
         justify-content: center;
         margin: 0.5rem;
     }
+
     .dropdown-select .dd-searchbox {
         width: 90%;
         padding: 0.5rem;
@@ -351,12 +364,15 @@
         border-radius: 4px;
         outline: none;
     }
+
     .dropdown-select .dd-searchbox:focus {
         border-color: #12CBC4;
     }
+
     .dropdown-select .list ul {
         padding: 0;
     }
+
     .dropdown-select .option {
         cursor: default;
         font-weight: 400;
@@ -368,32 +384,40 @@
         transition: all 0.2s;
         list-style: none;
     }
+
     .dropdown-select .option:hover,
     .dropdown-select .option:focus {
         background-color: #f6f6f6 !important;
     }
+
     .dropdown-select .option.selected {
         font-weight: 600;
         color: #12cbc4;
     }
+
     .dropdown-select .option.selected:focus {
         background: #f6f6f6;
     }
+
     .dropdown-select a {
         color: #aaa;
         text-decoration: none;
         transition: all 0.2s ease-in-out;
     }
+
     .dropdown-select a:hover {
         color: #666;
     }
+
     .form-check-input {
         border: 1px solid #5a5c69 !important;
     }
+
     .yellow {
         width: 400px;
         background-color: yellow;
     }
+
     /* boxes css */
     .container1 {
         width: 95%;
@@ -403,10 +427,12 @@
         margin: 20px auto;
         padding: 20px 0;
     }
+
     .container1 ul {
         padding: 0px;
         margin: 0px;
     }
+
     .container1 ul li {
         list-style-type: none;
         float: left;
@@ -417,6 +443,7 @@
         margin: 40px 30px 0px 40px;
         line-height: 200px;
     }
+
     .container1 ul li .title {
         width: 100%;
         height: 50px;
@@ -425,6 +452,7 @@
         text-align: center;
         border: 2px solid rgb(135, 127, 127);
     }
+
     /* input[type="checkbox"] {
         transform: scale(2);
         border-radius: 0px !important;
@@ -434,6 +462,7 @@
     .footer {
         border: 2px solid black;
     }
+
     /* css for responsive */
     @media (max-width: 992px) {
         .container1 ul li {
@@ -442,6 +471,7 @@
             line-height: 150px;
         }
     }
+
     /*  */
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -455,13 +485,11 @@
     rel="stylesheet">
 <input type="hidden" value="{{ request()->get('id') }}" id="consumerId" />
 @php $companyName="NA"; @endphp
-@foreach ($corporateCompanyBatchName as $company)
-    @php
-
+    @foreach ($corporateCompanyBatchName as $company)
+        @php
         $companyName = $company->name;
-
-    @endphp
-@endforeach
+        @endphp
+    @endforeach
 <div class="accordion px-4 mb-2" id="accordionExample">
     <h1 class="text-start report-examina mt-3 mb-3 text-success"> Report Examination Sheet </h1>
     <div class="accordion-item">
@@ -811,7 +839,7 @@
                                     @if (gettype(json_decode($data->noise_in_ears, true)) == 'string')
                                         @php $noise_in_ears=json_decode(json_decode($data->noise_in_ears,true));@endphp
                                     @endif
-                                 <p>b. Noise in ears ?</p>
+                                    <p>b. Noise in ears ?</p>
                                     <div class="objective-option">
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox1">Yes</label>
@@ -851,7 +879,7 @@
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
                                                 @if (in_array(6, $noise_in_ears)) checked  @disabled(true) @endif />
-                                            </div>
+                                        </div>
                                     </div>
                                     @if (!isset($data->fullness_or_stuffiness_in_your_ears))
                                         @php $fullness_or_stuffiness_in_your_ears=[]; @endphp
@@ -1029,7 +1057,8 @@
 <div class="accordion px-4 mb-2" id="bpcontainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingFour">
-            <button class="accordion-button collapsed" @if (isset($TestData['bp'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
+            <button class="accordion-button collapsed"
+                @if (isset($TestData['bp'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
                 aria-controls="collapseFour" id="bpbutton">
                 Check For Blood Pressure
@@ -1046,13 +1075,13 @@
                     <div class="row">
                         @if (isset($TestData['bp']))
                             {{-- <div class="col-md-6" id="chartgraph">
-                                <canvas id="bpCanvasChart" width="1000" height="1000"></canvas>
-                                {{-- <div id="pre-bp-chart-container" style="height: 400px;"></div> --}}
+                                    <canvas id="bpCanvasChart" width="1000" height="1000"></canvas>
+                                    {{-- <div id="pre-bp-chart-container" style="height: 400px;"></div> --}}
                             {{-- </div> --}}
                             <canvas id="bpCanvasChart" width="1000" height="300"></canvas>
                             {{-- <div class="col-md-6">
-                                <div id="post-bp-chart-container" style="height: 400px;"></div>
-                            </div> --}}
+                                    <div id="post-bp-chart-container" style="height: 400px;"></div>
+                                </div> --}}
                         @endif
                     </div>
                 </div>
@@ -1095,8 +1124,9 @@
 <div class="accordion px-4 mb-2" id="eyecontainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingFive">
-            <button class="accordion-button collapsed" @if (isset($TestData['eyecheckup'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
+            <button class="accordion-button collapsed"
+                @if (isset($TestData['eyecheckup'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
+                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
                 aria-controls="collapseFive" id="eyecheckupbutton">
                 Check For Eye Color Blindness Test
             </button>
@@ -1109,52 +1139,54 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-6">
                             {{-- @if (isset($TestData['eyecheckup'])) --}}
-                                <div id="eye-checkup-chart-container" style="height:280px;">
-                                    <div class="flex-wrapper">
-                                        @php
-                                            if (isset($TestData['eyecheckup'])) {
-                                                $eyecheckupdata = json_decode($TestData['eyecheckup'], true);
-                                                $count = 0;
-                                                foreach ($eyecheckupdata as $value) {
-                                                    if ($value == 'true') {
-                                                        $count++;
-                                                    }
+                            <div id="eye-checkup-chart-container" style="height:280px;">
+                                <div class="flex-wrapper">
+                                    @php
+                                        if (isset($TestData['eyecheckup'])) {
+                                            $eyecheckupdata = json_decode($TestData['eyecheckup'], true);
+                                            $count = 0;
+                                            foreach ($eyecheckupdata as $value) {
+                                                if ($value == 'true') {
+                                                    $count++;
                                                 }
-                                            } else {
-                                                $count = null;
                                             }
-                                            if ($count == 1) {
-                                                $percentage = 18;
-                                                $color = 'pink';
-                                            } elseif ($count == 2) {
-                                                $percentage = 35;
-                                                $color = 'orange';
-                                            } elseif ($count == 3) {
-                                                $percentage = 50;
-                                                $color = 'yellow';
-                                            } elseif ($count == 4) {
-                                                $percentage = 68;
-                                                $color = 'skyblue';
-                                            } elseif ($count == 5) {
-                                                $percentage = 75;
-                                                $color = 'blue';
-                                            } elseif ($count == 6) {
-                                                $percentage = 100;
-                                                $color = 'green';
-                                            } elseif ($count == 0) {
-                                                $percentage = 0;
-                                                $color = 'red';
-                                            }
-                                        @endphp
-                                        <div class="single-chart">
-                                            <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
-                                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                                <path class="circle" stroke-dasharray="{{ $percentage }}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                                <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
-                                            </svg>
-                                        </div>
+                                        } else {
+                                            $count = null;
+                                        }
+                                        if ($count == 1) {
+                                            $percentage = 18;
+                                            $color = 'pink';
+                                        } elseif ($count == 2) {
+                                            $percentage = 35;
+                                            $color = 'orange';
+                                        } elseif ($count == 3) {
+                                            $percentage = 50;
+                                            $color = 'yellow';
+                                        } elseif ($count == 4) {
+                                            $percentage = 68;
+                                            $color = 'skyblue';
+                                        } elseif ($count == 5) {
+                                            $percentage = 75;
+                                            $color = 'blue';
+                                        } elseif ($count == 6) {
+                                            $percentage = 100;
+                                            $color = 'green';
+                                        } elseif ($count == 0) {
+                                            $percentage = 0;
+                                            $color = 'red';
+                                        }
+                                    @endphp
+                                    <div class="single-chart">
+                                        <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                            <path class="circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="circle" stroke-dasharray="{{ $percentage }}, 100"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
+                                        </svg>
                                     </div>
                                 </div>
+                            </div>
                             {{-- @endif --}}
                         </div>
 
@@ -1171,7 +1203,8 @@
                                     <label class="form-check-label" for="checkbox1">Fit</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="eyecheckupcheckboxunfit" value="0">
+                                    <input class="form-check-input" type="checkbox" id="eyecheckupcheckboxunfit"
+                                        value="0">
                                     <label class="form-check-label" for="checkbox2">Unfit</label>
                                 </div>
                             </div>
@@ -1181,11 +1214,13 @@
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" id="eyecheckup" onclick="saveResult(this)">Submit</button>
+                            <button class="btn btn-primary" id="eyecheckup"
+                                onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
                             <button class="btn btn-danger" id="eyecheckup_test_again">Please test again</button>
                             &nbsp;&nbsp;
-                            <button onclick="eyegeneratePDF()" class="btn btn-danger  btn-sm"><i class="fa fa-print" style="font-size:36px"></i></button>
+                            <button onclick="eyegeneratePDF()" class="btn btn-danger  btn-sm"><i class="fa fa-print"
+                                    style="font-size:36px"></i></button>
                         </div>
                     </div>
                 @endif
@@ -1198,8 +1233,9 @@
 <div class="accordion px-4 mb-2" id="eyedistancecontainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingsix">
-            <button class="accordion-button collapsed" @if (isset($TestData['eyedistance'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false"
+            <button class="accordion-button collapsed"
+                @if (isset($TestData['eyedistance'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
+                type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false"
                 aria-controls="collapsesix" id="eyecheckupbutton">
                 Check For Eye Distance Test
             </button>
@@ -1212,52 +1248,54 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-6">
                             {{-- @if (isset($TestData['eyedistance'])) --}}
-                                <div id="eye-checkup-chart-container" style="height:280px;">
-                                    <div class="flex-wrapper">
-                                        @php
-                                            if (isset($TestData['eyedistance'])) {
-                                                $eyedistancedata = json_decode($TestData['eyedistance'], true);
-                                                $count = 0;
-                                                foreach ($eyedistancedata as $value) {
-                                                    if ($value == 'true') {
-                                                        $count++;
-                                                    }
+                            <div id="eye-checkup-chart-container" style="height:280px;">
+                                <div class="flex-wrapper">
+                                    @php
+                                        if (isset($TestData['eyedistance'])) {
+                                            $eyedistancedata = json_decode($TestData['eyedistance'], true);
+                                            $count = 0;
+                                            foreach ($eyedistancedata as $value) {
+                                                if ($value == 'true') {
+                                                    $count++;
                                                 }
-                                            } else {
-                                                $count = null;
                                             }
-                                            if ($count == 1) {
-                                                $percentage = 18;
-                                                $color = 'pink';
-                                            } elseif ($count == 2) {
-                                                $percentage = 35;
-                                                $color = 'orange';
-                                            } elseif ($count == 3) {
-                                                $percentage = 50;
-                                                $color = 'yellow';
-                                            } elseif ($count == 4) {
-                                                $percentage = 68;
-                                                $color = 'skyblue';
-                                            } elseif ($count == 5) {
-                                                $percentage = 75;
-                                                $color = 'blue';
-                                            } elseif ($count == 6) {
-                                                $percentage = 100;
-                                                $color = 'green';
-                                            } elseif ($count == 0) {
-                                                $percentage = 0;
-                                                $color = 'red';
-                                            }
-                                        @endphp
-                                        <div class="single-chart">
-                                            <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
-                                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                                <path class="circle" stroke-dasharray="{{ $percentage }}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                                <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
-                                            </svg>
-                                        </div>
+                                        } else {
+                                            $count = null;
+                                        }
+                                        if ($count == 1) {
+                                            $percentage = 18;
+                                            $color = 'pink';
+                                        } elseif ($count == 2) {
+                                            $percentage = 35;
+                                            $color = 'orange';
+                                        } elseif ($count == 3) {
+                                            $percentage = 50;
+                                            $color = 'yellow';
+                                        } elseif ($count == 4) {
+                                            $percentage = 68;
+                                            $color = 'skyblue';
+                                        } elseif ($count == 5) {
+                                            $percentage = 75;
+                                            $color = 'blue';
+                                        } elseif ($count == 6) {
+                                            $percentage = 100;
+                                            $color = 'green';
+                                        } elseif ($count == 0) {
+                                            $percentage = 0;
+                                            $color = 'red';
+                                        }
+                                    @endphp
+                                    <div class="single-chart">
+                                        <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                            <path class="circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <path class="circle" stroke-dasharray="{{ $percentage }}, 100"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                            <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
+                                        </svg>
                                     </div>
                                 </div>
+                            </div>
                             {{-- @endif --}}
                         </div>
                     </div>
@@ -1273,7 +1311,8 @@
                                     <label class="form-check-label" for="checkbox1">Fit</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="eyedistancecheckboxunfit" value="0">
+                                    <input class="form-check-input" type="checkbox" id="eyedistancecheckboxunfit"
+                                        value="0">
                                     <label class="form-check-label" for="checkbox2">Unfit</label>
                                 </div>
                             </div>
@@ -1283,11 +1322,13 @@
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" id="eyedistance" onclick="saveResult(this)">Submit</button>
+                            <button class="btn btn-primary" id="eyedistance"
+                                onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
                             <button class="btn btn-danger" id="eyedistance_test_again">Please test again</button>
                             &nbsp;&nbsp;
-                            <button onclick="eyedistancepdf()" class="btn btn-danger  btn-sm"><i class="fa fa-print" style="font-size:36px"></i></button>
+                            <button onclick="eyedistancepdf()" class="btn btn-danger  btn-sm"><i class="fa fa-print"
+                                    style="font-size:36px"></i></button>
                         </div>
                     </div>
                 @endif
@@ -1301,12 +1342,12 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingHearing">
             <button class="accordion-button collapsed"
-            @if (isset($TestData['hearingtest'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
-            type="button" data-bs-toggle="collapse" data-bs-target="#collapseHearing" aria-expanded="false"
-            aria-controls="collapseHearing" id="hearingbutton">
-            Check For Hearing Test
-        </button>
-    </h2>
+                @if (isset($TestData['hearingtest'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
+                type="button" data-bs-toggle="collapse" data-bs-target="#collapseHearing" aria-expanded="false"
+                aria-controls="collapseHearing" id="hearingbutton">
+                Check For Hearing Test
+            </button>
+        </h2>
         <div id="collapseHearing" class="accordion-collapse collapse" aria-labelledby="headingHearing"
             data-bs-parent="#HearingContainer">
             <div class="accordion-body">
@@ -1314,7 +1355,8 @@
                 <div class="container" id="hearingTestContent">
                     <input type="hidden" id="certificationnumber" value="{{ $data->certification_number }}" />
                     <input type="hidden" id="consumerid" value="{{ request()->get('id') }}" />
-                    <p class="text-success pt-3 pb-3"><strong> Consumer Certificate Number -- {{ $data->certification_number }}</strong></p>
+                    <p class="text-success pt-3 pb-3"><strong> Consumer Certificate Number --
+                            {{ $data->certification_number }}</strong></p>
                     {{-- @if (isset($TestData['hearingtest'])) --}}
                     <!-- Chart Canvas -->
                     <canvas id="hearingChartCanvas" width="1000" height="300"></canvas>
@@ -1345,7 +1387,8 @@
                             &nbsp;&nbsp;
                             <button class="btn btn-warning" id="hearing_test_again">Please Test Again</button>
                             &nbsp;&nbsp;
-                            <button onclick="generateHearingtestPDF()"><i class="fa fa-print text-success" style="font-size:36px"></i></button>
+                            <button onclick="generateHearingtestPDF()"><i class="fa fa-print text-success"
+                                    style="font-size:36px"></i></button>
                         </div>
                     </div>
                 @endif
@@ -1362,8 +1405,9 @@
 <div class="accordion px-4 mb-2 " id="rombergtestcontainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingSix">
-            <button class="accordion-button collapsed" @if (isset($TestData['rt'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
+            <button class="accordion-button collapsed"
+                @if (isset($TestData['rt'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
+                type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
                 aria-controls="collapseSix" id="rtbutton">
                 Check For Romberg Test
             </button>
@@ -1458,8 +1502,9 @@
 <div class="accordion px-4 mb-2" id="flatfoottestcontainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingSeaven">
-            <button class="accordion-button collapsed" @if (isset($TestData['flatfoot'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseSeaven" aria-expanded="false"
+            <button class="accordion-button collapsed"
+                @if (isset($TestData['flatfoot'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
+                type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeaven" aria-expanded="false"
                 aria-controls="collapseSeaven" id="flatfootbutton">
                 Check For Flat Foot Test
             </button>
@@ -1473,8 +1518,7 @@
                         <div class="col">
                             <div id="flattestcontainer-checkup-chart-container">
                                 @if (isset($flatfootcheckupdata))
-                                    <div class="container d-flex justify-content-center"
-                                        id="flatfootimage">
+                                    <div class="container d-flex justify-content-center" id="flatfootimage">
                                         <img src="{{ asset('public/test_images/' . $flatfootcheckupdata['flatfoot']) }}"
                                             class="img-fluid" alt="Responsive image">
                                     </div>
@@ -1532,8 +1576,9 @@
 <div class="accordion px-4 mb-2" id="bppvtestcontainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingeight">
-            <button class="accordion-button collapsed" @if (isset($TestData['bppv'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseeight" aria-expanded="false"
+            <button class="accordion-button collapsed"
+                @if (isset($TestData['bppv'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
+                type="button" data-bs-toggle="collapse" data-bs-target="#collapseeight" aria-expanded="false"
                 aria-controls="collapseeight" id="bppvbutton">
                 Check For BPPV Test
             </button>
@@ -1611,8 +1656,9 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingnine">
             <button class="accordion-button collapsed" id="fukudabutton"
-                @if (isset($TestData['fukuda'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapsenine" aria-expanded="false" aria-controls="collapsenine">
+                @if (isset($TestData['fukuda'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
+                type="button" data-bs-toggle="collapse" data-bs-target="#collapsenine" aria-expanded="false"
+                aria-controls="collapsenine">
                 Check For Fukuda-Unterberger Test
             </button>
         </h2>
@@ -1626,8 +1672,11 @@
                             <div id="fukudacontainer-checkup container">
                                 @if (isset($fukudacheckupdata['fukuda_video']) && $fukudacheckupdata['fukuda_video'] != [])
                                     <div class="col-sm">
-                                        <div class="embed-responsive embed-responsive-16by9" style="width: 60%; left: 16%; top: 10px;">
-                                            <iframe class="embed-responsive-item" src="{{ asset('public/videos/' . $fukudacheckupdata['fukuda_video']) }}" allowfullscreen></iframe>
+                                        <div class="embed-responsive embed-responsive-16by9"
+                                            style="width: 60%; left: 16%; top: 10px;">
+                                            <iframe class="embed-responsive-item"
+                                                src="{{ asset('public/videos/' . $fukudacheckupdata['fukuda_video']) }}"
+                                                allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 @endif
@@ -1833,8 +1882,8 @@
 <button type="button mt-4 mb-4" class="btn btn-dark ml-4 " data-toggle="modal" data-target="#exampleModalLong">
     Consumer Examination Report
 </button>
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" style="
   max-width: 1000px;" role="document">
         <div class="modal-content">
@@ -1957,8 +2006,8 @@
                                             @if ($data->light_hedness_or_swim_sensation_in_the_head == 'yes') checked @disabled(true) @endif />
                                     </div>
                                     <div class="form-check ml-4">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            value="option1"
+                                        <input class="form-check-input" disabled type="checkbox"
+                                            id="inlineCheckbox1" value="option1"
                                             @if ($data->light_hedness_or_swim_sensation_in_the_head == 'no') checked @disabled(true) @endif />
                                     </div>
                                 </div>
@@ -2251,6 +2300,284 @@
     </div>
 </div>
 {{-- ---------------------------------------------------------------------------------------------- --}}
+{{-- <div class="container my-5">
+    <!-- form start -->
+    <form action="" id="verticopdfreport" class="shadow-sm"
+        style="border: 2px solid #339999">
+        <div class="top-section d-flex justify-content-around">
+            <div class="logo">
+                <img src="{{ url('public/dashboard/img/logo.png') }}" alt=""
+                    width="100" />
+            </div>
+            <div class="heading">
+                <p class="text-center h2" style="color: #0d9494">MEDICLEAR</p>
+                <p class="text-center h4" style="color: #339999">
+                    An ISO 9001 - 2015 Certified Company<br />
+                    Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi
+                </p>
+            </div>
+            <div class="blank"></div>
+        </div>
+        <hr style="color: black; height: 12px; border-top: 5px solid black" />
+        <!-- table start -->
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Patient Name :</th>
+                    <th scope="col">{{ $data->consumer_name }}</th>
+                    <th scope="col">Joining Date</th>
+                    <th scope="col">NA</th>
+                    <th scope="col">Checkup Date</th>
+                    <th scope="col">{{ date('d-M-y') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Designation :</th>
+                    <td>NA</td>
+                    <td>D.O.B / AGE</td>
+
+                    <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
+                    <td>valid Till -</td>
+                    <td>{{ date('d-M-y', strtotime('+1 year')) }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Emp Code :</th>
+                    <td>NA</td>
+                    <td>Gender</td>
+                    <td colspan="2" class="text-center">
+                        @if ($data->gender == 'male')
+                            {{ 'Male' }}
+                        @elseif($data->gender == 'female')
+                            {{ 'Female' }}
+                        @endif
+                    </td>
+                    <td>..</td>
+                    <td>..</td>
+                </tr>
+                <tr>
+                    <th scope="row">Address</th>
+                    <td>{{ $data->consumer_location }}</td>
+                    <td>Certificate No. :</td>
+                    <td>{{ $data->certification_number }}</td>
+                    <td>..</td>
+                    <td>..</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="6 " class="text-center fw-bold h4">
+                        <u>Vertigo Test for Working at Height</u>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--  -->
+        <!-- question Ans field start -->
+        <div class="questions">
+            <p class="h4 text-dark my-3 fw-bold">
+                1- Complaint :
+            </p>
+            <div class="row choice">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">Yes&nbsp;&nbsp;&nbsp;&nbsp;No</div>
+            </div>
+            <!-- question start  -->
+            <div class="row my-4">
+                <div class="col-md-6">
+                    a.&nbsp;&nbsp;Giddiness
+                </div>
+                <div class="col-md-4">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option1"
+                        @if (in_array(1, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option1"
+                        @if (in_array(1, $complaints) == false) checked @disabled(true) @endif />
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-6">b. &nbsp;&nbsp;Vertigo</div>
+                <div class="col-4">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option2"
+                        @if (in_array(2, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option2"
+                        @if (in_array(2, $complaints) == false) checked @disabled(true) @endif />
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-6">c.&nbsp;&nbsp; Nausea?</div>
+                <div class="col-4">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option5"
+                        @if (in_array(3, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option5"
+                        @if (in_array(3, $complaints) == false) checked @disabled(true) @endif />
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-6">d.&nbsp;&nbsp; Seizure Disorder(Epilespy)?</div>
+                <div class="col-4">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option1"
+                        @if (in_array(4, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option6"
+                        @if (in_array(4, $complaints) == false) checked @disabled(true) @endif />
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-6">
+                    e.&nbsp;&nbsp; Acrophobia?
+                </div>
+                <div class="col-4">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option1"
+                        @if (in_array(5, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option1"
+                        @if (in_array(5, $complaints) == false) checked @disabled(true) @endif />
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-6">
+                    f.&nbsp;&nbsp; Asthama /COPD
+                </div>
+                <div class="col-4">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option1"
+                        @if (in_array(6, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option1"
+                        @if (in_array(6, $complaints) == false) checked @disabled(true) @endif />
+                </div>
+            </div>
+        </div>
+        <!--  -->
+        <div class="questions">
+            <p class="h4 text-dark my-3 fw-bold">
+                1- General Examination :
+            </p>
+            <div class="row choice">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    Normal&nbsp;&nbsp;&nbsp;Abnormal
+                </div>
+            </div>
+        </div>
+        <!-- question start  -->
+        <div class="row my-4">
+            <div class="col-md-6">
+                a.&nbsp;&nbsp;Pulse
+            </div>
+            <div class="col-md-4">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1" />
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-6">b. &nbsp;&nbsp;BP</div>
+            <div class="col-4">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1"
+                    @if (isset($Testresult['bp']) && $Testresult['bp'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1"
+                    @if (isset($Testresult['bp']) && $Testresult['bp'] == '0') checked @disabled(true) @endif />
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-6">c.&nbsp;&nbsp; Depth Of Vision?</div>
+            <div class="col-4">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1"
+                    @if (isset($Testresult['eyecheckup']) && $Testresult['eyecheckup'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1"
+                    @if (isset($Testresult['eyecheckup']) && $Testresult['eyecheckup'] == '0') checked @disabled(true) @endif />
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-6">d.&nbsp;&nbsp; Nystagmus?</div>
+            <div class="col-4">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1" />
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-6">
+                e.&nbsp;&nbsp; Flat Foot
+            </div>
+            <div class="col-4">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1"
+                    @if (isset($Testresult['flatfoot']) && $Testresult['flatfoot'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1"
+                    @if (isset($Testresult['flatfoot']) && $Testresult['flatfoot'] == '0') checked @disabled(true) @endif />
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-6">
+                f.&nbsp;&nbsp; Hearing
+            </div>
+            <div class="col-4">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1" />
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-6">
+                g.&nbsp;&nbsp; BPPV(Being Paroxysmal Positional Vertigo)
+            </div>
+            <div class="col-4">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1"
+                    @if (isset($Testresult['bppv']) && $Testresult['bppv'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                    value="option1"
+                    @if (isset($Testresult['bppv']) && $Testresult['bppv'] == '0') checked @disabled(true) @endif />
+            </div>
+        </div>
+        <p class="h5 fw-bolder">3. Examination Finding :</p>
+        <p class="h5 fw-bolder">a- Romberg Test</p>
+        <p>
+            A Pass requires the ability to maintain balance while standing with
+            shoes off, feet together side by side , eyes closed and arms by
+            sides,
+        <p class="text-center">sides, for 30 seconds</p>
+        </p>
+        <div class="form-check form-check-inline d-flex justify-content-evenly">
+            <input class="form-check-input"
+                @if (isset($Testresult['rt']) && $Testresult['rt'] == '1') checked @disabled(true) @endif
+                type="checkbox" id="inlineCheckbox1" value="option1">
+            <label class="form-check-label" for="inlineCheckbox1"> Normal</label>
+        </div>
+        <br>
+        <div class="form-check form-check-inline d-flex justify-content-evenly">
+            <input class="form-check-input"
+                @if (isset($Testresult['rt']) && $Testresult['rt'] == '0') checked @disabled(true) @endif
+                type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">Abnormal</label>
+        </div>
+        <br><br>
+    </form>
+</div> --}}
 {{-- ------------------------------ Vertigo Test Report PDF------------------------------------------------------------------------ --}}
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalVertigo">
@@ -2263,302 +2590,327 @@
   max-width: 1000px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="container my-5">
-                    <!-- form start -->
-                    <form action="" id="verticopdfreport" class="shadow-sm"
-                        style="border: 2px solid #339999">
-                        <div class="top-section d-flex justify-content-around">
-                            <div class="logo">
-                                <img src="{{ url('public/dashboard/img/logo.png') }}" alt=""
-                                    width="100" />
-                            </div>
-                            <div class="heading">
-                                <p class="text-center h2" style="color: #0d9494">MEDICLEAR</p>
-                                <p class="text-center h4" style="color: #339999">
-                                    An ISO 9001 - 2015 Certified Company<br />
-                                    Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-holder shadow-lg my-5 p-3 fist-step">
+                                <h1 class="text-center" style="font-size: 30px;">
+                                    MEDICLEAR
+                                </h1>
+                                <p class="text-center" style="color: #4daf92">
+                                    <b> An ISO 9001 - 2015 Certified Company
+                                        <br> Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi</b>
                                 </p>
-                            </div>
-                            <div class="blank"></div>
-                        </div>
-
-                        <hr style="color: black; height: 12px; border-top: 5px solid black" />
-                        <!-- table start -->
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Patient Name :</th>
-                                    <th scope="col">{{ $data->consumer_name }}</th>
-                                    <th scope="col">Joining Date</th>
-                                    <th scope="col">NA</th>
-                                    <th scope="col">Checkup Date</th>
-                                    <th scope="col">{{ date('d-M-y') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Designation :</th>
-                                    <td>NA</td>
-                                    <td>D.O.B / AGE</td>
-
-                                    <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
-                                    <td>valid Till -</td>
-                                    <td>{{ date('d-M-y', strtotime('+1 year')) }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Emp Code :</th>
-                                    <td>NA</td>
-                                    <td>Gender</td>
-                                    <td colspan="2" class="text-center">
-                                        @if ($data->gender == 'male')
-                                            {{ 'Male' }}
-                                        @elseif($data->gender == 'female')
-                                            {{ 'Female' }}
-                                        @endif
-                                    </td>
-                                    <td>..</td>
-                                    <td>..</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Address</th>
-                                    <td>{{ $data->consumer_location }}</td>
-                                    <td>Certificate No. :</td>
-                                    <td>{{ $data->certification_number }}</td>
-                                    <td>..</td>
-                                    <td>..</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="6 " class="text-center fw-bold h4">
-                                        <u>Vertigo Test for Working at Height</u>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!--  -->
-                        <!-- question Ans field start -->
-                        <div class="questions">
-                            <p class="h4 text-dark my-3 fw-bold">
-                                1- Complaint :
-                            </p>
-
-                            <div class="row choice">
-                                <div class="col-md-6"></div>
-                                <div class="col-md-6">Yes&nbsp;&nbsp;&nbsp;&nbsp;No</div>
-                            </div>
-                            <!-- question start  -->
-                            <div class="row my-4">
-                                <div class="col-md-6">
-                                    a.&nbsp;&nbsp;Giddiness
+                                <table class="table table-striped border-dark table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col-4" style="width: 40%;">...</th>
+                                            <th scope="col">Checkup Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>D.O.B.
+                                            </td>
+                                            <td></td>
+                                            <td>Valid Till-</td>
+                                            <td>...</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Designation</td>
+                                            <td>....</td>
+                                            <td colspan="2">....</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Certification
+                                            </td>
+                                            <td>...</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Emp code
+                                            </td>
+                                            <td>....</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- end 1st table  -->
+                                <h2 class="text-center text-success">Step 1 : General Information</h2>
+                                <div class="form-pre">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p><b> Pre</b></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>35.0000</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>35000.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p><b>Post</b></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>35.0000</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>35000.00</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1"
-                                        @if (in_array(1, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1"
-                                        @if (in_array(1, $complaints) == false) checked @disabled(true) @endif />
+                                <h5 class="text-center text-warning"> Blood Pressure Report</h5>
+                                <div class="graph-holder shadow-lg">
+                                    <canvas id="bpcanvaschartmodal" width="1000" height="300"></canvas>
                                 </div>
-                            </div>
-                            <div class="row my-4">
-                                <div class="col-6">b. &nbsp;&nbsp;Vertigo</div>
-                                <div class="col-4">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option2"
-                                        @if (in_array(2, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option2"
-                                        @if (in_array(2, $complaints) == false) checked @disabled(true) @endif />
+                                <div class="fit mt-2">
+                                    <h5 class="text-successmt mt-3">Remark</h5>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input fit" type="radio"
+                                                    name="fitnessStatus" id="fitRadio">
+                                                <label class="form-check-label" for="fitRadio">
+                                                    Fit
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input unfit" type="radio"
+                                                    name="fitnessStatus" id="unfitRadio">
+                                                <label class="form-check-label" for="unfitRadio">
+                                                    Unfit
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h6 class="mt-4"><b class="text-success">Remark: </b> <span
+                                            class="text-danger">This Person is not Fit</span></h6>
+                                    <div class="second-step">
+                                        {{-- 2nd step start here --}}
+                                        <h2 class="text-success text-center">Step 2 :Hearing Checkup</h2>
+                                        <p class="text-success ">For the Hearing
+                                            Checkup...................................................................................................................................................................................................................
+                                        </p>
+                                        <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="hearing-graph">
+                                                <canvas id="modalHearingChartCanvas" width="1000"
+                                                    height="300"></canvas>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">I.</b> Procedure</p>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Fit
+                                                                <input type="radio" id="modalfithearing"
+                                                                    name="hearingfit" value="fit"
+                                                                    class="fit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Unfit
+                                                                <input type="radio" id="modalunfithearing"
+                                                                    name="hearingunfit" value="unfit"
+                                                                    class="unfit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                        <p id="remarkInModal">Reamrk: </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- 2nd step end here --}}
+                                        <h2 class="text-success text-center">Step 3 :Romberg Test </h2>
+                                        <h4 class="text-warning"> Procedure</h4>
+                                        <p class="text-success ">For the Ranberg
+                                            Test...................................................................................................................................................................................................................
+                                        </p>
+                                        <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">I.</b> Stand on One Foot <b
+                                                                class="text-danger">(left)</b></p>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Fit
+                                                                <input type="radio" name="foot"
+                                                                    value="fit" class="fit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Unfit
+                                                                <input type="radio" name="foot"
+                                                                    value="unfit" class="unfit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- hello there  -->
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">II.</b>Stand on One Feet<b
+                                                                class="text-danger">(Right)</b></p>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Fit
+                                                                <input type="radio" name="rightfoot"
+                                                                    value="fit" class="fit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Unfit
+                                                                <input type="radio" name="rightfoot"
+                                                                    value="unfit" class="unfit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- hello there  -->
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">II.</b>Stand on both Feet<b
+                                                                class="text-danger">(Closed Eyes)</b></p>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Fit
+                                                                <input type="radio" name="bothfoot"
+                                                                    value="fit" class="fit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="unfit">
+                                                                Unfit
+                                                                <input type="radio" name="bothfoot"
+                                                                    value="unfit" class="unfit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--************2nd step done ************** -->
+                                        <hr>
+                                        <h2 class="text-success text-center">Step 4 :Fukuda-Unterberger </h2>
+                                        <p class="text-success ">For the Fukuda-Unterberger
+                                            Test...................................................................................................................................................................................................................
+                                        </p>
+                                        <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">I.</b> Procedure</p>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Fit
+                                                                <input type="radio" name="fukudafit"
+                                                                    value="fukudafit" class="fit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Unfit
+                                                                <input type="radio" name="fukudafit"
+                                                                    value="fukudaunfit" class="unfit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!--************3rd step done ************** -->
+                                        <h2 class="text-success text-center">Step 5 :Flat Foot</h2>
+                                        <p class="text-success ">For the Flat Foot
+                                            test...................................................................................................................................................................................................................
+                                        </p>
+                                        <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">I.</b>Flat Foot</p>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Fit
+                                                                <input type="radio" name="flatfit"
+                                                                    value="flatfit" class="fit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Unfit
+                                                                <input type="radio" name="flatfit"
+                                                                    value="flatunfit" class="unfit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--************4th step done ************** -->
+                                        <h2 class="text-success text-center">Step 6 :BPPV Procedure</h2>
+                                        <p class="text-success ">For the
+                                            BPPV...................................................................................................................................................................................................................
+                                        </p>
+                                        <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">I.</b>Procedure</p>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Fit
+                                                                <input type="radio" name="bppvunfit"
+                                                                    value="bppvfit" class="fit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="fit">
+                                                                Unfit
+                                                                <input type="radio" name="bppvunfit"
+                                                                    value="bppvunfit" class="unfit">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--************5th step done ************** -->
+                                    </div>
                                 </div>
+                                <!--**********end col************ -->
                             </div>
-                            <div class="row my-4">
-                                <div class="col-6">c.&nbsp;&nbsp; Nausea?</div>
-                                <div class="col-4">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option5"
-                                        @if (in_array(3, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option5"
-                                        @if (in_array(3, $complaints) == false) checked @disabled(true) @endif />
-                                </div>
-                            </div>
-                            <div class="row my-4">
-                                <div class="col-6">d.&nbsp;&nbsp; Seizure Disorder(Epilespy)?</div>
-                                <div class="col-4">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1"
-                                        @if (in_array(4, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option6"
-                                        @if (in_array(4, $complaints) == false) checked @disabled(true) @endif />
-                                </div>
-                            </div>
-                            <div class="row my-4">
-                                <div class="col-6">
-                                    e.&nbsp;&nbsp; Acrophobia?
-                                </div>
-                                <div class="col-4">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1"
-                                        @if (in_array(5, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1"
-                                        @if (in_array(5, $complaints) == false) checked @disabled(true) @endif />
-                                </div>
-                            </div>
-                            <div class="row my-4">
-                                <div class="col-6">
-                                    f.&nbsp;&nbsp; Asthama /COPD
-                                </div>
-                                <div class="col-4">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1"
-                                        @if (in_array(6, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1"
-                                        @if (in_array(6, $complaints) == false) checked @disabled(true) @endif />
-                                </div>
-                            </div>
-
+                            <!--**********end row************ -->
                         </div>
-
-                        <!--  -->
-                        <div class="questions">
-                            <p class="h4 text-dark my-3 fw-bold">
-                                1- General Examination :
-                            </p>
-
-                            <div class="row choice">
-                                <div class="col-md-6"></div>
-                                <div class="col-md-6">
-                                    Normal&nbsp;&nbsp;&nbsp;Abnormal
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- question start  -->
-                        <div class="row my-4">
-                            <div class="col-md-6">
-                                a.&nbsp;&nbsp;Pulse
-                            </div>
-                            <div class="col-md-4">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1" />
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-6">b. &nbsp;&nbsp;BP</div>
-                            <div class="col-4">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1"
-                                    @if (isset($Testresult['bp']) && $Testresult['bp'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1"
-                                    @if (isset($Testresult['bp']) && $Testresult['bp'] == '0') checked @disabled(true) @endif />
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-6">c.&nbsp;&nbsp; Depth Of Vision?</div>
-                            <div class="col-4">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1"
-                                    @if (isset($Testresult['eyecheckup']) && $Testresult['eyecheckup'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1"
-                                    @if (isset($Testresult['eyecheckup']) && $Testresult['eyecheckup'] == '0') checked @disabled(true) @endif />
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-6">d.&nbsp;&nbsp; Nystagmus?</div>
-                            <div class="col-4">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1" />
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-6">
-                                e.&nbsp;&nbsp; Flat Foot
-                            </div>
-                            <div class="col-4">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1"
-                                    @if (isset($Testresult['flatfoot']) && $Testresult['flatfoot'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1"
-                                    @if (isset($Testresult['flatfoot']) && $Testresult['flatfoot'] == '0') checked @disabled(true) @endif />
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-6">
-                                f.&nbsp;&nbsp; Hearing
-                            </div>
-                            <div class="col-4">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1" />
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-6">
-                                g.&nbsp;&nbsp; BPPV(Being Paroxysmal Positional Vertigo)
-                            </div>
-                            <div class="col-4">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1"
-                                    @if (isset($Testresult['bppv']) && $Testresult['bppv'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                    value="option1"
-                                    @if (isset($Testresult['bppv']) && $Testresult['bppv'] == '0') checked @disabled(true) @endif />
-                            </div>
-                        </div>
-                        <p class="h5 fw-bolder">3. Examination Finding :</p>
-                        <p class="h5 fw-bolder">a- Romberg Test</p>
-                        <p>
-                            A Pass requires the ability to maintain balance while standing with
-                            shoes off, feet together side by side , eyes closed and arms by
-                            sides,
-                        <p class="text-center">sides, for 30 seconds</p>
-                        </p>
-                        <div class="form-check form-check-inline d-flex justify-content-evenly">
-                            <input class="form-check-input"
-                                @if (isset($Testresult['rt']) && $Testresult['rt'] == '1') checked @disabled(true) @endif
-                                type="checkbox" id="inlineCheckbox1" value="option1">
-                            <label class="form-check-label" for="inlineCheckbox1"> Normal</label>
-                        </div>
-                        <br>
-
-
-                        <div class="form-check form-check-inline d-flex justify-content-evenly">
-                            <input class="form-check-input"
-                                @if (isset($Testresult['rt']) && $Testresult['rt'] == '0') checked @disabled(true) @endif
-                                type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2">Abnormal</label>
-                        </div>
-                        <br><br>
-
-
-
-
-
-                    </form>
+                        <!--**********end container************ -->
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -2819,6 +3171,7 @@
         }
         event.stopPropagation();
     });
+
     function filter() {
         var valThis = $('#txtSearchValue').val();
         $('.dropdown-select ul > li').each(function() {
@@ -2860,8 +3213,7 @@
                 $('#doctorId').val(doctorId);
                 $('#doctorregistration').html(registrationHTML);
             },
-            error: (data) => {
-            }
+            error: (data) => {}
         });
         $(this).closest('.list').find('.selected').removeClass('selected');
         $(this).addClass('selected');
@@ -2939,7 +3291,6 @@ $bpdata['post_upper_bp']="0";
 @endphp
 
 @endif --}}
-
 @php
     if (isset($TestData['bp'])) {
         $bpdata = json_decode($TestData['bp'], true);
@@ -2952,7 +3303,7 @@ $bpdata['post_upper_bp']="0";
     }
 
 @endphp
-@php    
+@php
     if (isset($TestData['hearingtest'])) {
         $hrdata = json_decode($TestData['hearingtest'], true);
     } else {
@@ -2985,7 +3336,76 @@ $bpdata['post_upper_bp']="0";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Sample data for the area chart
+    $(function() {
+    var preLowerBpModal = "{{ $bpdata['pre_lower_bp'] }}";
+    var preLowerBpNumModal = Number(preLowerBpModal);
+    var preUpperBpModal = "{{ $bpdata['pre_upper_bp'] }}";
+    var preUpperBpNumModal = Number(preUpperBpModal);
+    var postLowerBpModal = "{{ $bpdata['post_lower_bp'] }}"
+    var postLowerBpNumModal = Number(postLowerBpModal);
+    var postUpperBpModal = "{{ $bpdata['post_upper_bp'] }}"
+    var postUpperBpNumModal = Number(postUpperBpModal);
+    var chartDataPreModal = [preLowerBpNumModal, preUpperBpNumModal];
+    var chartDataPostModal = [postLowerBpNumModal, postUpperBpNumModal];
+    var modalCanvas = document.getElementById("BpCanvasChartmodal");
+    var ctxModal = document.getElementById('BpCanvasChartmodal').getContext('2d');
+    var chartDataModal = {
+        labels: ["0", "10", "20", "30", "40", "50", "60"],
+        datasets: [{
+                label: `Post Blood Pressure Data(Post Lower BP:${postLowerBpNumModal},Post Upper BP:${postUpperBpNumModal})`,
+                data: chartDataPostModal,
+                yAxisID: 'y-axis-1',
+                borderColor: 'red',
+                borderWidth: 2,
+                fill: false,
+            },
+            {
+                label: `Pre Blood Pressure Data(Pre Lower BP:${preLowerBpNumModal},Pre Upper BP:${preUpperBpNumModal})`,
+                data: chartDataPreModal,
+                yAxisID: 'y-axis-1',
+                borderColor: 'blue',
+                borderWidth: 2,
+                fill: false,
+            },
+        ],
+    };
+    var chartOptionsModal = {
+        scales: {
+            x: {
+                type: 'linear',
+                position: 'bottom',
+                title: {
+                    display: true,
+                    text: 'Diastolic',
+                },
+            },
+            y: {
+                type: 'linear',
+                position: 'left',
+                title: {
+                    display: true,
+                    text: 'Systolic Post Pressure Data(mm/hg)',
+                },
+                grid: {
+                    drawOnChartArea: false,
+                },
+            },
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+            },
+        },
+    };
+    var modalMultiAxisLineChart = new Chart(ctxModal, {
+        type: 'line',
+        data: chartDataModal,
+        options: chartOptionsModal,
+    });
+    });
+</script>
+<script>
     var preLowerBp = "{{ $bpdata['pre_lower_bp'] }}";
     var preLowerBpNum = Number(preLowerBp);
     var preUpperBp = "{{ $bpdata['pre_upper_bp'] }}";
@@ -2997,9 +3417,7 @@ $bpdata['post_upper_bp']="0";
     var chartDataPre = [preLowerBpNum, preUpperBpNum];
     var chartDataPost = [postLowerBpNum, postUpperBpNum];
     var speedCanvas = document.getElementById("bpCanvasChart");
-
     var ctx = document.getElementById('bpCanvasChart').getContext('2d');
-
     var chartData = {
         labels: ["0", "10", "20", "30", "40", "50", "60"],
         datasets: [{
@@ -3099,7 +3517,6 @@ $bpdata['post_upper_bp']="0";
         if ($("#eyecheckupcheckboxunfit").is(":checked ")) {
             $("#eyecheckup_test_remark_result").show();
             $("#eyecheckupcheckboxfit").prop("checked", false);
-
         } else {
             $("#eyecheckup_test_remark_result").hide();
             $("#eyecheckupcheckboxfit").prop("checked", true);
@@ -3113,7 +3530,6 @@ $bpdata['post_upper_bp']="0";
         if ($("#eyedistancecheckboxunfit").is(":checked ")) {
             $("#eyedistance_test_remark_result").show();
             $("#eyedistancecheckboxfit").prop("checked", false);
-
         } else {
             $("#eyedistance_test_remark_result").hide();
             $("#eyedistancecheckboxfit").prop("checked", true);
@@ -3127,64 +3543,45 @@ $bpdata['post_upper_bp']="0";
         if ($("#rtcheckboxunfit").is(":checked ")) {
             $("#rt_test_remark_result").show();
             $("#rtcheckboxfit").prop("checked", false);
-
         } else {
             $("#rt_test_remark_result").hide();
             $("#rtcheckboxfit").prop("checked", true);
         }
-
     });
     $("#rtcheckboxfit").click(function() {
         $("#rtcheckboxunfit").prop("checked", false);
         $("#rt_test_remark_result").hide();
-
     })
     $("#hearingtestcheckboxunfit").click(function() {
-
         if ($("#hearingtestcheckboxunfit").is(":checked ")) {
             $("#hearing_test_remark_result").show();
             $("#hearingtestcheckboxfit").prop("checked", false);
-
         } else {
             $("#hearing_test_remark_result").hide();
             $("#hearingtestcheckboxfit").prop("checked", true);
         }
-
     });
-
     $("#hearingtestcheckboxfit").click(function() {
         $("#hearingtestcheckboxunfit").prop("checked", false);
         $("#hearing_test_remark_result").hide();
-
     })
-
-
     $("#flatfootcheckboxunfit").click(function() {
-
         if ($("#flatfootcheckboxunfit").is(":checked ")) {
             $("#flatfoot_test_remark_result").show();
             $("#flatfootcheckboxfit").prop("checked", false);
-
         } else {
             $("#flatfoot_test_remark_result").hide();
             $("#flatfootcheckboxfit").prop("checked", true);
         }
-
     });
-
     $("#flatfootcheckboxfit").click(function() {
         $("#flatfootcheckboxunfit").prop("checked", false);
         $("#flatfoot_test_remark_result").hide();
-
     });
-
-
     $("#bppvcheckboxunfit").click(function() {
-
         if ($("#bppvcheckboxunfit").is(":checked ")) {
             $("#bppv_test_remark_result").show();
             $("#bppvcheckboxfit").prop("checked", false);
-
         } else {
             $("#bppv_test_remark_result").hide();
             $("#bppvcheckboxfit").prop("checked", true);
@@ -3254,6 +3651,53 @@ $bpdata['post_upper_bp']="0";
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var ctx = document.getElementById('modalHearingChartCanvas').getContext('2d');
+        var labels = ['125', '250', '500', '1000', '2000', '3000', '4000', '6000', '8000', '10000'];
+        var hrdata = @json($hrdata);
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Right Ear',
+                    data: hrdata['right_ear_problem'].split(',').map(Number),
+                    borderColor: 'red',
+                    backgroundColor: 'transparent',
+                    pointRadius: 3
+                }, {
+                    label: 'Left Ear',
+                    data: hrdata['left_ear_problem'].split(',').map(Number),
+                    borderColor: 'blue',
+                    backgroundColor: 'transparent',
+                    pointRadius: 3
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        id: 'YLeft',
+                        position: 'left',
+                    }]
+                }
+            }
+        });
+    });
+    $("#hearingtestcheckboxunfit").click(function() {
+        if ($("#hearingtestcheckboxunfit").is(":checked ")) {
+            var remark = $('#hearingunfitRemark').val();
+            $('input[name="hearingfit"][value="fit"]').prop("checked", false);
+            $('input[name="hearingunfit"][value="unfit"]').prop("checked", true);
+            $('#remarkInModal').text(remark);
+        }
+    });
+    $("#hearingtestcheckboxfit").click(function() {
+        $('input[name="hearingfit"][value="fit"]').prop("checked", true);
+        $('input[name="hearingunfit"][value="unfit"]').prop("checked", false);
+    })
+</script>
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('js/html2canvasmin.js') }}"></script>
@@ -3303,14 +3747,14 @@ $bpdata['post_upper_bp']="0";
                         $('#doctorcount').val(Number(data));
                         Swal.fire("Saved!", "", "success");
                     },
-                    error: (data) => {
-                    }
+                    error: (data) => {}
                 });
             } else if (result.isDenied) {
                 Swal.fire("Changes are not saved", "", "info");
             }
         })
     }
+
     function signatureOFDoctor(button) {
         var id = button.id;
         var button = `${id}button`;
@@ -3385,6 +3829,7 @@ $bpdata['post_upper_bp']="0";
             }
         })
     }
+
     function generateHearingtestPDF() {
         var certificationnumber = document.getElementById('certificationnumber').value;
         var unfitCheckbox = document.getElementById('hearingtestcheckboxunfit');
@@ -3394,7 +3839,8 @@ $bpdata['post_upper_bp']="0";
         var isUnfitChecked = unfitCheckbox.checked;
         var canvas = document.getElementById('hearingChartCanvas');
         var dataUrl = canvas.toDataURL('image/png');
-        var printContent = '<style>.checked {color: blue;} .unchecked {display: none;} .container {display: flex; flex-direction: column;}</style>';
+        var printContent =
+            '<style>.checked {color: blue;} .unchecked {display: none;} .container {display: flex; flex-direction: column;}</style>';
         printContent += '<h1>' + certificationnumber + '</h1>';
         printContent += '<div class="container">';
         printContent += '<img src="' + dataUrl + '" style="width:100%;">';
@@ -3421,6 +3867,7 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
+
     function generatePDF() {
         var canvas = document.getElementById('bpCanvasChart');
         var dataUrl = canvas.toDataURL('image/png');
@@ -3430,7 +3877,8 @@ $bpdata['post_upper_bp']="0";
         var unfitRemark = document.getElementById('bpunfitRemark').value; // Update with your unfit remark ID
         var isFitChecked = fitCheckbox.checked;
         var isUnfitChecked = unfitCheckbox.checked;
-        var printContent = '<style>.checked {color: blue;} .unchecked {display: none;} .container {display: flex; flex-direction: column;}</style>';
+        var printContent =
+            '<style>.checked {color: blue;} .unchecked {display: none;} .container {display: flex; flex-direction: column;}</style>';
         printContent += '<h1>' + certificationnumber + '</h1>';
         printContent += '<div class="container">';
         printContent += '<img src="' + dataUrl + '" style="width:100%;">';
@@ -3452,13 +3900,14 @@ $bpdata['post_upper_bp']="0";
         WinPrint.document.write('<html><head><title>BP ' + certificationnumber + '</title></head><body>');
         WinPrint.document.write(printContent);
         WinPrint.document.write('</body></html>');
-        WinPrint.document.close(); 
+        WinPrint.document.close();
         setTimeout(function() {
             WinPrint.focus();
             WinPrint.print();
             WinPrint.close();
         }, 1000);
     }
+
     function eyegeneratePDF() {
         var body = document.getElementById('page-top').innerHTML;
         var eyegraph = document.getElementById('eyegraph').innerHTML;
@@ -3537,6 +3986,7 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
+
     function eyedistancepdf() {
         var body = document.getElementById('page-top').innerHTML;
         var eyedistancegraph = document.getElementById('eyedistancegraph').innerHTML;
@@ -3646,6 +4096,7 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
+
     function docotorFinalReportPDF() {
         var prtContent = document.getElementById("doctorreportfinal");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
@@ -3660,6 +4111,7 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
+
     function consumerfinalPDf() {
         var prtContent = document.getElementById("consumer_pdf");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
@@ -3687,6 +4139,7 @@ $bpdata['post_upper_bp']="0";
         // document.getElementById('site-title').innerHTML = "Mediclear the Eye Test";
         // location.reload(); class="accordion-collapse collapse"
     }
+
     function doctorFinalResultSubmit() {
         let val = $('#doctorcount').val();
         if (Number(val) == 6) {
