@@ -19,22 +19,34 @@ class CompanyController extends Controller
 
 
 
+
+
+
+    public function filterCompany(Request $req)
+    {
+        $start=$req->start;
+$end=$req->end;
+        $company = Company::whereDate('created_at', '>=', $start)
+        ->whereDate('created_at', '<=', $end)
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return view('dashboard.add-company', compact('company','start','end'));
+    }
+
+
+
     public function CreateCompany(Request $req)
     {
-
-
         // dd($req->all());
         $validate = Validator::make($req->all(), [
             'name' => 'required',
             // 'user_id' => 'required|unique:corporate_i_d_s',
             // 'address' => 'required',
-            'mobile_no' => 'required|numeric|unique:company',
+            'mobile_no' => 'required|numeric|unique:company|digits:10',
             'email' => 'required|email|unique:company',
             'city' => 'required',
         ]);
-
         if ($validate->fails()) {
-
             // return back()->withErrors($validate)->withInput();
             return back()->withErrors($validate);
         }
@@ -44,11 +56,10 @@ class CompanyController extends Controller
             'city' => $req->city,
             'mobile_no' => $req->mobile_no,
             'email' => $req->email,
-            'status' => 'Pending',
+            'status' => 'Active',
 
         ]);
         return back()->with('message', 'Company Added Successfully');
-
         // return view('dashboard.add-company',compact('company'));
     }
 

@@ -129,15 +129,12 @@
     .circular-chart.blue .circle {
         stroke: #3c9ee5;
     }
-
     .circular-chart.red .circle {
         stroke: #e5533c;
     }
-
     .circular-chart.pink .circle {
         stroke: #e53ca4;
     }
-
     .circular-chart.yellow .circle {
         stroke: #e5dd3c;
     }
@@ -268,14 +265,12 @@
     .dropdown-select:hover {
         background-color: #fff;
     }
-
     .dropdown-select:active,
     .dropdown-select.open {
         background-color: #fff !important;
         border-color: #bbb;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) inset;
     }
-
     .dropdown-select:after {
         height: 0;
         width: 0;
@@ -293,12 +288,10 @@
         right: 10px;
         top: 50%;
     }
-
     .dropdown-select.open:after {
         -webkit-transform: rotate(-180deg);
         transform: rotate(-180deg);
     }
-
     .dropdown-select.open .list {
         -webkit-transform: scale(1);
         transform: scale(1);
@@ -309,17 +302,14 @@
     .dropdown-select.open .option {
         cursor: pointer;
     }
-
     .dropdown-select.wide {
         width: 100%;
     }
-
     .dropdown-select.wide .list {
         left: 0 !important;
         right: 0 !important;
         top: -213px;
     }
-
     .dropdown-select .list {
         box-sizing: border-box;
         transition: all 0.15s cubic-bezier(0.25, 0, 0.25, 1.75), opacity 0.1s linear;
@@ -343,11 +333,9 @@
         overflow: auto;
         border: 1px solid #ddd;
     }
-
     .dropdown-select .list:hover .option:not(:hover) {
         background-color: transparent !important;
     }
-
     .dropdown-select .dd-search {
         overflow: hidden;
         display: flex;
@@ -355,7 +343,6 @@
         justify-content: center;
         margin: 0.5rem;
     }
-
     .dropdown-select .dd-searchbox {
         width: 90%;
         padding: 0.5rem;
@@ -364,15 +351,12 @@
         border-radius: 4px;
         outline: none;
     }
-
     .dropdown-select .dd-searchbox:focus {
         border-color: #12CBC4;
     }
-
     .dropdown-select .list ul {
         padding: 0;
     }
-
     .dropdown-select .option {
         cursor: default;
         font-weight: 400;
@@ -384,40 +368,32 @@
         transition: all 0.2s;
         list-style: none;
     }
-
     .dropdown-select .option:hover,
     .dropdown-select .option:focus {
         background-color: #f6f6f6 !important;
     }
-
     .dropdown-select .option.selected {
         font-weight: 600;
         color: #12cbc4;
     }
-
     .dropdown-select .option.selected:focus {
         background: #f6f6f6;
     }
-
     .dropdown-select a {
         color: #aaa;
         text-decoration: none;
         transition: all 0.2s ease-in-out;
     }
-
     .dropdown-select a:hover {
         color: #666;
     }
-
     .form-check-input {
         border: 1px solid #5a5c69 !important;
     }
-
     .yellow {
         width: 400px;
         background-color: yellow;
     }
-
     /* boxes css */
     .container1 {
         width: 95%;
@@ -427,12 +403,10 @@
         margin: 20px auto;
         padding: 20px 0;
     }
-
     .container1 ul {
         padding: 0px;
         margin: 0px;
     }
-
     .container1 ul li {
         list-style-type: none;
         float: left;
@@ -443,7 +417,6 @@
         margin: 40px 30px 0px 40px;
         line-height: 200px;
     }
-
     .container1 ul li .title {
         width: 100%;
         height: 50px;
@@ -452,19 +425,15 @@
         text-align: center;
         border: 2px solid rgb(135, 127, 127);
     }
-
     /* input[type="checkbox"] {
         transform: scale(2);
         border-radius: 0px !important;
-
         border: 0.5px solid black !important;
         outline: none !important;
     } */
-
     .footer {
         border: 2px solid black;
     }
-
     /* css for responsive */
     @media (max-width: 992px) {
         .container1 ul li {
@@ -473,12 +442,6 @@
             line-height: 150px;
         }
     }
-
-
-
-
-
-
     /*  */
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -486,14 +449,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 </script>
-
 <a class="btn btn-success ml-4 mb-2" href="{{ url()->previous() }}" role="button">Go Back</a>
 <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
-
 <input type="hidden" value="{{ request()->get('id') }}" id="consumerId" />
-
 @php $companyName="NA"; @endphp
 @foreach ($corporateCompanyBatchName as $company)
     @php
@@ -502,14 +462,9 @@
 
     @endphp
 @endforeach
-
 <div class="accordion px-4 mb-2" id="accordionExample">
-
-
     <h1 class="text-start report-examina mt-3 mb-3 text-success"> Report Examination Sheet </h1>
-
     <div class="accordion-item">
-
         <h2 class="accordion-header " id="headingThree">
             <button class="accordion-button collapsed bg-light text-dark" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -542,9 +497,7 @@
                                     </p>
                                     <p class="name-company mt-4" id="consumerDOB">
                                         {{ date('F j, Y', strtotime($data->consumer_dob)) }}</p>
-
                                     <p class="name-company mt-4" id="consumerAddress">{{ $data->consumer_address }}</p>
-
                                     <p class="name-company mt-4" id="consumerAadharNumber">
                                         {{ $data->consumer_addhar_number }}</p>
                                 </div>
@@ -729,36 +682,23 @@
                                     </div>
                                 </div>
                             </div>
-
                             @if (!isset($data->post_mediacal_history_disease))
                                 @php $postMedicalHistory=[]; @endphp
                             @endif
-
                             @if (gettype($data->post_mediacal_history_disease) == 'array')
                                 @php $postMedicalHistory=$data->post_mediacal_history_disease;@endphp
                             @endif
-
                             @if (gettype($data->post_mediacal_history_disease) == 'string')
                                 @php $postMedicalHistory=json_decode($data->post_mediacal_history_disease,true); @endphp
                             @endif
-
-
                             @if (gettype(json_decode($data->post_mediacal_history_disease, true)) == 'string')
                                 @php
                                 $postMedicalHistory = json_decode(json_decode($data->post_mediacal_history_disease, true)); @endphp
                             @endif
-
-
-
-
-
-
                             <!-- past medical section start -->
-
                             <div class="past-medical History">
                                 <div class="1">
                                     <p class="text-black">Past Medical History :</p>
-
                                     <p>
                                         1. Do you have a History of any of the following ? please check
                                         all that apply
@@ -800,20 +740,15 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 @if (!isset($data->defficulting_in_hearing))
                                     @php $defficulting_in_hearing=[]; @endphp
                                 @endif
-
                                 @if (gettype($data->defficulting_in_hearing) == 'array')
                                     @php $defficulting_in_hearing=$data->defficulting_in_hearing;@endphp
                                 @endif
-
                                 @if (gettype($data->defficulting_in_hearing) == 'string')
                                     @php $defficulting_in_hearing=json_decode($data->defficulting_in_hearing,true); @endphp
                                 @endif
-
-
                                 @if (gettype(json_decode($data->defficulting_in_hearing, true)) == 'string')
                                     @php
                                     $defficulting_in_hearing = json_decode(json_decode($data->defficulting_in_hearing, true)); @endphp
@@ -876,8 +811,7 @@
                                     @if (gettype(json_decode($data->noise_in_ears, true)) == 'string')
                                         @php $noise_in_ears=json_decode(json_decode($data->noise_in_ears,true));@endphp
                                     @endif
-
-                                    <p>b. Noise in ears ?</p>
+                                 <p>b. Noise in ears ?</p>
                                     <div class="objective-option">
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox1">Yes</label>
@@ -917,13 +851,8 @@
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
                                                 @if (in_array(6, $noise_in_ears)) checked  @disabled(true) @endif />
-                                        </div>
-
-
+                                            </div>
                                     </div>
-
-
-
                                     @if (!isset($data->fullness_or_stuffiness_in_your_ears))
                                         @php $fullness_or_stuffiness_in_your_ears=[]; @endphp
                                     @endif
@@ -942,12 +871,6 @@
                                         @php
                                         $fullness_or_stuffiness_in_your_ears = json_decode(json_decode($data->fullness_or_stuffiness_in_your_ears, true)); @endphp
                                     @endif
-
-
-
-
-
-
                                     <p>c. Fullness or stuffiness in your ears ?</p>
                                     <div class="objective-option">
                                         <div class="form-check form-check-inline">
@@ -994,33 +917,24 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             @if (!isset($data->complaint))
                                 @php $complaints=[]; @endphp
                             @endif
-
                             @if (gettype($data->complaint) == 'array')
                                 @php $complaints=$data->complaint;@endphp
                             @endif
-
                             @if (gettype($data->complaint) == 'string')
                                 @php $complaints=json_decode($data->complaint,true);@endphp
                             @endif
-
                             @if (gettype(json_decode($data->complaint, true)) == 'string')
                                 @php $complaints=json_decode(json_decode($data->complaint,true));@endphp
                             @endif
-
                             @if (json_decode(json_decode($data->complaint)) == '[]')
                                 @php $complaints=[]; @endphp
                             @endif
-
                             @if (gettype(json_decode(json_decode($data->complaint, true))) == 'string')
                                 @php $complaints=json_decode(json_decode(json_decode($data->complaint,true))) @endphp
                             @endif
-
-
                             <!-- Complaint section start -->
                             <div class="complaints">
                                 <p class="text-black my-3">Complaints :</p>
@@ -1111,13 +1025,11 @@
         </div>
     </div>
 </div>
-
 {{-- ///accordionExample --}}
 <div class="accordion px-4 mb-2" id="bpcontainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingFour">
-            <button class="accordion-button collapsed"
-                @if (isset($Testresult['bp'])) @else style="background-color:#e5533c;color:#f8f9fc " @endif
+            <button class="accordion-button collapsed" @if (isset($TestData['bp'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
                 aria-controls="collapseFour" id="bpbutton">
                 Check For Blood Pressure
@@ -1183,13 +1095,10 @@
 <div class="accordion px-4 mb-2" id="eyecontainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingFive">
-
-            <button class="accordion-button collapsed" @if (isset($Testresult['eyecheckup'])) @else @endif type="button"
+            <button class="accordion-button collapsed" @if (isset($TestData['eyecheckup'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
                 data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
                 aria-controls="collapseFive" id="eyecheckupbutton">
                 Check For Eye Color Blindness Test
-
-
             </button>
         </h2>
         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
@@ -1199,7 +1108,7 @@
                     <strong> Consumer Certificate Number -- {{ $data->certification_number }}</strong>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-6">
-                            @if (isset($TestData['eyecheckup']))
+                            {{-- @if (isset($TestData['eyecheckup'])) --}}
                                 <div id="eye-checkup-chart-container" style="height:280px;">
                                     <div class="flex-wrapper">
                                         @php
@@ -1207,7 +1116,7 @@
                                                 $eyecheckupdata = json_decode($TestData['eyecheckup'], true);
                                                 $count = 0;
                                                 foreach ($eyecheckupdata as $value) {
-                                                    if ($value == true) {
+                                                    if ($value == 'true') {
                                                         $count++;
                                                     }
                                                 }
@@ -1236,42 +1145,22 @@
                                                 $percentage = 0;
                                                 $color = 'red';
                                             }
-
                                         @endphp
-
-
-
-
-
-
                                         <div class="single-chart">
                                             <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
-                                                <path class="circle-bg" d="M18 2.0845
-                    a 15.9155 15.9155 0 0 1 0 31.831
-                    a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                                <path class="circle" stroke-dasharray="{{ $percentage }}, 100" d="M18 2.0845
-                    a 15.9155 15.9155 0 0 1 0 31.831
-                    a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                <path class="circle" stroke-dasharray="{{ $percentage }}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                                 <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
                                             </svg>
                                         </div>
-
-
-
-
                                     </div>
-
                                 </div>
-                            @endif
+                            {{-- @endif --}}
                         </div>
 
                     </div>
                 </div>
-
                 {{-- <div id="c_pre-bp-chart-container" style="height: 400px;"></div> --}}
-
-
-
                 @if (isset($TestData['eyecheckup']))
                     <div class="container">
                         <div class="row d-flex justify-content-center mb-2">
@@ -1282,44 +1171,137 @@
                                     <label class="form-check-label" for="checkbox1">Fit</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="eyecheckupcheckboxunfit"
-                                        value="0">
+                                    <input class="form-check-input" type="checkbox" id="eyecheckupcheckboxunfit" value="0">
                                     <label class="form-check-label" for="checkbox2">Unfit</label>
                                 </div>
                             </div>
-
-
                             <div class="form-group" id="eyecheckup_test_remark_result" style="display:none">
                                 <label for="exampleFormControlTextarea1">Unfit Remark</label>
                                 <textarea class="form-control" id="eyecheckupunfitRemark" rows="3"></textarea>
                             </div>
-
-
                         </div>
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" id="eyecheckup"
-                                onclick="saveResult(this)">Submit</button>
+                            <button class="btn btn-primary" id="eyecheckup" onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
                             <button class="btn btn-danger" id="eyecheckup_test_again">Please test again</button>
                             &nbsp;&nbsp;
-                            <button onclick="eyegeneratePDF()" class="btn btn-danger  btn-sm"><i class="fa fa-print"
-                                    style="font-size:36px"></i></button>
+                            <button onclick="eyegeneratePDF()" class="btn btn-danger  btn-sm"><i class="fa fa-print" style="font-size:36px"></i></button>
                         </div>
                     </div>
                 @endif
-
             </div>
         </div>
     </div>
-
 </div>
 {{-- end chekup --}}
+{{-- eye distance check --}}
+<div class="accordion px-4 mb-2" id="eyedistancecontainer">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingsix">
+            <button class="accordion-button collapsed" @if (isset($TestData['eyedistance'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false"
+                aria-controls="collapsesix" id="eyecheckupbutton">
+                Check For Eye Distance Test
+            </button>
+        </h2>
+        <div id="collapsesix" class="accordion-collapse collapse" aria-labelledby="headingsix"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div class="container" id="eyedistancegraph">
+                    <strong> Consumer Certificate Number -- {{ $data->certification_number }}</strong>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-6">
+                            {{-- @if (isset($TestData['eyedistance'])) --}}
+                                <div id="eye-checkup-chart-container" style="height:280px;">
+                                    <div class="flex-wrapper">
+                                        @php
+                                            if (isset($TestData['eyedistance'])) {
+                                                $eyedistancedata = json_decode($TestData['eyedistance'], true);
+                                                $count = 0;
+                                                foreach ($eyedistancedata as $value) {
+                                                    if ($value == 'true') {
+                                                        $count++;
+                                                    }
+                                                }
+                                            } else {
+                                                $count = null;
+                                            }
+                                            if ($count == 1) {
+                                                $percentage = 18;
+                                                $color = 'pink';
+                                            } elseif ($count == 2) {
+                                                $percentage = 35;
+                                                $color = 'orange';
+                                            } elseif ($count == 3) {
+                                                $percentage = 50;
+                                                $color = 'yellow';
+                                            } elseif ($count == 4) {
+                                                $percentage = 68;
+                                                $color = 'skyblue';
+                                            } elseif ($count == 5) {
+                                                $percentage = 75;
+                                                $color = 'blue';
+                                            } elseif ($count == 6) {
+                                                $percentage = 100;
+                                                $color = 'green';
+                                            } elseif ($count == 0) {
+                                                $percentage = 0;
+                                                $color = 'red';
+                                            }
+                                        @endphp
+                                        <div class="single-chart">
+                                            <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                <path class="circle" stroke-dasharray="{{ $percentage }}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{-- @endif --}}
+                        </div>
+                    </div>
+                </div>
+                {{-- <div id="c_pre-bp-chart-container" style="height: 400px;"></div> --}}
+                @if (isset($TestData['eyedistance']))
+                    <div class="container">
+                        <div class="row d-flex justify-content-center mb-2">
+                            <div class="col-6">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="eyedistancecheckboxfit"
+                                        value="1">
+                                    <label class="form-check-label" for="checkbox1">Fit</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="eyedistancecheckboxunfit" value="0">
+                                    <label class="form-check-label" for="checkbox2">Unfit</label>
+                                </div>
+                            </div>
+                            <div class="form-group" id="eyedistance_test_remark_result" style="display:none">
+                                <label for="exampleFormControlTextarea1">Unfit Remark</label>
+                                <textarea class="form-control" id="eyedistanceunfitRemark" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center">
+                            <button class="btn btn-primary" id="eyedistance" onclick="saveResult(this)">Submit</button>
+                            &nbsp;&nbsp;
+                            <button class="btn btn-danger" id="eyedistance_test_again">Please test again</button>
+                            &nbsp;&nbsp;
+                            <button onclick="eyedistancepdf()" class="btn btn-danger  btn-sm"><i class="fa fa-print" style="font-size:36px"></i></button>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+{{-- eye distance end --}}
 {{-- Hearing Test Report --}}
 <div class="accordion px-4 mb-2" id="HearingContainer">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingHearing">
             <button class="accordion-button collapsed"
-            @if (isset($Testresult['hearingtest'])) @else style="background-color:#e5533c;color:#f8f9fc " @endif
+            @if (isset($TestData['hearingtest'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
             type="button" data-bs-toggle="collapse" data-bs-target="#collapseHearing" aria-expanded="false"
             aria-controls="collapseHearing" id="hearingbutton">
             Check For Hearing Test
@@ -1332,12 +1314,13 @@
                 <div class="container" id="hearingTestContent">
                     <input type="hidden" id="certificationnumber" value="{{ $data->certification_number }}" />
                     <input type="hidden" id="consumerid" value="{{ request()->get('id') }}" />
-                    <p class="text-success pt-3 pb-3"><strong> Consumer Certificate Number --
-                            {{ $data->certification_number }}</strong></p>
+                    <p class="text-success pt-3 pb-3"><strong> Consumer Certificate Number -- {{ $data->certification_number }}</strong></p>
+                    {{-- @if (isset($TestData['hearingtest'])) --}}
                     <!-- Chart Canvas -->
                     <canvas id="hearingChartCanvas" width="1000" height="300"></canvas>
+                    {{-- @endif --}}
                 </div>
-                {{-- @if (isset($TestData['hearingtest'])) --}}
+                @if (isset($TestData['hearingtest']))
                     <div class="container">
                         <div class="row">
                             <div class="col-6">
@@ -1365,50 +1348,38 @@
                             <button onclick="generateHearingtestPDF()"><i class="fa fa-print text-success" style="font-size:36px"></i></button>
                         </div>
                     </div>
-                {{-- @endif --}}
+                @endif
             </div>
         </div>
     </div>
 </div>
 {{-- ------------------------Rombergtest----------------------------------- --}}
-
 @php
     if (isset($TestData['rt'])) {
         $rtcheckupdata = json_decode($TestData['rt'], true);
     }
 @endphp
-
 <div class="accordion px-4 mb-2 " id="rombergtestcontainer">
-
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingSix">
-
-            <button class="accordion-button collapsed" @if (isset($Testresult['rt'])) @else @endif type="button"
+            <button class="accordion-button collapsed" @if (isset($TestData['rt'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
                 data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
                 aria-controls="collapseSix" id="rtbutton">
                 Check For Romberg Test
-
-
             </button>
         </h2>
         <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-
-
                 <div class="container" id="rombergtestcontainer">
-
-
                     <strong> Consumer Certificate Number -- {{ $data->certification_number }}</strong>
                     <div class="row">
                         <div class="col">
                             <div id="rombergtestcontainer-checkup-chart-container">
-
                                 <div class="container">
                                     <div class="row justify-content-md-center">
                                         @if (isset($rtcheckupdata['both_legs']) && $rtcheckupdata['both_legs'] != [])
                                             <div class="col-sm">
-
                                                 <div class="embed-responsive embed-responsive-16by9 mb-2">
                                                     <iframe class="embed-responsive-item" width="200px"
                                                         height="300px"
@@ -1428,9 +1399,6 @@
                                                 <p class="text-center"><strong>Left Legs</strong></p>
                                             </div>
                                         @endif
-
-
-
                                         @if (isset($rtcheckupdata['right_leg']) && $rtcheckupdata['right_leg'] != [])
                                             <div class="col-sm">
                                                 <div class="embed-responsive embed-responsive-16by9">
@@ -1441,39 +1409,13 @@
                                                 <p class="text-center"><strong>Right Legs</strong></p>
                                             </div>
                                         @endif
-
-
-
-
-
                                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
                 {{-- <div id="c_pre-bp-chart-container" style="height: 400px;"></div> --}}
-
-
-
                 @if (isset($rtcheckupdata))
                     <div class="container">
                         <div class="row">
@@ -1489,90 +1431,59 @@
                                     <label class="form-check-label" for="checkbox2">Unfit</label>
                                 </div>
                             </div>
-
-
                             <div class="form-group" id="rt_test_remark_result" style="display:none">
                                 <label for="exampleFormControlTextarea1">Unfit Remark</label>
                                 <textarea class="form-control" id="rtunfitRemark" rows="3"></textarea>
                             </div>
-
-
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <button class="btn btn-primary" id="rt" onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
                             <button class="btn btn-danger" id="rt_test_again">Please test again</button>
                             &nbsp;&nbsp;
-
-
                         </div>
                     </div>
                 @endif
-
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
 {{-- end Rombergtest --}}
-
 {{-- ----------------------flatfoottest------------------------------------------------ --}}
-
 @php
     if (isset($TestData['flatfoot'])) {
         $flatfootcheckupdata = json_decode($TestData['flatfoot'], true);
     }
 @endphp
-
 <div class="accordion px-4 mb-2" id="flatfoottestcontainer">
-
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingSeaven">
-
-            <button class="accordion-button collapsed" @if (isset($Testresult['flatfoot'])) @else @endif type="button"
+            <button class="accordion-button collapsed" @if (isset($TestData['flatfoot'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
                 data-bs-toggle="collapse" data-bs-target="#collapseSeaven" aria-expanded="false"
                 aria-controls="collapseSeaven" id="flatfootbutton">
                 Check For Flat Foot Test
-
-
             </button>
         </h2>
         <div id="collapseSeaven" class="accordion-collapse collapse" aria-labelledby="headingSix"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-
-
                 <div class="container" id="flattestcontainer">
-
-
                     <strong> Consumer Certificate Number -- {{ $data->certification_number }}</strong>
                     <div class="row">
                         <div class="col">
                             <div id="flattestcontainer-checkup-chart-container">
                                 @if (isset($flatfootcheckupdata))
-                                    <div class="container d-flex
-                    justify-content-center"
+                                    <div class="container d-flex justify-content-center"
                                         id="flatfootimage">
-
                                         <img src="{{ asset('public/test_images/' . $flatfootcheckupdata['flatfoot']) }}"
                                             class="img-fluid" alt="Responsive image">
-
                                     </div>
                                 @endif
                             </div>
                         </div>
                     </div>
                 </div>
-
                 {{-- <div id="c_pre-bp-chart-container" style="height: 400px;"></div> --}}
-
-
-
                 @if (isset($flatfootcheckupdata))
                     <div class="container">
                         <div class="row">
@@ -1588,8 +1499,6 @@
                                     <label class="form-check-label" for="checkbox2">Unfit</label>
                                 </div>
                             </div>
-
-
                             <div class="form-group" id="flatfoot_test_remark_result" style="display:none">
                                 <label for="exampleFormControlTextarea1">Unfit Remark</label>
                                 <textarea class="form-control" id="flatfootunfitRemark" rows="3"></textarea>
@@ -1614,46 +1523,25 @@
     </div>
 
 </div>
-
-
-
-
-
-{{-- --}}
-
-
 {{-- ----------------------------------BPPV-------------------------------------------- --}}
-
-
-
 @php
     if (isset($TestData['bppv'])) {
         $bppvcheckupdata = json_decode($TestData['bppv'], true);
     }
 @endphp
-
-
 <div class="accordion px-4 mb-2" id="bppvtestcontainer">
-
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingeight">
-
-            <button class="accordion-button collapsed" @if (isset($Testresult['bppv'])) @else @endif type="button"
+            <button class="accordion-button collapsed" @if (isset($TestData['bppv'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button"
                 data-bs-toggle="collapse" data-bs-target="#collapseeight" aria-expanded="false"
                 aria-controls="collapseeight" id="bppvbutton">
                 Check For BPPV Test
-
-
             </button>
         </h2>
         <div id="collapseeight" class="accordion-collapse collapse" aria-labelledby="headingSix"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-
-
                 <div class="container" id="bppvcontainer">
-
-
                     <strong> Consumer Certificate Number -- {{ $data->certification_number }}</strong>
                     <div class="row">
                         <div class="col">
@@ -1661,26 +1549,18 @@
                                 @if (isset($bppvcheckupdata['bppv_video']) && $bppvcheckupdata['bppv_video'] != [])
                                     <div class="col-sm">
                                         <div class="embed-responsive embed-responsive-16by9"
-                                            style="width: 60%;
-                  left: 16%;
-                  top: 10px;">
+                                            style="width: 60%; left: 16%; top: 10px;">
                                             <iframe class="embed-responsive-item"
                                                 src="{{ asset('public/videos/' . $bppvcheckupdata['bppv_video']) }}"
                                                 allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 @endif
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
                 {{-- <div id="c_pre-bp-chart-container" style="height: 400px;"></div> --}}
-
-
-
                 @if (isset($bppvcheckupdata))
                     <div class="container">
                         <div class="row">
@@ -1721,70 +1601,41 @@
     </div>
 
 </div>
-
-
-
-
-
-{{-- ------------------------------------------------------------------------- --}}
-
 {{-- -----------------------------Fukuda-Unterberger Test--------------------------------------- --}}
-
 @php
     if (isset($TestData['fukuda'])) {
         $fukudacheckupdata = json_decode($TestData['fukuda'], true);
     }
 @endphp
-
-
 <div class="accordion px-4 mb-2 " id="fukudatestcontainer">
-
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingnine">
-
             <button class="accordion-button collapsed" id="fukudabutton"
-                @if (isset($Testresult['fukuda'])) @else @endif type="button" data-bs-toggle="collapse"
+                @if (isset($TestData['fukuda'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapsenine" aria-expanded="false" aria-controls="collapsenine">
                 Check For Fukuda-Unterberger Test
-
-
             </button>
         </h2>
         <div id="collapsenine" class="accordion-collapse collapse" aria-labelledby="headingnine"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-
-
                 <div class="container" id="fukudacontainer">
-
-
                     <strong> Consumer Certificate Number -- {{ $data->certification_number }}</strong>
                     <div class="row">
                         <div class="col">
                             <div id="fukudacontainer-checkup container">
                                 @if (isset($fukudacheckupdata['fukuda_video']) && $fukudacheckupdata['fukuda_video'] != [])
                                     <div class="col-sm">
-                                        <div class="embed-responsive embed-responsive-16by9"
-                                            style="width: 60%;
-                  left: 16%;
-                  top: 10px;">
-                                            <iframe class="embed-responsive-item"
-                                                src="{{ asset('public/videos/' . $fukudacheckupdata['fukuda_video']) }}"
-                                                allowfullscreen></iframe>
+                                        <div class="embed-responsive embed-responsive-16by9" style="width: 60%; left: 16%; top: 10px;">
+                                            <iframe class="embed-responsive-item" src="{{ asset('public/videos/' . $fukudacheckupdata['fukuda_video']) }}" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 @endif
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
                 {{-- <div id="c_pre-bp-chart-container" style="height: 400px;"></div> --}}
-
-
-
                 @if (isset($fukudacheckupdata))
                     <div class="container">
                         <div class="row">
@@ -1830,17 +1681,11 @@
 
 
 </div>
-
 {{-- -------------------------------------Consumer Final Report Submit------------------------ --}}
-
 <div class="accordion px-4 mb-2 " id="finalreportcontainer">
-
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingten">
-
-
             <input type="hidden" value="{{ $CountRisultGivenByDoctor }}" id="doctorcount" />
-
             <button class="accordion-button collapsed" id="doctorbutton" onclick="doctorFinalResultSubmit()"
                 @if (isset($data->doctor_final_result)) @else @endif type="button" data-bs-toggle="collapse"
                 @if ($CountRisultGivenByDoctor == 6) data-bs-target="#collapseten" @else data-bs-target="" @endif
@@ -1856,7 +1701,6 @@
                     <div class="row">
                         <div class="col">
                             <div id="doctorsigncontainer-checkup container">
-
                                 <p class="h4 text-center text-dark">This is to be certify that Mr.
                                     {{ $data->consumer_name }}</p>
                                 <p class="text-dark">
@@ -1985,12 +1829,10 @@
 
 
 </div>
-
 {{-- -------------------------------------Customer Profile Modal----------------------------- --}}
 <button type="button mt-4 mb-4" class="btn btn-dark ml-4 " data-toggle="modal" data-target="#exampleModalLong">
     Consumer Examination Report
 </button>
-
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <div class="modal-dialog" style="
@@ -2408,16 +2250,12 @@
         </div>
     </div>
 </div>
-
 {{-- ---------------------------------------------------------------------------------------------- --}}
-{{-- ------------------------------ Vertigo Test Report
-PDF------------------------------------------------------------------------ --}}
-
+{{-- ------------------------------ Vertigo Test Report PDF------------------------------------------------------------------------ --}}
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalVertigo">
     Vertico Test Report
 </button>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModalVertigo" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalVertigo" aria-hidden="true">
@@ -2730,19 +2568,12 @@ PDF------------------------------------------------------------------------ --}}
         </div>
     </div>
 </div>
-
-
-
 {{-- ------------------------------------------------------------------------------------------------ --}}
-
-
 {{-- -----------------------------------------------consumer final report form3------------------------------------------- --}}
-
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
     Consumer Final Report
 </button>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -2890,18 +2721,13 @@ PDF------------------------------------------------------------------------ --}}
                                         <div class="title" id="">REGISTRATION NUMBER</div>
                                         <div class="col-md-6" id="doctorregistration">
                                             {{ $doc->doctorregistration }}
-
-
                                         </div>
-
                                     </li>
                                     <li class="text-center">
                                         <div class="title">SIGNATURE OF DOCTOR</div>
                                         <div class="col-md-6" id="doctorsign">
                                             <img src="{{ url('public/images/' . $doc->doctorsign) }}"
                                                 width="100px" class="img-fluid" alt="">
-
-
                                         </div>
                                     </li>
                                     <li class="text-center">
@@ -2940,18 +2766,12 @@ PDF------------------------------------------------------------------------ --}}
 
     </div>
 </div>
-
-
 <script>
     // $('#corporateProfile').change(function() {
     //     console.log('helllo');
     //     var selectedValue = $(this).val();
-
-
     //     console.log('Selected Value: ' + selectedValue);
     // });
-
-
     function create_custom_dropdowns() {
         $('select').each(function(i, select) {
             if (!$(this).next().hasClass('dropdown-select')) {
@@ -2971,14 +2791,11 @@ PDF------------------------------------------------------------------------ --}}
                 });
             }
         });
-
         $('.dropdown-select ul').before(
             '<div class="dd-search"><input id="txtSearchValue" autocomplete="off" onkeyup="filter()" class="dd-searchbox" type="text"></div>'
         );
     }
-
     // Event listeners
-
     // Open/close
     $(document).on('click', '.dropdown-select', function(event) {
         if ($(event.target).hasClass('dd-searchbox')) {
@@ -2994,7 +2811,6 @@ PDF------------------------------------------------------------------------ --}}
             $(this).focus();
         }
     });
-
     // Close when clicking outside
     $(document).on('click', function(event) {
         if ($(event.target).closest('.dropdown-select').length === 0) {
@@ -3003,7 +2819,6 @@ PDF------------------------------------------------------------------------ --}}
         }
         event.stopPropagation();
     });
-
     function filter() {
         var valThis = $('#txtSearchValue').val();
         $('.dropdown-select ul > li').each(function() {
@@ -3013,19 +2828,14 @@ PDF------------------------------------------------------------------------ --}}
         });
     };
     // Search
-
     // Option click
     $(document).on('click', '.dropdown-select .option', function(event) {
-
         let doctorId = event.target.id;
-
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $.ajax({
             type: 'post',
             url: "{{ url('doctor-data-based-id') }}",
@@ -3033,53 +2843,32 @@ PDF------------------------------------------------------------------------ --}}
                 id: doctorId
             },
             success: (data) => {
-
-
                 let sign = data[0].sign;
                 let seal = data[0].seal_of_doctor;
                 let registration_number = data[0].registration_number;
                 let doctorId = data[0].id;
-
                 var signHTML =
                     ` <img src="{{ url('public/images/') }}/${sign}"  width="100px" class="img-fluid"  alt="">`;
-
-
                 var sealHTML =
                     ` <img src="{{ url('public/images/') }}/${seal}" width="100px" class="img-fluid"  alt="">`;
-
                 var registrationHTML =
                     ` ${registration_number}`;
-
                 console.log(signHTML);
-
                 console.log(sealHTML);
-
                 $('#doctorsign').html(signHTML);
                 $('#doctorseal').html(sealHTML);
                 $('#doctorId').val(doctorId);
-
                 $('#doctorregistration').html(registrationHTML);
-
-
-
-
-
             },
             error: (data) => {
-
             }
-
         });
-
-
         $(this).closest('.list').find('.selected').removeClass('selected');
         $(this).addClass('selected');
         var text = $(this).data('display-text') || $(this).text();
-
         $(this).closest('.dropdown-select').find('.current').text(text);
         $(this).closest('.dropdown-select').prev('select').val($(this).data('value')).trigger('change');
     });
-
     // Keyboard events
     $(document).on('keydown', '.dropdown-select', function(event) {
         var focused_option = $($(this).find('.list .option:focus')[0] || $(this).find('.list .option.selected')[
@@ -3124,26 +2913,10 @@ PDF------------------------------------------------------------------------ --}}
         create_custom_dropdowns();
     });
 </script>
-
-
-
-
-
-
-
-
 {{-- ---------------------------------------------------------------------------------------------- --}}
-
-
 </div>
-
 </div>
-
 {{-- @if (isset($TestData) && json_decode($TestData, true) != [])
-
-
-
-
 @php
 if(isset($TestData['bp'])){
 
@@ -3179,7 +2952,7 @@ $bpdata['post_upper_bp']="0";
     }
 
 @endphp
-@php
+@php    
     if (isset($TestData['hearingtest'])) {
         $hrdata = json_decode($TestData['hearingtest'], true);
     } else {
@@ -3190,20 +2963,8 @@ $bpdata['post_upper_bp']="0";
         $hrdata['right_ear_fixed'] = '0';
     }
 @endphp
-
 {{-- -------------------------------------------------------------------------------------------------- --}}
 {{-- -------------------------------------form Modal ------------------------ --}}
-
-
-
-
-
-
-
-
-
-
-
 {{-- ----------------------------------------------------------------------------- --}}
 @endforeach
 @if (isset($TestData) && json_decode($TestData, true) != [])
@@ -3217,7 +2978,6 @@ $bpdata['post_upper_bp']="0";
         if (isset($TestData['eyecheckup'])) {
             $eyecheckupdata = json_decode($TestData['eyecheckup'], true);
         }
-
     @endphp
 @endif
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -3336,7 +3096,6 @@ $bpdata['post_upper_bp']="0";
 
     })
     $("#eyecheckupcheckboxunfit").click(function() {
-
         if ($("#eyecheckupcheckboxunfit").is(":checked ")) {
             $("#eyecheckup_test_remark_result").show();
             $("#eyecheckupcheckboxfit").prop("checked", false);
@@ -3349,12 +3108,22 @@ $bpdata['post_upper_bp']="0";
     $("#eyecheckupcheckboxfit").click(function() {
         $("#eyecheckupcheckboxunfit").prop("checked", false);
         $("#eyecheckup_test_remark_result").hide();
-
     })
+    $("#eyedistancecheckboxunfit").click(function() {
+        if ($("#eyedistancecheckboxunfit").is(":checked ")) {
+            $("#eyedistance_test_remark_result").show();
+            $("#eyedistancecheckboxfit").prop("checked", false);
 
-
+        } else {
+            $("#eyedistance_test_remark_result").hide();
+            $("#eyedistancecheckboxfit").prop("checked", true);
+        }
+    });
+    $("#eyedistancecheckboxfit").click(function() {
+        $("#eyedistancecheckboxunfit").prop("checked", false);
+        $("#eyedistance_test_remark_result").hide();
+    })
     $("#rtcheckboxunfit").click(function() {
-
         if ($("#rtcheckboxunfit").is(":checked ")) {
             $("#rt_test_remark_result").show();
             $("#rtcheckboxfit").prop("checked", false);
@@ -3365,7 +3134,6 @@ $bpdata['post_upper_bp']="0";
         }
 
     });
-
     $("#rtcheckboxfit").click(function() {
         $("#rtcheckboxunfit").prop("checked", false);
         $("#rt_test_remark_result").hide();
@@ -3463,13 +3231,13 @@ $bpdata['post_upper_bp']="0";
                 labels: labels,
                 datasets: [{
                     label: 'Right Ear',
-                    data: hrdata['right_ear_problem'].split(','),
+                    data: hrdata['right_ear_problem'].split(',').map(Number),
                     borderColor: 'red',
                     backgroundColor: 'transparent',
                     pointRadius: 3
                 }, {
                     label: 'Left Ear',
-                    data: hrdata['left_ear_problem'].split(','),
+                    data: hrdata['left_ear_problem'].split(',').map(Number),
                     borderColor: 'blue',
                     backgroundColor: 'transparent',
                     pointRadius: 3
@@ -3617,136 +3385,144 @@ $bpdata['post_upper_bp']="0";
             }
         })
     }
-    function generatePDF() {
-        var canvas = document.getElementById('bpCanvasChart');
-        var dataUrl = canvas.toDataURL('image/png');
+    function generateHearingtestPDF() {
         var certificationnumber = document.getElementById('certificationnumber').value;
+        var unfitCheckbox = document.getElementById('hearingtestcheckboxunfit');
+        var unfitRemark = document.getElementById('hearingunfitRemark').value;
+        var fitCheckbox = document.getElementById('hearingtestcheckboxfit');
+        var isFitChecked = fitCheckbox.checked;
+        var isUnfitChecked = unfitCheckbox.checked;
+        var canvas = document.getElementById('hearingChartCanvas');
+        var dataUrl = canvas.toDataURL('image/png');
+        var printContent = '<style>.checked {color: blue;} .unchecked {display: none;} .container {display: flex; flex-direction: column;}</style>';
+        printContent += '<h1>' + certificationnumber + '</h1>';
+        printContent += '<div class="container">';
+        printContent += '<img src="' + dataUrl + '" style="width:100%;">';
+        if (isFitChecked) {
+            printContent += '<p><strong>Fit:</strong> <span class="checked">☑</span></p>';
+        } else {
+            printContent += '<p><strong>Fit:</strong> <span class="unchecked">☑</span></p>';
+        }
+        if (isUnfitChecked) {
+            printContent += '<p><strong>Unfit:</strong> <span class="checked">☑</span></p>';
+            printContent += '<p><strong>Unfit Remark:</strong> ' + unfitRemark + '</p>';
+        } else {
+            printContent += '<p><strong>Unfit:</strong> <span class="unchecked">☑</span></p>';
+        }
+        printContent += '</div>';
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
-        WinPrint.document.write(certificationnumber);
-        WinPrint.document.write(`<title>BP${certificationnumber}</title>`)
-        WinPrint.document.write('<img src="' + dataUrl + '" style="width:100%;">');
+        WinPrint.document.write('<html><head><title>HearingTest ' + certificationnumber + '</title></head><body>');
+        WinPrint.document.write(printContent);
+        WinPrint.document.write('</body></html>');
         WinPrint.document.close();
         setTimeout(function() {
             WinPrint.focus();
             WinPrint.print();
             WinPrint.close();
         }, 1000);
-        printWindow.document.close();
-        printWindow.print();
     }
-    function generateHearingtestPDF() {
-    var certificationnumber = document.getElementById('certificationnumber').value;
-    var unfitCheckbox = document.getElementById('hearingtestcheckboxunfit');
-    var unfitRemark = document.getElementById('hearingunfitRemark').value;
-    
-    var printContent = '<h1>' + certificationnumber + '</h1>';
-    printContent += '<p><strong>Fit:</strong> <input type="checkbox" disabled ' + 
-                    (document.getElementById('hearingtestcheckboxfit').checked ? 'checked' : '') + '></p>';
-    printContent += '<p><strong>Unfit:</strong> <input type="checkbox" disabled ' + 
-                    (unfitCheckbox.checked ? 'checked' : '') + '></p>';
-    
-    if (unfitCheckbox.checked) {
-        printContent += '<p><strong>Unfit Remark:</strong> ' + unfitRemark + '</p>';
-    }
-    
-    var canvas = document.getElementById('hearingChartCanvas');
-    var dataUrl = canvas.toDataURL('image/png');
+    function generatePDF() {
+        var canvas = document.getElementById('bpCanvasChart');
+        var dataUrl = canvas.toDataURL('image/png');
+        var certificationnumber = document.getElementById('certificationnumber').value;
+        var fitCheckbox = document.getElementById('bpcheckboxfit'); // Update with your fit checkbox ID
+        var unfitCheckbox = document.getElementById('bpcheckboxunfit'); // Update with your unfit checkbox ID
+        var unfitRemark = document.getElementById('bpunfitRemark').value; // Update with your unfit remark ID
+        var isFitChecked = fitCheckbox.checked;
+        var isUnfitChecked = unfitCheckbox.checked;
+        var printContent = '<style>.checked {color: blue;} .unchecked {display: none;} .container {display: flex; flex-direction: column;}</style>';
+        printContent += '<h1>' + certificationnumber + '</h1>';
+        printContent += '<div class="container">';
+        printContent += '<img src="' + dataUrl + '" style="width:100%;">';
 
-    var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
-    WinPrint.document.write('<html><head><title>HearingTest ' + certificationnumber + '</title></head><body>');
-    WinPrint.document.write(printContent);
-    WinPrint.document.write('<img src="' + dataUrl + '" style="width:100%;">');
-    WinPrint.document.write('</body></html>');
-    WinPrint.document.close();
-    
-    setTimeout(function() {
-        WinPrint.focus();
-        WinPrint.print();
-        WinPrint.close();
-    }, 1000);
-}
+        if (isFitChecked) {
+            printContent += '<p><strong>Fit:</strong> <span class="checked">☑</span></p>';
+        } else {
+            printContent += '<p><strong>Fit:</strong> <span class="unchecked">☑</span></p>';
+        }
+
+        if (isUnfitChecked) {
+            printContent += '<p><strong>Unfit:</strong> <span class="checked">☑</span></p>';
+            printContent += '<p><strong>Unfit Remark:</strong> ' + unfitRemark + '</p>';
+        } else {
+            printContent += '<p><strong>Unfit:</strong> <span class="unchecked">☑</span></p>';
+        }
+        printContent += '</div>';
+        var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write('<html><head><title>BP ' + certificationnumber + '</title></head><body>');
+        WinPrint.document.write(printContent);
+        WinPrint.document.write('</body></html>');
+        WinPrint.document.close(); 
+        setTimeout(function() {
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+        }, 1000);
+    }
     function eyegeneratePDF() {
         var body = document.getElementById('page-top').innerHTML;
         var eyegraph = document.getElementById('eyegraph').innerHTML;
         var certificationnumber = document.getElementById('certificationnumber').value;
         var style = `<style>
-    .flex-wrapper {
-        display: flex;
-        flex-flow: row nowrap;
-    }
-    .single-chart {
-        width: 100%;
-        justify-content: space-around;
-    }
-
-    .circular-chart {
-        display: block;
-        margin: 10px auto;
-        max-width: 80%;
-        max-height: 250px;
-    }
-
-    .circle-bg {
-        fill: none;
-        stroke: #eee;
-        stroke-width: 3.8;
-    }
-
-    .circle {
-        fill: none;
-        stroke-width: 2.8;
-        stroke-linecap: round;
-        animation: progress 0s ease-out forwards;
-    }
-
-    @keyframes progress {
-        0% {
-            stroke-dasharray: 0 100;
-        }
-    }
-
-    .circular-chart.orange .circle {
-        stroke: #ff9f00;
-    }
-
-    .circular-chart.green .circle {
-        stroke: #4CC790;
-    }
-
-    .circular-chart.blue .circle {
-        stroke: #3c9ee5;
-    }
-
-    .circular-chart.red .circle {
-        stroke: #e5533c;
-    }
-
-    .circular-chart.pink .circle {
-        stroke: #e53ca4;
-    }
-
-    .circular-chart.yellow .circle {
-        stroke: #e5dd3c;
-    }
-
-    .circular-chart.skyblue .circle {
-        stroke: #3c7ae5;
-    }
-
-    .percentage {
-        fill: #666;
-        font-family: sans-serif;
-        font-size: 0.5em;
-        text-anchor: middle;
-    }
-</style>`
-
-
-
+                        .flex-wrapper {
+                            display: flex;
+                            flex-flow: row nowrap;
+                        }
+                        .single-chart {
+                            width: 100%;
+                            justify-content: space-around;
+                        }
+                        .circular-chart {
+                            display: block;
+                            margin: 10px auto;
+                            max-width: 80%;
+                            max-height: 250px;
+                        }
+                        .circle-bg {
+                            fill: none;
+                            stroke: #eee;
+                            stroke-width: 3.8;
+                        }
+                        .circle {
+                            fill: none;
+                            stroke-width: 2.8;
+                            stroke-linecap: round;
+                            animation: progress 0s ease-out forwards;
+                        }
+                        @keyframes progress {
+                            0% {
+                                stroke-dasharray: 0 100;
+                            }
+                        }
+                        .circular-chart.orange .circle {
+                            stroke: #ff9f00;
+                        }
+                        .circular-chart.green .circle {
+                            stroke: #4CC790;
+                        }
+                        .circular-chart.blue .circle {
+                            stroke: #3c9ee5;
+                        }
+                        .circular-chart.red .circle {
+                            stroke: #e5533c;
+                        }
+                        .circular-chart.pink .circle {
+                            stroke: #e53ca4;
+                        }
+                        .circular-chart.yellow .circle {
+                            stroke: #e5dd3c;
+                        }
+                        .circular-chart.skyblue .circle {
+                            stroke: #3c7ae5;
+                        }
+                        .percentage {
+                            fill: #666;
+                            font-family: sans-serif;
+                            font-size: 0.5em;
+                            text-anchor: middle;
+                        }
+                    </style>`
         var eyePrintHtml = style + eyegraph;
-
-
-
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
         var
             boostrapCDN =
@@ -3755,82 +3531,136 @@ $bpdata['post_upper_bp']="0";
         WinPrint.document.write('<title>eyechekup</title>')
         WinPrint.document.write(eyePrintHtml);
         WinPrint.document.close();
-
         setTimeout(function() {
             WinPrint.focus();
             WinPrint.print();
             WinPrint.close();
         }, 1000);
-
-
-
-
-
-
-
-
     }
-
-
-
+    function eyedistancepdf() {
+        var body = document.getElementById('page-top').innerHTML;
+        var eyedistancegraph = document.getElementById('eyedistancegraph').innerHTML;
+        var certificationnumber = document.getElementById('certificationnumber').value;
+        // var eyeditancefitCheckbox = document.getElementById('eyedistanceCheckboxfit'); 
+        // var eyeditanceunfitCheckbox = document.getElementById('eyedistanceCheckboxunfit'); 
+        // var eyeditanceunfitRemark = document.getElementById('eyedistanceunfitremark').value;
+        // var isFitChecked = eyeditancefitCheckbox.checked;
+        // var isUnfitChecked = eyeditanceunfitCheckbox.checked;
+        var style = `<style>
+            .flex-wrapper {
+                            display: flex;
+                            flex-flow: row nowrap;
+                        }
+                        .single-chart {
+                            width: 100%;
+                            justify-content: space-around;
+                        }
+                        .circular-chart {
+                            display: block;
+                            margin: 10px auto;
+                            max-width: 80%;
+                            max-height: 250px;
+                        }
+                        .circle-bg {
+                            fill: none;
+                            stroke: #eee;
+                            stroke-width: 3.8;
+                        }
+                        .circle {
+                            fill: none;
+                            stroke-width: 2.8;
+                            stroke-linecap: round;
+                            animation: progress 0s ease-out forwards;
+                        }
+                        @keyframes progress {
+                            0% {
+                                stroke-dasharray: 0 100;
+                            }
+                        }
+                        .circular-chart.orange .circle {
+                            stroke: #ff9f00;
+                        }
+                        .circular-chart.green .circle {
+                            stroke: #4CC790;
+                        }
+                        .circular-chart.blue .circle {
+                            stroke: #3c9ee5;
+                        }
+                        .circular-chart.red .circle {
+                            stroke: #e5533c;
+                        }
+                        .circular-chart.pink .circle {
+                            stroke: #e53ca4;
+                        }
+                        .circular-chart.yellow .circle {
+                            stroke: #e5dd3c;
+                        }
+                        .circular-chart.skyblue .circle {
+                            stroke: #3c7ae5;
+                        }
+                        .percentage {
+                            fill: #666;
+                            font-family: sans-serif;
+                            font-size: 0.5em;
+                            text-anchor: middle;
+                        }
+                    </style>`
+        var eyedistanceHTML = style + eyedistancegraph;
+        var printContent = '<h1>' + certificationnumber + '</h1>';
+        // if (isFitChecked) {
+        //     printContent += '<p><strong>Fit:</strong> <span class="checked">☑</span></p>';
+        // } else {
+        //     printContent += '<p><strong>Fit:</strong> <span class="unchecked">☑</span></p>';
+        // }
+        // if (isUnfitChecked) {
+        //     printContent += '<p><strong>Unfit:</strong> <span class="checked">☑</span></p>';
+        //     // printContent += '<p><strong>Unfit Remark:</strong> ' + eyeditanceunfitRemark + '</p>';
+        // } else {
+        //     printContent += '<p><strong>Unfit:</strong> <span class="unchecked">☑</span></p>';
+        // }
+        var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
+        WinPrint.document.write('<html><head><title>EyeDistance ' + certificationnumber + '</title></head><body>');
+        WinPrint.document.write(printContent);
+        WinPrint.document.write(eyedistanceHTML);
+        WinPrint.document.write('</body></html>');
+        WinPrint.document.close();
+        setTimeout(function() {
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+        }, 1000);
+    }
     /////////////////////////////////////////////
-
-
-
     /////////////////vertigo report//////////////////////////////////////////////
-
     function verticoPDF() {
-
         var prtContent = document.getElementById("verticopdfreport");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
-
         var boostrapCDN =
             '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">'
-
         WinPrint.document.write(boostrapCDN);
         WinPrint.document.write(prtContent.innerHTML);
         WinPrint.document.close();
-
         setTimeout(function() {
             WinPrint.focus();
             WinPrint.print();
             WinPrint.close();
         }, 1000);
-
-
     }
-
     function docotorFinalReportPDF() {
-
         var prtContent = document.getElementById("doctorreportfinal");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
-
         var boostrapCDN =
             '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">'
-
         WinPrint.document.write(boostrapCDN);
         WinPrint.document.write(prtContent.innerHTML);
         WinPrint.document.close();
-
         setTimeout(function() {
             WinPrint.focus();
             WinPrint.print();
             WinPrint.close();
         }, 1000);
-
-
-
-
-
     }
-
-
-
-
-
     function consumerfinalPDf() {
-
-
         var prtContent = document.getElementById("consumer_pdf");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
         var
@@ -3839,7 +3669,6 @@ $bpdata['post_upper_bp']="0";
         WinPrint.document.write(boostrapCDN)
         WinPrint.document.write(prtContent.innerHTML);
         WinPrint.document.close();
-
         setTimeout(function() {
             WinPrint.focus();
             WinPrint.print();
@@ -3848,37 +3677,18 @@ $bpdata['post_upper_bp']="0";
         // WinPrint.focus();
         // WinPrint.print();
         // WinPrint.close();
-
         // var body = document.getElementById('page-top').innerHTML;
         // var consumerReport = document.getElementById('consumer_pdf').innerHTML;
         // var certificationnumber = document.getElementById('certificationnumber').value;
-
         // document.getElementById('page-top').innerHTML = consumerReport;
-
         // document.getElementById('site-title').innerHTML = 'consumerreport' + certificationnumber
-
         // window.print();
-
-
-
-
-
         // document.getElementById('page-top').innerHTML = body;
-
         // document.getElementById('site-title').innerHTML = "Mediclear the Eye Test";
-
         // location.reload(); class="accordion-collapse collapse"
-
-
-
     }
-
-
-
     function doctorFinalResultSubmit() {
         let val = $('#doctorcount').val();
-
-
         if (Number(val) == 6) {
             if ($('#collapseten').attr('class') == 'accordion-collapse collapse') {
                 $('#doctorbutton').attr('data-bs-target', '#collapseten');
@@ -3887,39 +3697,14 @@ $bpdata['post_upper_bp']="0";
                 $('#doctorbutton').attr('data-bs-target', '#collapseten');
                 $('#collapseten').attr('class', 'accordion-collapse collapse');
             }
-
-
-
-
         } else {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Please submit all remaing test results of consumer!",
-
             });
-
         }
-
-
     }
-
-
-
-
     //////////////////////////////////////////////////////////////////////////////////
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 @include('include.footer')

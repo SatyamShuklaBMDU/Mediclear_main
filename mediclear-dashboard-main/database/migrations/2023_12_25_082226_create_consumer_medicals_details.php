@@ -16,10 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->morphs('consumer_batch');
             $table->unsignedBigInteger('test_type_id');
-            $table->foreign('test_type_id')
-                ->references('id')
-                ->on('test_types')
-                ->onDelete('cascade');
+            $table->foreign('test_type_id')->references('id')->on('test_types')->onDelete('cascade');
             $table->string('consumer_name');
             $table->string('consumer_profile');
             $table->string('consumer_location');

@@ -16,8 +16,25 @@ class CorporateController extends Controller
         ->get();
 
 
-        return view('dashboard.corporateID',compact('corporate'));
+        return view('dashboard.corporateId',compact('corporate'));
     }
+
+
+
+
+
+
+    public function filterCorporateID(Request $req){
+$start=$req->start;
+$end=$req->end;
+        $corporate=CorporateID::whereDate('created_at', '>=', $start)
+        ->whereDate('created_at', '<=', $end)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('dashboard.corporateId',compact('corporate','start','end'));
+    }
+
 
 
 
@@ -28,7 +45,7 @@ class CorporateController extends Controller
             'name' => 'required',
             'user_id' => 'required|unique:corporate_i_d_s',
             // 'address' => 'required',
-            'mobile_no' => 'required',
+            'mobile_no' => 'required|digits:10',
             'email' => 'required|email|unique:corporate_i_d_s',
             'password'=>'required',
             ]);

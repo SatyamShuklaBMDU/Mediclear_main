@@ -18,7 +18,7 @@ class CustomerBatchController extends Controller
     {
         $activeCustomerId = Customer::select('user_id')->where('status', 'Active')->get();
 
-        $customerBatch = CustomerBatch::with('customers')->get();
+        $customerBatch = CustomerBatch::with('customers')->orderBy('id', 'DESC')->get();
         return view('dashboard.customerbatch', ['activeCustomerId' => $activeCustomerId, 'customerBatch' => $customerBatch]);
     }
 
@@ -30,21 +30,16 @@ class CustomerBatchController extends Controller
 
     public function customerBatchSave(Request $request)
     {
-
-
         $validate = Validator::make($request->all(), [
 
             'user_customer_batch_no' => ['required', 'string', Rule::unique('customerbatchs', 'batch_no')],
         ]);
 
-
-
         if ($validate->fails()) {
 
 
-            return redirect('/customer-batch')->withErrors($validate)->withInput();
+              return redirect('/customer-batch')->withErrors($validate)->withInput();
         }
-
 
         $input = [
             'batch_no' => $request->user_customer_batch_no,
@@ -55,10 +50,7 @@ class CustomerBatchController extends Controller
 
         $customerBatchData = CustomerBatch::create($input);
 
-
-
         if ($customerBatchData) {
-
             return redirect('/customer-batch')->with('message', 'User Batch Added Successfully');
         }
 
@@ -127,8 +119,8 @@ class CustomerBatchController extends Controller
 
     public function customerfilterData(Request $request)
     {
-
-        $validate = Validator::make($request->all(), [
+        
+         $validate = Validator::make($request->all(), [
 
             'fromdate' => ['required'],
             'todate' => ['required'],
@@ -139,8 +131,6 @@ class CustomerBatchController extends Controller
 
             return back()->withErrors($validate)->withInput();
         }
-
-
         $activeCustomerId = Customer::select('user_id')->where('status', 'Active')->get();
 
         // $customerBatch = CustomerBatch::with(['customers' => function ($query) use ($request) {
@@ -160,16 +150,9 @@ class CustomerBatchController extends Controller
 
         //$customerBatch = CustomerBatch::whereBetween(DB::raw('DATE(created_at)'), [$startDate, $endDate])->get();
 
-        $customerBatchFilter = CustomerBatch::select(
-            'customerbatchs.id as customerbatchs_id',
-            'customers.name as customer_name',
-            'customers.user_id as user_id',
-            'customerbatchs.batch_no as customer_batch_no',
-            'customerbatchs.test as test',
-            'customers.mobile_no as mobile_no',
-            'customers.email as email',
-            \DB::raw("DATE_FORMAT(customerbatchs.created_at ,'%d/%m/%Y') AS date")
-        )
+        $customerBatchFilter = CustomerBatch::select('customerbatchs.id as customerbatchs_id',
+            'customers.name as customer_name', 'customers.user_id as user_id', 'customerbatchs.batch_no as customer_batch_no',
+            'customerbatchs.test as test', 'customers.mobile_no as mobile_no', 'customers.email as email', \DB::raw("DATE_FORMAT(customerbatchs.created_at ,'%d/%m/%Y') AS date"))
             ->join('customers', 'customerbatchs.customer_id', '=', 'customers.id')
             ->whereDate('customerbatchs.created_at', '>=', $request->fromdate)
             ->whereDate('customerbatchs.created_at', '<=', $request->todate)

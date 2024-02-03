@@ -16,11 +16,14 @@ class CustomerBatch extends Model
         'batch_no',
         'test',
         'customer_id',
+
     ];
+
     public function customers()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
+
     public function getbatchdetails()
     {
         return $this->morphMany(MedicalDetail::class, 'cusmerbatchdetails');

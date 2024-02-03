@@ -12,12 +12,10 @@ class ConsumerHistoryController extends Controller
 {
     public function showReport(){
         return view('dashboard.history.consumer-history');
-
     }
  
     public function consumerHistoryReport(Request $request){
         if ($request->ajax()) {
-
             if($request->consumerType=='customerhistory'){
              $data=  MedicalDetail::select('customerbatchs.batch_no as batch_no','medical_details.id as consumer_id','customers.name as customername','customers.email as customeremail',
                 'medical_details.certification_number as certification_number',
@@ -29,12 +27,7 @@ class ConsumerHistoryController extends Controller
                 ->where('doctor_final_result','!=',null)
                 ->orderBy('medical_details.doctor_submit_date', 'DESC')
                 ->get();
-
-                
-                           
-             
             }elseif($request->consumerType=='corporatehistory'){
-
                 $data=  MedicalDetail::select('corporatebatchs.batch_no as batch_no','medical_details.id as consumer_id','company.name as company_name','company.email as companyemail',
                 'medical_details.certification_number as certification_number',
                 'corporatebatchs.test as test','corporatebatchs.payment_status as payment_status',

@@ -9,17 +9,17 @@ use App\Models\CorporateBatch;
 class Company extends Model
 {
     use HasFactory;
-    protected $table = "company";
+    protected $table="company";
 
-    protected $fillable = [
+    protected $fillable=[
         'name',
         'email',
         'mobile_no',
         'city',
         'status',
     ];
-
-    public function corprateCompanyBatch()
+    
+     public function corprateCompanyBatch()
     {
 
 

@@ -13,18 +13,32 @@ class AdminManagesController extends Controller
     {
         if ($request->isMethod('get')) {
             $users = User::select('id', 'name', 'role', 'permissions')->whereNotNull('role')->get();
+
+
+
             return view('admin.adduser', ['users' => $users]);
         }
+
         if ($request->isMethod('post')) {
+
+
             $validate = Validator::make($request->all(), [
                 'name' => ['required'],
                 'email' => ['required', 'email', 'unique:users'],
                 'password' => ['required'],
                 'role' => ['required'],
+
+
             ]);
+
             if ($validate->fails()) {
+
+
                 return back()->withErrors($validate)->withInput();
             }
+
+
+
             $input = [
                 'name' => $request->name,
                 'email' => $request->email,
@@ -32,13 +46,20 @@ class AdminManagesController extends Controller
                 'role' => $request->role,
                 'permissions' => $request->permission,
             ];
+
             $item = User::create($input);
             return back()->with('message', 'User Added Successfully');
+
+
+
+
         }
+
     }
 
     public function viewUserList()
     {
+       
         $users = User::where('role', '!=', 'admin')->get();
         return view('admin.userlist', ['users' => $users]);
 

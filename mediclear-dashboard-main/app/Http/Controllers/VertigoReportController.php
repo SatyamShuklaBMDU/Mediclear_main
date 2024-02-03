@@ -27,10 +27,22 @@ class VertigoReportController extends Controller
             'Ashish Singh',
         );
     }
+
+
+
+
+
+
+
+
+
     public function customersvertigoreports(Request $request)
     {
         if ($request->ajax()) {
+
             $medicalmodel = 'App\\\\Models\\\\CustomerBatch';
+
+
             $customerBatch = CustomerBatch::select(
                 'customerbatchs.id as batch_id',
                 'customers.name as name',
@@ -41,13 +53,21 @@ class VertigoReportController extends Controller
                 'customers.email as email',
                 DB::raw("DATE_FORMAT(customerbatchs.created_at ,'%d/%m/%Y') AS date"),
                 DB::raw("(SELECT COUNT(*) as count FROM medical_details WHERE cusmerbatchdetails_id=customerbatchs.id AND cusmerbatchdetails_type='$medicalmodel')AS count")
+
             )
                 ->join('customers', 'customerbatchs.customer_id', '=', 'customers.id')
                 ->orderBy('customerbatchs.created_at', 'DESC')
                 ->get();
+
+
+
             $data = $customerBatch;
+
+
+
             return DataTables::of($data)
                 ->addIndexColumn()
+
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a type="button" class="btn bg-primary btn-sm" style="color:white" data-bs-toggle="modal" href="' . url('customer/consumer/?id=' . $row->batch_id) . '"  >View Reports</a>';
                     return $actionBtn;
@@ -61,10 +81,15 @@ class VertigoReportController extends Controller
         }
         return view('dashboard.vertigo.customervertigoreport');
     }
+
+
     public function corporatevertigoreports(Request $request)
     {
         if ($request->ajax()) {
+
             $medicalmodel = 'App\\\\Models\\\\CorporateBatch';
+
+
             $corporateBatch = CorporateBatch::select(
                 'corporatebatchs.id as batch_id',
                 'company.name as company_name',
@@ -74,13 +99,30 @@ class VertigoReportController extends Controller
 
                 DB::raw("DATE_FORMAT(corporatebatchs.created_at ,'%d/%m/%Y') AS date"),
                 DB::raw("(SELECT COUNT(*) as count FROM medical_details WHERE cusmerbatchdetails_id=corporatebatchs.id AND cusmerbatchdetails_type='$medicalmodel')AS count")
+
+
+
             )
                 ->join('company', 'corporatebatchs.company_id', '=', 'company.id')
                 ->orderBy('corporatebatchs.created_at', 'DESC')
                 ->get();
+
+
+
+
+
+
+
+
+
+
             $data = $corporateBatch;
+
+
+
             return DataTables::of($data)
                 ->addIndexColumn()
+
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a type="button" class="btn bg-primary btn-sm" style="color:white" data-bs-toggle="modal" href="' . url('corporate/consumer/?id=' . $row->batch_id) . '"  >View Reports</a>';
                     return $actionBtn;
@@ -94,6 +136,8 @@ class VertigoReportController extends Controller
         }
         return view('dashboard.vertigo.corporatevertigoreport');
     }
+
+
     public function customerconsumervertigoreports(Request $request)
     {
         if ($request->ajax()) {
@@ -115,22 +159,28 @@ class VertigoReportController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('consumerImage', function ($row) {
+
+
                     $consumerImage = '<img src="' . asset('public/images/' . $row->image) . '" width="100px" alt=""> ';
                     return $consumerImage;
+
                 })->addIndexColumn()
                 ->addColumn('consumerProfile', function ($row) {
                     $actionBtn = '<a type="button" class="btn bg-primary btn-sm" style="color:white" data-bs-toggle="modal" href="' . url('customer/consumer/profile/?id=' . $row->id) . '"  >View Profile</a>';
                     return $actionBtn;
                 })->addIndexColumn()
+
                 ->addColumn('consumertest', function ($row) {
                     $actionBtn = '<a type="button" class="btn bg-primary btn-sm" style="color:white" data-bs-toggle="modal" href="' . url('consumer/test/?id=' . $row->id) . '"  >View Test Reports</a>';
                     return $actionBtn;
                 })->addIndexColumn()
                 ->addColumn('consumertestcount', function ($row) {
                     if ($row->count == 8) {
+
                         $actionBtn = '<a type="button" href="javascript:void(0)" class="btn bg-success btn-sm" style="color:white">Complete</a>';
                         return $actionBtn;
                     } else {
+
                         $actionBtn = '<a type="button" href="javascript:void(0)" class="btn bg-danger btn-sm" style="color:white">Pending</a>';
                         return $actionBtn;
                     }
@@ -138,14 +188,30 @@ class VertigoReportController extends Controller
                 ->rawColumns(['consumerImage', 'consumerProfile', 'consumertest', 'consumertestcount'])
                 ->make(true);
         }
+
         $certificationNumber = MedicalDetail::select('certification_number')->get();
+
+
+
         return view('dashboard.vertigo.customer-consumervertigoreport', ['certificationNumber' => $certificationNumber]);
+
+
+
     }
+
+
     public function corporateconsumervertigoreports(Request $request)
     {
+
+
         if ($request->ajax()) {
+
             $cusmerBatchDetails_id = $request->id;
+
             $customerBatchType = "App\Models\CorporateBatch";
+
+
+
             $data = MedicalDetail::
                 select(
                     DB::raw("DATE_FORMAT(medical_details.created_at ,'%d/%m/%Y') AS date"),
@@ -155,11 +221,19 @@ class VertigoReportController extends Controller
                     'medical_details.consumer_profile_image_name as image',
                     'medical_details.id as id',
                     DB::raw("(SELECT COUNT(*) as count FROM tests WHERE test_type_id=1 AND medical_details_id=medical_details.id AND test_status='1')AS count")
+
+
+
                 )
                 ->where('cusmerbatchdetails_type', "App\Models\CorporateBatch")
+
                 ->where('cusmerbatchdetails_id', $cusmerBatchDetails_id)
                 ->orderBy('created_at', 'DESC')
                 ->get();
+
+                
+
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('consumerImage', function ($row) {
@@ -194,15 +268,16 @@ class VertigoReportController extends Controller
     }
     public function consumertestprofile(Request $request)
     {
-        $consumer_id = $request->get('id');
+        $consumer_id = $request->get('id'); 
         $corporateCompanyBatchName=MedicalDetail::select('name','batch_no')->join('corporatebatchs','corporatebatchs.id','=','medical_details.cusmerbatchdetails_id')->join('company','company.id','=','corporatebatchs.company_id')->where('medical_details.id',$consumer_id)->get();
         $examnationDetailsBeforeMedicalTest = MedicalDetail::where('id', $consumer_id)->get();
-        $TestData = Test::where('medical_details_id', $consumer_id)->where('test_type_id', '1')->where('test_status', '1')->whereIn('features', ['bp', 'eyecheckup', 'rt', 'flatfoot', 'bppv', 'fukuda','hearingtest'])->pluck('data', 'features');
+        $TestData = Test::where('medical_details_id', $consumer_id)->where('test_type_id', '1')->where('test_status', '1')->whereIn('features', ['bp', 'eyecheckup', 'rt', 'flatfoot', 'bppv', 'fukuda','hearingtest','eyedistance'])->pluck('data', 'features');
         $Testresult = Test::where('medical_details_id', $consumer_id)->where('test_type_id', '1')->where('test_status', '1')->pluck('test_results', 'features');
+        // dd($Testresult);
         $doctordata = Doctor::select('registration_number', 'name', 'id')->where('status', 'Active')->get();
-        $AssignDoctor = MedicalDetail::select('doctors.sign as doctorsign', 'doctors.seal_of_doctor as doctorseal', 'doctors.registration_number as doctorregistration','doctor_final_result')->where('medical_details.id', $consumer_id)->join('doctors', 'medical_details.doctorid', '=', 'doctors.id')->get();
+        $AssignDoctor = MedicalDetail::select('doctors.sign as doctorsign', 'doctors.seal_of_doctor as doctorseal', 'doctors.registration_number as doctorregistration','doctor_final_result')->where('medical_details.id', $consumer_id)->join('doctors', 'medical_details.doctorid', '=', 'doctors.id')->get();  
         $CountRisultGivenByDoctor=Test::where('medical_details_id',$consumer_id)->where('test_type_id', '1')->where('test_status', '1')
-        ->where('test_results','!=',null)->count();
+        ->where('test_results','!=',null)->count(); 
         return view('dashboard.vertigo.consumer-test-profile', ['examnationDetailsBeforeMedicalTest' => $examnationDetailsBeforeMedicalTest, 'TestData' => $TestData, 'Testresult' => $Testresult, 'doctordata' => $doctordata, 'AssignDoctor' => $AssignDoctor,'CountRisultGivenByDoctor'=> $CountRisultGivenByDoctor,'corporateCompanyBatchName'=>$corporateCompanyBatchName]);
     }
     public function consumertestresult(Request $request)
@@ -224,50 +299,87 @@ class VertigoReportController extends Controller
     }
     public function doctordatabasesid(Request $request)
     {
+       
+
         $doctordata = Doctor::select('sign', 'seal_of_doctor', 'registration_number', 'id')->where('id', $request->id)->get();
         return $doctordata;
+
+
+
     }
+
+
+
     public function doctorfinalresult(Request $request)
     {
+
+        
         // $request->validate([
         //     'ResultCount' => [new CountResultGivenByDoctor($request->consumerid)],
            
         // ]);
+
+       
+       
+      
         $validator = Validator::make($request->all(), [
             'ResultCount' => ['required',new CountResultGivenByDoctor($request->consumerId)],
+           
         ]);
+
+
         if ($validator->fails()) {
             return response()->json([
                 "status" => "error",
                 "message" => $validator->errors()
             ], 403);
         }
+
+
+
+
+
         $doctorFinalReport = MedicalDetail::where('id', $request->consumerId)->update([
             'doctorid' => $request->doctorId,
             'doctor_final_result' => $request->doctorFinalResult,
             'doctor_submit_date'=>Carbon::now()->format('Y-m-d')
+
         ]);
+
         $consumerFinalVerticoDataByDoctor=MedicalDetail::select('certification_number',
         'doctor_final_result','consumer_name','consumer_addhar_number' ,'doctor_submit_date',
         'consumer_dob' ,'doctor_final_result','gender')
         ->where('id',$request->consumerId)
         ->get();
+
         $sendData=[];
         foreach($consumerFinalVerticoDataByDoctor as $k=>$value){
             $sendData['certification_number']=$value->certification_number;
+
             $blurredAadhar = 'xxxx-xxxx-' . substr($value->consumer_addhar_number, -4);
+
             $sendData['consumer_addharnumber']=$blurredAadhar;
+
             $carbonDate = Carbon::createFromFormat('Y-m-d', $value->doctor_submit_date);
+
             $consumerDob=Carbon::createFromFormat('Y-m-d', $value->consumer_dob);
             $formatedConsumerDob= $consumerDob->format('d-M-Y');
+
+
             $formattedDate = $carbonDate->format('d-M-Y');
+
             $carbonDate->addYear(); 
             $lastValidDate = $carbonDate->format('d-M-Y');
+
+
+           
+
             $sendData['doctor_submit_date']=$formattedDate;
             $sendData['lastvalid_date']=$lastValidDate; 
             $sendData['consumerdob']= $formatedConsumerDob;
             $sendData['consumername']=$value->consumer_name;
             $sendData['gender']=$value->gender;
+
             if($value->doctor_final_result=='1'){
                 $sendData['result']="FIT";
             }elseif($value->doctor_final_result=='0'){
@@ -275,15 +387,28 @@ class VertigoReportController extends Controller
             }elseif($value->doctor_final_result=='-1'){
                 $sendData['result']="Temorarily UNFIT";
             }          
+
         }
+
+
         $consumerQrData = 'Name:' . $sendData['consumername'] . ' ' 
                      .'AdharNumber:' .$sendData['consumer_addharnumber'] .' '
                      .'DOB:'  .$sendData['consumerdob'] .' ' 
                     .'Valid up To:' .$sendData['lastvalid_date'] .' ' 
                     .'Gender:' .$sendData['gender'] .' ' 
                      .'Final Vertico Report:'  .$sendData['result'] .' ' ;
+
+
           $qrcodeConsumer=  QrCode::size(256)->generate( $consumerQrData);
+
           return  $qrcodeConsumer;
+
+
+
+
     }
+
+
+
 }
 

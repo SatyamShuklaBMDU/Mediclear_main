@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request, Response;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CustomerBatch;
 use App\Models\MedicalDetail;
 use App\Models\CorporateBatch;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Response;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Faker\Provider\Medical;
@@ -42,56 +42,125 @@ class MedicaldetailsController extends Controller
             //     //return $validator->messages()->all();  
             // } 
             // $user = Auth::user();
+
             // // Access the tokenable_type
             // $tokenableType = $user->tokenable_type;
+
             // Output or use the $tokenableType as needed
+
+
+
+
+
+
             if (Auth::check()) {
                 $user = Auth::user();
                 $modelName = $user->getMorphClass();
+
                 $token_type = $modelName;
+
             }
+
             if ($token_type == "App\Models\Customer") {
                 $consumerId = Auth::User()->id;
+
                 $customerBatch = CustomerBatch::where('batch_no', $request->batch_no)->where('customer_id', $consumerId)->first();
+
             } elseif ($token_type == "App\Models\CorporateID") {
                 $consumerId = Auth::User()->id;
                 $customerBatch = CorporateBatch::where('batch_no', $request->batch_no)->where('company_id', $request->company_id)->first();
+
+
             }
+
             if (!isset($customerBatch)) {
                 return response()->json([
+
                     'status' => 'forbidden',
                     'code' => 403,
                     'message' => 'Please enter Valid Batch Number',
                 ], 403);
+
             }
+
+
+
+
+
             $latestMediaclDetailsSave = $customerBatch->getbatchdetails()->latest()->first();
+
             if (isset($latestMediaclDetailsSave)) {
                 $testtypename = DB::table('test_types')->where('id', $request->test_type_id)->pluck('test_name');
+
                 $latestcusmerbatchdetails_type = $latestMediaclDetailsSave->cusmerbatchdetails_type;
                 $cusmerbatchdetails_id = $latestMediaclDetailsSave->cusmerbatchdetails_id;
+
                 $latestComment = MedicalDetail::with('cusmerbatchdetails')
                     ->where('cusmerbatchdetails_type', $latestcusmerbatchdetails_type)
                     ->where('cusmerbatchdetails_id', $cusmerbatchdetails_id)
                     ->latest()
                     ->first();
+
                 $CountMedicalsData = MedicalDetail::where('cusmerbatchdetails_type', $latestcusmerbatchdetails_type)->where('cusmerbatchdetails_id', $cusmerbatchdetails_id)->count();
+
                 $remaingTest = ($latestComment->cusmerbatchdetails->test) - ($CountMedicalsData);
+
                 if ($CountMedicalsData == $latestComment->cusmerbatchdetails->test) {
                     return response()->json([
+
                         'status' => 'forbidden',
                         'code' => 403,
                         'message' => 'You cross your limit of Testing',
                     ], 403);
+
+
                 }
             }
+
+
             $image = $request->file('consumer_profile_image');
-            $current_timestamp = Carbon::now()->timestamp;
-            $imageName = $current_timestamp . '.' . $image->getClientOriginalName();
-            $image->move(public_path('/images'), $imageName);
+
+            // $current_timestamp = Carbon::now()->timestamp;
+            // $imageName = $current_timestamp . '.' . $image->getClientOriginalName();
+
+
+            // $image->move(public_path('/images'), $imageName);
+            
+               if ($image) {
+                $current_timestamp = Carbon::now()->timestamp;
+                $imageName = $current_timestamp . '.' . $image->getClientOriginalName();
+
+
+                $image->move(public_path('/images'), $imageName);
+
+               } else {
+                $imageName = null;
+            }
+
+
             $imagesign = $request->file('consumer_sign_image');
-            $current_timestamp = Carbon::now()->timestamp;
-            $imagesignName = $current_timestamp . '.' . $imagesign->getClientOriginalName();
-            $imagesign->move(public_path('/sign'), $imagesignName);
+
+            // $current_timestamp = Carbon::now()->timestamp;
+            // $imagesignName = $current_timestamp . '.' . $imagesign->getClientOriginalName();
+
+
+            // $imagesign->move(public_path('/sign'), $imagesignName);
+            
+              if ($imagesign) {
+                $current_timestamp = Carbon::now()->timestamp;
+                $imagesignName = $current_timestamp . '.' . $imagesign->getClientOriginalName();
+
+
+                $imagesign->move(public_path('/sign'), $imagesignName);
+
+            } else {
+                $imagesignName = null;
+            }
+
+
+
+
+
             $medicaldetails = new MedicalDetail([
                 'parent_id' => Auth::User()->user_id,
                 'test_type_id' => $request->test_type_id,
@@ -114,25 +183,56 @@ class MedicaldetailsController extends Controller
                 'defficulting_in_hearing' => json_encode($request->defficulting_in_hearing),
                 'noise_in_ears' => json_encode($request->noise_in_ears),
                 'fullness_or_stuffiness_in_your_ears' => json_encode($request->fullness_or_stuffiness_in_your_ears),
-                'complaints' => json_encode($request->complaints),
+                 'tendency_to_fall' => json_encode($request->tendency_to_fall),
+                'loss_of_balance_while_walking' => json_encode($request->loss_of_balance_while_walking),
+                'complaint' => json_encode($request->complaint),
+
             ]);
+
+
+
             $savemedicalDeatils = $customerBatch->getbatchdetails()->save($medicaldetails);
             $latestMediaclDetailsSave = $customerBatch->getbatchdetails()->latest()->first();
+
             $testtypename = DB::table('test_types')->where('id', $request->test_type_id)->pluck('test_name');
+
             $latestcusmerbatchdetails_type = $latestMediaclDetailsSave->cusmerbatchdetails_type;
             $cusmerbatchdetails_id = $latestMediaclDetailsSave->cusmerbatchdetails_id;
+
             $latestComment = MedicalDetail::with('cusmerbatchdetails')
                 ->where('cusmerbatchdetails_type', $latestcusmerbatchdetails_type)
                 ->where('cusmerbatchdetails_id', $cusmerbatchdetails_id)
                 ->latest()
                 ->first();
+
+
+
+
+
+
+
+
             $CountMedicalsData = MedicalDetail::where('cusmerbatchdetails_type', $latestcusmerbatchdetails_type)->where('cusmerbatchdetails_id', $cusmerbatchdetails_id)->count();
+
             $remaingTest = ($latestComment->cusmerbatchdetails->test) - ($CountMedicalsData);
+
+
+
             $post_mediacal_history_disease = json_decode($latestComment->post_mediacal_history_disease);
             $defficulting_in_hearing = json_decode($latestComment->defficulting_in_hearing);
             $noise_in_ears = json_decode($latestComment->noise_in_ears);
-            $complaints = json_decode($latestComment->complaints);
+            $complaints = json_decode($latestComment->complaint);
             $fullness_or_stuffiness_in_your_ears = json_decode($latestComment->fullness_or_stuffiness_in_your_ears);
+
+
+             $tendency_to_fall = json_decode($latestComment->tendency_to_fall);
+            $loss_of_balance_while_walking = json_decode($latestComment->loss_of_balance_while_walking);
+
+
+
+
+
+
             $sendData = [];
             $sendData['parent_id'] = Auth::User()->id;
             $sendData['id'] = $latestComment->id;
@@ -141,13 +241,19 @@ class MedicaldetailsController extends Controller
             $sendData['consumer_mob_no'] = $latestComment->consumer_mob_no;
             $sendData['consumer_addhar_number'] = $latestComment->consumer_addhar_number;
             $sendData['gender'] = $latestComment->gender;
-            $sendData['consumer_profile_image_name'] = asset('public' . '/images' . '/' . $latestComment->consumer_profile_image_name);
-            $sendData['consumer_sign_image_name'] = asset('public' . '/sign' . '/' . $latestComment->consumer_sign_image_name);
+            
+            // $sendData['consumer_profile_image_name'] = asset('public' . '/images' . '/' . $latestComment->consumer_profile_image_name);
+            // $sendData['consumer_sign_image_name'] = asset('public' . '/sign' . '/' . $latestComment->consumer_sign_image_name);
+            
+            $sendData['consumer_profile_image_name'] = ($latestComment->consumer_profile_image_name == null) ? ("consumer image not entered") : asset('public' . '/images' . '/' . $latestComment->consumer_profile_image_name);
+            $sendData['consumer_sign_image_name'] = ($latestComment->consumer_sign_image_name == null) ? ("consumer sign not entered") : asset('public' . '/sign' . '/' . $latestComment->consumer_sign_image_name);
+            
             $sendData['light_hedness_or_swim_sensation_in_the_head'] = $latestComment->light_hedness_or_swim_sensation_in_the_head;
             $sendData['blacking_out_or_loss_of_consciousness'] = $latestComment->blacking_out_or_loss_of_consciousness;
             $sendData['object_spinning_or_turning_around_you'] = $latestComment->object_spinning_or_turning_around_you;
             $sendData['nausea_or_vomiting'] = $latestComment->nausea_or_vomiting;
             $sendData['tingling_in_your_fingers_toes_around_your_mouth'] = $latestComment->tingling_in_your_fingers_toes_around_your_mouth;
+
             $sendData['does_changes_of_position_make_you_dizzy'] = $latestComment->does_changes_of_position_make_you_dizzy;
             $sendData['when_you_are_dizzy_must_support_yourself_when_standing'] = $latestComment->when_you_are_dizzy_must_support_yourself_when_standing;
             $sendData['post_mediacal_history_disease'] = $post_mediacal_history_disease;
@@ -159,6 +265,14 @@ class MedicaldetailsController extends Controller
             $sendData['total_test'] = $latestComment->cusmerbatchdetails->test;
             $sendData['gave_test'] = $CountMedicalsData;
             $sendData['remaing_test'] = $remaingTest;
+            
+              $sendData['tendency_to_fall'] = $tendency_to_fall;
+            $sendData['loss_of_balance_while_walking'] = $loss_of_balance_while_walking;
+
+
+
+
+
             if ($savemedicalDeatils) {
                 return response()->json([
                     'success' => true,
@@ -166,8 +280,16 @@ class MedicaldetailsController extends Controller
                     'code' => 200,
                     'message' => 'medical data add sucessfully',
                     'data' => $sendData
+
+
                 ], 200);
+
+
             }
+
+
+
+
         } catch (\Exception $e) {
             return Response::json(
                 array(
@@ -177,37 +299,60 @@ class MedicaldetailsController extends Controller
                 ),
                 404
             );
+
         }
+
+
+
+
+
     }
+
     public function allconsumerdata(Request $request)
     {
         try {
+
+
+
             if (Auth::check()) {
                 $user = Auth::user();
                 $modelName = $user->getMorphClass();
+
                 $token_type = $modelName;
+
             }
+
             if ($token_type == "App\Models\Customer") {
                 $consumerId = Auth::User()->id;
+
                 $customerBatch = CustomerBatch::where('batch_no', $request->batch_no)->where('customer_id', $consumerId)->first();
+
             } elseif ($token_type == "App\Models\CorporateID") {
                 $consumerId = Auth::User()->id;
-                $customerBatch = CorporateBatch::where('batch_no', $request->batch_no)->where('corporate_id', $consumerId)->first();
+                $customerBatch = CorporateBatch::where('batch_no', $request->batch_no)->where('company_id', $request->company_id)->first();
+
+
             }
+
             if (!isset($customerBatch)) {
                 return response()->json([
+
                     'status' => 'forbidden',
                     'code' => 403,
                     'message' => 'Please enter Valid Batch Number',
                 ], 403);
+
             }
+
             $allConsumerData = $customerBatch->getbatchdetails;
+
             $allSendData = [];
 
             foreach ($allConsumerData as $k => $data) {
                 $allSendData[$k]['id'] = $data->id;
                 $allSendData[$k]['consumer_name'] = $data->consumer_name;
-                $allSendData[$k]['consumer_profile_image_name'] = asset($data->consumer_profile_image_name);
+                // $allSendData[$k]['consumer_profile_image_name'] = asset($data->consumer_profile_image_name);
+                $allSendData[$k]['consumer_profile_image_name'] = ($data->consumer_profile_image_name == null) ? ("consumer image not entered") : asset('public' . '/images' . '/' . $data->consumer_profile_image_name);
                 $allSendData[$k]['consumer_status'] = $data->consumer_status;
 
             }
@@ -247,8 +392,29 @@ class MedicaldetailsController extends Controller
     public function consumerData(Request $request)
     {
         try {
-            $consumerData = MedicalDetail::where('id', $request->id)->first();
 
+
+
+
+
+            $consumerData = MedicalDetail::where('id', $request->id)->first();
+            $consumerType = $consumerData->cusmerbatchdetails_type;
+             $consumerId = $consumerData->cusmerbatchdetails_id;
+
+            if ($consumerType == "App\Models\CorporateBatch") {
+
+
+                $customerBatchCompany = CorporateBatch::select('company.name as company_name')->join('company', 'corporatebatchs.company_id', '=', 'company.id')->where('corporatebatchs.id', $consumerData->cusmerbatchdetails_id)->pluck('company_name');
+                $consumer_company_name = ($customerBatchCompany[0]);
+                 $customerBatch = CorporateBatch::select('batch_no')->where('id', $consumerId)->pluck('batch_no');
+                $BatchNumber = $customerBatch[0];
+
+
+            } else {
+                $consumer_company_name = null;
+                   $customerBatch = CustomerBatch::select('batch_no')->where('id', $consumerId)->pluck('batch_no');
+                $BatchNumber = $customerBatch[0];
+            }
 
 
             $post_mediacal_history_disease = json_decode(json_decode($consumerData->post_mediacal_history_disease));
@@ -256,23 +422,34 @@ class MedicaldetailsController extends Controller
             $noise_in_ears = json_decode(json_decode($consumerData->noise_in_ears));
 
 
-            $complaints = json_decode((json_decode($consumerData->complaints)));
+            $complaints = json_decode((json_decode($consumerData->complaint)));
             $fullness_or_stuffiness_in_your_ears = json_decode(json_decode($consumerData->fullness_or_stuffiness_in_your_ears));
-
+            
+ $tendency_to_fall = json_decode(json_decode($consumerData->tendency_to_fall));
+$loss_of_balance_while_walking = json_decode(json_decode($consumerData->loss_of_balance_while_walking));
 
 
 
             $sendData = [];
             $sendData['id'] = $consumerData->id;
             $sendData['parent_id'] = $consumerData->parent_id;
+               $sendData['batch_no'] = $BatchNumber;
+            $sendData['company_name'] = $consumer_company_name;
+
 
             $sendData['consumer_name'] = $consumerData->consumer_name;
             $sendData['consumer_location'] = $consumerData->consumer_location;
             $sendData['consumer_mob_no'] = $consumerData->consumer_mob_no;
             $sendData['consumer_addhar_number'] = $consumerData->consumer_addhar_number;
             $sendData['gender'] = $consumerData->gender;
-            $sendData['consumer_profile_image_name'] = asset('public' . '/images' . '/' . $consumerData->consumer_profile_image_name);
-            $sendData['consumer_sign_image_name'] = asset('public' . '/sign' . '/' . $consumerData->consumer_sign_image_name);
+            
+            // $sendData['consumer_profile_image_name'] = asset('public' . '/images' . '/' . $consumerData->consumer_profile_image_name);
+            // $sendData['consumer_sign_image_name'] = asset('public' . '/sign' . '/' . $consumerData->consumer_sign_image_name);
+            
+            $sendData['consumer_profile_image_name'] = ($consumerData->consumer_profile_image_name == null) ? ("consumer image not entered") : asset('public' . '/images' . '/' . $consumerData->consumer_profile_image_name);
+            $sendData['consumer_sign_image_name'] = ($consumerData->consumer_sign_image_name == null) ? ("consumer sign not entered") : asset('public' . '/sign' . '/' . $consumerData->consumer_sign_image_name);
+            
+            
             $sendData['light_hedness_or_swim_sensation_in_the_head'] = $consumerData->light_hedness_or_swim_sensation_in_the_head;
             $sendData['blacking_out_or_loss_of_consciousness'] = $consumerData->blacking_out_or_loss_of_consciousness;
             $sendData['object_spinning_or_turning_around_you'] = $consumerData->object_spinning_or_turning_around_you;
@@ -286,6 +463,8 @@ class MedicaldetailsController extends Controller
             $sendData['noise_in_ears'] = $noise_in_ears;
             $sendData['fullness_or_stuffiness_in_your_ears'] = $fullness_or_stuffiness_in_your_ears;
             $sendData['complaints'] = $complaints;
+            $sendData['tendency_to_fall'] = $tendency_to_fall;
+            $sendData['loss_of_balance_while_walking'] = $loss_of_balance_while_walking;
 
 
 
@@ -345,7 +524,7 @@ class MedicaldetailsController extends Controller
 
             } elseif ($token_type == "App\Models\CorporateID") {
                 $consumerId = Auth::User()->id;
-                $customerBatch = CorporateBatch::where('batch_no', $request->batch_no)->where('corporate_id', $consumerId)->first();
+                $customerBatch = CorporateBatch::where('batch_no', $request->batch_no)->where('company_id', $request->company_id)->first();
 
 
             }
@@ -496,7 +675,9 @@ class MedicaldetailsController extends Controller
                 'defficulting_in_hearing' => json_encode($request->defficulting_in_hearing),
                 'noise_in_ears' => json_encode($request->noise_in_ears),
                 'fullness_or_stuffiness_in_your_ears' => json_encode($request->fullness_or_stuffiness_in_your_ears),
-                'complaints' => json_encode($request->complaints),
+                'complaint' => json_encode($request->complaints),
+                 'tendency_to_fall' => json_encode($request->tendency_to_fall),
+                'loss_of_balance_while_walking' => json_encode($request->loss_of_balance_while_walking),
 
 
 
@@ -508,7 +689,7 @@ class MedicaldetailsController extends Controller
                     'success' => true,
                     'status' => 'success',
                     'code' => 200,
-                    'message' => 'Consumer Detail Data Before Examantion Of Test',
+                    'message' => 'Consumer Detail Data updated Before Examantion Of Test',
 
 
 
@@ -530,6 +711,87 @@ class MedicaldetailsController extends Controller
 
 
         } catch (\Exception $e) {
+            return Response::json(
+                array(
+                    'status' => 'error',
+                    'code' => 404,
+                    'message' => $e->getmessage()
+                ),
+                404
+            );
+
+        }
+    }
+
+
+    public function companywithbatch(Request $request)
+    {
+         $exists = DB::table('corporatebatchs')->where('batch_no', $request->batch_no)->exists();
+        if ($exists) {
+          $customerBatchCompany = CorporateBatch::select('company.name as company_name', 'company.id as company_id')->join('company', 'corporatebatchs.company_id', '=', 'company.id')->where('corporatebatchs.batch_no', $request->batch_no)->get();
+            return response()->json([
+                    
+                    'status' => 'success',
+                    'code' => 200,
+                    'company' => $customerBatchCompany,
+
+
+
+                ], 200);
+            
+            
+            
+            
+            return $customerBatchCompany[0];
+        } else {
+            return response()->json([
+                'status' => false,
+               
+                'code' => 404,
+                'message' => 'not a valid batch number',
+
+
+
+            ], 404);
+        }
+
+    }
+    
+    public function deleteConsumerMedicaldata(Request $request)
+    {
+        try {
+
+
+            $id = $request->id;
+            $consumerData = MedicalDetail::find($id);
+            if ($consumerData) {
+                $consumerData->delete();
+                return response()->json([
+
+                    'status' => 'success',
+                    'code' => 200,
+                    'message' => 'Consumer data deleted Successfully ',
+
+
+
+                ], 200);
+
+            } else {
+                return response()->json([
+                    'status' => false,
+
+                    'code' => 404,
+                    'message' => 'something wroung',
+
+
+
+                ], 404);
+
+            }
+
+
+        } catch (\Exception $e) {
+
             return Response::json(
                 array(
                     'status' => 'error',

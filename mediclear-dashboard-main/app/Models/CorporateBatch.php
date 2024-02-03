@@ -21,7 +21,10 @@ class CorporateBatch extends Model
 
     ];
 
-
+    public function corporates()
+    {
+        return $this->belongsTo(CorporateID::class, 'corporate_id', 'id');
+    }
 
     public function corprateBelongCompany()
     {
@@ -30,6 +33,7 @@ class CorporateBatch extends Model
         return $this->belongsTo(Company::class, 'company_id', 'id');
 
     }
+
     public function getbatchdetails()
     {
         return $this->morphMany(MedicalDetail::class, 'cusmerbatchdetails');

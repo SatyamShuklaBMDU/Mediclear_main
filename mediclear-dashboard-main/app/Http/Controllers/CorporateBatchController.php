@@ -17,7 +17,7 @@ class CorporateBatchController extends Controller
 
         $companyDetails = Company::select('id', 'name')->where('status', 'Active')->get();
 
-        $corporateBatch = CorporateBatch::with(['corprateBelongCompany'])->get();
+        $corporateBatch = CorporateBatch::with(['corprateBelongCompany'])->orderBy('id', 'DESC')->get();
 
         return view('dashboard.corporatebatch', ['corporateBatch' => $corporateBatch, 'companyDetails' => $companyDetails]);
     }

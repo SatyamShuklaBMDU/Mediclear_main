@@ -24,6 +24,21 @@ class CustomerController extends Controller
 
 
 
+    public function filterCustomer(Request $request){
+
+        $start=$request->start;
+        $end=$request->end;
+
+        $customer=Customer::whereDate('created_at', '>=', $start)
+        ->whereDate('created_at', '<=', $end)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('dashboard.customer-profile',compact('customer','start','end'));
+    }
+
+
+
     public function updateStatusCustomer($type ,$id){
 
         if($type=="Pending"){

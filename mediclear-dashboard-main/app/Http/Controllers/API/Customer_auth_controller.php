@@ -60,16 +60,22 @@ class Customer_auth_controller extends Controller
                 ;
             }
 
-
+            $exists = DB::table('customerbatchs')->where('customer_id', $admin->id)->exists();
             $success['token'] = $admin->createToken('mobile', ['role:customer'])->plainTextToken;
             $success['name'] = $admin->name;
             $success['mobile_no'] = $admin->mobile_no;
             $success['id'] = $admin->id;
+            $success['have_batch_no'] = $exists;
             $success['user_id'] = $admin->user_id;
+            $success['pin_code'] = ($admin->pin_code == null) ? ("Please entere the pin_code") : ($admin->pin_code);
+            $success['state'] = ($admin->state == null) ? ("Please entere the state name") : ($admin->state);
+            $success['city'] = ($admin->city == null) ? ("Please entere the city name") : ($admin->city);
+
 
             return response()->json([
                 'data' => $success,
                 'status' => true,
+                'type' => 'customer',
                 'message' => 'User login successfully'
             ], 200);
 
@@ -118,7 +124,7 @@ class Customer_auth_controller extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
         $input['user_id'] = $this->generateUniqId();
-        $input['status'] = 'Pending';
+        $input['status'] = 'Active';
         $user = Customer::create($input);
         $success['token'] = $user->createToken('MyApp')->plainTextToken;
         $success['name'] = $user->name;
@@ -162,6 +168,11 @@ class Customer_auth_controller extends Controller
 
             if ($request->isMethod('get')) {
                 if (Auth::check()) {
+                        if (Auth::user()->getMorphClass() == "App\Models\Customer") {
+                        $type = "customer";
+                    } else {
+                        $type = "corporate";
+                    }
                     $userdata = new stdClass();
                     $userdata->name = Auth::user()->name;
                     $userdata->email = Auth::user()->email;
@@ -169,7 +180,10 @@ class Customer_auth_controller extends Controller
                     $userdata->pincode = Auth::user()->pin_code;
                     $userdata->state = Auth::user()->state;
                     $userdata->city = Auth::user()->city;
-                    $userdata->customer_profile_image = asset(Auth::user()->customer_profile_image_name);
+                     $userdata->unique_id = Auth::user()->user_id;
+                    $userdata->type = $type;
+                    $userdata->customer_profile_image = (Auth::user()->customer_profile_image_name == null) ? ("customer profile not updated") : asset('public' . '/customer' . '/' . Auth::user()->customer_profile_image_name);
+                    // $userdata->customer_profile_image = asset('public' . '/customer' . '/' . Auth::user()->customer_profile_image_name);
                     return response()->json([
 
                         'status' => 'sucess',
@@ -191,17 +205,35 @@ class Customer_auth_controller extends Controller
 
 
 
+                // $image = $request->file('customer_profile_image');
+
+                // $current_timestamp = Carbon::now()->timestamp;
+                // $imageName = $current_timestamp . '.' . $image->getClientOriginalName();
+
+
+                // $image->move(public_path('/customer'), $imageName);
+                
                 $image = $request->file('customer_profile_image');
+                $imageDataBaseExist = DB::table('customers')->where('id', $user_id)->pluck('customer_profile_image_name');
 
-                $current_timestamp = Carbon::now()->timestamp;
-                $imageName = $current_timestamp . '.' . $image->getClientOriginalName();
+                if ($image) {
+
+                    $current_timestamp = Carbon::now()->timestamp;
+                    $imageName = $current_timestamp . '.' . $image->getClientOriginalName();
 
 
-                $image->move(public_path('/customer'), $imageName);
+                    $image->move(public_path('/customer'), $imageName);
+                } elseif (($imageDataBaseExist[0]) != null) {
+                    $imageName = $imageDataBaseExist[0];
+                } else {
+                    $imageName = null;
+                }
+
 
                 $updatedCustomer = Customer::where('id', $user_id)
                     ->update([
                         'customer_profile_image_name' => $imageName,
+                         'email' => $request->email,
                         'state' => $request->state,
                         'city' => $request->city,
                         'pin_code' => $request->pincode

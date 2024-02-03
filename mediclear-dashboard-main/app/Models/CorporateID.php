@@ -10,20 +10,24 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class CorporateID extends Authenticatable
 {
-    use HasFactory, HasApiTokens, Notifiable;
+    use HasFactory , HasApiTokens ,Notifiable;
 
-    protected $table = "corporate_i_d_s";
+    protected $table="corporate_i_d_s";
+    protected $fillable= [
+    'name',
+    'user_id',
+    'mobile_no',
+    'email',
+    'password',
+    'status',
+];
 
-    protected $guard = 'corporate-api';
-    protected $fillable = [
-        'name',
-        'user_id',
-        'mobile_no',
-        'email',
-        'password',
-        'status',
-    ];
+public function corporatebatches()
+    {
 
 
+        return $this->hasMany(CorporateBatch::class, 'corporate_id', 'id');
+
+    }
 
 }

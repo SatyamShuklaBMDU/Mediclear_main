@@ -13,10 +13,12 @@ class MedicalDetail extends Model
     protected $table = "medical_details";
 
     protected $fillable = [
-        'parent_id',
         'cusmerbatchdetails_id',
         'cusmerbatchdetails_type',
+        'certification_number',
+        'parent_id',
         'test_type_id',
+        'consumer_status',
         'consumer_name',
         'consumer_location',
         'consumer_mob_no',
@@ -36,7 +38,9 @@ class MedicalDetail extends Model
         'defficulting_in_hearing',
         'noise_in_ears',
         'fullness_or_stuffiness_in_your_ears',
-        'complaints',
+         'tendency_to_fall',
+        'loss_of_balance_while_walking',
+        'complaint',
 
 
     ];
@@ -74,14 +78,34 @@ class MedicalDetail extends Model
             set: fn($value) => json_encode($value),
         );
     }
+    
+    
+    protected function tendency_to_fall(): Attribute
+    {
+        return Attribute::make(
 
-    // protected function complaints(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn($value) => json_decode($value, true),
-    //         set: fn($value) => json_encode($value),
-    //     );
-    // }
+            get: fn($value) => json_decode($value, true),
+            set: fn($value) => json_encode($value),
+        );
+    }
+
+
+    protected function loss_of_balance_while_walking(): Attribute
+    {
+        return Attribute::make(
+
+            get: fn($value) => json_decode($value, true),
+            set: fn($value) => json_encode($value),
+        );
+    }
+
+    //  protected function complaint(): Attribute
+    //  {
+    //      return Attribute::make(
+    //          get: fn($value) => json_decode($value, true),
+    //          set: fn($value) => json_encode($value),
+    //      );
+    //  }
 
     public function cusmerbatchdetails()
     {

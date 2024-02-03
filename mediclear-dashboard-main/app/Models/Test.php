@@ -13,6 +13,9 @@ class Test extends Model
         'data',
         'medical_details_id',
         'test_type_id',
+        'test_status',
+        'test_results',
+        'test_results_remarks',
         'features',
     ];
 

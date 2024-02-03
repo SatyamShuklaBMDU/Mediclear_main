@@ -43,8 +43,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-
     ];
+    
     protected function permissions(): Attribute
     {
         return Attribute::make(
