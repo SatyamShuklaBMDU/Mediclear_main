@@ -29,11 +29,10 @@
     </div>
 
 
-
+    <script src=" https://code.jquery.com/jquery-3.7.0.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="{{url('dashboard/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{url('dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
     <!-- Core plugin JavaScript-->
     <script src="{{url('dashboard/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
@@ -45,7 +44,6 @@
     <script src="{{url('dashboard/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
     <!-- Page level custom scripts -->
-    <script src=" https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src=" https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="  https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
 
@@ -54,10 +52,6 @@
 
 <!-- DataTables Buttons CSS -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
-
-<!-- DataTables JS -->
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
 <!-- DataTables Buttons JS -->
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>

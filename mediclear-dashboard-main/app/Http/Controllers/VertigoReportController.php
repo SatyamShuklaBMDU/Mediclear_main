@@ -286,6 +286,7 @@ class VertigoReportController extends Controller
         // unfitRemark:unfitRemark,
         // testfeatures:"bp",
         // consumerid:consumerid
+        // dd($request->all());
         $TestData = Test::where('medical_details_id', $request->consumerid)
             ->where('test_type_id', '1')
             ->where('test_status', '1')

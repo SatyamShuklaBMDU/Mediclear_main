@@ -485,11 +485,11 @@
     rel="stylesheet">
 <input type="hidden" value="{{ request()->get('id') }}" id="consumerId" />
 @php $companyName="NA"; @endphp
-    @foreach ($corporateCompanyBatchName as $company)
-        @php
+@foreach ($corporateCompanyBatchName as $company)
+    @php
         $companyName = $company->name;
-        @endphp
-    @endforeach
+    @endphp
+@endforeach
 <div class="accordion px-4 mb-2" id="accordionExample">
     <h1 class="text-start report-examina mt-3 mb-3 text-success"> Report Examination Sheet </h1>
     <div class="accordion-item">
@@ -1176,7 +1176,7 @@
                                             $color = 'red';
                                         }
                                     @endphp
-                                    <div class="single-chart">
+                                    <div class="single-chart" id="eyeblindness">
                                         <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
                                             <path class="circle-bg"
                                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -1285,7 +1285,7 @@
                                             $color = 'red';
                                         }
                                     @endphp
-                                    <div class="single-chart">
+                                    <div class="single-chart" id="eyedistance">
                                         <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
                                             <path class="circle-bg"
                                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -1813,23 +1813,14 @@
                                         </li>
                                     </ul>
                                 </div>
-
-
-
-
-
-
                                 <div class="container">
                                     <div class="main">
                                         <label for="">Assign Doctor Credential </label>
-
-
                                         <select class="form-select" aria-label="Default select example"
                                             style="margin-right:40px;margin-bottom:10px;" id="companyProfile"
                                             name="company_id">
                                             @if (isset($doctordata))
                                                 <option selected disabled>Select Doctors</option>
-
                                                 @foreach ($doctordata as $k => $doctor)
                                                     <option value={{ $doctor->id }}><strong>Doctor Name</strong>
                                                         &nbsp; &nbsp;
@@ -1863,20 +1854,11 @@
                         <button class="btn btn-primary" id="doctor"
                             onclick="signatureOFDoctor(this)">Submit</button>
                         &nbsp;&nbsp;
-
-
-
                     </div>
-
-
                 </div>
-
-
             </div>
         </div>
     </div>
-
-
 </div>
 {{-- -------------------------------------Customer Profile Modal----------------------------- --}}
 <button type="button mt-4 mb-4" class="btn btn-dark ml-4 " data-toggle="modal" data-target="#exampleModalLong">
@@ -2586,8 +2568,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalVertigo" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalVertigo" aria-hidden="true">
-    <div class="modal-dialog" style="
-  max-width: 1000px;" role="document">
+    <div class="modal-dialog" style="max-width: 1000px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -2610,18 +2591,18 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
-                                            <th scope="col-4" style="width: 40%;">...</th>
+                                            <th scope="col-4" style="width: 40%;">{{ $data->consumer_name }}</th>
                                             <th scope="col">Checkup Date</th>
-                                            <th></th>
+                                            <th>{{ date('d-M-y') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>D.O.B.
                                             </td>
-                                            <td></td>
+                                            <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
                                             <td>Valid Till-</td>
-                                            <td>...</td>
+                                            <td>{{ date('d-M-y', strtotime('+1 year')) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Designation</td>
@@ -2629,18 +2610,22 @@
                                             <td colspan="2">....</td>
                                         </tr>
                                         <tr>
-                                            <td>Certification
-                                            </td>
-                                            <td>...</td>
+                                            <td>Certification</td>
+                                            <td>{{ $data->certification_number }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Emp code
-                                            </td>
+                                            <td>Emp code</td>
                                             <td>....</td>
+                                            <td colspan="2">....</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <!-- end 1st table  -->
+                                @php
+                                    if (isset($TestData['bp'])) {
+                                        $bpdatamodal = json_decode($TestData['bp'], true);
+                                    }
+                                @endphp
                                 <h2 class="text-center text-success">Step 1 : General Information</h2>
                                 <div class="form-pre">
                                     <div class="row">
@@ -2648,10 +2633,10 @@
                                             <p><b> Pre</b></p>
                                         </div>
                                         <div class="col-md-4">
-                                            <p>35.0000</p>
+                                            <p>Lower: {{ $bpdatamodal['pre_lower_bp'] }}</p>
                                         </div>
                                         <div class="col-md-4">
-                                            <p>35000.00</p>
+                                            <p>Upper: {{ $bpdatamodal['pre_upper_bp'] }}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -2659,25 +2644,25 @@
                                             <p><b>Post</b></p>
                                         </div>
                                         <div class="col-md-4">
-                                            <p>35.0000</p>
+                                            <p>Lower: {{ $bpdatamodal['post_lower_bp'] }}</p>
                                         </div>
                                         <div class="col-md-4">
-                                            <p>35000.00</p>
+                                            <p>Upper: {{ $bpdatamodal['post_upper_bp'] }}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <h5 class="text-center text-warning"> Blood Pressure Report</h5>
                                 <div class="graph-holder shadow-lg">
-                                    <canvas id="bpcanvaschartmodal" width="1000" height="300"></canvas>
+                                    <canvas id="BpGraphModal" width="1000" height="300"></canvas>
                                 </div>
                                 <div class="fit mt-2">
                                     <h5 class="text-successmt mt-3">Remark</h5>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-check">
-                                                <input class="form-check-input fit" type="radio"
-                                                    name="fitnessStatus" id="fitRadio">
-                                                <label class="form-check-label" for="fitRadio">
+                                                <input class="form-check-input fit" type="radio" name="bpfit"
+                                                    value="fit" disabled id="fitRadio">
+                                                <label for="fitRadio">
                                                     Fit
                                                 </label>
                                             </div>
@@ -2685,20 +2670,19 @@
                                         <div class="col-md-4">
                                             <div class="form-check">
                                                 <input class="form-check-input unfit" type="radio"
-                                                    name="fitnessStatus" id="unfitRadio">
-                                                <label class="form-check-label" for="unfitRadio">
+                                                    name="bpunfit" id="unfitRadio" disabled value="unfit">
+                                                <label for="unfitRadio">
                                                     Unfit
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <h6 class="mt-4"><b class="text-success">Remark: </b> <span
-                                            class="text-danger">This Person is not Fit</span></h6>
+                                    <h6 class="mt-4"><b class="text-success">Remark: </b><p id="bpremarkmodal"></p></h6>
                                     <div class="second-step">
                                         {{-- 2nd step start here --}}
                                         <h2 class="text-success text-center">Step 2 :Hearing Checkup</h2>
                                         <p class="text-success ">For the Hearing
-                                            Checkup...................................................................................................................................................................................................................
+                                            Checkup.............................................................................................................................................................................................
                                         </p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="hearing-graph">
@@ -2709,34 +2693,115 @@
                                                 <div class="col-md-4">
                                                     <div class="row">
                                                         <p><b class="text-success">I.</b> Procedure</p>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled id="modalfithearing"
+                                                            name="hearingfit" value="fit"
+                                                            class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
-                                                                <input type="radio" id="modalfithearing"
-                                                                    name="hearingfit" value="fit"
-                                                                    class="fit">
-                                                                <span class="checkmark"></span>
                                                             </label>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled id="modalunfithearing"
+                                                                name="hearingunfit" value="unfit"
+                                                                class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
-                                                                <input type="radio" id="modalunfithearing"
-                                                                    name="hearingunfit" value="unfit"
-                                                                    class="unfit">
-                                                                <span class="checkmark"></span>
                                                             </label>
                                                         </div>
-                                                        <p id="remarkInModal">Reamrk: </p>
+                                                        </div>
+                                                        Remark: <p id="hearingremarkInModal" class="text-danger"> </p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- 2nd step end here --}}
-                                        <h2 class="text-success text-center">Step 3 :Romberg Test </h2>
+                                        <hr>
+                                        {{-- 3rd Step --}}
+                                        <h2 class="text-success text-center">Step 3 :Eye Color Blindness Test</h2>
+                                        <p class="text-success">For the Color Blindness
+                                            Checkup.............................................................................................................................................................................................
+                                        </p>
+                                        <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="eye-percentage">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">I.</b> Procedure</p>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled
+                                                            id="modalfiteyeblindness" name="eyeblindnessfit"
+                                                            value="fit" class="form-check-input fit">
+                                                            <label class="fit">
+                                                                Fit
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">    
+                                                            <input type="radio" disabled
+                                                            id="modalunfiteyeblindness"
+                                                            name="eyeblindnessunfit" value="unfit"
+                                                            class="form-check-input unfit">
+                                                            <label class="fit">
+                                                                Unfit
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        Remark: <p id="eyeremarkInModal" class="text-danger"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        {{-- 4th Step --}}
+                                        <h2 class="text-success text-center">Step 4 :Eye Color Distance Test</h2>
+                                        <p class="text-success ">For the Eye Distance
+                                            Checkup.............................................................................................................................................................................................
+                                        </p>
+                                        <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="eye-distance-percentage">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">I.</b> Procedure</p>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled
+                                                            id="modalfiteyedistance" name="eyedistancefit"
+                                                            value="fit" class="form-check-input fit">
+                                                            <label class="fit">
+                                                                Fit
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled
+                                                            id="modalunfiteyedistance"
+                                                            name="eyedistanceunfit" value="unfit"
+                                                            class="form-check-input unfit">
+                                                            <label class="fit">
+                                                                Unfit
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        Remark: <p id="eyedistanceremarkInModal" class="text-danger"> </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        {{-- 5th step here --}}
+                                        <h2 class="text-success text-center">Step 5 :Romberg Test </h2>
                                         <h4 class="text-warning"> Procedure</h4>
                                         <p class="text-success ">For the Ranberg
-                                            Test...................................................................................................................................................................................................................
+                                            Test................................................................................................................................................................................................
                                         </p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="row">
@@ -2744,22 +2809,25 @@
                                                     <div class="row">
                                                         <p><b class="text-success">I.</b> Stand on One Foot <b
                                                                 class="text-danger">(left)</b></p>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled name="rtfootfit"
+                                                            value="fit" class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
-                                                                <input type="radio" name="foot"
-                                                                    value="fit" class="fit">
-                                                                <span class="checkmark"></span>
                                                             </label>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled name="rtfootunfit"
+                                                            value="unfit" class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
-                                                                <input type="radio" name="foot"
-                                                                    value="unfit" class="unfit">
-                                                                <span class="checkmark"></span>
                                                             </label>
                                                         </div>
+                                                        </div>
+                                                        Remark: <p id="rtfootremark" class="text-danger"></p>
                                                     </div>
                                                 </div>
                                                 <!-- hello there  -->
@@ -2767,22 +2835,22 @@
                                                     <div class="row">
                                                         <p><b class="text-success">II.</b>Stand on One Feet<b
                                                                 class="text-danger">(Right)</b></p>
-                                                        <div class="col-md-6">
+                                                        {{-- <div class="col-md-6">
                                                             <label class="fit">
                                                                 Fit
                                                                 <input type="radio" name="rightfoot"
                                                                     value="fit" class="fit">
                                                                 <span class="checkmark"></span>
                                                             </label>
-                                                        </div>
-                                                        <div class="col-md-6">
+                                                        </div> --}}
+                                                        {{-- <div class="col-md-6">
                                                             <label class="fit">
                                                                 Unfit
                                                                 <input type="radio" name="rightfoot"
                                                                     value="unfit" class="unfit">
                                                                 <span class="checkmark"></span>
                                                             </label>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                                 <!-- hello there  -->
@@ -2790,7 +2858,7 @@
                                                     <div class="row">
                                                         <p><b class="text-success">II.</b>Stand on both Feet<b
                                                                 class="text-danger">(Closed Eyes)</b></p>
-                                                        <div class="col-md-6">
+                                                        {{-- <div class="col-md-6">
                                                             <label class="fit">
                                                                 Fit
                                                                 <input type="radio" name="bothfoot"
@@ -2805,104 +2873,127 @@
                                                                     value="unfit" class="unfit">
                                                                 <span class="checkmark"></span>
                                                             </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--************2nd step done ************** -->
-                                        <hr>
-                                        <h2 class="text-success text-center">Step 4 :Fukuda-Unterberger </h2>
-                                        <p class="text-success ">For the Fukuda-Unterberger
-                                            Test...................................................................................................................................................................................................................
-                                        </p>
-                                        <div class="col-md-12 p-3 shadow-lg bg-light">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="row">
-                                                        <p><b class="text-success">I.</b> Procedure</p>
-                                                        <div class="col-md-6">
-                                                            <label class="fit">
-                                                                Fit
-                                                                <input type="radio" name="fukudafit"
-                                                                    value="fukudafit" class="fit">
-                                                                <span class="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label class="fit">
-                                                                Unfit
-                                                                <input type="radio" name="fukudafit"
-                                                                    value="fukudaunfit" class="unfit">
-                                                                <span class="checkmark"></span>
-                                                            </label>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <hr>
-                                        <!--************3rd step done ************** -->
-                                        <h2 class="text-success text-center">Step 5 :Flat Foot</h2>
+                                        <!--************5th step done ************** -->
+                                        {{-- ************6th Step Start ************* --}}
+                                        <h2 class="text-success text-center">Step 6 :Flat Foot</h2>
                                         <p class="text-success ">For the Flat Foot
-                                            test...................................................................................................................................................................................................................
+                                            test.................................................................................................................................................................................................
                                         </p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="flat-foot">
+                                                @if (isset($flatfootcheckupdata))
+                                                    <div class="container d-flex justify-content-center"
+                                                        id="flatfootimage">
+                                                        <img src="{{ asset('public/test_images/' . $flatfootcheckupdata['flatfoot']) }}"
+                                                            class="img-fluid" alt="Responsive image">
+                                                    </div>
+                                                @endif
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
                                                         <p><b class="text-success">I.</b>Flat Foot</p>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled name="flatfit"
+                                                            value="fit" class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
-                                                                <input type="radio" name="flatfit"
-                                                                    value="flatfit" class="fit">
-                                                                <span class="checkmark"></span>
                                                             </label>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled name="flatunfit"
+                                                            value="unfit" class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
-                                                                <input type="radio" name="flatfit"
-                                                                    value="flatunfit" class="unfit">
-                                                                <span class="checkmark"></span>
                                                             </label>
                                                         </div>
+                                                        </div>
+                                                        Remark: <p id="flatremark" class="text-danger"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--************4th step done ************** -->
-                                        <h2 class="text-success text-center">Step 6 :BPPV Procedure</h2>
+                                        <hr>
+                                        <!--************6th step done ************** -->
+                                        <!--************7th step Start ************** -->
+                                        <h2 class="text-success text-center">Step 7 :BPPV Procedure</h2>
                                         <p class="text-success ">For the
-                                            BPPV...................................................................................................................................................................................................................
+                                            BPPV.................................................................................................................................................................................................
                                         </p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="row">
                                                         <p><b class="text-success">I.</b>Procedure</p>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled name="bppvfit"
+                                                            value="fit" class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
-                                                                <input type="radio" name="bppvunfit"
-                                                                    value="bppvfit" class="fit">
-                                                                <span class="checkmark"></span>
-                                                            </label>
+                                                        </label>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled name="bppvunfit"
+                                                            value="unfit" class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
-                                                                <input type="radio" name="bppvunfit"
-                                                                    value="bppvunfit" class="unfit">
-                                                                <span class="checkmark"></span>
                                                             </label>
                                                         </div>
+                                                        </div>
+                                                        Remark: <p id="bppvremark" class="text-danger"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--************5th step done ************** -->
+                                        <hr>
+                                        <!--************7th step done ************** -->
+                                        {{-- 8th Step Start --}}
+                                        <h2 class="text-success text-center">Step 8 :Fukuda-Unterberger </h2>
+                                        <p class="text-success ">For the Fukuda-Unterberger
+                                            Test................................................................................................................................................................................................
+                                        </p>
+                                        <div class="col-md-12 p-3 shadow-lg bg-light">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="row">
+                                                        <p><b class="text-success">I.</b> Procedure</p>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled name="fukudafit"
+                                                            value="fit" class="form-check-input fit">
+                                                            <label class="fit">
+                                                                Fit
+                                                        </label>
+                                                        </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-check">
+                                                            <input type="radio" disabled name="fukudaunfit"
+                                                            value="unfit" class="form-check-input unfit">
+                                                            <label class="fit">
+                                                                Unfit
+                                                            </label>
+                                                        </div>
+                                                        </div>
+                                                        Remark: <p id="fukudaremark" class="text-danger"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        {{-- 8th Step Done --}}
                                     </div>
                                 </div>
                                 <!--**********end col************ -->
@@ -3022,7 +3113,6 @@
                                     <th scope="row">6</th>
                                     <td>Fitness</td>
                                     <td>Fit</td>
-
                                 </tr>
                             </tbody>
                         </table>
@@ -3062,10 +3152,8 @@
                                     </label>
                                 </div>
                             </div>
-
                             <!-- 3 boxes start   $('#doctorsign').html(signHTML);
                 $('#doctorseal').html(sealHTML);
-
                 $('#doctorregistration').html(registrationHTML); -->
                             <div class="container1">
                                 <ul>
@@ -3087,14 +3175,10 @@
                                         <div class="col-md-6" id="doctorseal">
                                             <img src="{{ url('public//images/' . $doc->doctorseal) }}"
                                                 width="100px" class="img-fluid" alt="">
-
-
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-
-
                             <!-- form footer -->
                             <div class="footer d-flex justify-content-center align-items-center text-white"
                                 style="background-color: #418787">
@@ -3331,78 +3415,253 @@ $bpdata['post_upper_bp']="0";
         }
     @endphp
 @endif
+@php
+    $testResults = $Testresult->all();
+    $bpUnfitChecked = false;
+    $bpfitChecked = false;
+    $hearingUnfitChecked = false;
+    $hearingfitChecked = false;
+    // Add more variables for other features as needed
+@endphp
+
+@foreach ($Testresult as $feature => $test_result)
+    @if ($feature == 'bp')
+        @if ($test_result == 0)
+            @php $bpUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $bpfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'hearing')
+        @if ($test_result == 0)
+            @php $hearingUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $hearingfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'eyedistance')
+        @if ($test_result == 0)
+            @php $eyedistanceUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyedistancefitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'eyecheckup')
+        @if ($test_result == 0)
+            @php $eyedistanceUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyedistancefitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'bppv')
+        @if ($test_result == 0)
+            @php $eyedistanceUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyedistancefitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'fukuda')
+        @if ($test_result == 0)
+            @php $eyedistanceUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyedistancefitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'flatfoot')
+        @if ($test_result == 0)
+            @php $eyedistanceUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyedistancefitChecked = true; @endphp
+        @endif
+    @endif
+@endforeach
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        @if($bpUnfitChecked)
+            $('#unfitRadio').prop('checked', true);
+        @endif
+    // // const myeyeTextarea = document.getElementById('eyecheckupunfitRemark');
+    // // const myhearingtextarea = document.getElementById('hearingunfitremark');
+    // // const myeyedistancetextarea = document.getElementById('eyedistanceunfitremark');
+    // // const mybptextarea = document.getElementById('bpunfitremark');
+    // // const mybppvtextarea = document.getElementById('bppvunfitremark');
+    // // const myfukudatextarea = document.getElementById('fukudaunfitremark');
+    // // const myrttextarea = document.getElementById('rtunfitremark');
+    // // const mymodaleyeTextarea = document.getElementById('eyeremarkInModal');
+    // // const mymodalhearing = document.getElementById('hearingremarkInModal');
+    // // const mymodaleyedistance = document.getElementById('eyedistanceremarkInModal');
+    // // const mymodalbppv = document.getElementById('bppvremark');
+    // // const mymodalfukuda = document.getElementById('fukudaremark');
+    // // const mymodalrt = document.getElementById('rtfootremark');
+    // // const mymodalflat = document.getElementById('flatremark');
+    // const textareaModalPairs = [
+    //     { textarea: 'eyecheckupunfitRemark', modal: 'eyeremarkInModal' },
+    //     { textarea: 'hearingunfitremark', modal: 'hearingremarkInModal' },
+    //     { textarea: 'eyedistanceunfitremark', modal: 'eyedistanceremarkInModal' },
+    //     { textarea: 'bpunfitremark', modal: 'bpremarkmodal' },
+    //     { textarea: 'bppvunfitremark', modal: 'bppvremark' },
+    //     { textarea: 'fukudaunfitremark', modal: 'fukudaremark' },
+    //     { textarea: 'rtunfitremark', modal: 'rtfootremark' },
+    //     { textarea: 'flatremark', modal: 'flatremark' }
+    // ];
+    // textareaModalPairs.forEach(pair => {
+    //     const textarea = document.getElementById(pair.textarea);
+    //     const modal = document.getElementById(pair.modal);
+    //     $("#" + pair.textarea).on("input", function() {
+    //         modal.textContent = textarea.value;
+    //         });
+    //     });
+    });
+    $("#bpcheckboxunfit").click(function() {
+        if ($("#bpcheckboxunfit").is(":checked ")) {
+            $('input[name="bpfit"][value="fit"]').prop("checked", false);
+            $('input[name="bpunfit"][value="unfit"]').prop("checked", true);
+        }
+    });
+    $("#bpcheckboxfit").click(function() {
+        $('input[name="bpfit"][value="fit"]').prop("checked", true);
+        $('input[name="bpunfit"][value="unfit"]').prop("checked", false);
+    })
+    $("#fukudacheckboxunfit").click(function() {
+        if ($("#fukudacheckboxunfit").is(":checked ")) {
+            $('input[name="fukudafit"][value="fit"]').prop("checked", false);
+            $('input[name="fukudaunfit"][value="unfit"]').prop("checked", true);
+        }
+    });
+    $("#fukudafit").click(function() {
+        $('input[name="fukudafit"][value="fit"]').prop("checked", true);
+        $('input[name="fukudaunfit"][value="unfit"]').prop("checked", false);
+    })
+    $("#bppvcheckboxunfit").click(function() {
+        if ($("#bppvcheckboxunfit").is(":checked ")) {
+            $('input[name="bppvfit"][value="fit"]').prop("checked", false);
+            $('input[name="bppvunfit"][value="unfit"]').prop("checked", true);
+        }
+    });
+    $("#bppvcheckboxfit").click(function() {
+        $('input[name="bppvfit"][value="fit"]').prop("checked", true);
+        $('input[name="bppvunfit"][value="unfit"]').prop("checked", false);
+    })
+    $("#flatfootcheckboxunfit").click(function() {
+        if ($("#flatfootcheckboxunfit").is(":checked ")) {
+            $('input[name="flatfit"][value="fit"]').prop("checked", false);
+            $('input[name="flatunfit"][value="unfit"]').prop("checked", true);
+        }
+    });
+    $("#flatfootcheckboxfit").click(function() {
+        $('input[name="flatfit"][value="fit"]').prop("checked", true);
+        $('input[name="flatunfit"][value="unfit"]').prop("checked", false);
+    })
+    $("#rtcheckboxunfit").click(function() {
+        if ($("#rtcheckboxunfit").is(":checked ")) {
+            $('input[name="rtfootfit"][value="fit"]').prop("checked", false);
+            $('input[name="rtfootunfit"][value="unfit"]').prop("checked", true);
+        }
+    });
+    $("#rtcheckboxfit").click(function() {
+        $('input[name="rtfootfit"][value="fit"]').prop("checked", true);
+        $('input[name="rtfootunfit"][value="unfit"]').prop("checked", false);
+    })
+    $("#eyedistancecheckboxunfit").click(function() {
+        if ($("#eyedistancecheckboxunfit").is(":checked ")) {
+            $('input[name="eyedistancefit"][value="fit"]').prop("checked", false);
+            $('input[name="eyedistanceunfit"][value="unfit"]').prop("checked", true);
+        }
+    });
+    $("#eyedistancecheckboxfit").click(function() {
+        $('input[name="eyedistancefit"][value="fit"]').prop("checked", true);
+        $('input[name="eyedistanceunfit"][value="unfit"]').prop("checked", false);
+    })
+    $("#eyecheckupcheckboxunfit").click(function() {
+        if ($("#eyecheckupcheckboxunfit").is(":checked ")) {
+            $('input[name="eyeblindnessfit"][value="fit"]').prop("checked", false);
+            $('input[name="eyeblindnessunfit"][value="unfit"]').prop("checked", true);
+        }
+    });
+    $("#eyecheckupboxfit").click(function() {
+        $('input[name="eyeblindnessfit"][value="fit"]').prop("checked", true);
+        $('input[name="eyeblindnessunfit"][value="unfit"]').prop("checked", false);
+    })
+    $("#hearingtestcheckboxunfit").click(function() {
+        if ($("#hearingtestcheckboxunfit").is(":checked ")) {
+            $('input[name="hearingfit"][value="fit"]').prop("checked", false);
+            $('input[name="hearingunfit"][value="unfit"]').prop("checked", true);
+        }
+    });
+    $("#hearingtestcheckboxfit").click(function() {
+        $('input[name="hearingfit"][value="fit"]').prop("checked", true);
+        $('input[name="hearingunfit"][value="unfit"]').prop("checked", false);
+    })
+</script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    $(function() {
-    var preLowerBpModal = "{{ $bpdata['pre_lower_bp'] }}";
-    var preLowerBpNumModal = Number(preLowerBpModal);
-    var preUpperBpModal = "{{ $bpdata['pre_upper_bp'] }}";
-    var preUpperBpNumModal = Number(preUpperBpModal);
-    var postLowerBpModal = "{{ $bpdata['post_lower_bp'] }}"
-    var postLowerBpNumModal = Number(postLowerBpModal);
-    var postUpperBpModal = "{{ $bpdata['post_upper_bp'] }}"
-    var postUpperBpNumModal = Number(postUpperBpModal);
-    var chartDataPreModal = [preLowerBpNumModal, preUpperBpNumModal];
-    var chartDataPostModal = [postLowerBpNumModal, postUpperBpNumModal];
-    var modalCanvas = document.getElementById("BpCanvasChartmodal");
-    var ctxModal = document.getElementById('BpCanvasChartmodal').getContext('2d');
-    var chartDataModal = {
-        labels: ["0", "10", "20", "30", "40", "50", "60"],
-        datasets: [{
-                label: `Post Blood Pressure Data(Post Lower BP:${postLowerBpNumModal},Post Upper BP:${postUpperBpNumModal})`,
-                data: chartDataPostModal,
-                yAxisID: 'y-axis-1',
-                borderColor: 'red',
-                borderWidth: 2,
-                fill: false,
+    document.addEventListener("DOMContentLoaded", function() {
+        var preLowerBpModal = "{{ $bpdata['pre_lower_bp'] }}";
+        var preLowerBpNumModal = Number(preLowerBpModal);
+        var preUpperBpModal = "{{ $bpdata['pre_upper_bp'] }}";
+        var preUpperBpNumModal = Number(preUpperBpModal);
+        var postLowerBpModal = "{{ $bpdata['post_lower_bp'] }}"
+        var postLowerBpNumModal = Number(postLowerBpModal);
+        var postUpperBpModal = "{{ $bpdata['post_upper_bp'] }}"
+        var postUpperBpNumModal = Number(postUpperBpModal);
+        var chartDataPreModal = [preLowerBpNumModal, preUpperBpNumModal];
+        var chartDataPostModal = [postLowerBpNumModal, postUpperBpNumModal];
+        var modalCanvas = document.getElementById("BpGraphModal");
+        var ctxModal = document.getElementById('BpGraphModal').getContext('2d');
+        var chartDataModal = {
+            labels: ["0", "10", "20", "30", "40", "50", "60"],
+            datasets: [{
+                    label: `Post Blood Pressure Data(Post Lower BP:${postLowerBpNumModal},Post Upper BP:${postUpperBpNumModal})`,
+                    data: chartDataPostModal,
+                    yAxisID: 'y-axis-1',
+                    borderColor: 'red',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                {
+                    label: `Pre Blood Pressure Data(Pre Lower BP:${preLowerBpNumModal},Pre Upper BP:${preUpperBpNumModal})`,
+                    data: chartDataPreModal,
+                    yAxisID: 'y-axis-1',
+                    borderColor: 'blue',
+                    borderWidth: 2,
+                    fill: false,
+                },
+            ],
+        };
+        var chartOptionsModal = {
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Diastolic',
+                    },
+                },
+                y: {
+                    type: 'linear',
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Systolic Post Pressure Data(mm/hg)',
+                    },
+                    grid: {
+                        drawOnChartArea: false,
+                    },
+                },
             },
-            {
-                label: `Pre Blood Pressure Data(Pre Lower BP:${preLowerBpNumModal},Pre Upper BP:${preUpperBpNumModal})`,
-                data: chartDataPreModal,
-                yAxisID: 'y-axis-1',
-                borderColor: 'blue',
-                borderWidth: 2,
-                fill: false,
-            },
-        ],
-    };
-    var chartOptionsModal = {
-        scales: {
-            x: {
-                type: 'linear',
-                position: 'bottom',
-                title: {
+            plugins: {
+                legend: {
                     display: true,
-                    text: 'Diastolic',
+                    position: 'top',
                 },
             },
-            y: {
-                type: 'linear',
-                position: 'left',
-                title: {
-                    display: true,
-                    text: 'Systolic Post Pressure Data(mm/hg)',
-                },
-                grid: {
-                    drawOnChartArea: false,
-                },
-            },
-        },
-        plugins: {
-            legend: {
-                display: true,
-                position: 'top',
-            },
-        },
-    };
-    var modalMultiAxisLineChart = new Chart(ctxModal, {
-        type: 'line',
-        data: chartDataModal,
-        options: chartOptionsModal,
-    });
+        };
+        var modalMultiAxisLineChart = new Chart(ctxModal, {
+            type: 'line',
+            data: chartDataModal,
+            options: chartOptionsModal,
+        });
     });
 </script>
 <script>
@@ -3685,18 +3944,14 @@ $bpdata['post_upper_bp']="0";
             }
         });
     });
-    $("#hearingtestcheckboxunfit").click(function() {
-        if ($("#hearingtestcheckboxunfit").is(":checked ")) {
-            var remark = $('#hearingunfitRemark').val();
-            $('input[name="hearingfit"][value="fit"]').prop("checked", false);
-            $('input[name="hearingunfit"][value="unfit"]').prop("checked", true);
-            $('#remarkInModal').text(remark);
-        }
-    });
-    $("#hearingtestcheckboxfit").click(function() {
-        $('input[name="hearingfit"][value="fit"]').prop("checked", true);
-        $('input[name="hearingunfit"][value="unfit"]').prop("checked", false);
-    })
+    var originalChart = document.getElementById('eyeblindness');
+    var clonedChart = originalChart.cloneNode(true);
+    var distanceChart = document.getElementById('eyedistance');
+    var cloneddistanceChart = originalChart.cloneNode(true);
+    var modalContent = document.querySelector('.eye-percentage');
+    var modaldistanceContent = document.querySelector('.eye-distance-percentage');
+    modalContent.appendChild(clonedChart);
+    modaldistanceContent.appendChild(cloneddistanceChart);
 </script>
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
