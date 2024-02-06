@@ -436,7 +436,7 @@
     .container1 ul li {
         list-style-type: none;
         float: left;
-        width: 25%;
+        width: 20%;
         height: 200px;
         /* background-color: red; */
         border: 2px solid black;
@@ -489,6 +489,76 @@
     @php
         $companyName = $company->name;
     @endphp
+@endforeach
+@php
+    $testResults = $Testresult->all();
+    $bpUnfitChecked = false;
+    $bpfitChecked = false;
+    $hearingUnfitChecked = false;
+    $hearingfitChecked = false;
+    $eyedistanceUnfitChecked = false;
+    $eyedistancefitChecked = false;
+    $eyecheckupUnfitChecked = false;
+    $eyecheckupfitChecked = false;
+    $bppvUnfitChecked = false;
+    $bppvfitChecked = false;
+    $fukudaUnfitChecked = false;
+    $fukudafitChecked = false;
+    $flatfootUnfitChecked = false;
+    $flatfootfitChecked = false;
+    $rtunfitChecked = false;
+    $rtfitChecked = false;
+@endphp
+@foreach ($Testresult as $feature => $test_result)
+    @if ($feature == 'bp')
+        @if ($test_result == 0)
+            @php $bpUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $bpfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'hearing')
+        @if ($test_result == 0)
+            @php $hearingUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $hearingfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'eyedistance')
+        @if ($test_result == 0)
+            @php $eyedistanceUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyedistancefitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'eyecheckup')
+        @if ($test_result == 0)
+            @php $eyecheckupUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyecheckupfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'bppv')
+        @if ($test_result == 0)
+            @php $bppvUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $bppvfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'fukuda')
+        @if ($test_result == 0)
+            @php $fukudaUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $fukudafitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'flatfoot')
+        @if ($test_result == 0)
+            @php $flatfootUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $flatfootfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'rt')
+        @if ($test_result == 0)
+            @php $rtunfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $rtfitChecked = true; @endphp
+        @endif
+    @endif
 @endforeach
 <div class="accordion px-4 mb-2" id="accordionExample">
     <h1 class="text-start report-examina mt-3 mb-3 text-success"> Report Examination Sheet </h1>
@@ -1700,30 +1770,19 @@
                                     <label class="form-check-label" for="checkbox2">Unfit</label>
                                 </div>
                             </div>
-
-
                             <div class="form-group" id="fukuda_test_remark_result" style="display:none">
                                 <label for="exampleFormControlTextarea1">Unfit Remark</label>
                                 <textarea class="form-control" id="fukudaunfitRemark" rows="3"></textarea>
                             </div>
-
-
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <button class="btn btn-primary" id="fukuda" onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
                             <button class="btn btn-danger" id="fukuda_test_again">Please test again</button>
                             &nbsp;&nbsp;
-
-
                         </div>
-
-
-
-
                     </div>
                 @endif
-
             </div>
         </div>
     </div>
@@ -1764,51 +1823,38 @@
                                         <p class="h4 text dark">Vertigo Test : Normal</p>
                                     </div>
                                 </div>
-
                                 <div class="container d-flex justify-content-around">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="overallfit"
-                                            value="1" />
+                                        <input class="form-check-input" type="checkbox" id="overallfit" value="1" disabled />
                                         <label class="form-check-label" for="inlineCheckbox1">FIT</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="overallunfit"
-                                            value="0" />
+                                        <input class="form-check-input" type="checkbox" id="overallunfit" value="0" disabled />
                                         <label class="form-check-label" for="inlineCheckbox2">UNFIT</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="temporaeilyunfit"
-                                            value="-1" />
-                                        <label class="form-check-label" for="inlineCheckbox3">Temorarily UNFIT
-                                        </label>
+                                        <input class="form-check-input" type="checkbox" id="temporaeilyunfit" value="-1" disabled />
+                                        <label class="form-check-label" for="inlineCheckbox3">Temorarily UNFIT</label>
                                     </div>
                                 </div>
                                 <input type="hidden" id="doctorId" />
                                 <div class="container1">
+                                    <div class="col-m"
                                     <ul>
                                         <li class="text-center">
                                             <div class="title" id="">REGISTRATION NUMBER</div>
                                             <div class="col-md-6" id="doctorregistration">
-
-
-
                                             </div>
-
                                         </li>
+
                                         <li class="text-center">
                                             <div class="title">SIGNATURE OF DOCTOR</div>
                                             <div class="col-md-6" id="doctorsign">
-
-
-
                                             </div>
                                         </li>
                                         <li class="text-center">
                                             <div class="title">SEAL OF DOCTOR</div>
                                             <div class="col-md-6" id="doctorseal">
-
-
-
                                             </div>
                                         </li>
                                     </ul>
@@ -1833,19 +1879,11 @@
                                         </select>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
                 {{-- <div id="c_pre-bp-chart-container" style="height: 400px;"></div> --}}
-
-
-
-
                 <div class="container">
                     <div class="row">
 
@@ -2575,8 +2613,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="container my-5">
+            <div class="modal-body" id="verticopdfreport">
+                <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-holder shadow-lg my-5 p-3 fist-step">
@@ -2677,7 +2715,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h6 class="mt-4"><b class="text-success">Remark: </b><p id="bpremarkmodal"></p></h6>
+                                    <div class="row"><h6 class="mt-4 d-flex"><b class="text-success">Remark: </b>
+                                    <p id="bpremarkmodal">
+                                        @if(isset($testremarks) && isset($testremarks['bp']))
+                                            {{$testremarks['bp']}}
+                                        @endif
+                                    </p></h6></div>
                                     <div class="second-step">
                                         {{-- 2nd step start here --}}
                                         <h2 class="text-success text-center">Step 2 :Hearing Checkup</h2>
@@ -2713,7 +2756,10 @@
                                                             </label>
                                                         </div>
                                                         </div>
-                                                        Remark: <p id="hearingremarkInModal" class="text-danger"> </p>
+                                                        <p id="hearingremarkInModal" class="text-danger"> 
+                                                            <span class="text-dark">Remark: </span>@if(isset($testremarks) && isset($testremarks['hearingtest']))
+                                                            {{$testremarks['hearingtest']}}
+                                                        @endif</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2721,11 +2767,16 @@
                                         <hr>
                                         {{-- 3rd Step --}}
                                         <h2 class="text-success text-center">Step 3 :Eye Color Blindness Test</h2>
-                                        <p class="text-success">For the Color Blindness
-                                            Checkup.............................................................................................................................................................................................
-                                        </p>
+                                        <p class="text-success">For the Color Blindness</p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="eye-percentage">
+                                                <svg id="eyeblindnessmodal" viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                                    <path class="circle-bg"
+                                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                    <path class="circle" stroke-dasharray="{{ $percentage }}, 100"
+                                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                    <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
+                                                </svg>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -2752,7 +2803,11 @@
                                                             </label>
                                                         </div>
                                                         </div>
-                                                        Remark: <p id="eyeremarkInModal" class="text-danger"></p>
+                                                        <span id="eyeremarkInModal" class="text-danger">
+                                                            <span class="text-dark">Remark: </span> @if(isset($testremarks) && isset($testremarks['eyecheckup']))
+                                                                {{$testremarks['eyecheckup']}}
+                                                            @endif
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2760,11 +2815,16 @@
                                         <hr>
                                         {{-- 4th Step --}}
                                         <h2 class="text-success text-center">Step 4 :Eye Color Distance Test</h2>
-                                        <p class="text-success ">For the Eye Distance
-                                            Checkup.............................................................................................................................................................................................
-                                        </p>
+                                        <p class="text-success ">For the Eye Distance</p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="eye-distance-percentage">
+                                                <svg id="eyedistancemodal" viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                                    <path class="circle-bg"
+                                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                    <path class="circle" stroke-dasharray="{{ $percentage }}, 100"
+                                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                    <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
+                                                </svg>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -2791,7 +2851,11 @@
                                                             </label>
                                                         </div>
                                                         </div>
-                                                        Remark: <p id="eyedistanceremarkInModal" class="text-danger"> </p>
+                                                        <p id="eyedistanceremarkInModal" class="text-danger">
+                                                            <span class="text-dark">Remark: </span>@if(isset($testremarks) && isset($testremarks['eyedistance']))
+                                                                {{$testremarks['eyedistance']}}
+                                                            @endif
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2800,8 +2864,16 @@
                                         {{-- 5th step here --}}
                                         <h2 class="text-success text-center">Step 5 :Romberg Test </h2>
                                         <h4 class="text-warning"> Procedure</h4>
-                                        <p class="text-success ">For the Ranberg
-                                            Test................................................................................................................................................................................................
+                                        <p> For the Romberg test, you’ll be asked to stand with your feet together. Then, you’ll close your eyes. Your doctor will assess how much you sway or fall to determine what’s causing your vertigo.
+                                   <br>
+                                         Record Vedio -
+                                         <ul> 
+                                           <li>15 Sec - stand on one feet (left) (with closed eyes) </li>
+                                           <li>15 Sec - stand on one feet (Right) (with closed eyes) </li>
+                                           <li> 30 sec - stand on both feet (with closed eyes)</li>
+                                         </ul>
+                                         <br>
+                                        <span class="text-success"> Remark - Based on vedio doctor confirm FIT or UNFIT</span>
                                         </p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="row">
@@ -2812,7 +2884,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="rtfootfit"
-                                                            value="fit" class="form-check-input fit">
+                                                            value="fit" id="rtfit" class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
                                                             </label>
@@ -2820,14 +2892,17 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-check">
-                                                            <input type="radio" disabled name="rtfootunfit"
+                                                            <input type="radio" id="rtunfit" disabled name="rtfootunfit"
                                                             value="unfit" class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
                                                             </label>
                                                         </div>
-                                                        </div>
-                                                        Remark: <p id="rtfootremark" class="text-danger"></p>
+                                                        </div><p id="rtfootremark" class="text-danger">
+                                                            <span class="text-dark">Remark: </span>@if(isset($testremarks) && isset($testremarks['rt']))
+                                                                {{$testremarks['rt']}}
+                                                            @endif
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <!-- hello there  -->
@@ -2882,9 +2957,7 @@
                                         <!--************5th step done ************** -->
                                         {{-- ************6th Step Start ************* --}}
                                         <h2 class="text-success text-center">Step 6 :Flat Foot</h2>
-                                        <p class="text-success ">For the Flat Foot
-                                            test.................................................................................................................................................................................................
-                                        </p>
+                                        <p class="text-success ">For the Flat Foot</p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="flat-foot">
                                                 @if (isset($flatfootcheckupdata))
@@ -2902,7 +2975,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="flatfit"
-                                                            value="fit" class="form-check-input fit">
+                                                            value="fit" id="flatfit" class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
                                                             </label>
@@ -2911,13 +2984,16 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="flatunfit"
-                                                            value="unfit" class="form-check-input unfit">
+                                                            value="unfit" id="flatUnfit" class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
                                                             </label>
                                                         </div>
-                                                        </div>
-                                                        Remark: <p id="flatremark" class="text-danger"></p>
+                                                        </div><p id="flatremark" class="text-danger d-flex">
+                                                            <span class="text-dark">Remark: </span>@if(isset($testremarks) && isset($testremarks['flatfoot']))
+                                                                {{$testremarks['flatfoot']}}
+                                                            @endif
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2926,9 +3002,10 @@
                                         <!--************6th step done ************** -->
                                         <!--************7th step Start ************** -->
                                         <h2 class="text-success text-center">Step 7 :BPPV Procedure</h2>
-                                        <p class="text-success ">For the
-                                            BPPV.................................................................................................................................................................................................
-                                        </p>
+                                        <p><b class="text-success">I.</b>Procedure</p>
+                                    <p>Your healthcare provider will turn your head 45 degrees to one side. Then, you’ll quickly lie on your back, with your head off the side of the table, and maintain the 45-degree head turn for at least 30 seconds. Your doctor will inspect your eyes and ask if you feel dizzy. The procedure is then repeated on the other side.
+                                    </p>
+                                    <p> You should know that this test could trigger unpleasant bouts of vertigo. If you develop symptoms during this test, your doctor will determine that you do indeed have vertigo.</p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -2951,8 +3028,11 @@
                                                                 Unfit
                                                             </label>
                                                         </div>
-                                                        </div>
-                                                        Remark: <p id="bppvremark" class="text-danger"></p>
+                                                        </div><p id="bppvremark" class="text-danger">
+                                                            <span class="text-dark">Remark: </span>@if(isset($testremarks) && isset($testremarks['bppv']))
+                                                                {{$testremarks['bppv']}}
+                                                            @endif
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2961,9 +3041,14 @@
                                         <!--************7th step done ************** -->
                                         {{-- 8th Step Start --}}
                                         <h2 class="text-success text-center">Step 8 :Fukuda-Unterberger </h2>
-                                        <p class="text-success ">For the Fukuda-Unterberger
-                                            Test................................................................................................................................................................................................
-                                        </p>
+                                        <p>The Fukuda-Unterberger test requires you to march with your eyes closed. Your physician will look at how your body strays from the midline to identify which side of your body is affected by vertigo.
+                                            <br>
+                                            Record Vedio -
+                                            <ul> 
+                                               <li>straight line drawn and tell them to walk with closed eyes and record the vedio</li>
+                                               <br>
+                                               <span class="text-success"> Remark -  Based on vedio doctor confirm FIT or UNFIT</span>
+                                            </p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -2986,8 +3071,11 @@
                                                                 Unfit
                                                             </label>
                                                         </div>
-                                                        </div>
-                                                        Remark: <p id="fukudaremark" class="text-danger"></p>
+                                                        </div><p id="fukudaremark" class="text-danger">
+                                                            <span class="text-dark">Remark: </span>@if(isset($testremarks) && isset($testremarks['fukuda']))
+                                                                {{$testremarks['fukuda']}}
+                                                            @endif
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -3006,7 +3094,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="verticoPDF()">Save PDF</button>
+                <button type="button" onclick="verticoPDF()" class="btn btn-primary">Save PDF</button>
             </div>
         </div>
     </div>
@@ -3030,166 +3118,152 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container my-5">
-                    <!-- form start -->
-                    <form action="" class="shadow-sm" id="doctorreportfinal"
-                        style="border: 2px solid #339999">
-
-                        <div class="top-section d-flex justify-content-around">
-                            <div class="logo">
-                                <img src="{{ url('public/dashboard/img/logo.png') }}" alt=""
-                                    width="100" />
-                            </div>
-                            <div class="heading">
-                                <p class="text-center h2" style="color: #0d9494">MEDICLEAR</p>
-                                <p class="text-center h4" style="color: #339999">
-                                    An ISO 9001 - 2015 Certified Company<br />
-                                    Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi
-                                </p>
-                            </div>
-                            <div class="blank"></div>
-                        </div>
-
-                        <hr style="color: black; height: 12px; border-top: 5px solid black" />
-                        <u>
-                            <p class="h3 text-dark text-center my-5">
-                                CERTIFICATION OF VERTIGO EXAMINATION
-                            </p>
-                        </u>
-                        <!-- table start -->
-                        <table class="table table-striped border-dark table-bordered"
-                            style="background-color: aliceblue">
-                            <thead>
-                                <tr>
-                                    <th scope="col">1</th>
-                                    <th scope="col">Certification No.</th>
-                                    <th scope="col">{{ $data->certification_number }}</th>
-                                    <th scope="col">{{ date('d-M-y') }}</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Name</td>
-                                    <td>{{ $data->consumer_name }}</td>
-                                    <td>Valid Till-</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Company</td>
-                                    <td>NA</td>
-                                    <td rowspan="4" colspan="2" class="text-center" id="qrcolum">
-
-                                        @php
-                                            $blurredAadhar = 'xxxx-xxxx-' . substr($data->consumer_addhar_number, -4);
-
-                                            $consumerQrData = 'Name:' . $data->consumer_name . ' ' . 'AdharNumber:' . $blurredAadhar;
-
-                                        @endphp
-
-                                        {!! QrCode::size(256)->generate($consumerQrData) !!}
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Gender</td>
-                                    <td>
-                                        @if ($data->gender == 'male')
-                                            {{ 'Male' }}
-                                        @elseif($data->gender == 'female')
-                                            {{ 'Female' }}
-                                        @endif
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>DOB /AGE</td>
-                                    <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td>Fitness</td>
-                                    <td>Fit</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p class="h4 text-center text-dark">This is to be certify that Mr.</p>
-                        <p class="text-dark">
-                            has been examined by us, We can not discover that he/she has got any
-                            disease, communicable or otherwise, constitutional or bodily deformed
-                            oe Vertigo.
-                        </p>
-                        <!--info container -->
-                        <div class="d-flex justify-content-around my-4">
-                            <p class="h4 text dark">Candidate is hereby declared,</p>
-                            <div class=" text-center">
-                                <p class="h4 text dark">Vertigo Test : Normal</p>
-                            </div>
-                        </div>
-                        <!-- checkboxes -->
-                        @foreach ($AssignDoctor as $doc)
-                            <div class="container d-flex justify-content-around">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        value="option1"
-                                        @if ($doc->doctor_final_result == '1') checked @disabled(true) @disabled(true) @endif />
-                                    <label class="form-check-label" for="inlineCheckbox1">FIT</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input"
-                                        @if ($doc->doctor_final_result == '0') checked @disabled(true) @endif
-                                        type="checkbox" id="inlineCheckbox2" value="option2" />
-                                    <label class="form-check-label" for="inlineCheckbox2">UNFIT</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input"
-                                        @if ($doc->doctor_final_result == '-1') checked @disabled(true) @endif
-                                        type="checkbox" id="inlineCheckbox3" value="option3" />
-                                    <label class="form-check-label" for="inlineCheckbox3">Temorarily UNFIT
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- 3 boxes start   $('#doctorsign').html(signHTML);
-                $('#doctorseal').html(sealHTML);
-                $('#doctorregistration').html(registrationHTML); -->
-                            <div class="container1">
-                                <ul>
-                                    <li class="text-center">
-                                        <div class="title" id="">REGISTRATION NUMBER</div>
-                                        <div class="col-md-6" id="doctorregistration">
-                                            {{ $doc->doctorregistration }}
-                                        </div>
-                                    </li>
-                                    <li class="text-center">
-                                        <div class="title">SIGNATURE OF DOCTOR</div>
-                                        <div class="col-md-6" id="doctorsign">
-                                            <img src="{{ url('public/images/' . $doc->doctorsign) }}"
-                                                width="100px" class="img-fluid" alt="">
-                                        </div>
-                                    </li>
-                                    <li class="text-center">
-                                        <div class="title">SEAL OF DOCTOR</div>
-                                        <div class="col-md-6" id="doctorseal">
-                                            <img src="{{ url('public//images/' . $doc->doctorseal) }}"
-                                                width="100px" class="img-fluid" alt="">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- form footer -->
-                            <div class="footer d-flex justify-content-center align-items-center text-white"
-                                style="background-color: #418787">
-                                <p class="h5">
-                                    To verify the Medical Certification scan QR Code or email Us at
-                                    <span class="text-danger">everify@mediclear.in</span>
-                                </p>
-                            </div>
-                    </form>
-                </div>
-
+                    <div class="container">
+                       <div class="row">
+                          <div class="col-md-12">
+                             <div class="form-holder shadow-lg  p-3 pb-0">
+                                <!-- form start -->
+                                <form action="" class="shadow-sm">
+                                   <div class="top-section d-flex justify-content-around">
+                                    <div class="logo" id="qrcolum">
+                                         <img src="{{asset('assets/img/logo.png')}}" alt="" width="100" />
+                                      </div>
+                                      <div class="heading">
+                                         <h1 class="text-center" style="font-size: 30px;">
+                                         MEDICLEAR</h1>
+                                         <p class="text-center" style="color: #4daf92">
+                                           <b> An ISO 9001 - 2015 Certified Company
+                                         <br>  Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi</b>
+                                         </p>
+                                      </div>
+                                      <div class="blank"></div>
+                                   </div>
+                                   
+                                      <p class="h3 text-dark text-center my-3">
+                                       <u>Certification Of Vertigo Examination</u>
+                                      </p>
+                                   <table
+                                      class="table table-striped border-dark table-bordered">
+                                      <thead>
+                                         <tr>
+                                            <th scope="col">1</th>
+                                            <th scope="col">Certification No.</th>
+                                            <th scope="col">{{ $data->certification_number }}</th>
+                                            <th scope="col">Checkup Date</th>
+                                            <th scope="col">{{ date('d-M-y') }}</th>
+                                         </tr>
+                                      </thead>
+                                      <tbody>
+                                         <tr>
+                                            <th scope="row">2</th>
+                                            <td>Name</td>
+                                            <td>{{ $data->consumer_name }}</td>
+                                            <td>Valid Till-</td>
+                                            <td></td>
+                                         </tr>
+                                         <tr>
+                                            <th scope="row">2</th>
+                                            <td>Company</td>
+                                            <td></td>
+                                            <td rowspan="4" colspan="2" class="text-center" id="qrcolum">
+                                                @php
+                                                    $blurredAadhar = 'xxxx-xxxx-' . substr($data->consumer_addhar_number, -4);
+                                                    $consumerQrData = 'Name:' . $data->consumer_name . ' ' . 'AdharNumber:' . $blurredAadhar;
+                                                @endphp
+                                            {!! QrCode::size(256)->generate($consumerQrData) !!}
+                                            </td>
+                                         </tr>
+                                         <tr>
+                                            <th scope="row">4</th>
+                                            <td>Gender</td>
+                                            <td>
+                                                @if ($data->gender == 'male')
+                                                    {{ 'Male' }}
+                                                @elseif($data->gender == 'female')
+                                                    {{ 'Female' }}
+                                                @endif
+                                            </td>
+                                         </tr>
+                                         <tr>
+                                            <th scope="row">5</th>
+                                            <td>DOB /AGE</td>
+                                            <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
+                                         </tr>
+                                         <tr>
+                                            <th scope="row">6</th>
+                                            <td>Fitness</td>
+                                            <td>Fit</td>
+                                         </tr>
+                                      </tbody>
+                                   </table>
+                                   <p class="h4 text-center text-dark">This is to be certify that Mr.........</p>
+                                   <p class="text-dark">
+                                      has been examined by us, We can not discover that he/she has got any
+                                      disease, communicable or otherwise, constitutional or bodily deformed
+                                      oe Vertigo.
+                                   </p>
+                                   <!--info container -->
+                                   <div class="d-flex justify-content-around my-4">
+                                      <p class="h4 text dark">Candidate is hereby declared,</p>
+                                      <div class="yellow text-center">
+                                         <p class="h4 text dark">Vertigo Test : Normal</p>
+                                      </div>
+                                   </div>
+                                   <!-- checkboxes -->
+                                   @foreach ($AssignDoctor as $doc)
+                                   <div class="container d-flex justify-content-around">
+                                      <div class="form-check form-check-inline">
+                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" disabled value="option1" @if ($doc->doctor_final_result == '1') checked @disabled(true) @disabled(true) @endif />
+                                         <label class="form-check-label" for="inlineCheckbox1">Fit</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox2" disabled value="option2" @if ($doc->doctor_final_result == '0') checked @disabled(true) @endif />
+                                         <label class="form-check-label" for="inlineCheckbox2">Unfit</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3" disabled value="option3" @if ($doc->doctor_final_result == '-1') checked @disabled(true) @endif />
+                                         <label class="form-check-label" for="inlineCheckbox3">Temorarily Unfit</label>
+                                      </div>
+                                   </div>
+                                   <!-- 3 boxes start  -->
+                                   <div class="container1">
+                                      <ul>
+                                         <li class="text-center">
+                                            <div class="title">Registration Number</div>
+                                            <div class="col-md-6" id="doctorregistration">
+                                                {{ $doc->doctorregistration }}
+                                            </div>
+                                         </li>
+                                         <li class="text-center">
+                                            <div class="title">Signature Of Doctor</div>
+                                            <div class="col-md-6" id="doctorsign">
+                                                <img src="{{ asset('images/' . $doc->doctorsign) }}" width="100px" class="img-fluid" alt="wkcicb">
+                                            </div>
+                                         </li>
+                                         <li class="text-center">
+                                            <div class="title">Seal Of Doctor</div>
+                                            <div class="col-md-6" id="doctorseal">
+                                                <img src="{{ asset('images/' . $doc->doctorseal) }}" width="100px" class="img-fluid" alt="N/A">
+                                            </div>
+                                         </li>
+                                      </ul>
+                                   </div>
+                                   <!-- form footer -->
+                                   <div
+                                      class="footer d-flex justify-content-center align-items-center">
+                                      <p class="h6 text-success">
+                                      <b>Note:</b>   To verify the Medical Certification scan QR Code or email Us at
+                                         <span class="text-danger">everify@mediclear.in</span>
+                                      </p>
+                                   </div>
+                                </form>
+                             </div>
+                             <!--**********end col************ -->
+                          </div>
+                          <!--**********end row************ -->
+                       </div>
+                       <!--**********end container************ -->
+                    </div>           
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -3352,6 +3426,160 @@
 {{-- ---------------------------------------------------------------------------------------------- --}}
 </div>
 </div>
+{{-- <div class="container my-5">
+    <!-- form start -->
+    <form action="" class="shadow-sm" id="doctorreportfinal"
+        style="border: 2px solid #339999">
+
+        <div class="top-section d-flex justify-content-around">
+            <div class="logo">
+                <img src="{{ url('public/dashboard/img/logo.png') }}" alt=""
+                    width="100" />
+            </div>
+            <div class="heading">
+                <p class="text-center h2" style="color: #0d9494">MEDICLEAR</p>
+                <p class="text-center h4" style="color: #339999">
+                    An ISO 9001 - 2015 Certified Company<br />
+                    Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi
+                </p>
+            </div>
+            <div class="blank"></div>
+        </div>
+
+        <hr style="color: black; height: 12px; border-top: 5px solid black" />
+        <u>
+            <p class="h3 text-dark text-center my-5">
+                CERTIFICATION OF VERTIGO EXAMINATION
+            </p>
+        </u>
+        <!-- table start -->
+        <table class="table table-striped border-dark table-bordered"
+            style="background-color: aliceblue">
+            <thead>
+                <tr>
+                    <th scope="col">1</th>
+                    <th scope="col">Certification No.</th>
+                    <th scope="col">{{ $data->certification_number }}</th>
+                    <th scope="col">{{ date('d-M-y') }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Name</td>
+                    <td>{{ $data->consumer_name }}</td>
+                    <td>Valid Till-</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Company</td>
+                    <td>NA</td>
+                    <td rowspan="4" colspan="2" class="text-center" id="qrcolum">
+                        @php
+                            $blurredAadhar = 'xxxx-xxxx-' . substr($data->consumer_addhar_number, -4);
+                            $consumerQrData = 'Name:' . $data->consumer_name . ' ' . 'AdharNumber:' . $blurredAadhar;
+                        @endphp
+                        {!! QrCode::size(256)->generate($consumerQrData) !!}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Gender</td>
+                    <td>
+                        @if ($data->gender == 'male')
+                            {{ 'Male' }}
+                        @elseif($data->gender == 'female')
+                            {{ 'Female' }}
+                        @endif
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>DOB /AGE</td>
+                    <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">6</th>
+                    <td>Fitness</td>
+                    <td>Fit</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="h4 text-center text-dark">This is to be certify that Mr.</p>
+        <p class="text-dark">
+            has been examined by us, We can not discover that he/she has got any
+            disease, communicable or otherwise, constitutional or bodily deformed
+            oe Vertigo.
+        </p>
+        <!--info container -->
+        <div class="d-flex justify-content-around my-4">
+            <p class="h4 text dark">Candidate is hereby declared,</p>
+            <div class=" text-center">
+                <p class="h4 text dark">Vertigo Test : Normal</p>
+            </div>
+        </div>
+        <!-- checkboxes -->
+        @foreach ($AssignDoctor as $doc)
+            <div class="container d-flex justify-content-around">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                        value="option1"
+                        @if ($doc->doctor_final_result == '1') checked @disabled(true) @disabled(true) @endif />
+                    <label class="form-check-label" for="inlineCheckbox1">FIT</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                        @if ($doc->doctor_final_result == '0') checked @disabled(true) @endif
+                        type="checkbox" id="inlineCheckbox2" value="option2" />
+                    <label class="form-check-label" for="inlineCheckbox2">UNFIT</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                        @if ($doc->doctor_final_result == '-1') checked @disabled(true) @endif
+                        type="checkbox" id="inlineCheckbox3" value="option3" />
+                    <label class="form-check-label" for="inlineCheckbox3">Temorarily UNFIT
+                    </label>
+                </div>
+            </div>
+                            <!-- 3 boxes start   $('#doctorsign').html(signHTML);
+                $('#doctorseal').html(sealHTML);
+                $('#doctorregistration').html(registrationHTML); -->
+            <div class="container1">
+                <ul>
+                    <li class="text-center">
+                        <div class="title" id="">REGISTRATION NUMBER</div>
+                        <div class="col-md-6" id="doctorregistration">
+                            {{ $doc->doctorregistration }}
+                        </div>
+                    </li>
+                    <li class="text-center">
+                        <div class="title">SIGNATURE OF DOCTOR</div>
+                        <div class="col-md-6" id="doctorsign">
+                            <img src="{{ url('public/images/' . $doc->doctorsign) }}"
+                                width="100px" class="img-fluid" alt="">
+                        </div>
+                    </li>
+                    <li class="text-center">
+                        <div class="title">SEAL OF DOCTOR</div>
+                        <div class="col-md-6" id="doctorseal">
+                            <img src="{{ url('public//images/' . $doc->doctorseal) }}"
+                                width="100px" class="img-fluid" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- form footer -->
+            <div class="footer d-flex justify-content-center align-items-center text-white"
+                style="background-color: #418787">
+                <p class="h5">
+                    To verify the Medical Certification scan QR Code or email Us at
+                    <span class="text-danger">everify@mediclear.in</span>
+                </p>
+            </div>
+    </form>
+</div> --}}
 {{-- @if (isset($TestData) && json_decode($TestData, true) != [])
 @php
 if(isset($TestData['bp'])){
@@ -3415,178 +3643,62 @@ $bpdata['post_upper_bp']="0";
         }
     @endphp
 @endif
-@php
-    $testResults = $Testresult->all();
-    $bpUnfitChecked = false;
-    $bpfitChecked = false;
-    $hearingUnfitChecked = false;
-    $hearingfitChecked = false;
-    // Add more variables for other features as needed
-@endphp
-
-@foreach ($Testresult as $feature => $test_result)
-    @if ($feature == 'bp')
-        @if ($test_result == 0)
-            @php $bpUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $bpfitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'hearing')
-        @if ($test_result == 0)
-            @php $hearingUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $hearingfitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'eyedistance')
-        @if ($test_result == 0)
-            @php $eyedistanceUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $eyedistancefitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'eyecheckup')
-        @if ($test_result == 0)
-            @php $eyedistanceUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $eyedistancefitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'bppv')
-        @if ($test_result == 0)
-            @php $eyedistanceUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $eyedistancefitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'fukuda')
-        @if ($test_result == 0)
-            @php $eyedistanceUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $eyedistancefitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'flatfoot')
-        @if ($test_result == 0)
-            @php $eyedistanceUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $eyedistancefitChecked = true; @endphp
-        @endif
-    @endif
-@endforeach
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script>
+    function downloadPDF() {
+        const pdf = new jsPDF();
+        const modalContent = document.getElementById('verticopdfreport').innerHTML;
+        pdf.html(modalContent, {
+            callback: function () {
+                pdf.save('modal_content.pdf');
+            }
+        });
+    }
+</script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         @if($bpUnfitChecked)
             $('#unfitRadio').prop('checked', true);
+        @elseif($bpfitChecked)
+            $('#fitRadio').prop('checked', true);
         @endif
-    // // const myeyeTextarea = document.getElementById('eyecheckupunfitRemark');
-    // // const myhearingtextarea = document.getElementById('hearingunfitremark');
-    // // const myeyedistancetextarea = document.getElementById('eyedistanceunfitremark');
-    // // const mybptextarea = document.getElementById('bpunfitremark');
-    // // const mybppvtextarea = document.getElementById('bppvunfitremark');
-    // // const myfukudatextarea = document.getElementById('fukudaunfitremark');
-    // // const myrttextarea = document.getElementById('rtunfitremark');
-    // // const mymodaleyeTextarea = document.getElementById('eyeremarkInModal');
-    // // const mymodalhearing = document.getElementById('hearingremarkInModal');
-    // // const mymodaleyedistance = document.getElementById('eyedistanceremarkInModal');
-    // // const mymodalbppv = document.getElementById('bppvremark');
-    // // const mymodalfukuda = document.getElementById('fukudaremark');
-    // // const mymodalrt = document.getElementById('rtfootremark');
-    // // const mymodalflat = document.getElementById('flatremark');
-    // const textareaModalPairs = [
-    //     { textarea: 'eyecheckupunfitRemark', modal: 'eyeremarkInModal' },
-    //     { textarea: 'hearingunfitremark', modal: 'hearingremarkInModal' },
-    //     { textarea: 'eyedistanceunfitremark', modal: 'eyedistanceremarkInModal' },
-    //     { textarea: 'bpunfitremark', modal: 'bpremarkmodal' },
-    //     { textarea: 'bppvunfitremark', modal: 'bppvremark' },
-    //     { textarea: 'fukudaunfitremark', modal: 'fukudaremark' },
-    //     { textarea: 'rtunfitremark', modal: 'rtfootremark' },
-    //     { textarea: 'flatremark', modal: 'flatremark' }
-    // ];
-    // textareaModalPairs.forEach(pair => {
-    //     const textarea = document.getElementById(pair.textarea);
-    //     const modal = document.getElementById(pair.modal);
-    //     $("#" + pair.textarea).on("input", function() {
-    //         modal.textContent = textarea.value;
-    //         });
-    //     });
+        @if($hearingUnfitChecked)
+            $('#modalunfithearing').prop('checked', true);
+        @elseif($hearingfitChecked)
+            $('#modalfithearing').prop('checked', true);
+        @endif
+        @if($eyedistanceUnfitChecked)
+            $('#eyedistancefit').prop('checked', true);
+        @elseif($eyedistancefitChecked)
+            $('#eyedistanceunfit').prop('checked', true);
+        @endif
+        @if($eyecheckupUnfitChecked)
+            $('#eyeblindnessfit').prop('checked', true);
+        @elseif($eyecheckupfitChecked)
+            $('#eyeblindnessunfit').prop('checked', true);
+        @endif
+        @if($bppvUnfitChecked)
+            $('#bppvunfit').prop('checked', true);
+        @elseif($bppvfitChecked)
+            $('#bppvfit').prop('checked', true);
+        @endif
+        @if($fukudaUnfitChecked)
+            $('#fukudaunfit').prop('checked', true);
+        @elseif($fukudaUnfitChecked)
+            $('#fukudafit').prop('checked', true);
+        @endif
+        @if($rtunfitChecked)
+            $('#rtunfit').prop('checked', true);
+        @elseif($rtfitChecked)
+            $('#rtfit').prop('checked', true);
+        @endif
+        @if($flatfootUnfitChecked)
+            $('#flatUnfit').prop('checked', true);
+        @elseif($flatfootfitChecked)
+            $('#flatfit').prop('checked', true);
+        @endif
     });
-    $("#bpcheckboxunfit").click(function() {
-        if ($("#bpcheckboxunfit").is(":checked ")) {
-            $('input[name="bpfit"][value="fit"]').prop("checked", false);
-            $('input[name="bpunfit"][value="unfit"]').prop("checked", true);
-        }
-    });
-    $("#bpcheckboxfit").click(function() {
-        $('input[name="bpfit"][value="fit"]').prop("checked", true);
-        $('input[name="bpunfit"][value="unfit"]').prop("checked", false);
-    })
-    $("#fukudacheckboxunfit").click(function() {
-        if ($("#fukudacheckboxunfit").is(":checked ")) {
-            $('input[name="fukudafit"][value="fit"]').prop("checked", false);
-            $('input[name="fukudaunfit"][value="unfit"]').prop("checked", true);
-        }
-    });
-    $("#fukudafit").click(function() {
-        $('input[name="fukudafit"][value="fit"]').prop("checked", true);
-        $('input[name="fukudaunfit"][value="unfit"]').prop("checked", false);
-    })
-    $("#bppvcheckboxunfit").click(function() {
-        if ($("#bppvcheckboxunfit").is(":checked ")) {
-            $('input[name="bppvfit"][value="fit"]').prop("checked", false);
-            $('input[name="bppvunfit"][value="unfit"]').prop("checked", true);
-        }
-    });
-    $("#bppvcheckboxfit").click(function() {
-        $('input[name="bppvfit"][value="fit"]').prop("checked", true);
-        $('input[name="bppvunfit"][value="unfit"]').prop("checked", false);
-    })
-    $("#flatfootcheckboxunfit").click(function() {
-        if ($("#flatfootcheckboxunfit").is(":checked ")) {
-            $('input[name="flatfit"][value="fit"]').prop("checked", false);
-            $('input[name="flatunfit"][value="unfit"]').prop("checked", true);
-        }
-    });
-    $("#flatfootcheckboxfit").click(function() {
-        $('input[name="flatfit"][value="fit"]').prop("checked", true);
-        $('input[name="flatunfit"][value="unfit"]').prop("checked", false);
-    })
-    $("#rtcheckboxunfit").click(function() {
-        if ($("#rtcheckboxunfit").is(":checked ")) {
-            $('input[name="rtfootfit"][value="fit"]').prop("checked", false);
-            $('input[name="rtfootunfit"][value="unfit"]').prop("checked", true);
-        }
-    });
-    $("#rtcheckboxfit").click(function() {
-        $('input[name="rtfootfit"][value="fit"]').prop("checked", true);
-        $('input[name="rtfootunfit"][value="unfit"]').prop("checked", false);
-    })
-    $("#eyedistancecheckboxunfit").click(function() {
-        if ($("#eyedistancecheckboxunfit").is(":checked ")) {
-            $('input[name="eyedistancefit"][value="fit"]').prop("checked", false);
-            $('input[name="eyedistanceunfit"][value="unfit"]').prop("checked", true);
-        }
-    });
-    $("#eyedistancecheckboxfit").click(function() {
-        $('input[name="eyedistancefit"][value="fit"]').prop("checked", true);
-        $('input[name="eyedistanceunfit"][value="unfit"]').prop("checked", false);
-    })
-    $("#eyecheckupcheckboxunfit").click(function() {
-        if ($("#eyecheckupcheckboxunfit").is(":checked ")) {
-            $('input[name="eyeblindnessfit"][value="fit"]').prop("checked", false);
-            $('input[name="eyeblindnessunfit"][value="unfit"]').prop("checked", true);
-        }
-    });
-    $("#eyecheckupboxfit").click(function() {
-        $('input[name="eyeblindnessfit"][value="fit"]').prop("checked", true);
-        $('input[name="eyeblindnessunfit"][value="unfit"]').prop("checked", false);
-    })
-    $("#hearingtestcheckboxunfit").click(function() {
-        if ($("#hearingtestcheckboxunfit").is(":checked ")) {
-            $('input[name="hearingfit"][value="fit"]').prop("checked", false);
-            $('input[name="hearingunfit"][value="unfit"]').prop("checked", true);
-        }
-    });
-    $("#hearingtestcheckboxfit").click(function() {
-        $('input[name="hearingfit"][value="fit"]').prop("checked", true);
-        $('input[name="hearingunfit"][value="unfit"]').prop("checked", false);
-    })
 </script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -3942,19 +4054,44 @@ $bpdata['post_upper_bp']="0";
             }
         });
     });
-    var originalChart = document.getElementById('eyeblindness');
-    var clonedChart = originalChart.cloneNode(true);
-    var distanceChart = document.getElementById('eyedistance');
-    var cloneddistanceChart = originalChart.cloneNode(true);
-    var modalContent = document.querySelector('.eye-percentage');
-    var modaldistanceContent = document.querySelector('.eye-distance-percentage');
-    modalContent.appendChild(clonedChart);
-    modaldistanceContent.appendChild(cloneddistanceChart);
+    // var originalChart = document.getElementById('eyeblindness');
+    // var clonedChart = originalChart.cloneNode(true);
+    // var distanceChart = document.getElementById('eyedistance');
+    // var cloneddistanceChart = originalChart.cloneNode(true);
+    // var modalContent = document.querySelector('.eye-percentage');
+    // var modaldistanceContent = document.querySelector('.eye-distance-percentage');
+    // modalContent.appendChild(clonedChart);
+    // modaldistanceContent.appendChild(cloneddistanceChart);
 </script>
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('js/html2canvasmin.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+{{-- <script>
+    $(document).ready(function () {
+    $('#pdfdownload').click(function () { 
+        var modalContent = document.getElementById('vertigopdfreport');
+        var content = modalContent.innerHTML;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: 'post',
+                    url: "{{ url('consumer-download-pdf') }}",
+                    data: {
+                        modalContent: content,
+                    },success: function(response) {
+                        console.log('PDF downloaded successfully');
+                    },
+                error: function(xhr, status, error) {
+                    console.error('Error downloading PDF:', error);
+                }
+            });
+    });
+});
+</script> --}}
 <script>
     function saveResult(button) {
         var id = button.id;
@@ -4335,12 +4472,12 @@ $bpdata['post_upper_bp']="0";
     }
     /////////////////////////////////////////////
     /////////////////vertigo report//////////////////////////////////////////////
+
     function verticoPDF() {
         var prtContent = document.getElementById("verticopdfreport");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
-        var boostrapCDN =
-            '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">'
-        WinPrint.document.write(boostrapCDN);
+        var bootstrapCDN = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">';
+        WinPrint.document.write(bootstrapCDN);
         WinPrint.document.write(prtContent.innerHTML);
         WinPrint.document.close();
         setTimeout(function() {
@@ -4349,6 +4486,7 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
+
 
     function docotorFinalReportPDF() {
         var prtContent = document.getElementById("doctorreportfinal");

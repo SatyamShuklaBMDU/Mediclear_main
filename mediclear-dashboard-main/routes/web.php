@@ -178,7 +178,8 @@ Route::post('/banner/update', [NotificationController::class, 'addBanner']);
         Route::post('/doctor-final-test-result', [VertigoReportController::class, 'doctorfinalresult'])->name('doctor-final-test-result');
     });
 
-
+    // pdf 
+    Route::post('/consumer-download-pdf', [VertigoReportController::class, 'pdf']);
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -13,13 +13,39 @@ use Illuminate\Validation\Rules\Unique;
 use Carbon\Carbon;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Rules\CountResultGivenByDoctor;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class VertigoReportController extends Controller
 {
+    public function pdf(Request $request)
+{
+    // Receive modal content from AJAX request
+    $modalContent = $request->input('modalContent');
 
+    // Include modal content in the data array
+    $data = [
+        'title' => 'My PDF Title',
+        'content' => 'This is the content of my PDF.',
+        'modalContent' => $modalContent,
+    ];
+    $pdf = new Dompdf();
+    $pdf->loadHtml(view('dashboard.vertigo.pdf', $data));
+    $pdf->setPaper('A4', 'portrait');
+    $pdf->render();
+    $pdfContent = $pdf->output();
+
+    $fileName = 'my_pdf_file.pdf';
+
+    return response()->streamDownload(
+        function () use ($pdfContent) {
+            echo $pdfContent;
+        },
+        $fileName
+    );
+}
 
     public function show()
     {
@@ -27,15 +53,6 @@ class VertigoReportController extends Controller
             'Ashish Singh',
         );
     }
-
-
-
-
-
-
-
-
-
     public function customersvertigoreports(Request $request)
     {
         if ($request->ajax()) {
@@ -273,12 +290,22 @@ class VertigoReportController extends Controller
         $examnationDetailsBeforeMedicalTest = MedicalDetail::where('id', $consumer_id)->get();
         $TestData = Test::where('medical_details_id', $consumer_id)->where('test_type_id', '1')->where('test_status', '1')->whereIn('features', ['bp', 'eyecheckup', 'rt', 'flatfoot', 'bppv', 'fukuda','hearingtest','eyedistance'])->pluck('data', 'features');
         $Testresult = Test::where('medical_details_id', $consumer_id)->where('test_type_id', '1')->where('test_status', '1')->pluck('test_results', 'features');
-        // dd($Testresult);
+        $testremark=[];
+        foreach($Testresult as $feature => $testresults){
+            if($testresults == '0'){
+                $remarks = Test::where('medical_details_id', $consumer_id)
+                ->where('test_results', $testresults)
+                ->where('features', $feature) 
+                ->pluck('test_results_remarks')
+                ->first(); 
+                $testremark[$feature] = $remarks;
+            }
+        }
         $doctordata = Doctor::select('registration_number', 'name', 'id')->where('status', 'Active')->get();
-        $AssignDoctor = MedicalDetail::select('doctors.sign as doctorsign', 'doctors.seal_of_doctor as doctorseal', 'doctors.registration_number as doctorregistration','doctor_final_result')->where('medical_details.id', $consumer_id)->join('doctors', 'medical_details.doctorid', '=', 'doctors.id')->get();  
+        $AssignDoctor = MedicalDetail::select('doctors.sign as doctorsign', 'doctors.seal_of_doctor as doctorseal', 'doctors.registration_number as doctorregistration','doctor_final_result')->where('medical_details.id', $consumer_id)->join('doctors', 'medical_details.doctorid', '=', 'doctors.id')->get();
         $CountRisultGivenByDoctor=Test::where('medical_details_id',$consumer_id)->where('test_type_id', '1')->where('test_status', '1')
         ->where('test_results','!=',null)->count(); 
-        return view('dashboard.vertigo.consumer-test-profile', ['examnationDetailsBeforeMedicalTest' => $examnationDetailsBeforeMedicalTest, 'TestData' => $TestData, 'Testresult' => $Testresult, 'doctordata' => $doctordata, 'AssignDoctor' => $AssignDoctor,'CountRisultGivenByDoctor'=> $CountRisultGivenByDoctor,'corporateCompanyBatchName'=>$corporateCompanyBatchName]);
+        return view('dashboard.vertigo.consumer-test-profile', ['examnationDetailsBeforeMedicalTest' => $examnationDetailsBeforeMedicalTest, 'TestData' => $TestData, 'Testresult' => $Testresult, 'doctordata' => $doctordata, 'AssignDoctor' => $AssignDoctor,'CountRisultGivenByDoctor'=> $CountRisultGivenByDoctor,'corporateCompanyBatchName'=>$corporateCompanyBatchName,'testremarks'=>$testremark]);
     }
     public function consumertestresult(Request $request)
     {
