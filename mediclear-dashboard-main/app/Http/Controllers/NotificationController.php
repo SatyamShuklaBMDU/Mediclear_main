@@ -21,32 +21,19 @@ class NotificationController extends Controller
     //
 
     public function customerNotification(){
-
         $notification=Notification_for::orderBy('id','desc')->get();
         return view('dashboard.notification',compact('notification'));
     }
-
-
-
     public function deleteNotification(Request $request){
-
         Notification_for::where('id',$request->id)->delete();
         return redirect()->back()->with('message','Delete successful!');
     }
-
-
-
-
-
     public function sendNotification(Request $request){
-
         $validator = Validator::make($request->all(), [
             'subject' => 'required',
             'for' => 'required',
             'message' => 'required',
         ]);
-
-
     Notification_for::create([
         'for'=>$request->for,
         'subject'=>$request->subject,

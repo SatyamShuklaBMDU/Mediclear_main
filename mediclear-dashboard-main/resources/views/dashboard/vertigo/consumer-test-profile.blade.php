@@ -3106,175 +3106,171 @@
     Consumer Final Report
 </button>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="
-    max-width: 1000px;" role="document">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                    <div class="container">
-                       <div class="row">
-                          <div class="col-md-12">
-                             <div class="form-holder shadow-lg  p-3 pb-0">
-                                <!-- form start -->
-                                <form action="" class="shadow-sm">
-                                   <div class="top-section d-flex justify-content-around">
-                                    <div class="logo" id="qrcolum">
-                                         <img src="{{asset('assets/img/logo.png')}}" alt="" width="100" />
-                                      </div>
-                                      <div class="heading">
-                                         <h1 class="text-center" style="font-size: 30px;">
-                                         MEDICLEAR</h1>
-                                         <p class="text-center" style="color: #4daf92">
-                                           <b> An ISO 9001 - 2015 Certified Company
-                                         <br>  Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi</b>
-                                         </p>
-                                      </div>
-                                      <div class="blank"></div>
-                                   </div>
-                                   
-                                      <p class="h3 text-dark text-center my-3">
-                                       <u>Certification Of Vertigo Examination</u>
-                                      </p>
-                                   <table
-                                      class="table table-striped border-dark table-bordered">
-                                      <thead>
-                                         <tr>
-                                            <th scope="col">1</th>
-                                            <th scope="col">Certification No.</th>
-                                            <th scope="col">{{ $data->certification_number }}</th>
-                                            <th scope="col">Checkup Date</th>
-                                            <th scope="col">{{ date('d-M-y') }}</th>
-                                         </tr>
-                                      </thead>
-                                      <tbody>
-                                         <tr>
-                                            <th scope="row">2</th>
-                                            <td>Name</td>
-                                            <td>{{ $data->consumer_name }}</td>
-                                            <td>Valid Till-</td>
-                                            <td></td>
-                                         </tr>
-                                         <tr>
-                                            <th scope="row">2</th>
-                                            <td>Company</td>
-                                            <td></td>
-                                            <td rowspan="4" colspan="2" class="text-center" id="qrcolum">
-                                                @php
-                                                    $blurredAadhar = 'xxxx-xxxx-' . substr($data->consumer_addhar_number, -4);
-                                                    $consumerQrData = 'Name:' . $data->consumer_name . ' ' . 'AdharNumber:' . $blurredAadhar;
-                                                @endphp
-                                            {!! QrCode::size(256)->generate($consumerQrData) !!}
-                                            </td>
-                                         </tr>
-                                         <tr>
-                                            <th scope="row">4</th>
-                                            <td>Gender</td>
-                                            <td>
-                                                @if ($data->gender == 'male')
-                                                    {{ 'Male' }}
-                                                @elseif($data->gender == 'female')
-                                                    {{ 'Female' }}
-                                                @endif
-                                            </td>
-                                         </tr>
-                                         <tr>
-                                            <th scope="row">5</th>
-                                            <td>DOB /AGE</td>
-                                            <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
-                                         </tr>
-                                         <tr>
-                                            <th scope="row">6</th>
-                                            <td>Fitness</td>
-                                            <td>Fit</td>
-                                         </tr>
-                                      </tbody>
-                                   </table>
-                                   <p class="h4 text-center text-dark">This is to be certify that Mr.........</p>
-                                   <p class="text-dark">
-                                      has been examined by us, We can not discover that he/she has got any
-                                      disease, communicable or otherwise, constitutional or bodily deformed
-                                      oe Vertigo.
-                                   </p>
-                                   <!--info container -->
-                                   <div class="d-flex justify-content-around my-4">
-                                      <p class="h4 text dark">Candidate is hereby declared,</p>
-                                      <div class="yellow text-center">
-                                         <p class="h4 text dark">Vertigo Test : Normal</p>
-                                      </div>
-                                   </div>
-                                   <!-- checkboxes -->
-                                   @foreach ($AssignDoctor as $doc)
-                                   <div class="container d-flex justify-content-around">
-                                      <div class="form-check form-check-inline">
-                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" disabled value="option1" @if ($doc->doctor_final_result == '1') checked @disabled(true) @disabled(true) @endif />
-                                         <label class="form-check-label" for="inlineCheckbox1">Fit</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox2" disabled value="option2" @if ($doc->doctor_final_result == '0') checked @disabled(true) @endif />
-                                         <label class="form-check-label" for="inlineCheckbox2">Unfit</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3" disabled value="option3" @if ($doc->doctor_final_result == '-1') checked @disabled(true) @endif />
-                                         <label class="form-check-label" for="inlineCheckbox3">Temorarily Unfit</label>
-                                      </div>
-                                   </div>
-                                   <!-- 3 boxes start  -->
-                                   <div class="container1">
-                                      <ul>
-                                         <li class="text-center">
-                                            <div class="title">Registration Number</div>
-                                            <div class="col-md-6" id="doctorregistration">
-                                                {{ $doc->doctorregistration }}
-                                            </div>
-                                         </li>
-                                         <li class="text-center">
-                                            <div class="title">Signature Of Doctor</div>
-                                            <div class="col-md-6" id="doctorsign">
-                                                <img src="{{ asset('images/' . $doc->doctorsign) }}" width="100px" class="img-fluid" alt="wkcicb">
-                                            </div>
-                                         </li>
-                                         <li class="text-center">
-                                            <div class="title">Seal Of Doctor</div>
-                                            <div class="col-md-6" id="doctorseal">
-                                                <img src="{{ asset('images/' . $doc->doctorseal) }}" width="100px" class="img-fluid" alt="N/A">
-                                            </div>
-                                         </li>
-                                      </ul>
-                                   </div>
-                                   <!-- form footer -->
-                                   <div
-                                      class="footer d-flex justify-content-center align-items-center">
-                                      <p class="h6 text-success">
-                                      <b>Note:</b>   To verify the Medical Certification scan QR Code or email Us at
-                                         <span class="text-danger">everify@mediclear.in</span>
-                                      </p>
-                                   </div>
-                                </form>
-                             </div>
-                             <!--**********end col************ -->
-                          </div>
-                          <!--**********end row************ -->
-                       </div>
-                       <!--**********end container************ -->
-                    </div>           
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-holder shadow-lg  p-3 pb-0">
+                                    <!-- form start -->
+                                    <form action="" class="shadow-sm">
+                                    <div class="top-section d-flex justify-content-around">
+                                        <div class="logo" id="qrcolum">
+                                            <img src="{{asset('assets/img/logo.png')}}" alt="" width="100" />
+                                        </div>
+                                        <div class="heading">
+                                            <h1 class="text-center" style="font-size: 30px;">
+                                            MEDICLEAR</h1>
+                                            <p class="text-center" style="color: #4daf92">
+                                            <b> An ISO 9001 - 2015 Certified Company
+                                            <br>  Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi</b>
+                                            </p>
+                                        </div>
+                                        <div class="blank"></div>
+                                    </div>
+                                    
+                                        <p class="h3 text-dark text-center my-3">
+                                        <u>Certification Of Vertigo Examination</u>
+                                        </p>
+                                    <table
+                                        class="table table-striped border-dark table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">1</th>
+                                                <th scope="col">Certification No.</th>
+                                                <th scope="col">{{ $data->certification_number }}</th>
+                                                <th scope="col">Checkup Date</th>
+                                                <th scope="col">{{ date('d-M-y') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Name</td>
+                                                <td>{{ $data->consumer_name }}</td>
+                                                <td>Valid Till-</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Company</td>
+                                                <td></td>
+                                                <td rowspan="4" colspan="2" class="text-center" id="qrcolum">
+                                                    @php
+                                                        $blurredAadhar = 'xxxx-xxxx-' . substr($data->consumer_addhar_number, -4);
+                                                        $consumerQrData = 'Name:' . $data->consumer_name . ' ' . 'AdharNumber:' . $blurredAadhar;
+                                                    @endphp
+                                                {!! QrCode::size(256)->generate($consumerQrData) !!}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>Gender</td>
+                                                <td>
+                                                    @if ($data->gender == 'male')
+                                                        {{ 'Male' }}
+                                                    @elseif($data->gender == 'female')
+                                                        {{ 'Female' }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">5</th>
+                                                <td>DOB /AGE</td>
+                                                <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">6</th>
+                                                <td>Fitness</td>
+                                                <td>Fit</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="h4 text-center text-dark">This is to be certify that Mr.........</p>
+                                    <p class="text-dark">
+                                        has been examined by us, We can not discover that he/she has got any
+                                        disease, communicable or otherwise, constitutional or bodily deformed
+                                        oe Vertigo.
+                                    </p>
+                                    <!--info container -->
+                                    <div class="d-flex justify-content-around my-4">
+                                        <p class="h4 text dark">Candidate is hereby declared,</p>
+                                        <div class="yellow text-center">
+                                            <p class="h4 text dark">Vertigo Test : Normal</p>
+                                        </div>
+                                    </div>
+                                    <!-- checkboxes -->
+                                    @foreach ($AssignDoctor as $doc)
+                                    <div class="container d-flex justify-content-around">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" disabled value="option1" @if ($doc->doctor_final_result == '1') checked @disabled(true) @disabled(true) @endif />
+                                            <label class="form-check-label" for="inlineCheckbox1">Fit</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" disabled value="option2" @if ($doc->doctor_final_result == '0') checked @disabled(true) @endif />
+                                            <label class="form-check-label" for="inlineCheckbox2">Unfit</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" disabled value="option3" @if ($doc->doctor_final_result == '-1') checked @disabled(true) @endif />
+                                            <label class="form-check-label" for="inlineCheckbox3">Temorarily Unfit</label>
+                                        </div>
+                                    </div>
+                                    <!-- 3 boxes start  -->
+                                    <div class="container1">
+                                        <ul>
+                                            <li class="text-center">
+                                                <div class="title">Registration Number</div>
+                                                <div class="col-md-6" id="doctorregistration">
+                                                    {{ $doc->doctorregistration }}
+                                                </div>
+                                            </li>
+                                            <li class="text-center">
+                                                <div class="title">Signature Of Doctor</div>
+                                                <div class="col-md-6" id="doctorsign">
+                                                    <img src="{{ asset('images/' . $doc->doctorsign) }}" width="100px" class="img-fluid" alt="wkcicb">
+                                                </div>
+                                            </li>
+                                            <li class="text-center">
+                                                <div class="title">Seal Of Doctor</div>
+                                                <div class="col-md-6" id="doctorseal">
+                                                    <img src="{{ asset('images/' . $doc->doctorseal) }}" width="100px" class="img-fluid" alt="N/A">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- form footer -->
+                                    <div
+                                        class="footer d-flex justify-content-center align-items-center">
+                                        <p class="h6 text-success">
+                                        <b>Note:</b>   To verify the Medical Certification scan QR Code or email Us at
+                                            <span class="text-danger">everify@mediclear.in</span>
+                                        </p>
+                                    </div>
+                                    </form>
+                                </div>
+                                <!--**********end col************ -->
+                            </div>
+                            <!--**********end row************ -->
+                        </div>
+                        <!--**********end container************ -->
+                        </div>           
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-                <button type="button" class="btn btn-primary" onclick="docotorFinalReportPDF()">Save PDF</button>
-
+                    <button type="button" class="btn btn-primary" onclick="docotorFinalReportPDF()">Save PDF</button>
+                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
-
-    </div>
 </div>
 <script>
     // $('#corporateProfile').change(function() {
@@ -4475,10 +4471,76 @@ $bpdata['post_upper_bp']="0";
 
     function verticoPDF() {
         var prtContent = document.getElementById("verticopdfreport");
+        var hearingcanvas = document.getElementById('modalHearingChartCanvas');
+        var bpcanvas = document.getElementById('BpGraphModal');
+        var bpdataUrl = bpcanvas.toDataURL('image/png');
+        var hearingdataUrl = hearingcanvas.toDataURL('image/png');
+        var style = `<style>
+                            .flex-wrapper {
+                                display: flex;
+                                flex-flow: row nowrap;
+                            }
+                            .single-chart {
+                                width: 100%;
+                                justify-content: space-around;
+                            }
+                            .circular-chart {
+                                display: block;
+                                margin: 10px auto;
+                                max-width: 80%;
+                                max-height: 250px;
+                            }
+                            .circle-bg {
+                                fill: none;
+                                stroke: #eee;
+                                stroke-width: 3.8;
+                            }
+                            .circle {
+                                fill: none;
+                                stroke-width: 2.8;
+                                stroke-linecap: round;
+                                animation: progress 0s ease-out forwards;
+                            }
+                            @keyframes progress {
+                                0% {
+                                    stroke-dasharray: 0 100;
+                                }
+                            }
+                            .circular-chart.orange .circle {
+                                stroke: #ff9f00;
+                            }
+                            .circular-chart.green .circle {
+                                stroke: #4CC790;
+                            }
+                            .circular-chart.blue .circle {
+                                stroke: #3c9ee5;
+                            }
+                            .circular-chart.red .circle {
+                                stroke: #e5533c;
+                            }
+                            .circular-chart.pink .circle {
+                                stroke: #e53ca4;
+                            }
+                            .circular-chart.yellow .circle {
+                                stroke: #e5dd3c;
+                            }
+                            .circular-chart.skyblue .circle {
+                                stroke: #3c7ae5;
+                            }
+                            .percentage {
+                                fill: #666;
+                                font-family: sans-serif;
+                                font-size: 0.5em;
+                                text-anchor: middle;
+                            }
+                        </style>`;
+        var Total = style + prtContent.innerHTML;
+        Total += '<img src="' + bpdataUrl + '" style="width:100%;">';
+        Total += '<img src="' + hearingdataUrl + '" style="width:100%;">';
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
         var bootstrapCDN = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">';
         WinPrint.document.write(bootstrapCDN);
-        WinPrint.document.write(prtContent.innerHTML);
+        WinPrint.document.write(Total);
         WinPrint.document.close();
         setTimeout(function() {
             WinPrint.focus();
@@ -4486,8 +4548,6 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
-
-
     function docotorFinalReportPDF() {
         var prtContent = document.getElementById("doctorreportfinal");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');

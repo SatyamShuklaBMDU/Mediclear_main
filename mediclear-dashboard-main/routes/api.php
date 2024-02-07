@@ -44,7 +44,7 @@ Route::post('/corporate-company-list', [MedicaldetailsController::class, 'compan
 Route::post('/consumer-medical-data-delete', [MedicaldetailsController::class, 'deleteConsumerMedicaldata'])->middleware('auth:sanctum');
 
 ///Testing
-Route::post('/bpdata', [TestController::class, 'bp'])->middleware('auth:sanctum');
+Route::post('/bpdata', [TestController::class, 'bp']);
 Route::post('/rombergTest', [TestController::class, 'rombergTest'])->middleware('auth:sanctum');
 Route::post('/check-access-test', [TestController::class, 'checkaccesoftest'])->middleware('auth:sanctum');
 Route::post('/eyecheckup', [TestController::class, 'eyecheckup'])->middleware('auth:sanctum');

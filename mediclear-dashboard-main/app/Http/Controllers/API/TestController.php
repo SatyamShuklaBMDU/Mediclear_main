@@ -143,14 +143,13 @@ class TestController extends Controller
                     "message" => "Something went wrong!",
                 ], 500);
             }
-
         } catch (\Exception $e) {
             DB::rollBack();
-            return Response::json(
+            return response()->json(
                 array(
                     'status' => 'error',
                     'code' => 404,
-                    'message' => $e->getmessage(),
+                    'message' => $e->getMessage(),
                 ),
                 404
             );
@@ -468,11 +467,11 @@ class TestController extends Controller
         } catch (\Exception $e) {
 
             DB::rollBack();
-            return Response::json(
+            return response()->json(
                 array(
                     'status' => 'error',
                     'code' => 404,
-                    'message' => $e->getmessage(),
+                    'message' => $e->getMessage(),
                 ),
                 404
             );

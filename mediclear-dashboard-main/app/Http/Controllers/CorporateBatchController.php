@@ -26,14 +26,10 @@ class CorporateBatchController extends Controller
     public function corporatefilter(Request $request)
     {
         $validate = Validator::make($request->all(), [
-
             'fromdate' => ['required'],
             'todate' => ['required'],
         ]);
-
         if ($validate->fails()) {
-
-
             return back()->withErrors($validate)->withInput();
         }
 
@@ -47,7 +43,7 @@ class CorporateBatchController extends Controller
             'corporatebatchs.test as test',
             'company.mobile_no as mobile_no',
             'company.email as email',
-            \DB::raw("DATE_FORMAT(corporatebatchs.created_at ,'%d/%m/%Y') AS date")
+            DB::raw("DATE_FORMAT(corporatebatchs.created_at ,'%d/%m/%Y') AS date")
         )->join('company', 'corporatebatchs.company_id', '=', 'company.id')
             ->whereDate('corporatebatchs.created_at', '>=', $request->fromdate)
             ->whereDate('corporatebatchs.created_at', '<=', $request->todate)
@@ -165,7 +161,7 @@ class CorporateBatchController extends Controller
             'corporatebatchs.test as test',
             'company.mobile_no as mobile_no',
             'company.email as email',
-            \DB::raw("DATE_FORMAT(corporatebatchs.created_at ,'%d/%m/%Y') AS date")
+            DB::raw("DATE_FORMAT(corporatebatchs.created_at ,'%d/%m/%Y') AS date")
         )->join('company', 'corporatebatchs.company_id', '=', 'company.id')
             ->where('corporatebatchs.id', '=', $request->corporateBatchId)
             ->get();

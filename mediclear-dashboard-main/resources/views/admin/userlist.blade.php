@@ -35,16 +35,13 @@
 
 <script>
     function showModal(button) {
-
         var userId = button.id;
-
         $("input[type='checkbox']:checked").prop("checked", false);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $.ajax({
             type: 'post',
             url: "{{ url('edit-users') }}",
@@ -53,31 +50,20 @@
             },
             success: (data) => {
                 console.log(data);
-
-
                 $('#userName').val(data.name);
                 $('#userStatus').val(data.status);
                 $('#userRole').val(data.role);
                 $('#userId').val(data.id);
-
                 let permissionData = data.permissions;
-
                 let permissionDataLength = permissionData.length;
-
                 for (let i = 0; i < permissionDataLength; i++) {
-
-
                     if (permissionData[i] == "all") {
                         console.log(permissionData[i]);
                         $("input[type='checkbox']").prop("checked", true);
                     }
-
                     $(`#${permissionData[i]}`).prop("checked", true);
-
                 }
-
                 $('#myModal').modal('show');
-
                 $('#userUpdateButton').click(function(event) {
                     event.preventDefault();
                     var checkedValues = $("input[type='checkbox']:checked").map(function() {
@@ -95,15 +81,12 @@
                         userRole: userRole,
                         userPermission: checkedValues,
                         userId: userId,
-
                     }
-
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-
                     $.ajax({
                         type: 'post',
                         url: "{{ url('update-users') }}",
@@ -115,24 +98,15 @@
                             let thScopIdInnerHTML = $(`#${thScopId}`).html();
                             let userTotalPermission = data.updatedUserData.permissions;
                             let UserTotalPermissionLength = userTotalPermission.length;
-
                             let UserPermissionString = "";
                             for (let i = 0; i < UserTotalPermissionLength; i++) {
-
                                 UserPermissionString = userTotalPermission[i] + ',' +
                                     UserPermissionString;
-
                             }
                             console.log(UserPermissionString);
-
-
-
                             console.log($(`#${updatedUserDataId}`).html());
                             console.log(thScopIdInnerHTML);
-
                             // $(`#${updatedUserDataId}`).html()
-
-
                             let updatedHTML = ` <th scope="row" id="${thScopId}">${thScopIdInnerHTML}</th>
                                                                      <td>${data.updatedUserData.name}</td>
                                                                      <td>${data.updatedUserData.role}</td>
@@ -143,14 +117,9 @@
                                          </button></td>`;
 
                             $(`#${updatedUserDataId}`).html(updatedHTML);
-
-
-
-
                         },
                         error: function(data) {
                             console.log(data);
-
                         }
 
 
@@ -201,19 +170,12 @@
                             <div class="form-group">
 
                                 <label for="userStatus">User Status</label>
-                                <select class="form-select" aria-label="Default select example" name="status"
-                                    id="userStatus">
-
+                                <select class="form-select" aria-label="Default select example" name="status" id="userStatus">
                                     <option value="1">Active</option>
                                     <option value="0">Deactive</option>
-
                                 </select>
-
-
                             </div>
-
                             <input type="hidden" id="userId" value="">
-
                             <div class="form-group">
                                 <label for="userRole">Role</label>
                                 <input type="text" name="role" class="form-control" id="userRole"
@@ -272,8 +234,6 @@
                                         Customer Batch
                                     </label>
                                 </div>
-
-
                                 <!-- <div class="col-md-4"> -->
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="notification"
@@ -290,8 +250,6 @@
                                     </label>
                                 </div>
                             </div>
-
-
                             <div class="col-md-12 d-flex justify-content-around">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="vertigoreport"
@@ -325,22 +283,12 @@
                                     </label>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
                             <button type="submit" class="btn btn-dark btn-md" style="margin: 30px 0px 0px;"
                                 id="userUpdateButton">Update User Profile
                             </button>
                     </div>
                     </form>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -372,10 +320,8 @@
                         for ($i = 0; $i < $count; $i++) {
                             $allpermission = $userpermission[$i] . ',' . $allpermission;
                         }
-
                     @endphp
                     <td>{{ $allpermission }}</td>
-
                     <td><button type="button" class="btn btn-primary" onclick="showModal(this)"
                             id="{{ $user->id }}">
                             Edit

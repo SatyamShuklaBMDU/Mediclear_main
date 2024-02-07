@@ -17,7 +17,6 @@ class CustomerBatchController extends Controller
     public function customerBatch()
     {
         $activeCustomerId = Customer::select('user_id')->where('status', 'Active')->get();
-
         $customerBatch = CustomerBatch::with('customers')->orderBy('id', 'DESC')->get();
         return view('dashboard.customerbatch', ['activeCustomerId' => $activeCustomerId, 'customerBatch' => $customerBatch]);
     }
@@ -86,14 +85,6 @@ class CustomerBatchController extends Controller
         $updatedCustomerBatchData = CustomerBatch::where('id', $request->customerBatchId)->first();
 
         $customerProfile = Customer::where('id', $request->customerId)->first();
-
-
-
-
-
-
-
-
         if ($customerBatchDataUpdate) {
             return response()->json([
                 'updatedCustomerBatchData' => $updatedCustomerBatchData,
@@ -101,7 +92,6 @@ class CustomerBatchController extends Controller
                 'message' => 'Batch Data Update Sucessfully'
             ]);
         }
-
     }
 
 
@@ -112,72 +102,36 @@ class CustomerBatchController extends Controller
             response()->json([
                 'message' => "data deleted Successfully",
             ]);
-
         }
-
     }
-
     public function customerfilterData(Request $request)
     {
-        
          $validate = Validator::make($request->all(), [
-
             'fromdate' => ['required'],
             'todate' => ['required'],
         ]);
-
         if ($validate->fails()) {
-
-
             return back()->withErrors($validate)->withInput();
         }
         $activeCustomerId = Customer::select('user_id')->where('status', 'Active')->get();
-
         // $customerBatch = CustomerBatch::with(['customers' => function ($query) use ($request) {
         //     $query->whereDate('customerbatchs.created_at', '>=', $request->fromdate)
         //         ->whereDate('customerbatchs.created_at', '<=', $request->todate)
         //         ->orderBy('customerbatchs.created_at', 'desc');
-
-
         // },])->get();
-
-
-
         // $startDate = $request->fromdate;
-
         // $endDate = $request->todate;
         // dd($startDate, $endDate);
-
         //$customerBatch = CustomerBatch::whereBetween(DB::raw('DATE(created_at)'), [$startDate, $endDate])->get();
-
         $customerBatchFilter = CustomerBatch::select('customerbatchs.id as customerbatchs_id',
             'customers.name as customer_name', 'customers.user_id as user_id', 'customerbatchs.batch_no as customer_batch_no',
-            'customerbatchs.test as test', 'customers.mobile_no as mobile_no', 'customers.email as email', \DB::raw("DATE_FORMAT(customerbatchs.created_at ,'%d/%m/%Y') AS date"))
+            'customerbatchs.test as test', 'customers.mobile_no as mobile_no', 'customers.email as email', DB::raw("DATE_FORMAT(customerbatchs.created_at ,'%d/%m/%Y') AS date"))
             ->join('customers', 'customerbatchs.customer_id', '=', 'customers.id')
             ->whereDate('customerbatchs.created_at', '>=', $request->fromdate)
             ->whereDate('customerbatchs.created_at', '<=', $request->todate)
             ->get();
-
         $customerBatchFilterdate['fromdate'] = $request->fromdate;
         $customerBatchFilterdate['todate'] = $request->todate;
-
-
-
-
-
-
         return view('dashboard.customerbatch', ['activeCustomerId' => $activeCustomerId, 'customerBatchFilter' => $customerBatchFilter, 'customerBatchFilterdate' => $customerBatchFilterdate]);
-
-
-
-
-
-
-
-
-
-
-
     }
-
 }

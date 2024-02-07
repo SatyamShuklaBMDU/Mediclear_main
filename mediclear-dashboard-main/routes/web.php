@@ -36,30 +36,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
-
 Route::get('/user-reset-password/{token}', [PasswordResetLinkController::class, 'resetPassword'])->name('resetuserpassword');
 Route::post('/make-reset-password', [PasswordResetLinkController::class, 'resetPasswordPost'])->name('reset.password.post');
-
-
 Route::get('/dashbord', function () {
     return view('dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashbord');
-
-
 Route::get('/consumer-history', [ConsumerHistoryController::class, 'showReport']);
-
 Route::any('/consumer-history-report/{consumertype?}',[ConsumerHistoryController::class,'consumerHistoryReport'])->name('consumer-history-report');
 
-
-
 Route::middleware('auth')->group(function () {
-
-
     //company routes
     Route::middleware('permission:corporateid')->group(function () {
         Route::get('/corporateID', [CorporateController::class, 'showCorporateID']);
         Route::post('/corporateID', [CorporateController::class, 'filterCorporateID']);
-
         Route::post('/addCorporateID', [CorporateController::class, 'addCorporateID']);
         Route::get('/updateStatusCorporateID/{type}/{id}', [CorporateController::class, 'updateStatusCorporateID']);
         Route::post('/corporateID/delete', [CorporateController::class, 'deleteCorporateID']);
@@ -78,21 +67,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/updateStatusCompany/{type}/{id}', [CompanyController::class, 'updateStatusCompany']);
     });
     // end company routes
-
-
-
     // Doctor routes
     Route::middleware('permission:adddoctor')->group(function () {
         Route::get('/add-docter', [DoctorController::class, 'showDocter']);
         Route::post('/add-docter', [DoctorController::class, 'filterDocter']);
         Route::post('/adddocter', [DoctorController::class, 'addDocter']);
+        Route::post('/doctor/update', [DoctorController::class, 'updateDoctor']);
         Route::post('/doctor/delete', [DoctorController::class, 'deleteDoctor']);
         Route::get('/updateStatusDoctor/{type}/{id}', [DoctorController::class, 'updateStatusDoctor']);
     });
     // end Docter Routes
-
-
-
     //custmer routes
     Route::get('/customer-profile', [CustomerController::class, 'showCustomer']);
     Route::post('/customer-profile', [CustomerController::class, 'filterCustomer']);
@@ -126,8 +110,7 @@ Route::middleware('auth')->group(function () {
     // batch routes
     Route::middleware('permission:customerbatch')->group(function () {
         Route::get('/customer-batch', [CustomerBatchController::class, 'customerBatch']);
-          Route::post('/customer-batch-filterdata', [CustomerBatchController::class, 'customerfilterData']);
-        
+        Route::post('/customer-batch-filterdata', [CustomerBatchController::class, 'customerfilterData']);
         Route::post('/customer-data-based-id', [CustomerBatchController::class, 'customerBatchUserData']);
         Route::post('/add-customer-batch', [CustomerBatchController::class, 'customerBatchSave'])->name('addcustomerbatch');
         Route::post('/customer-batch-edit', [CustomerBatchController::class, 'customerBatchEdit'])->name('editcustomerbatch');
@@ -135,25 +118,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/customer-batch-delete', [CustomerBatchController::class, 'customerBatchDelete'])->name('deletecustomerbatch');
     });
     // end batch routes
-
-
-
-
-
     // bannner start
     Route::get('/banner', [NotificationController::class, 'showbanner']);
-Route::post('/banner/update', [NotificationController::class, 'addBanner']);
-
- Route::get('/banners/delete/{id}', [NotificationController::class, 'deleteBanner']);
-
-// banner end
-
-
-
-
-
+    Route::post('/banner/update', [NotificationController::class, 'addBanner']);
+    Route::get('/banners/delete/{id}', [NotificationController::class, 'deleteBanner']);
+    // banner end
     //corporate batch
-    
      Route::middleware('permission:corporatebatch')->group(function () {
         Route::get('/corporate-batch', [CorporateBatchController::class, 'corporateBatch']);
         Route::post('/corporate-batch-filterdata', [CorporateBatchController::class, 'corporatefilter']);
@@ -164,8 +134,7 @@ Route::post('/banner/update', [NotificationController::class, 'addBanner']);
         Route::post('/corporate-batch-update', [CorporateBatchController::class, 'corporateBatchUpdate'])->name('updatecorporatebatch');
         Route::post('/corporate-batch-delete', [CorporateBatchController::class, 'corporateBatchDelete'])->name('deletecorporatebatch');
     });
-
-//vertigo report
+    //vertigo report
     Route::middleware('permission:vertigoreport')->group(function () {
         Route::get('/customers-vertigo-report', [VertigoReportController::class, 'customersvertigoreports'])->name('customer-vertigo-report');
         Route::get('/consumer/test/{id?}', [VertigoReportController::class, 'consumertestprofile']);
@@ -180,7 +149,6 @@ Route::post('/banner/update', [NotificationController::class, 'addBanner']);
 
     // pdf 
     Route::post('/consumer-download-pdf', [VertigoReportController::class, 'pdf']);
-
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
