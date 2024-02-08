@@ -52,7 +52,6 @@
 
     <form action="{{ url('/add-docter') }}" method="POST">
         @csrf
-        <!--  3 -row start block -->
         <div class="row dashboard-header">
             <div class="col-md-12">
                 <div class="row mt-3">
@@ -61,20 +60,6 @@
                             <div class="col-sm-1">
                                 <p class="text-dark"><b><strong>Filters:</strong></b></p>
                             </div>
-                            <!-- <div class="col-sm-3 end-date">
-                           <p class="text-dark"><strong>Date From:</strong></p>
-                           <div class="input-group date d-flex" id="datepicker">
-                              <input type="text" class="form-control " id="date" placeholder="dd-mm-yyyy" />
-                              <span class="input-group-append">
-                                 <span class="input-group-text bg-light d block ">
-                                    <i class="fa fa-calendar"></i>
-                                 </span>
-
-                              </span>
-                           </div>
-                        </div> -->
-                            <!--  -->
-                            <!--  -->
                             <div class="col-sm-3 end-date">
                                 <p class="text-dark"><strong>Date From:</strong></p>
                                 <div class="input-group date d-flex" id="datepicker1">
@@ -82,10 +67,6 @@
                                         value="{{ $start ?? '' }}" placeholder="dd-mm-yyyy" />
                                 </div>
                             </div>
-
-                            <!--  -->
-                            <!--  -->
-                            <!--  -->
                             <div class="col-sm-3 end-date">
                                 <p class="text-dark"><strong>Date to:</strong></p>
                                 <div class="input-group date d-flex" id="datepicker2">
@@ -93,40 +74,6 @@
                                         value="{{ $end ?? '' }}" placeholder="dd-mm-yyyy" />
                                 </div>
                             </div>
-
-                            <!--  -->
-                            <!--  -->
-                            <!--  -->
-                            <!-- <div class="col-sm-3 end-date">
-                                    <p class="text-dark"><strong>Date From:</strong></p>
-                                    <div class="col-sm-4 ">
-                                        <input type="date" placeholder="dd-mm-yyyy!important;" class=" rounded  border-0 shadow-lg p-1 " style="background-color:#dc9727; " />
-                                    </div>
-                                </div> -->
-                            <!-- <div class="col-sm-3 end-date">
-                                    <p class="text-dark"><strong>Date to:</strong></p>
-                                    <div class="col-sm-4 ">
-                                        <input type="date" placeholder="dd-mm-yyyy!important;" class=" rounded  border-0 shadow-lg p-1 " style="background-color:#dc9727; " />
-                                    </div>
-                                </div> -->
-
-
-
-                            <!-- <div class="col-sm-3 end-date">
-                           <p><strong class="text-dark">Date to:</strong></p>
-                           <div class="input-group date d-flex" id="datepicker1">
-                              <input type="text" class="form-control" id="date" placeholder="dd-mm-yyyy" />
-                              <span class="input-group-append">
-                                 <span class="input-group-text bg-light d-block">
-                                    <i class="fa fa-calendar"></i>
-                                 </span>
-                              </span>
-                           </div>
-                        </div> -->
-                            <!--  -->
-
-
-                            <!--  -->
                             <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
                                 <button class="btn   bg-gradient-success text-white shadow-lg "
                                     type="submit">Filter</button>
@@ -267,12 +214,8 @@
 
 </div>
 <!-- /.container-fluid -->
-
 </div>
 <!-- End of Main Content -->
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -298,12 +241,7 @@
         </div>
     </div>
 </div>
-
 {{-- end model  --}}
-
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -316,7 +254,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <form action="{{ url('/doctor/update') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
@@ -362,15 +299,7 @@
         </div>
     </div>
 </div>
-
 {{-- end model  --}}
-
-
-
-
-
-
-
 <!-- Footer -->
 <footer class="medi-footer bg-gradient-success">
     <div class="container my-auto">
@@ -380,10 +309,8 @@
     </div>
 </footer>
 <!-- End of Footer -->
-
 </div>
 <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
 <script>

@@ -471,7 +471,14 @@
             line-height: 150px;
         }
     }
-
+    *{font-family: 'Poppins', sans-serif;
+         }
+         .hearing-graph {
+         border-left: 1px solid #0000004d;
+         border-bottom: 1px solid #0000004d;
+         padding: 5px 15px 0px;
+         box-shadow: 0px 7px 6px 0px #00000014;
+         }
     /*  */
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -1010,8 +1017,6 @@
                                                 value="option3"
                                                 @if (in_array(6, $fullness_or_stuffiness_in_your_ears)) checked  @disabled(true) @endif />
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -1427,11 +1432,260 @@
                     <input type="hidden" id="consumerid" value="{{ request()->get('id') }}" />
                     <p class="text-success pt-3 pb-3"><strong> Consumer Certificate Number --
                             {{ $data->certification_number }}</strong></p>
-                    {{-- @if (isset($TestData['hearingtest'])) --}}
-                    <!-- Chart Canvas -->
-                    <canvas id="hearingChartCanvas" width="1000" height="300"></canvas>
-                    {{-- @endif --}}
-                </div>
+                                <div class="row">
+                                   <div class="col-md-1">
+                                      <div class="farq-points" style="text-align: right;">
+                                         <p class="text-danger"> 
+                                            <br>250<br><br>
+                                            500<br><br>
+                                            1000<br><br>
+                                            2000<br><br>
+                                            4000<br><br>
+                                            6000<br><br>
+                                            8000<br><br>
+                                        </p>
+                                      </div>
+                                   </div>
+                                   <div class="col-md-10">
+                                      <div class="hearing-graph">
+                                         <form class="p-0">
+                                            <div class="form-group">
+                                               <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option1" value="option1">
+                                                  <label class="form-check-label" for="field1Option1">100 Fq</label>
+                                               </div>
+                                               <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="field2" id="field1Option2" value="option2">
+                                                  <label class="form-check-label" for="field1Option2">200 Fq</label>
+                                               </div>
+                                               <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option3" value="option1">
+                                                  <label class="form-check-label" for="field1Option3">300 Fq</label>
+                                               </div>
+                                               <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option4" value="option2">
+                                                  <label class="form-check-label" for="field1Option4">400 Fq</label>
+                                               </div>
+                                               <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option5" value="option1">
+                                                  <label class="form-check-label" for="field1Option5">500 Fq</label>
+                                               </div>
+                                               <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option6" value="option2">
+                                                  <label class="form-check-label" for="field1Option6">600 Fq</label>
+                                               </div>
+                                               <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option7" value="option1">
+                                                  <label class="form-check-label" for="field1Option7">700 Fq</label>
+                                               </div>
+                                               <hr>
+                                               <div class="form-group">
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option1" value="option1">
+                                                     <label class="form-check-label" for="field2Option1">100 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option2" value="option2">
+                                                     <label class="form-check-label" for="field2Option2">200 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option3" value="option1">
+                                                     <label class="form-check-label" for="field2Option3">300 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option4" value="option2">
+                                                     <label class="form-check-label" for="field2Option4">400 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option5" value="option1">
+                                                     <label class="form-check-label" for="field2Option5">500 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option6" value="option2">
+                                                     <label class="form-check-label" for="field2Option6">600 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option7" value="option1">
+                                                     <label class="form-check-label" for="field2Option7">700 Fq</label>
+                                                  </div>
+                                                  <!-- Add more options if needed -->
+                                               </div>
+                                               <hr>
+                                               <div class="form-group">
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option1" value="option1">
+                                                     <label class="form-check-label" for="field3Option1">100 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option2" value="option2">
+                                                     <label class="form-check-label" for="field3Option2">200 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option3" value="option1">
+                                                     <label class="form-check-label" for="field3Option3">300 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option4" value="option2">
+                                                     <label class="form-check-label" for="field3Option4">400 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option5" value="option1">
+                                                     <label class="form-check-label" for="field3Option5">500 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option6" value="option2">
+                                                     <label class="form-check-label" for="field3Option6">600 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option7" value="option1">
+                                                     <label class="form-check-label" for="field3Option7">700 Fq</label>
+                                                  </div>
+                                                  <!-- Add more options if needed -->
+                                               </div>
+                                               <hr>
+                                               <div class="form-group">
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option1" value="option1">
+                                                     <label class="form-check-label" for="field4Option1">100 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option2" value="option2">
+                                                     <label class="form-check-label" for="field4Option2">200 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option3" value="option1">
+                                                     <label class="form-check-label" for="field4Option3">300 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option4" value="option2">
+                                                     <label class="form-check-label" for="field4Option4">400 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option5" value="option1">
+                                                     <label class="form-check-label" for="field4Option5">500 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option6" value="option2">
+                                                     <label class="form-check-label" for="field4Option6">600 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option7" value="option1">
+                                                     <label class="form-check-label" for="field4Option7">700 Fq</label>
+                                                  </div>
+                                                  <!-- Add more options if needed -->
+                                               </div>
+                                               <hr>
+                                               <div class="form-group">
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option1" value="option1">
+                                                     <label class="form-check-label" for="field5Option1">100 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option2" value="option2">
+                                                     <label class="form-check-label" for="field5Option2">200 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option3" value="option1">
+                                                     <label class="form-check-label" for="field5Option3">300 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option4" value="option2">
+                                                     <label class="form-check-label" for="field5Option4">400 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option5" value="option1">
+                                                     <label class="form-check-label" for="field5Option5">500 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option6" value="option2">
+                                                     <label class="form-check-label" for="field5Option6">600 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option7" value="option1">
+                                                     <label class="form-check-label" for="field5Option7">700 Fq</label>
+                                                  </div>
+                                                  <!-- Add more options if needed -->
+                                               </div>
+                                               <hr>
+                                               <div class="form-group">
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option1" value="option1">
+                                                     <label class="form-check-label" for="field6Option1">100 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option2" value="option2">
+                                                     <label class="form-check-label" for="field6Option2">200 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option3" value="option1">
+                                                     <label class="form-check-label" for="field6Option3">300 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option4" value="option2">
+                                                     <label class="form-check-label" for="field6Option4">400 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option5" value="option1">
+                                                     <label class="form-check-label" for="field6Option5">500 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option6" value="option2">
+                                                     <label class="form-check-label" for="field6Option6">600 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option7" value="option1">
+                                                     <label class="form-check-label" for="field6Option7">700 Fq</label>
+                                                  </div>
+                                                  <!-- Add more options if needed -->
+                                               </div>
+                                               <hr>
+                                               <div class="form-group">
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option1" value="option1">
+                                                     <label class="form-check-label" for="field7Option1">100 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option2" value="option2">
+                                                     <label class="form-check-label" for="field7Option2">200 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option3" value="option1">
+                                                     <label class="form-check-label" for="field7Option3">300 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option4" value="option2">
+                                                     <label class="form-check-label" for="field7Option4">400 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option5" value="option1">
+                                                     <label class="form-check-label" for="field7Option5">500 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option6" value="option2">
+                                                     <label class="form-check-label" for="field7Option6">600 Fq</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option7" value="option1">
+                                                     <label class="form-check-label" for="field7Option7">700 Fq</label>
+                                                  </div>
+                                                  <!-- Add more options if needed -->
+                                               </div>
+                                               <!-- Repeat the above structure for each field -->
+                                         </form>
+                                         </div>
+                                         <!-- radio end -->
+                          
+                                      </div>
+                                      <div class="bootom points">
+                                          <p class="text-success"> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20  &nbsp; &nbsp; &nbsp;30 &nbsp; &nbsp; &nbsp;40&nbsp; 
+                                            &nbsp; &nbsp;50 &nbsp; &nbsp; &nbsp;60
+                                              &nbsp; &nbsp; &nbsp;70&nbsp; &nbsp; &nbsp;80
+                                          </span></p>
+                                         </div>
+                                   </div>
+                                   </div>
+                                </div>
                 @if (isset($TestData['hearingtest']))
                     <div class="container">
                         <div class="row">
@@ -1691,30 +1945,22 @@
                                     <label class="form-check-label" for="checkbox2">Unfit</label>
                                 </div>
                             </div>
-
-
                             <div class="form-group" id="bppv_test_remark_result" style="display:none">
                                 <label for="exampleFormControlTextarea1">Unfit Remark</label>
                                 <textarea class="form-control" id="bppvunfitRemark" rows="3"></textarea>
                             </div>
-
-
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <button class="btn btn-primary" id="bppv" onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
                             <button class="btn btn-danger" id="bppv_test_again">Please test again</button>
                             &nbsp;&nbsp;
-
-
                         </div>
                     </div>
                 @endif
-
             </div>
         </div>
     </div>
-
 </div>
 {{-- -----------------------------Fukuda-Unterberger Test--------------------------------------- --}}
 @php
@@ -3981,26 +4227,44 @@ $bpdata['post_upper_bp']="0";
 
     })
 </script>
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         var ctx = document.getElementById('hearingChartCanvas').getContext('2d');
         var labels = ['125', '250', '500', '1000', '2000', '3000', '4000', '6000', '8000', '10000'];
         var hrdata = @json($hrdata);
+
+        // Merge problem and fixed data for the left ear
+        var leftEarProblem = hrdata['left_ear_problem'].split(',').map(Number);
+        var leftEarFixed = hrdata['left_ear_fixed'].split(',').map(Number);
+        var leftEarData = leftEarProblem.map(function (value, index) {
+            return {x: labels[index], y: value};
+        }).concat(leftEarFixed.map(function (value, index) {
+            return {x: labels[index], y: value};
+        }));
+
+        // Merge problem and fixed data for the right ear
+        var rightEarProblem = hrdata['right_ear_problem'].split(',').map(Number);
+        var rightEarFixed = hrdata['right_ear_fixed'].split(',').map(Number);
+        var rightEarData = rightEarProblem.map(function (value, index) {
+            return {x: labels[index], y: value};
+        }).concat(rightEarFixed.map(function (value, index) {
+            return {x: labels[index], y: value};
+        }));
 
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Right Ear',
-                    data: hrdata['right_ear_problem'].split(',').map(Number),
-                    borderColor: 'red',
+                    label: 'Left Ear',
+                    data: leftEarData,
+                    borderColor: 'blue',
                     backgroundColor: 'transparent',
                     pointRadius: 3
                 }, {
-                    label: 'Left Ear',
-                    data: hrdata['left_ear_problem'].split(',').map(Number),
-                    borderColor: 'blue',
+                    label: 'Right Ear',
+                    data: rightEarData,
+                    borderColor: 'red',
                     backgroundColor: 'transparent',
                     pointRadius: 3
                 }]
@@ -4008,14 +4272,17 @@ $bpdata['post_upper_bp']="0";
             options: {
                 scales: {
                     yAxes: [{
-                        id: 'YLeft',
-                        position: 'left',
+                        ticks: {
+                            beginAtZero: true
+                        }
                     }]
                 }
             }
         });
     });
-</script>
+</script> --}}
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var ctx = document.getElementById('modalHearingChartCanvas').getContext('2d');

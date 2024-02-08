@@ -25,7 +25,6 @@
         display: none;
     }
 </style>
-
     <!-- Main content starts -->
     <div class="container-fluid">
         <div class="row">
@@ -44,7 +43,7 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="for" id="inlineRadio2" value="corporate">
-                        <label class="form-check-label" for="inlineRadio2">For Corporate</label>
+                        <label class="form-check-label" for="inlineRadio2">For Employee</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="for" id="inlineRadio3" value="customer">
@@ -54,12 +53,9 @@
                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
                         <label class="form-check-label" for="inlineRadio4">For Customer</label>
                     </div> -->
-
                     <div class="form-group">
-
                         <label for="exampleInputEmail1">Subject</label>
                         <input type="text" class="form-control" id="exampleInputsubject" name="subject" aria-describedby="textHelp" placeholder="Subject">
-
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Notification Message</label>
@@ -68,46 +64,68 @@
 
                     <button type="submit" class="btn btn-primary btn-md">Submit</button>
                 </form>
-
                 <h3> History</h3>
                 <!--end form-->
                 <!--start Table-->
                 <table class="table table-striped table-hover table-hover border shadow border-light mt-4">
                     <thead>
                         <tr>
-                            <th colspan="1">Sr.No.</th>
-                            <th scope="col">Subject</th>
-                            <th colspan="2">Messages</th>
-                            <th colspan="1">Action</th>
+                            <th >Sr.No.</th>
+                            <th >For</th>
+                            <th >Subject</th>
+                            <th >Messages</th>
+                            {{-- <th >Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $i=1;
+                        @endphp
+                        @foreach ( $notification as $notify )
                         <tr>
-                            <th colspan="1">1</th>
-                            <td>Mark</td>
-                            <td colspan="2">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to commonly used.</td>
-                            <td class="text-center"><i class="fa-solid fa-trash text-danger"></i></td>
+                            <td >{{$i}}</td>
+                            <td>{{$notify->for}}</td>
+                            <td >{{$notify->subject}}</td>
+                            <td >{{$notify->message}}</td>
+                            {{-- <td class="text-center"><i class="fa-solid fa-trash text-danger"  onclick="{document.getElementById('id1').value={{ $notify->id }}}" data-toggle="modal" data-target="#exampleModal"></i></td> --}}
                         </tr>
-                        <tr>
-                            <th colspan="1">2</th>
-                            <td>Jacob</td>
-                            <td colspan="2">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to commonly used .</td>
-                            <td class="text-center"><i class="fa-solid fa-trash text-danger"></i></td>
-                        </tr>
-                        <tr>
-                            <th colspan="1">3</th>
-                            <td>Larry the Bird</td>
-                            <td colspan="2">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to commonly used for.</td>
-                            <td class="text-center"><i class="fa-solid fa-trash text-danger"></i></td>
-                        </tr>
+                        @php
+                        $i++;
+                        @endphp
+                        @endforeach
                     </tbody>
                 </table>
                 <!--end table-->
             </div>
-
-
         </div>
         <!-- 4-blocks row end -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure want to delete?
+                <form action="{{ url('/notification/delete') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" id="id1">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- end model  --}}
 
 
 

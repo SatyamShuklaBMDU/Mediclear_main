@@ -39,35 +39,26 @@ class NotificationController extends Controller
         'subject'=>$request->subject,
         'message'=>$request->message,
     ]);
-
-
         if($request->for=="all"){
             $title = $request->subject;
             $body   =$request->message;
-
             // $deposit = [
             //     // 'user_id' =>Auth::user()->id,
             // ];
             // User::all()->notify(new MyNotification($title,$body));
             $users = Customer::all();
             foreach ($users as $user) {
-
                 Notification::send($user, new MyNotification($title,$body));
               }
-
               $user = CorporateID::all();
             foreach ($user as $use) {
-
                 Notification::send($use, new MyNotification($title,$body));
               }
-
             return redirect()->back()->with('message','notification was successful!');
-
         }else if($request->for=='customer'){
             $title = $request->subject;
             $body   =$request->message;
                 $users=Customer::all();
-
             foreach ($users as $user) {
             Notification::send($user, new MyNotification($title,$body));
               }

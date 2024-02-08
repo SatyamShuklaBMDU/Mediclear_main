@@ -5,15 +5,12 @@
         padding: 40px;
         margin: 40px 0px 40px 0px;
     }
-
     .content-wrapper {
         margin-left: 210px;
     }
-
     .sidebar-right-trigger {
         display: none;
     }
-
     /* .form-check-label {
         margin-bottom: 0;
         width: 30rem;
@@ -21,7 +18,6 @@
     .Modules {
         flex-wrap: wrap;
     }
-
     .field-icon {
         float: right;
         margin-left: -25px;
@@ -30,9 +26,6 @@
         z-index: 2;
     }
 </style>
-
-
-
 <script>
     function showModal(button) {
         var userId = button.id;
@@ -93,6 +86,7 @@
                         data: formData,
                         success: (data) => {
                             console.log(data.updatedUserData);
+                            $('#myModal').modal('hide');
                             let updatedUserDataId = `tr${data.updatedUserData.id}`;
                             let thScopId = `row${data.updatedUserData.id}`;
                             let thScopIdInnerHTML = $(`#${thScopId}`).html();
@@ -100,8 +94,7 @@
                             let UserTotalPermissionLength = userTotalPermission.length;
                             let UserPermissionString = "";
                             for (let i = 0; i < UserTotalPermissionLength; i++) {
-                                UserPermissionString = userTotalPermission[i] + ',' +
-                                    UserPermissionString;
+                                UserPermissionString = userTotalPermission[i] + ',' +UserPermissionString;
                             }
                             console.log(UserPermissionString);
                             console.log($(`#${updatedUserDataId}`).html());
@@ -110,37 +103,24 @@
                             let updatedHTML = ` <th scope="row" id="${thScopId}">${thScopIdInnerHTML}</th>
                                                                      <td>${data.updatedUserData.name}</td>
                                                                      <td>${data.updatedUserData.role}</td>
-
                                                                      <td>${UserPermissionString}</td>
                                         <td><button type="button" class="btn btn-primary" onclick="showModal(this)" id="${data.updatedUserData.id}" fdprocessedid="cjf9v">
                                                        Edit
                                          </button></td>`;
-
                             $(`#${updatedUserDataId}`).html(updatedHTML);
                         },
                         error: function(data) {
                             console.log(data);
                         }
-
-
-
-
-
                     });
-
                 });
-
-
             },
             error: function(data) {
                 console.log(data);
             }
-
         });
-
     };
 </script>
-
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -150,23 +130,18 @@
                         <h4 class="mt-4">Edit User Profile</h4>
                     </div>
                 </div>
-
                 <!-- Modal Header -->
                 <div class="row dashboard-header" style="background: #e5e5e5;">
                     <div class="col-md-11  mx-auto">
                         <form class="notification-form shadow rounded" action="" method="post" id="userFormData">
                             <div class="form-group">
-
                                 <label for="exampleInputEmail1">User Name</label>
                                 <input type="text" name="name" value="{{ old('name') }}" class="form-control"
                                     id="userName" aria-describedby="textHelp" placeholder="please enter your name">
-
                                 @if ($errors->has('name'))
                                     <span class="help-block">{{ $errors->first('name') }}</span>
                                 @endif
-
                             </div>
-
                             <div class="form-group">
 
                                 <label for="userStatus">User Status</label>
@@ -186,7 +161,6 @@
                             </div>
                             <h6>Assign Modules</h6>
                             <div class="col-md-12  Modules d-flex justify-content-around">
-
                                 <div class="form-check" style="">
                                     <input class="form-check-input" type="checkbox" value="alluser" id="alluser"
                                         name="permission[]" checked>
@@ -208,9 +182,7 @@
                                         ADD Company
                                     </label>
                                 </div>
-
                                 <!-- <div class="col-md-4"> -->
-
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="corporateid" id="corporateid"
                                         name="permission[]">

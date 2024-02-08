@@ -67,11 +67,11 @@ class TestController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return Response::json(
+            return response()->json(
                 array(
                     'status' => 'error',
                     'code' => 404,
-                    'message' => $e->getmessage(),
+                    'message' => $e->getMessage(),
                 ),
                 404
             );
@@ -82,11 +82,9 @@ class TestController extends Controller
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
-                'left_ear_problem' => 'required',
                 'left_ear_fixed' => 'required',
                 'medical_details_id' => 'required',
                 'test_type_id' => 'required',
-                'right_ear_problem' => 'required',
                 'right_ear_fixed' => 'required',
             ]);
             if ($validator->fails()) {
@@ -114,7 +112,7 @@ class TestController extends Controller
             $test = Test::updateOrCreate(
                 ['features' => 'hearingtest', 'medical_details_id' => $request->medical_details_id, 'test_type_id' => $request->test_type_id],
                 [
-                    'data' => json_encode(['left_ear_problem' => $request->left_ear_problem, 'right_ear_problem' => $request->right_ear_problem, 'left_ear_fixed' => $request->left_ear_fixed, 'right_ear_fixed' => $request->right_ear_fixed]),
+                    'data' => json_encode(['right_ear_problem' => $request->right_ear_problem, 'left_ear_fixed' => $request->left_ear_fixed]),
                     'test_status' => $test_status,
                 ]
             );

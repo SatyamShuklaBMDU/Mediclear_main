@@ -55,8 +55,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/corporateID/update', [CorporateController::class, 'updateCorporateID']);
     });
     //end company routes
-
-
     // company routes
     Route::middleware('permission:addcompany')->group(function () {
         Route::get('/add-company', [CompanyController::class, 'showCompany']);
@@ -92,21 +90,16 @@ Route::middleware('auth')->group(function () {
     // complaint routes
     Route::middleware('permission:complaints')->group(function () {
         Route::get('/complaint', [ComplaintController::class, 'showComplaint']);
+        Route::post('/add-complaint', [ComplaintController::class, 'filterComplaint']);
         Route::post('/complaint/delete', [ComplaintController::class, 'deleteComplaint']);
     });
     // end complaint routes
-
-
-
     // Notifications
     Route::middleware('permission:notification')->group(function () {
         Route::get('/customer-notification', [NotificationController::class, 'customerNotification']);
         Route::post('/sendNotification', [NotificationController::class, 'sendNotification']);
     });
     //end Notification
-
-
-
     // batch routes
     Route::middleware('permission:customerbatch')->group(function () {
         Route::get('/customer-batch', [CustomerBatchController::class, 'customerBatch']);
