@@ -303,8 +303,7 @@ class VertigoReportController extends Controller
         }
         $doctordata = Doctor::select('registration_number', 'name', 'id')->where('status', 'Active')->get();
         $AssignDoctor = MedicalDetail::select('doctors.sign as doctorsign', 'doctors.seal_of_doctor as doctorseal', 'doctors.registration_number as doctorregistration','doctor_final_result')->where('medical_details.id', $consumer_id)->join('doctors', 'medical_details.doctorid', '=', 'doctors.id')->get();
-        $CountRisultGivenByDoctor=Test::where('medical_details_id',$consumer_id)->where('test_type_id', '1')->where('test_status', '1')
-        ->where('test_results','!=',null)->count(); 
+        $CountRisultGivenByDoctor=Test::where('medical_details_id',$consumer_id)->where('test_type_id', '1')->where('test_status', '1')->where('test_results','!=',null)->count(); 
         return view('dashboard.vertigo.consumer-test-profile', ['examnationDetailsBeforeMedicalTest' => $examnationDetailsBeforeMedicalTest, 'TestData' => $TestData, 'Testresult' => $Testresult, 'doctordata' => $doctordata, 'AssignDoctor' => $AssignDoctor,'CountRisultGivenByDoctor'=> $CountRisultGivenByDoctor,'corporateCompanyBatchName'=>$corporateCompanyBatchName,'testremarks'=>$testremark]);
     }
     public function consumertestresult(Request $request)

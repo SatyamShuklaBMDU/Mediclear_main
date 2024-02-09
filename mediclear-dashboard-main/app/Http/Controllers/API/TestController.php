@@ -93,7 +93,7 @@ class TestController extends Controller
                     "message" => $validator->errors(),
                 ], 401);
             }
-            if (isset($request->left_ear_problem) && isset($request->left_ear_fixed) && isset($request->right_ear_problem) && isset($request->right_ear_fixed)) {
+            if (isset($request->left_ear_fixed) && isset($request->right_ear_fixed)) {
                 $test_status = '1';
             } else {
                 $test_status = '0';
@@ -112,7 +112,7 @@ class TestController extends Controller
             $test = Test::updateOrCreate(
                 ['features' => 'hearingtest', 'medical_details_id' => $request->medical_details_id, 'test_type_id' => $request->test_type_id],
                 [
-                    'data' => json_encode(['right_ear_problem' => $request->right_ear_problem, 'left_ear_fixed' => $request->left_ear_fixed]),
+                    'data' => json_encode(['right_ear_fixed' => $request->right_ear_fixed, 'left_ear_fixed' => $request->left_ear_fixed]),
                     'test_status' => $test_status,
                 ]
             );

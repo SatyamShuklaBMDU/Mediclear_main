@@ -1432,240 +1432,240 @@
                     <input type="hidden" id="consumerid" value="{{ request()->get('id') }}" />
                     <p class="text-success pt-3 pb-3"><strong> Consumer Certificate Number --
                             {{ $data->certification_number }}</strong></p>
-                                <div class="row">
-                                   <div class="col-md-1">
-                                      <div class="farq-points" style="text-align: right;">
+                                <div class="row" id="radiobuttongraph">
+                                   <div class="col-sm-1">
+                                      <div class="farq-points" style="text-align: right;float:left;">
                                          <p class="text-danger"> 
-                                            <br>250<br><br>
-                                            500<br><br>
-                                            1000<br><br>
-                                            2000<br><br>
-                                            4000<br><br>
-                                            6000<br><br>
-                                            8000<br><br>
+                                            <div class="my-2">250</div>
+                                            <div class="my-4 p-1">500</div>
+                                            <div class="my-4 p-2">1000</div>
+                                            <div class="my-3 p-1">2000</div>
+                                            <div class="my-4 p-2">4000</div>
+                                            <div class="my-3 p-2">6000</div>
+                                            <div class="my-4 p-1">8000</div>
                                         </p>
                                       </div>
                                    </div>
-                                   <div class="col-md-10">
+                                   <div class="col-sm-11">
                                       <div class="hearing-graph">
                                          <form class="p-0">
                                             <div class="form-group">
-                                               <div class="form-check form-check-inline">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option1" value="option1">
+                                               <div class="form-check form-check-inline mx-4">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option1" value="1">
                                                   <label class="form-check-label" for="field1Option1">100 Fq</label>
                                                </div>
-                                               <div class="form-check form-check-inline">
-                                                  <input class="form-check-input" type="radio" name="field2" id="field1Option2" value="option2">
+                                               <div class="form-check form-check-inline mx-4">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option2" value="8">
                                                   <label class="form-check-label" for="field1Option2">200 Fq</label>
                                                </div>
-                                               <div class="form-check form-check-inline">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option3" value="option1">
+                                               <div class="form-check form-check-inline mx-4">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option3" value="15">
                                                   <label class="form-check-label" for="field1Option3">300 Fq</label>
                                                </div>
-                                               <div class="form-check form-check-inline">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option4" value="option2">
+                                               <div class="form-check form-check-inline mx-4">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option4" value="22">
                                                   <label class="form-check-label" for="field1Option4">400 Fq</label>
                                                </div>
-                                               <div class="form-check form-check-inline">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option5" value="option1">
+                                               <div class="form-check form-check-inline mx-4">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option5" value="29">
                                                   <label class="form-check-label" for="field1Option5">500 Fq</label>
                                                </div>
-                                               <div class="form-check form-check-inline">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option6" value="option2">
+                                               <div class="form-check form-check-inline mx-4">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option6" value="36">
                                                   <label class="form-check-label" for="field1Option6">600 Fq</label>
                                                </div>
-                                               <div class="form-check form-check-inline">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option7" value="option1">
+                                               <div class="form-check form-check-inline mx-4">
+                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option7" value="43">
                                                   <label class="form-check-label" for="field1Option7">700 Fq</label>
                                                </div>
                                                <hr>
                                                <div class="form-group">
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option1" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option1" value="2">
                                                      <label class="form-check-label" for="field2Option1">100 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option2" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option2" value="9">
                                                      <label class="form-check-label" for="field2Option2">200 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option3" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option3" value="16">
                                                      <label class="form-check-label" for="field2Option3">300 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option4" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option4" value="23">
                                                      <label class="form-check-label" for="field2Option4">400 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option5" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option5" value="30">
                                                      <label class="form-check-label" for="field2Option5">500 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option6" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option6" value="37">
                                                      <label class="form-check-label" for="field2Option6">600 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option7" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option7" value="44">
                                                      <label class="form-check-label" for="field2Option7">700 Fq</label>
                                                   </div>
                                                   <!-- Add more options if needed -->
                                                </div>
                                                <hr>
                                                <div class="form-group">
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option1" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option1" value="3">
                                                      <label class="form-check-label" for="field3Option1">100 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option2" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option2" value="10">
                                                      <label class="form-check-label" for="field3Option2">200 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option3" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option3" value="17">
                                                      <label class="form-check-label" for="field3Option3">300 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option4" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option4" value="24">
                                                      <label class="form-check-label" for="field3Option4">400 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option5" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option5" value="31">
                                                      <label class="form-check-label" for="field3Option5">500 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option6" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option6" value="38">
                                                      <label class="form-check-label" for="field3Option6">600 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option7" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option7" value="45">
                                                      <label class="form-check-label" for="field3Option7">700 Fq</label>
                                                   </div>
                                                   <!-- Add more options if needed -->
                                                </div>
                                                <hr>
                                                <div class="form-group">
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option1" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option1" value="4">
                                                      <label class="form-check-label" for="field4Option1">100 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option2" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option2" value="11">
                                                      <label class="form-check-label" for="field4Option2">200 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option3" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option3" value="18">
                                                      <label class="form-check-label" for="field4Option3">300 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option4" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option4" value="25">
                                                      <label class="form-check-label" for="field4Option4">400 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option5" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option5" value="32">
                                                      <label class="form-check-label" for="field4Option5">500 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option6" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option6" value="39">
                                                      <label class="form-check-label" for="field4Option6">600 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field4Option7" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option7" value="46">
                                                      <label class="form-check-label" for="field4Option7">700 Fq</label>
                                                   </div>
                                                   <!-- Add more options if needed -->
                                                </div>
                                                <hr>
                                                <div class="form-group">
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option1" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option1" value="5">
                                                      <label class="form-check-label" for="field5Option1">100 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option2" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option2" value="12">
                                                      <label class="form-check-label" for="field5Option2">200 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option3" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option3" value="19">
                                                      <label class="form-check-label" for="field5Option3">300 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option4" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option4" value="26">
                                                      <label class="form-check-label" for="field5Option4">400 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option5" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option5" value="33">
                                                      <label class="form-check-label" for="field5Option5">500 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option6" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option6" value="40">
                                                      <label class="form-check-label" for="field5Option6">600 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field5Option7" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option7" value="47">
                                                      <label class="form-check-label" for="field5Option7">700 Fq</label>
                                                   </div>
                                                   <!-- Add more options if needed -->
                                                </div>
                                                <hr>
                                                <div class="form-group">
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option1" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option1" value="6">
                                                      <label class="form-check-label" for="field6Option1">100 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option2" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option2" value="13">
                                                      <label class="form-check-label" for="field6Option2">200 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option3" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option3" value="20">
                                                      <label class="form-check-label" for="field6Option3">300 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option4" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option4" value="27">
                                                      <label class="form-check-label" for="field6Option4">400 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option5" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option5" value="34">
                                                      <label class="form-check-label" for="field6Option5">500 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option6" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option6" value="41">
                                                      <label class="form-check-label" for="field6Option6">600 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field6Option7" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option7" value="48">
                                                      <label class="form-check-label" for="field6Option7">700 Fq</label>
                                                   </div>
                                                   <!-- Add more options if needed -->
                                                </div>
                                                <hr>
                                                <div class="form-group">
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option1" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option1" value="7">
                                                      <label class="form-check-label" for="field7Option1">100 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option2" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option2" value="14">
                                                      <label class="form-check-label" for="field7Option2">200 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option3" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option3" value="21">
                                                      <label class="form-check-label" for="field7Option3">300 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option4" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option4" value="28">
                                                      <label class="form-check-label" for="field7Option4">400 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option5" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option5" value="35">
                                                      <label class="form-check-label" for="field7Option5">500 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option6" value="option2">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option6" value="42">
                                                      <label class="form-check-label" for="field7Option6">600 Fq</label>
                                                   </div>
-                                                  <div class="form-check form-check-inline">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field7Option7" value="option1">
+                                                  <div class="form-check form-check-inline mx-4">
+                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option7" value="49">
                                                      <label class="form-check-label" for="field7Option7">700 Fq</label>
                                                   </div>
                                                   <!-- Add more options if needed -->
@@ -1674,13 +1674,12 @@
                                          </form>
                                          </div>
                                          <!-- radio end -->
-                          
                                       </div>
                                       <div class="bootom points">
-                                          <p class="text-success"> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20  &nbsp; &nbsp; &nbsp;30 &nbsp; &nbsp; &nbsp;40&nbsp; 
-                                            &nbsp; &nbsp;50 &nbsp; &nbsp; &nbsp;60
-                                              &nbsp; &nbsp; &nbsp;70&nbsp; &nbsp; &nbsp;80
+                                          <p class="text-success"> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;70
                                           </span></p>
                                          </div>
                                    </div>
@@ -2852,7 +2851,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalVertigo" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalVertigo" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 1000px;" role="document">
+    <div class="modal-dialog" style="max-width: 1400px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -2860,7 +2859,6 @@
                 </button>
             </div>
             <div class="modal-body" id="verticopdfreport">
-                <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-holder shadow-lg my-5 p-3 fist-step">
@@ -2967,16 +2965,15 @@
                                             {{$testremarks['bp']}}
                                         @endif
                                     </p></h6></div>
+                                </div>
                                     <div class="second-step">
                                         {{-- 2nd step start here --}}
                                         <h2 class="text-success text-center">Step 2 :Hearing Checkup</h2>
                                         <p class="text-success ">For the Hearing
-                                            Checkup.............................................................................................................................................................................................
+                                            Checkup....................................................................................................................................................
                                         </p>
-                                        <div class="col-md-12 p-3 shadow-lg bg-light">
-                                            <div class="hearing-graph">
-                                                <canvas id="modalHearingChartCanvas" width="1000"
-                                                    height="300"></canvas>
+                                        <div class="col-md-12 shadow-lg bg-light">
+                                            <div id="hearingdata">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -3333,11 +3330,9 @@
                                 <!--**********end col************ -->
                             </div>
                             <!--**********end row************ -->
-                        </div>
                         <!--**********end container************ -->
                     </div>
                 </div>
-            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" onclick="verticoPDF()" class="btn btn-primary">Save PDF</button>
@@ -3511,7 +3506,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
                     <button type="button" class="btn btn-primary" onclick="docotorFinalReportPDF()">Save PDF</button>
                 </div>
                 @endforeach
@@ -3885,18 +3879,6 @@ $bpdata['post_upper_bp']="0";
         }
     @endphp
 @endif
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
-<script>
-    function downloadPDF() {
-        const pdf = new jsPDF();
-        const modalContent = document.getElementById('verticopdfreport').innerHTML;
-        pdf.html(modalContent, {
-            callback: function () {
-                pdf.save('modal_content.pdf');
-            }
-        });
-    }
-</script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -3940,6 +3922,7 @@ $bpdata['post_upper_bp']="0";
         @elseif($flatfootfitChecked)
             $('#flatfit').prop('checked', true);
         @endif
+        $('#radiobuttongraph').clone().appendTo('#hearingdata');
     });
 </script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -4227,134 +4210,36 @@ $bpdata['post_upper_bp']="0";
 
     })
 </script>
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var ctx = document.getElementById('hearingChartCanvas').getContext('2d');
-        var labels = ['125', '250', '500', '1000', '2000', '3000', '4000', '6000', '8000', '10000'];
-        var hrdata = @json($hrdata);
-
-        // Merge problem and fixed data for the left ear
-        var leftEarProblem = hrdata['left_ear_problem'].split(',').map(Number);
-        var leftEarFixed = hrdata['left_ear_fixed'].split(',').map(Number);
-        var leftEarData = leftEarProblem.map(function (value, index) {
-            return {x: labels[index], y: value};
-        }).concat(leftEarFixed.map(function (value, index) {
-            return {x: labels[index], y: value};
-        }));
-
-        // Merge problem and fixed data for the right ear
-        var rightEarProblem = hrdata['right_ear_problem'].split(',').map(Number);
-        var rightEarFixed = hrdata['right_ear_fixed'].split(',').map(Number);
-        var rightEarData = rightEarProblem.map(function (value, index) {
-            return {x: labels[index], y: value};
-        }).concat(rightEarFixed.map(function (value, index) {
-            return {x: labels[index], y: value};
-        }));
-
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Left Ear',
-                    data: leftEarData,
-                    borderColor: 'blue',
-                    backgroundColor: 'transparent',
-                    pointRadius: 3
-                }, {
-                    label: 'Right Ear',
-                    data: rightEarData,
-                    borderColor: 'red',
-                    backgroundColor: 'transparent',
-                    pointRadius: 3
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    });
-</script> --}}
-
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var ctx = document.getElementById('modalHearingChartCanvas').getContext('2d');
-        var labels = ['125', '250', '500', '1000', '2000', '3000', '4000', '6000', '8000', '10000'];
-        var hrdata = @json($hrdata);
-
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Right Ear',
-                    data: hrdata['right_ear_problem'].split(',').map(Number),
-                    borderColor: 'red',
-                    backgroundColor: 'transparent',
-                    pointRadius: 3
-                }, {
-                    label: 'Left Ear',
-                    data: hrdata['left_ear_problem'].split(',').map(Number),
-                    borderColor: 'blue',
-                    backgroundColor: 'transparent',
-                    pointRadius: 3
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        id: 'YLeft',
-                        position: 'left',
-                    }]
-                }
-            }
-        });
+    var leftEarValues = "{{ $hrdata['left_ear_fixed'] }}".split(',');
+    var rightEarValues = "{{ $hrdata['right_ear_fixed'] }}".split(',');
+    var radioButtons = document.querySelectorAll('#HearingContainer input[type="radio"]');
+    radioButtons.forEach(function(radioButton) {
+        radioButton.disabled = true;
+        radioButton.style.backgroundColor = 'white'; 
+        radioButton.style.backgroundImage = 'none';
     });
-    // var originalChart = document.getElementById('eyeblindness');
-    // var clonedChart = originalChart.cloneNode(true);
-    // var distanceChart = document.getElementById('eyedistance');
-    // var cloneddistanceChart = originalChart.cloneNode(true);
-    // var modalContent = document.querySelector('.eye-percentage');
-    // var modaldistanceContent = document.querySelector('.eye-distance-percentage');
-    // modalContent.appendChild(clonedChart);
-    // modaldistanceContent.appendChild(cloneddistanceChart);
+    leftEarValues.forEach(function(value) {
+        var radioBtn = document.querySelector('input[type="radio"][value="' + value + '"]');
+        if (radioBtn) {
+            radioBtn.checked = true;
+            radioBtn.disabled = false;
+            radioBtn.style.backgroundColor = 'blue';
+        }
+    });
+    rightEarValues.forEach(function(value) {
+        var radioBtn = document.querySelector('input[type="radio"][value="' + value + '"]');
+        if (radioBtn) {
+            radioBtn.checked = true;
+            radioBtn.disabled = false;
+            radioBtn.style.backgroundColor = 'red';
+        }
+    });
 </script>
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('js/html2canvasmin.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-{{-- <script>
-    $(document).ready(function () {
-    $('#pdfdownload').click(function () { 
-        var modalContent = document.getElementById('vertigopdfreport');
-        var content = modalContent.innerHTML;
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type: 'post',
-                    url: "{{ url('consumer-download-pdf') }}",
-                    data: {
-                        modalContent: content,
-                    },success: function(response) {
-                        console.log('PDF downloaded successfully');
-                    },
-                error: function(xhr, status, error) {
-                    console.error('Error downloading PDF:', error);
-                }
-            });
-    });
-});
-</script> --}}
 <script>
     function saveResult(button) {
         var id = button.id;
@@ -4407,7 +4292,6 @@ $bpdata['post_upper_bp']="0";
             }
         })
     }
-
     function signatureOFDoctor(button) {
         var id = button.id;
         var button = `${id}button`;
@@ -4482,7 +4366,6 @@ $bpdata['post_upper_bp']="0";
             }
         })
     }
-
     function generateHearingtestPDF() {
         var certificationnumber = document.getElementById('certificationnumber').value;
         var unfitCheckbox = document.getElementById('hearingtestcheckboxunfit');
@@ -4490,23 +4373,31 @@ $bpdata['post_upper_bp']="0";
         var fitCheckbox = document.getElementById('hearingtestcheckboxfit');
         var isFitChecked = fitCheckbox.checked;
         var isUnfitChecked = unfitCheckbox.checked;
-        var canvas = document.getElementById('hearingChartCanvas');
-        var dataUrl = canvas.toDataURL('image/png');
-        var printContent =
-            '<style>.checked {color: blue;} .unchecked {display: none;} .container {display: flex; flex-direction: column;}</style>';
+        var printContent = '<style>.checked-blue {color: blue;} .checked-red {color: red;} .unchecked {display: none;} .container {display: flex; flex-direction: column;}</style>';
         printContent += '<h1>' + certificationnumber + '</h1>';
         printContent += '<div class="container">';
-        printContent += '<img src="' + dataUrl + '" style="width:100%;">';
+        var radioButtons = document.querySelectorAll('#radiobuttongraph input[type="radio"]');
+        radioButtons.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                var colorClass = radioButton.classList.contains('blue-radio') ? 'checked-blue' : 'checked-red';
+                var colorClass = radioButton.style.backgroundColor === 'blue' ? 'checked-blue' : 'checked-red';
+                printContent += '<div class="form-check form-check-inline mx-4">';
+                printContent += '<input class="form-check-input" type="radio" name="' + radioButton.name + '" id="' + radioButton.id + '" value="' + radioButton.value + '" checked>';
+                printContent += '<label class="form-check-label ' + colorClass + '" for="' + radioButton.id + '">' + getLabelText(radioButton.id) + '</label>';
+                printContent += '</div>';
+            }
+        });
         if (isFitChecked) {
-            printContent += '<p><strong>Fit:</strong> <span class="checked">☑</span></p>';
+        printContent += '<p><strong>Fit:</strong> <span class="checked-blue">☑</span></p>';
         } else {
-            printContent += '<p><strong>Fit:</strong> <span class="unchecked">☑</span></p>';
+        printContent += '<p><strong>Fit:</strong> <span class="unchecked">☐</span></p>';
         }
+
         if (isUnfitChecked) {
-            printContent += '<p><strong>Unfit:</strong> <span class="checked">☑</span></p>';
-            printContent += '<p><strong>Unfit Remark:</strong> ' + unfitRemark + '</p>';
+        printContent += '<p><strong>Unfit:</strong> <span class="checked-red">☑</span></p>';
+        printContent += '<p><strong>Unfit Remark:</strong> ' + unfitRemark + '</p>';
         } else {
-            printContent += '<p><strong>Unfit:</strong> <span class="unchecked">☑</span></p>';
+        printContent += '<p><strong>Unfit:</strong> <span class="unchecked">☐</span></p>';
         }
         printContent += '</div>';
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
@@ -4520,7 +4411,10 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
-
+    function getLabelText(radioButtonId) {
+        var label = document.querySelector('label[for="' + radioButtonId + '"]');
+        return label ? label.innerText : '';
+    }
     function generatePDF() {
         var canvas = document.getElementById('bpCanvasChart');
         var dataUrl = canvas.toDataURL('image/png');
@@ -4560,7 +4454,6 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
-
     function eyegeneratePDF() {
         var body = document.getElementById('page-top').innerHTML;
         var eyegraph = document.getElementById('eyegraph').innerHTML;
@@ -4639,7 +4532,6 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
-
     function eyedistancepdf() {
         var body = document.getElementById('page-top').innerHTML;
         var eyedistancegraph = document.getElementById('eyedistancegraph').innerHTML;
@@ -4733,9 +4625,6 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
-    /////////////////////////////////////////////
-    /////////////////vertigo report//////////////////////////////////////////////
-
     function verticoPDF() {
         var prtContent = document.getElementById("verticopdfreport");
         var hearingcanvas = document.getElementById('modalHearingChartCanvas');
@@ -4829,7 +4718,6 @@ $bpdata['post_upper_bp']="0";
             WinPrint.close();
         }, 1000);
     }
-
     function consumerfinalPDf() {
         var prtContent = document.getElementById("consumer_pdf");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
@@ -4857,7 +4745,6 @@ $bpdata['post_upper_bp']="0";
         // document.getElementById('site-title').innerHTML = "Mediclear the Eye Test";
         // location.reload(); class="accordion-collapse collapse"
     }
-
     function doctorFinalResultSubmit() {
         let val = $('#doctorcount').val();
         if (Number(val) == 6) {
@@ -4876,6 +4763,5 @@ $bpdata['post_upper_bp']="0";
             });
         }
     }
-    //////////////////////////////////////////////////////////////////////////////////
 </script>
 @include('include.footer')
