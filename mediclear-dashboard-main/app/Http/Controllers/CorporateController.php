@@ -10,12 +10,8 @@ class CorporateController extends Controller
 {
 
     public function showCorporateID(){
-
-
         $corporate=CorporateID::orderBy('created_at','desc')
         ->get();
-
-
         return view('dashboard.corporateId',compact('corporate'));
     }
 

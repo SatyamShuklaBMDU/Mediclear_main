@@ -134,12 +134,8 @@ class VertigoReportController extends Controller
 
 
             $data = $corporateBatch;
-
-
-
             return DataTables::of($data)
                 ->addIndexColumn()
-
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a type="button" class="btn bg-primary btn-sm" style="color:white" data-bs-toggle="modal" href="' . url('corporate/consumer/?id=' . $row->batch_id) . '"  >View Reports</a>';
                     return $actionBtn;
@@ -176,28 +172,22 @@ class VertigoReportController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('consumerImage', function ($row) {
-
-
                     $consumerImage = '<img src="' . asset('public/images/' . $row->image) . '" width="100px" alt=""> ';
                     return $consumerImage;
-
                 })->addIndexColumn()
                 ->addColumn('consumerProfile', function ($row) {
                     $actionBtn = '<a type="button" class="btn bg-primary btn-sm" style="color:white" data-bs-toggle="modal" href="' . url('customer/consumer/profile/?id=' . $row->id) . '"  >View Profile</a>';
                     return $actionBtn;
                 })->addIndexColumn()
-
                 ->addColumn('consumertest', function ($row) {
                     $actionBtn = '<a type="button" class="btn bg-primary btn-sm" style="color:white" data-bs-toggle="modal" href="' . url('consumer/test/?id=' . $row->id) . '"  >View Test Reports</a>';
                     return $actionBtn;
                 })->addIndexColumn()
                 ->addColumn('consumertestcount', function ($row) {
                     if ($row->count == 8) {
-
                         $actionBtn = '<a type="button" href="javascript:void(0)" class="btn bg-success btn-sm" style="color:white">Complete</a>';
                         return $actionBtn;
                     } else {
-
                         $actionBtn = '<a type="button" href="javascript:void(0)" class="btn bg-danger btn-sm" style="color:white">Pending</a>';
                         return $actionBtn;
                     }
@@ -205,30 +195,16 @@ class VertigoReportController extends Controller
                 ->rawColumns(['consumerImage', 'consumerProfile', 'consumertest', 'consumertestcount'])
                 ->make(true);
         }
-
         $certificationNumber = MedicalDetail::select('certification_number')->get();
-
-
-
         return view('dashboard.vertigo.customer-consumervertigoreport', ['certificationNumber' => $certificationNumber]);
-
-
-
     }
 
 
     public function corporateconsumervertigoreports(Request $request)
     {
-
-
         if ($request->ajax()) {
-
             $cusmerBatchDetails_id = $request->id;
-
             $customerBatchType = "App\Models\CorporateBatch";
-
-
-
             $data = MedicalDetail::
                 select(
                     DB::raw("DATE_FORMAT(medical_details.created_at ,'%d/%m/%Y') AS date"),
@@ -238,19 +214,11 @@ class VertigoReportController extends Controller
                     'medical_details.consumer_profile_image_name as image',
                     'medical_details.id as id',
                     DB::raw("(SELECT COUNT(*) as count FROM tests WHERE test_type_id=1 AND medical_details_id=medical_details.id AND test_status='1')AS count")
-
-
-
                 )
                 ->where('cusmerbatchdetails_type', "App\Models\CorporateBatch")
-
                 ->where('cusmerbatchdetails_id', $cusmerBatchDetails_id)
                 ->orderBy('created_at', 'DESC')
                 ->get();
-
-                
-
-
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('consumerImage', function ($row) {
@@ -312,7 +280,7 @@ class VertigoReportController extends Controller
         // unfitRemark:unfitRemark,
         // testfeatures:"bp",
         // consumerid:consumerid
-        // dd($request->all());
+        dd($request->all());
         $TestData = Test::where('medical_details_id', $request->consumerid)
             ->where('test_type_id', '1')
             ->where('test_status', '1')

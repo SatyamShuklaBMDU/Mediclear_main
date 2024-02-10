@@ -141,6 +141,10 @@
                     </div>
                 </div>
             </div>
+            <script>
+                var currentDate = new Date().toISOString().split('T')[0];
+                document.getElementById('enddate').setAttribute('max', currentDate);
+            </script>
             {{-- end model  --}}
 {{-- // start footer --}}
 @include('include.footer')

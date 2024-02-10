@@ -63,7 +63,7 @@
                 <li class="nav-item active">
                     <a class="nav-link py-2" href="{{ url('/corporateID') }}">
                         <i class="fa-regular fa-id-badge"></i>
-                        <span> Corporate ID</span></a>
+                        <span> Employee ID</span></a>
                 </li>
             @endif
 
@@ -266,7 +266,7 @@
                 <div id="collapsehistory" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="report-history.php">Report History</a>
+                        <a class="collapse-item" href="{{url('consumer-history')}}">Report History</a>
                         <a class="collapse-item" href="payment-history.php">Payment History</a>
                     </div>
                 </div>

@@ -814,12 +814,21 @@
                                                 disease</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                                 value="option1"
-                                                @if (in_array(1, $postMedicalHistory)) checked  @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(1, $postMedicalHistory)) checked @disabled(true) @endif
+                                                @else
+                                                     $postMedicalHistory = []; 
+                                                @endif
+                                                />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
                                                 value="option2"
-                                                @if (in_array(2, $postMedicalHistory)) checked  @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(2, $postMedicalHistory)) checked @disabled(true) @endif
+                                                @else
+                                                     $postMedicalHistory = []; 
+                                                @endif />
                                             <label class="form-check-label" for="inlineCheckbox2">Hypertension</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -827,21 +836,33 @@
                                                 disease</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(3, $postMedicalHistory)) checked  @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(3, $postMedicalHistory)) checked @disabled(true) @endif
+                                                @else
+                                                    $postMedicalHistory = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Thyroid
                                                 disease</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(4, $postMedicalHistory)) checked  @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(4, $postMedicalHistory)) checked @disabled(true) @endif
+                                                @else
+                                                    $postMedicalHistory = []; 
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Migrain
                                                 headaches</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(5, $postMedicalHistory)) checked  @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(5, $postMedicalHistory)) checked @disabled(true) @endif
+                                                @else
+                                                    $postMedicalHistory = []; 
+                                                @endif />
                                         </div>
                                     </div>
                                 </div>
@@ -869,39 +890,64 @@
                                             <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                                 value="option1"
-                                                @if (in_array(1, $defficulting_in_hearing)) checked  @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(1, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif
+                                                />
                                         </div>
                                         <div class="form-check form-check-inline">
 
                                             <label class="form-check-label" for="inlineCheckbox2">No</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
                                                 value="option2"
-                                                @if (in_array(2, $defficulting_in_hearing)) checked  @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(2, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Left ears</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(3, $defficulting_in_hearing)) checked  @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(3, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Both ears</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(4, $defficulting_in_hearing)) checked  @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(4, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Right ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(5, $defficulting_in_hearing)) checked @disabled(true)   @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(5, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">associated with
                                                 attack</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(6, $defficulting_in_hearing)) checked  @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(6, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                         </div>
                                     </div>
                                     @if (!isset($data->noise_in_ears))
@@ -922,40 +968,62 @@
                                             <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                                 value="option1"
-                                                @if (in_array(1, $noise_in_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($noise_in_ears) && is_array($noise_in_ears))
+                                                    @if (in_array(1, $noise_in_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $noise_in_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox2">No</label>
-
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
                                                 value="option2"
-                                                @if (in_array(2, $noise_in_ears)) checked  @disabled(true) @endif />
-
+                                                @if (isset($noise_in_ears) && is_array($noise_in_ears))
+                                                    @if (in_array(2, $noise_in_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $noise_in_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Left ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(3, $noise_in_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($noise_in_ears) && is_array($noise_in_ears))
+                                                    @if (in_array(3, $noise_in_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $noise_in_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Both ears</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(4, $noise_in_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($noise_in_ears) && is_array($noise_in_ears))
+                                                    @if (in_array(4, $noise_in_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $noise_in_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Right ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(5, $noise_in_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($noise_in_ears) && is_array($noise_in_ears))
+                                                    @if (in_array(5, $noise_in_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $noise_in_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">associated with
                                                 attack</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(6, $noise_in_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($noise_in_ears) && is_array($noise_in_ears))
+                                                    @if (in_array(6, $noise_in_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $noise_in_ears = [];
+                                                @endif />
                                         </div>
                                     </div>
                                     @if (!isset($data->fullness_or_stuffiness_in_your_ears))
@@ -982,40 +1050,62 @@
                                             <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                                 value="option1"
-                                                @if (in_array(1, $fullness_or_stuffiness_in_your_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
+                                                    @if (in_array(1, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $fullness_or_stuffiness_in_your_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox2">No</label>
-
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
                                                 value="option2"
-                                                @if (in_array(2, $fullness_or_stuffiness_in_your_ears)) checked  @disabled(true) @endif />
-
+                                                @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
+                                                    @if (in_array(2, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $fullness_or_stuffiness_in_your_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Left ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(3, $fullness_or_stuffiness_in_your_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
+                                                    @if (in_array(3, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $fullness_or_stuffiness_in_your_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Both ears</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(4, $fullness_or_stuffiness_in_your_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
+                                                    @if (in_array(4, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $fullness_or_stuffiness_in_your_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Right ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(5, $fullness_or_stuffiness_in_your_ears)) checked  @disabled(true) @endif />
+                                                @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
+                                                    @if (in_array(5, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
+                                                @else
+                                                    $fullness_or_stuffiness_in_your_ears = [];
+                                                @endif />
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">associated with
                                                 attack</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                                 value="option3"
-                                                @if (in_array(6, $fullness_or_stuffiness_in_your_ears)) checked  @disabled(true) @endif />
+                                            @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
+                                                @if (in_array(6, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
+                                            @else
+                                                $fullness_or_stuffiness_in_your_ears = [];
+                                            @endif />
                                         </div>
                                     </div>
                                 </div>
@@ -1044,9 +1134,12 @@
                                 <div class="row my-4">
                                     <div class="col-6">1. Giddiness</div>
                                     <div class="col-4">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            value="option1"
-                                            @if (in_array(1, $complaints)) checked  @disabled(true) @endif />
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
+                                        @if (isset($complaints) && is_array($complaints))
+                                            @if (in_array(1, $complaints)) checked @disabled(true) @endif
+                                        @else
+                                            $complaints = [];
+                                        @endif />
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -1054,7 +1147,11 @@
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                             value="option1"
-                                            @if (in_array(2, $complaints)) checked  @disabled(true) @endif />
+                                            @if (isset($complaints) && is_array($complaints))
+                                                @if (in_array(2, $complaints)) checked @disabled(true) @endif
+                                            @else
+                                                $complaints = [];
+                                            @endif />
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -1062,7 +1159,11 @@
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                             value="option1"
-                                            @if (in_array(3, $complaints)) checked  @disabled(true) @endif />
+                                            @if (isset($complaints) && is_array($complaints))
+                                                @if (in_array(3, $complaints)) checked @disabled(true) @endif
+                                            @else
+                                                $complaints = [];
+                                            @endif />
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -1070,7 +1171,11 @@
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                             value="option1"
-                                            @if (in_array(4, $complaints)) checked  @disabled(true) @endif />
+                                            @if (isset($complaints) && is_array($complaints))
+                                                @if (in_array(4, $complaints)) checked @disabled(true) @endif
+                                            @else
+                                                $complaints = [];
+                                            @endif />
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -1078,7 +1183,11 @@
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                             value="option1"
-                                            @if (in_array(5, $complaints)) checked @disabled(true) @endif />
+                                            @if (isset($complaints) && is_array($complaints))
+                                                @if (in_array(5, $complaints)) checked @disabled(true) @endif
+                                            @else
+                                                $complaints = [];
+                                            @endif />
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -1086,7 +1195,11 @@
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                             value="option1"
-                                            @if (in_array(6, $complaints)) checked @disabled(true) @endif />
+                                            @if (isset($complaints) && is_array($complaints))
+                                                @if (in_array(6, $complaints)) checked @disabled(true) @endif
+                                            @else
+                                                $complaints = [];
+                                            @endif />
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -1096,17 +1209,19 @@
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                             value="option1"
-                                            @if (in_array(7, $complaints)) checked @disabled(true) @endif />
+                                            @if (isset($complaints) && is_array($complaints))
+                                                @if (in_array(7, $complaints)) checked @disabled(true) @endif
+                                            @else
+                                                $complaints = [];
+                                            @endif />
                                     </div>
                                 </div>
                                 <!-- buttons -->
-
                                 <div class="col-md-6 text-center">
                                     <label for="file" class="file text-center"><span class="image text-dark"><img
                                                 src="{{ url('/sign/' . $data->consumer_sign_image_name) }}"
                                                 width="100px" /></span></label>
                                     <input type="file" id="file" />
-
                                 </div>
                                 <!--<div class="row g-3 my-5 buttons">-->
                                 <!--    <div class="col-md-4">-->
@@ -1706,12 +1821,11 @@
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-dark" id="hearing" onclick="saveResult(this)">Submit</button>
+                            <button class="btn btn-dark" id="hearingtest" onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
                             <button class="btn btn-warning" id="hearing_test_again">Please Test Again</button>
                             &nbsp;&nbsp;
-                            <button onclick="generateHearingtestPDF()"><i class="fa fa-print text-success"
-                                    style="font-size:36px"></i></button>
+                            <button onclick="generateHearingtestPDF()"><i class="fa fa-print text-success" style="font-size:36px"></i></button>
                         </div>
                     </div>
                 @endif
@@ -2176,8 +2290,6 @@
                             </div>
                             <div class="blank"></div>
                         </div>
-
-
                         <hr style="color:black;height:12px; border-top: 5px solid black;">
                         <!-- table start -->
                         <table class=" table table-striped border-dark table-bordered"
@@ -2448,33 +2560,53 @@
                                         <label class="form-check-label" for="inlineCheckbox1">Heart disease</label>
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                             value="option1"
-                                            @if (in_array(1, $postMedicalHistory)) checked @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(1, $postMedicalHistory)) checked @endif
+                                                @else
+                                                     $postMedicalHistory = []; 
+                                                @endif />
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
                                             value="option2"
-                                            @if (in_array(2, $postMedicalHistory)) checked @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(2, $postMedicalHistory)) checked @endif
+                                                @else
+                                                     $postMedicalHistory = []; 
+                                                @endif />
                                         <label class="form-check-label" for="inlineCheckbox2">Hypertension</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="inlineCheckbox3">Kidney disease</label>
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                             value="option3"
-                                            @if (in_array(3, $postMedicalHistory)) checked @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(3, $postMedicalHistory)) checked @endif
+                                                @else
+                                                     $postMedicalHistory = []; 
+                                                @endif />
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="inlineCheckbox3">Thyroid
                                             disease</label>
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                             value="option3"
-                                            @if (in_array(4, $postMedicalHistory)) checked @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(4, $postMedicalHistory)) checked @endif
+                                                @else
+                                                     $postMedicalHistory = []; 
+                                                @endif/>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="inlineCheckbox3">Migrain
                                             headaches</label>
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                             value="option3"
-                                            @if (in_array(5, $postMedicalHistory)) checked @disabled(true) @endif />
+                                                @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
+                                                    @if (in_array(5, $postMedicalHistory)) checked @endif
+                                                @else
+                                                     $postMedicalHistory = []; 
+                                                @endif />
                                     </div>
                                 </div>
                             </div>
@@ -2490,33 +2622,53 @@
                                         <label class="form-check-label" for="inlineCheckbox1">Left ear</label>
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                             value="option1"
-                                            @if (in_array(1, $defficulting_in_hearing)) checked @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(1, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
                                             value="option2"
-                                            @if (in_array(2, $defficulting_in_hearing)) checked @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(2, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif/>
                                         <label class="form-check-label" for="inlineCheckbox2">Both ears</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="inlineCheckbox3">Right ears</label>
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                             value="option3"
-                                            @if (in_array(3, $defficulting_in_hearing)) checked @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(3, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="inlineCheckbox3">associated with
                                             attack</label>
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                             value="option4"
-                                            @if (in_array(4, $defficulting_in_hearing)) checked @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(4, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="inlineCheckbox3">Migrain
                                             headaches</label>
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                             value="option5"
-                                            @if (in_array(5, $defficulting_in_hearing)) checked @disabled(true) @endif />
+                                                @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
+                                                    @if (in_array(5, $defficulting_in_hearing)) checked @disabled(true) @endif
+                                                @else
+                                                    $defficulting_in_hearing = [];
+                                                @endif />
                                     </div>
                                 </div>
                             </div>
@@ -2565,284 +2717,6 @@
     </div>
 </div>
 {{-- ---------------------------------------------------------------------------------------------- --}}
-{{-- <div class="container my-5">
-    <!-- form start -->
-    <form action="" id="verticopdfreport" class="shadow-sm"
-        style="border: 2px solid #339999">
-        <div class="top-section d-flex justify-content-around">
-            <div class="logo">
-                <img src="{{ url('public/dashboard/img/logo.png') }}" alt=""
-                    width="100" />
-            </div>
-            <div class="heading">
-                <p class="text-center h2" style="color: #0d9494">MEDICLEAR</p>
-                <p class="text-center h4" style="color: #339999">
-                    An ISO 9001 - 2015 Certified Company<br />
-                    Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi
-                </p>
-            </div>
-            <div class="blank"></div>
-        </div>
-        <hr style="color: black; height: 12px; border-top: 5px solid black" />
-        <!-- table start -->
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Patient Name :</th>
-                    <th scope="col">{{ $data->consumer_name }}</th>
-                    <th scope="col">Joining Date</th>
-                    <th scope="col">NA</th>
-                    <th scope="col">Checkup Date</th>
-                    <th scope="col">{{ date('d-M-y') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">Designation :</th>
-                    <td>NA</td>
-                    <td>D.O.B / AGE</td>
-
-                    <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
-                    <td>valid Till -</td>
-                    <td>{{ date('d-M-y', strtotime('+1 year')) }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Emp Code :</th>
-                    <td>NA</td>
-                    <td>Gender</td>
-                    <td colspan="2" class="text-center">
-                        @if ($data->gender == 'male')
-                            {{ 'Male' }}
-                        @elseif($data->gender == 'female')
-                            {{ 'Female' }}
-                        @endif
-                    </td>
-                    <td>..</td>
-                    <td>..</td>
-                </tr>
-                <tr>
-                    <th scope="row">Address</th>
-                    <td>{{ $data->consumer_location }}</td>
-                    <td>Certificate No. :</td>
-                    <td>{{ $data->certification_number }}</td>
-                    <td>..</td>
-                    <td>..</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td colspan="6 " class="text-center fw-bold h4">
-                        <u>Vertigo Test for Working at Height</u>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!--  -->
-        <!-- question Ans field start -->
-        <div class="questions">
-            <p class="h4 text-dark my-3 fw-bold">
-                1- Complaint :
-            </p>
-            <div class="row choice">
-                <div class="col-md-6"></div>
-                <div class="col-md-6">Yes&nbsp;&nbsp;&nbsp;&nbsp;No</div>
-            </div>
-            <!-- question start  -->
-            <div class="row my-4">
-                <div class="col-md-6">
-                    a.&nbsp;&nbsp;Giddiness
-                </div>
-                <div class="col-md-4">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option1"
-                        @if (in_array(1, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option1"
-                        @if (in_array(1, $complaints) == false) checked @disabled(true) @endif />
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-6">b. &nbsp;&nbsp;Vertigo</div>
-                <div class="col-4">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option2"
-                        @if (in_array(2, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option2"
-                        @if (in_array(2, $complaints) == false) checked @disabled(true) @endif />
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-6">c.&nbsp;&nbsp; Nausea?</div>
-                <div class="col-4">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option5"
-                        @if (in_array(3, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option5"
-                        @if (in_array(3, $complaints) == false) checked @disabled(true) @endif />
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-6">d.&nbsp;&nbsp; Seizure Disorder(Epilespy)?</div>
-                <div class="col-4">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option1"
-                        @if (in_array(4, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option6"
-                        @if (in_array(4, $complaints) == false) checked @disabled(true) @endif />
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-6">
-                    e.&nbsp;&nbsp; Acrophobia?
-                </div>
-                <div class="col-4">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option1"
-                        @if (in_array(5, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option1"
-                        @if (in_array(5, $complaints) == false) checked @disabled(true) @endif />
-                </div>
-            </div>
-            <div class="row my-4">
-                <div class="col-6">
-                    f.&nbsp;&nbsp; Asthama /COPD
-                </div>
-                <div class="col-4">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option1"
-                        @if (in_array(6, $complaints)) checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option1"
-                        @if (in_array(6, $complaints) == false) checked @disabled(true) @endif />
-                </div>
-            </div>
-        </div>
-        <!--  -->
-        <div class="questions">
-            <p class="h4 text-dark my-3 fw-bold">
-                1- General Examination :
-            </p>
-            <div class="row choice">
-                <div class="col-md-6"></div>
-                <div class="col-md-6">
-                    Normal&nbsp;&nbsp;&nbsp;Abnormal
-                </div>
-            </div>
-        </div>
-        <!-- question start  -->
-        <div class="row my-4">
-            <div class="col-md-6">
-                a.&nbsp;&nbsp;Pulse
-            </div>
-            <div class="col-md-4">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1" />
-            </div>
-        </div>
-        <div class="row my-4">
-            <div class="col-6">b. &nbsp;&nbsp;BP</div>
-            <div class="col-4">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1"
-                    @if (isset($Testresult['bp']) && $Testresult['bp'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1"
-                    @if (isset($Testresult['bp']) && $Testresult['bp'] == '0') checked @disabled(true) @endif />
-            </div>
-        </div>
-        <div class="row my-4">
-            <div class="col-6">c.&nbsp;&nbsp; Depth Of Vision?</div>
-            <div class="col-4">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1"
-                    @if (isset($Testresult['eyecheckup']) && $Testresult['eyecheckup'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1"
-                    @if (isset($Testresult['eyecheckup']) && $Testresult['eyecheckup'] == '0') checked @disabled(true) @endif />
-            </div>
-        </div>
-        <div class="row my-4">
-            <div class="col-6">d.&nbsp;&nbsp; Nystagmus?</div>
-            <div class="col-4">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1" />
-            </div>
-        </div>
-        <div class="row my-4">
-            <div class="col-6">
-                e.&nbsp;&nbsp; Flat Foot
-            </div>
-            <div class="col-4">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1"
-                    @if (isset($Testresult['flatfoot']) && $Testresult['flatfoot'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1"
-                    @if (isset($Testresult['flatfoot']) && $Testresult['flatfoot'] == '0') checked @disabled(true) @endif />
-            </div>
-        </div>
-        <div class="row my-4">
-            <div class="col-6">
-                f.&nbsp;&nbsp; Hearing
-            </div>
-            <div class="col-4">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1" />
-            </div>
-        </div>
-        <div class="row my-4">
-            <div class="col-6">
-                g.&nbsp;&nbsp; BPPV(Being Paroxysmal Positional Vertigo)
-            </div>
-            <div class="col-4">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1"
-                    @if (isset($Testresult['bppv']) && $Testresult['bppv'] == '1') checked @disabled(true) @endif />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    value="option1"
-                    @if (isset($Testresult['bppv']) && $Testresult['bppv'] == '0') checked @disabled(true) @endif />
-            </div>
-        </div>
-        <p class="h5 fw-bolder">3. Examination Finding :</p>
-        <p class="h5 fw-bolder">a- Romberg Test</p>
-        <p>
-            A Pass requires the ability to maintain balance while standing with
-            shoes off, feet together side by side , eyes closed and arms by
-            sides,
-        <p class="text-center">sides, for 30 seconds</p>
-        </p>
-        <div class="form-check form-check-inline d-flex justify-content-evenly">
-            <input class="form-check-input"
-                @if (isset($Testresult['rt']) && $Testresult['rt'] == '1') checked @disabled(true) @endif
-                type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1"> Normal</label>
-        </div>
-        <br>
-        <div class="form-check form-check-inline d-flex justify-content-evenly">
-            <input class="form-check-input"
-                @if (isset($Testresult['rt']) && $Testresult['rt'] == '0') checked @disabled(true) @endif
-                type="checkbox" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label" for="inlineCheckbox2">Abnormal</label>
-        </div>
-        <br><br>
-    </form>
-</div> --}}
 {{-- ------------------------------ Vertigo Test Report PDF------------------------------------------------------------------------ --}}
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalVertigo">
@@ -2851,7 +2725,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalVertigo" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalVertigo" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 1400px;" role="document">
+    <div class="modal-dialog" style="max-width: 1200px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -2902,7 +2776,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <!-- end 1st table  -->
                                 @php
                                     if (isset($TestData['bp'])) {
                                         $bpdatamodal = json_decode($TestData['bp'], true);
@@ -2915,10 +2788,19 @@
                                             <p><b> Pre</b></p>
                                         </div>
                                         <div class="col-md-4">
-                                            <p>Lower: {{ $bpdatamodal['pre_lower_bp'] }}</p>
+                                            <p>Lower:@php
+                                                        if(isset($TestData['bp']))
+                                                        {$bpdatamodal['pre_lower_bp'];}
+                                                        else{echo 0;} 
+                                                    @endphp
+                                            </p>
                                         </div>
                                         <div class="col-md-4">
-                                            <p>Upper: {{ $bpdatamodal['pre_upper_bp'] }}</p>
+                                            <p>Upper: @php
+                                                    if(isset($TestData['bp']))
+                                                    {$bpdatamodal['pre_upper_bp'];}
+                                                    else{echo 0;} 
+                                                @endphp</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -2926,10 +2808,18 @@
                                             <p><b>Post</b></p>
                                         </div>
                                         <div class="col-md-4">
-                                            <p>Lower: {{ $bpdatamodal['post_lower_bp'] }}</p>
+                                            <p>Lower: @php
+                                                if(isset($TestData['bp']))
+                                                {$bpdatamodal['post_lower_bp'];}
+                                                else{echo 0;} 
+                                            @endphp</p>
                                         </div>
                                         <div class="col-md-4">
-                                            <p>Upper: {{ $bpdatamodal['post_upper_bp'] }}</p>
+                                            <p>Upper: @php
+                                                if(isset($TestData['bp']))
+                                                {$bpdatamodal['post_upper_bp'];}
+                                                else{echo 0;} 
+                                            @endphp</p>
                                         </div>
                                     </div>
                                 </div>
@@ -3513,11 +3403,6 @@
         </div>
 </div>
 <script>
-    // $('#corporateProfile').change(function() {
-    //     console.log('helllo');
-    //     var selectedValue = $(this).val();
-    //     console.log('Selected Value: ' + selectedValue);
-    // });
     function create_custom_dropdowns() {
         $('select').each(function(i, select) {
             if (!$(this).next().hasClass('dropdown-select')) {
@@ -3662,183 +3547,6 @@
 {{-- ---------------------------------------------------------------------------------------------- --}}
 </div>
 </div>
-{{-- <div class="container my-5">
-    <!-- form start -->
-    <form action="" class="shadow-sm" id="doctorreportfinal"
-        style="border: 2px solid #339999">
-
-        <div class="top-section d-flex justify-content-around">
-            <div class="logo">
-                <img src="{{ url('public/dashboard/img/logo.png') }}" alt=""
-                    width="100" />
-            </div>
-            <div class="heading">
-                <p class="text-center h2" style="color: #0d9494">MEDICLEAR</p>
-                <p class="text-center h4" style="color: #339999">
-                    An ISO 9001 - 2015 Certified Company<br />
-                    Site Office - 90 ,Vasant Complex , Mayur Vihar,Delhi
-                </p>
-            </div>
-            <div class="blank"></div>
-        </div>
-
-        <hr style="color: black; height: 12px; border-top: 5px solid black" />
-        <u>
-            <p class="h3 text-dark text-center my-5">
-                CERTIFICATION OF VERTIGO EXAMINATION
-            </p>
-        </u>
-        <!-- table start -->
-        <table class="table table-striped border-dark table-bordered"
-            style="background-color: aliceblue">
-            <thead>
-                <tr>
-                    <th scope="col">1</th>
-                    <th scope="col">Certification No.</th>
-                    <th scope="col">{{ $data->certification_number }}</th>
-                    <th scope="col">{{ date('d-M-y') }}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Name</td>
-                    <td>{{ $data->consumer_name }}</td>
-                    <td>Valid Till-</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Company</td>
-                    <td>NA</td>
-                    <td rowspan="4" colspan="2" class="text-center" id="qrcolum">
-                        @php
-                            $blurredAadhar = 'xxxx-xxxx-' . substr($data->consumer_addhar_number, -4);
-                            $consumerQrData = 'Name:' . $data->consumer_name . ' ' . 'AdharNumber:' . $blurredAadhar;
-                        @endphp
-                        {!! QrCode::size(256)->generate($consumerQrData) !!}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Gender</td>
-                    <td>
-                        @if ($data->gender == 'male')
-                            {{ 'Male' }}
-                        @elseif($data->gender == 'female')
-                            {{ 'Female' }}
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>DOB /AGE</td>
-                    <td>{{ date('d-m-Y', strtotime($data->consumer_dob)) }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td>Fitness</td>
-                    <td>Fit</td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="h4 text-center text-dark">This is to be certify that Mr.</p>
-        <p class="text-dark">
-            has been examined by us, We can not discover that he/she has got any
-            disease, communicable or otherwise, constitutional or bodily deformed
-            oe Vertigo.
-        </p>
-        <!--info container -->
-        <div class="d-flex justify-content-around my-4">
-            <p class="h4 text dark">Candidate is hereby declared,</p>
-            <div class=" text-center">
-                <p class="h4 text dark">Vertigo Test : Normal</p>
-            </div>
-        </div>
-        <!-- checkboxes -->
-        @foreach ($AssignDoctor as $doc)
-            <div class="container d-flex justify-content-around">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                        value="option1"
-                        @if ($doc->doctor_final_result == '1') checked @disabled(true) @disabled(true) @endif />
-                    <label class="form-check-label" for="inlineCheckbox1">FIT</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                        @if ($doc->doctor_final_result == '0') checked @disabled(true) @endif
-                        type="checkbox" id="inlineCheckbox2" value="option2" />
-                    <label class="form-check-label" for="inlineCheckbox2">UNFIT</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                        @if ($doc->doctor_final_result == '-1') checked @disabled(true) @endif
-                        type="checkbox" id="inlineCheckbox3" value="option3" />
-                    <label class="form-check-label" for="inlineCheckbox3">Temorarily UNFIT
-                    </label>
-                </div>
-            </div>
-                            <!-- 3 boxes start   $('#doctorsign').html(signHTML);
-                $('#doctorseal').html(sealHTML);
-                $('#doctorregistration').html(registrationHTML); -->
-            <div class="container1">
-                <ul>
-                    <li class="text-center">
-                        <div class="title" id="">REGISTRATION NUMBER</div>
-                        <div class="col-md-6" id="doctorregistration">
-                            {{ $doc->doctorregistration }}
-                        </div>
-                    </li>
-                    <li class="text-center">
-                        <div class="title">SIGNATURE OF DOCTOR</div>
-                        <div class="col-md-6" id="doctorsign">
-                            <img src="{{ url('public/images/' . $doc->doctorsign) }}"
-                                width="100px" class="img-fluid" alt="">
-                        </div>
-                    </li>
-                    <li class="text-center">
-                        <div class="title">SEAL OF DOCTOR</div>
-                        <div class="col-md-6" id="doctorseal">
-                            <img src="{{ url('public//images/' . $doc->doctorseal) }}"
-                                width="100px" class="img-fluid" alt="">
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- form footer -->
-            <div class="footer d-flex justify-content-center align-items-center text-white"
-                style="background-color: #418787">
-                <p class="h5">
-                    To verify the Medical Certification scan QR Code or email Us at
-                    <span class="text-danger">everify@mediclear.in</span>
-                </p>
-            </div>
-    </form>
-</div> --}}
-{{-- @if (isset($TestData) && json_decode($TestData, true) != [])
-@php
-if(isset($TestData['bp'])){
-
-$bpdata= json_decode($TestData['bp'],true);
-}
-if(isset($TestData['eyecheckup'])){
-
-$eyecheckupdata= json_decode($TestData['eyecheckup'],true);
-}
-
-@endphp
-
-@else
-@php
-$bpdata=[];
-$bpdata['pre_lower_bp']="0";
-$bpdata['pre_upper_bp']="0";
-$bpdata['post_lower_bp']="0";
-$bpdata['post_upper_bp']="0";
-@endphp
-
-@endif --}}
 @php
     if (isset($TestData['bp'])) {
         $bpdata = json_decode($TestData['bp'], true);
@@ -3849,7 +3557,6 @@ $bpdata['post_upper_bp']="0";
         $bpdata['post_lower_bp'] = '0';
         $bpdata['post_upper_bp'] = '0';
     }
-
 @endphp
 @php
     if (isset($TestData['hearingtest'])) {
@@ -3871,8 +3578,22 @@ $bpdata['post_upper_bp']="0";
         if (isset($TestData['bp'])) {
             $bpdata = json_decode($TestData['bp'], true);
         }
+        else {
+            $bpdata = [];
+            $bpdata['pre_lower_bp'] = '0';
+            $bpdata['pre_upper_bp'] = '0';
+            $bpdata['post_lower_bp'] = '0';
+            $bpdata['post_upper_bp'] = '0';
+        }
         if (isset($TestData['hearingtest'])) {
             $hrdata = json_decode($TestData['hearingtest'], true);
+        }
+        else {
+            $hrdata = [];
+            $hrdata['left_ear_problem'] = '0';
+            $hrdata['left_ear_fixed'] = '0';
+            $hrdata['right_ear_problem'] = '0';
+            $hrdata['right_ear_fixed'] = '0';
         }
         if (isset($TestData['eyecheckup'])) {
             $eyecheckupdata = json_decode($TestData['eyecheckup'], true);

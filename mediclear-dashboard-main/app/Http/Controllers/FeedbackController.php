@@ -16,7 +16,16 @@ class FeedbackController extends Controller
 
         return view('dashboard.feedback',compact('feedback'));
     }
-
+    public function filterFeedback(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+        $feedback = Feedback::whereDate('created_at', '>=', $start)
+            ->whereDate('created_at', '<=', $end)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('dashboard.feedback', compact('feedback', 'start', 'end'));
+    }
 
 
 

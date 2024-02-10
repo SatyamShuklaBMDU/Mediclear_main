@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
     // feedback routes
     Route::middleware('permission:feedback')->group(function () {
         Route::get('/feedback', [FeedbackController::class, 'showFeedback']);
+        Route::post('/add-feedback', [FeedbackController::class, 'filterFeedback']);
         Route::post('/feedback/delete', [FeedbackController::class, 'deleteFeedback']);
     });
     // end feedback routes

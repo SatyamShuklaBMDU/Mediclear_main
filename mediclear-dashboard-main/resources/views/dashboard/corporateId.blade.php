@@ -63,20 +63,13 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h3 class="h3 mb-2 text-gray-800">Employee ID</h3>
-
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-
-
-
             <form action="{{ url('/corporateID') }}" method="post">
                 @csrf
-
                 <!--  3 -row start block -->
                 <div class="row dashboard-header">
                     <div class="col-md-12">
