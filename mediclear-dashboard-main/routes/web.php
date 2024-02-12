@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
     // company routes
     Route::middleware('permission:addcompany')->group(function () {
         Route::get('/add-company', [CompanyController::class, 'showCompany']);
-            Route::post('/add-company', [CompanyController::class, 'filterCompany']);
+        Route::post('/add-company', [CompanyController::class, 'filterCompany']);
         Route::post('/create-company', [CompanyController::class, 'CreateCompany'])->name('create_company');
         Route::post('/company/delete', [CompanyController::class, 'deleteCompany']);
         Route::post('/company/update', [CompanyController::class, 'updateCompany']);
@@ -99,6 +99,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('permission:notification')->group(function () {
         Route::get('/customer-notification', [NotificationController::class, 'customerNotification']);
         Route::post('/sendNotification', [NotificationController::class, 'sendNotification']);
+        Route::get('/filter_notification', [NotificationController::class, 'filterNotification']);
     });
     //end Notification
     // batch routes

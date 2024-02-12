@@ -263,9 +263,7 @@
         var bacthId = button.id.replace("edit", "");
 
         console.log(bacthId);
-
         $('#myModal').show();
-
         $('#closeBatchEditForm').on('click', function() {
             console.log('hhjh');
             $('#myModal').hide();
@@ -287,8 +285,6 @@
             },
             success: (data) => {
                 console.log(data[0]);
-
-
                 $('#batch_no').val(data[0].batch_no);
                 $('#corporate_test').val(data[0].test);
                 $('#corporateBatchId').val(data[0].corporatebatchs_id);
@@ -296,9 +292,6 @@
                 $('#currentselect').html(data[0].name);
                 $('#editcompanyProfile').val(data[0].company_id)
                 // companyProfile
-
-
-
                 $('#myModal').show();
 
                 $('#userUpdateButton').click(function(event) {
@@ -609,7 +602,7 @@ s
     @endif
 
     <!-- Page Heading -->
-    <h3 class="h3 mb-2 text-gray-800">corporate Batch</h3>
+    <h3 class="h3 mb-2 text-gray-800">Company Batch</h3>
 
 
 
@@ -618,7 +611,7 @@ s
             <li class="breadcrumb-item"><a href="#"><i class="fa-solid fa-house text-secondary"></i></a></li>
             <li class="breadcrumb-item text-decoration-none text-dark"><a href="#" class="text-dark">Batch
                     Create</a></li>
-            <li class="breadcrumb-item active" aria-current="page">corporate Batch</li>
+            <li class="breadcrumb-item active" aria-current="page">Company Batch</li>
         </ol>
     </nav>
 
@@ -636,15 +629,12 @@ s
                                 @csrf
                             <p class="text-dark"><b><strong>Filters:</strong></b></p>
                         </div>
-                       
                         <div class="col-sm-3 end-date">
                             <p class="text-dark"><strong>Date From:</strong></p>
                             <div class="input-group date d-flex" id="">
                                 <input type="date" value="@if(isset($corporatefilterBatchFilterdate)){{$corporatefilterBatchFilterdate['fromdate']}}@endif"  name="fromdate" class="form-control" id="fromdate" placeholder="dd-mm-yyyy" />
-                              
                             </div>
                         </div> 
-
                         <!--  -->
                         <!--  -->
                         <!--  -->
@@ -670,7 +660,7 @@ s
                         <div class="col-sm-2" style="position: relative; top: 47px;">
                             <div class="Click-here"> <button class="btn    bg-gradient-success text-white shadow-lg"
                                     type="submit" style="padding: 4px 4px; font-size:17px; width:165px;"
-                                    data-target=" #mymodel" data-toggle="modal">+ Add corporate</button>
+                                    data-target=" #mymodel" data-toggle="modal"> Add Company</button>
 
 
 
@@ -682,7 +672,7 @@ s
                                             <div class="modal-header">
                                                 <form action="{{ route('addcorporatebatch') }}" method="post"
                                                     class="text-center">
-                                                    <span class="h3 mt-0 text-decoration-underline"> ADD corporate
+                                                    <span class="h3 mt-0 text-decoration-underline"> ADD Company
                                                     </span>
                                                     <br />
                                                     <br />
@@ -724,17 +714,13 @@ s
                                                         </div>
                                                     </div>
                                                     {{-- companyDetails --}}
-                                                    <label for="">corporate Batch No. </label>
+                                                    <label for="">Company Batch No. </label>
                                                     <input type="text" id="company_corporate_batch_no"
                                                         name="company_corporate_batch_no"
-                                                        style="margin-right: 40px;margin-bottom:10px;" /> <br />
-
-
-
+                                                        style="margin-right: 40px;margin-bottom:10px;" /> <br/>
                                                     <label for="">Total Test </label>
                                                     <input type="text" name="company_test"
-                                                        style="margin-left: 20px;margin-bottom:10px;" /> <br />
-                                                  
+                                                        style="margin-left: 20px;margin-bottom:10px;" /> <br/>
                                                     <label for="">Email ID &nbsp;&nbsp;&nbsp;&nbsp;
                                                         &nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                     <input type="email" name="company_email" id="company_email"
@@ -776,8 +762,8 @@ s
                                 <th scope="col">Sr. No.</th>
                                 <th scope="col">Create Date</th>
                                 
-                                <th scope="col">company Name</th>
-                                <th scope="col">corporate Batch No.</th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Company Batch No.</th>
                                 <th scope="col">Total Test</th>
                                 <th scope="col">Email ID</th>
                                 <th scope="col">Phone No.</th>

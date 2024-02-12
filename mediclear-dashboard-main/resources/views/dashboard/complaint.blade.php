@@ -51,7 +51,10 @@
                                                 <button class="btn   bg-gradient-success text-white shadow-lg "
                                                     type="submit">Filter</button>
                                             </div>
-                    </form>
+                                        </form>
+                                        <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
+                                            <a href="{{ url('/complaint') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
+                                        </div>
 <div class="row">
 </div>
 <div class="card-body" style="width: -webkit-fill-available;">
@@ -63,7 +66,6 @@
                 <th>Subject</th>
                 <th>Complaint</th>
                 <th>Action</th>
-
             </tr>
         </thead>
         <tbody>
@@ -131,6 +133,7 @@
             <script>
                 var currentDate = new Date().toISOString().split('T')[0];
                 document.getElementById('enddate').setAttribute('max', currentDate);
+                document.getElementById('startdate').setAttribute('max', currentDate);
             </script>
             {{-- end model  --}}
 {{-- // start footer --}}

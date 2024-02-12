@@ -50,7 +50,10 @@
                     {{ session()->get('permissionerror') }}
                 </div>
             @endif
-            @php $Userpermission = Auth::User()->permissions ;@endphp
+            @php 
+            $Userpermission = Auth::User()->permissions ;
+            $login = Auth::User();
+            @endphp
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <!-- Divider -->
@@ -63,10 +66,9 @@
                 <li class="nav-item active">
                     <a class="nav-link py-2" href="{{ url('/corporateID') }}">
                         <i class="fa-regular fa-id-badge"></i>
-                        <span> Employee ID</span></a>
+                        <span> Corporate ID</span></a>
                 </li>
             @endif
-
 
             <hr class="sidebar-divider my-0">
             @if (
@@ -161,7 +163,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="customer.php">Customer</a>
-                        <a class="collapse-item" href="corporate.php">Corporate</a>
+                        <a class="collapse-item" href="corporate.php">Company</a>
                     </div>
                 </div>
             </li>
@@ -266,7 +268,7 @@
                 <div id="collapsehistory" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{url('consumer-history')}}">Report History</a>
+                        <a class="collapse-item" href="report-history.php">Report History</a>
                         <a class="collapse-item" href="payment-history.php">Payment History</a>
                     </div>
                 </div>
@@ -458,7 +460,7 @@
                         <li class="nav-item dropdown no-arrow text-right">
                             <a class="sidebar-divider my-0 dropdown-toggle" href="#" id="userDropdown"
                                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$login->name}}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ url('dashboard/img/undraw_profile.svg') }}" style="width: 8%;">
                             </a>
@@ -480,4 +482,27 @@
                         </li>
                     </ul>
                 </nav>
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >Logout</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
                 <!-- End of Topbar -->

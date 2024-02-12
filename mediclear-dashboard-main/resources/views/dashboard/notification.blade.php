@@ -65,28 +65,90 @@
                     <button type="submit" class="btn btn-primary btn-md">Submit</button>
                 </form>
                 <h3> History</h3>
+            <div class="col-md-12">
+            <form class="notification-form shadow rounded"  method="get" action="{{url('/customer-notification')}}">
+                    @csrf
+                        <div class="row dashboard-header">
+                            <div class="col-md-12">
+                                <div class="row mt-3">
+                                    <div class="col-md-12 boder-danger me-5 pe-5">
+                                        <div class="row mb" style="margin-bottom: 30px;">
+                                            <div class="col-sm-1">
+                                                <p class="text-dark"><b><strong>Filters:</strong></b></p>
+                                            </div>
+                                            <div class="col-sm-3 end-date">
+                                                <p class="text-dark"><strong>Date From:</strong></p>
+                                                <div class="input-group date d-flex" id="datepicker1">
+                                                    <input type="date" class="form-control" name="start" id="startdate"
+                                                        value="" placeholder="dd-mm-yyyy" />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 end-date">
+                                                <p class="text-dark"><strong>Date to:</strong></p>
+                                                <div class="input-group date d-flex" id="datepicker2">
+                                                    <input type="date" name="end" class="form-control" id="enddate"
+                                                        value="" placeholder="dd-mm-yyyy" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
+                                                <button class="btn   bg-gradient-success text-white shadow-lg "
+                                                    type="submit">Filter</button>
+                                            </div>
+                                            <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
+                                            <button class="reset btn bg-gradient-success text-white shadow-lg ml-5"  type="submit">Reset</button>
+                                        </div>
+
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                       
+                
+                    
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)"     name="for" id="inlineRadio1" value="all">
+                        <label class="form-check-label" for="inlineRadio1">All</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)"   name="for" id="inlineRadio2" value="corporate">
+                        <label class="form-check-label" for="inlineRadio2">For Employee</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)"  name="for" id="inlineRadio3" value="customer">
+                        <label class="form-check-label" for="inlineRadio3">For Customer</label>
+                    </div>
+                    
+                    
+                </form>
+            </div>
                 <!--end form-->
                 <!--start Table-->
-                <table class="table table-striped table-hover table-hover border shadow border-light mt-4">
+                <table class="table table-striped table-hover table-hover border shadow border-light mt-4" id="notifications">
                     <thead>
                         <tr>
                             <th >Sr.No.</th>
                             <th >For</th>
+                            <th >Date</th>
                             <th >Subject</th>
                             <th >Messages</th>
+                            
                             {{-- <th >Action</th> --}}
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="filtervala">
                         @php
                             $i=1;
                         @endphp
+                       
                         @foreach ( $notification as $notify )
                         <tr>
                             <td >{{$i}}</td>
                             <td>{{$notify->for}}</td>
+                            <td >{{$notify->created_at->format('m/d/Y')}}</td>
                             <td >{{$notify->subject}}</td>
                             <td >{{$notify->message}}</td>
+                            
                             {{-- <td class="text-center"><i class="fa-solid fa-trash text-danger"  onclick="{document.getElementById('id1').value={{ $notify->id }}}" data-toggle="modal" data-target="#exampleModal"></i></td> --}}
                         </tr>
                         @php
@@ -139,7 +201,60 @@
 
 
 
+    <script>
+   function resetFunction(){
+    $("input[type=radio]").prop('checked', false);
+   }
+</script>
+<script>
+    $(document).ready(function() {
+        var table = $('#notifications').DataTable({
+            scrollX: true,
+           
+            
+        });
+    });
 
+
+    function filterDatas(element) {
+    var filterVal = element.value;
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: 'get',
+        url: "{{ url('filter_notification') }}",
+        data: {
+            filterVal: filterVal
+        },
+        success: function(data) {
+            console.log(data.notifications);
+            $("#filtervala").empty();
+            if (data.status == "success") {
+                let filterLength = data.notifications.length;
+                for (let i = 0; i < filterLength; i++) {
+                    var htmls = "<tr>";
+                    htmls += "<td>" + (i + 1) + "</td>";
+                    htmls += "<td>" + data.notifications[i].for + "</td>";
+                    htmls += "<td>" + data.notifications[i].created_at + "</td>";
+                    htmls += "<td>" + data.notifications[i].subject + "</td>";
+                    htmls += "<td>" + data.notifications[i].message + "</td>";
+                    htmls += "</tr>";
+                    $("#filtervala").append(htmls);
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+}
+
+</script>
 <!-- footer-file-start -->
 @include('include.footer')
 <!-- footer-file-start -->

@@ -69,7 +69,6 @@
                     <div class="row mb" style="margin-bottom: 30px;">
                         <div class="col-sm-1">
                             <p class="text-dark"><b><strong>Filters:</strong></b></p>
-
                         </div>
                         <!-- <div class="col-sm-3 end-date">
                        <p class="text-dark"><strong>Date From:</strong></p>
@@ -91,7 +90,6 @@
                                 <input type="date" name="start" value="{{ $start ?? ''}}" class="form-control" id="startdate" placeholder="dd-mm-yyyy" />
                             </div>
                         </div>
-
                         <!--  -->
                         <!--  -->
                         <!--  -->
@@ -155,36 +153,20 @@
                         <option value="2">Faridabad</option>
                         <option value="3">Banglore</option>
                         <option value="4">Aligarh</option>
-
-
                     </select>
-
-
                     <input style="width:264px; margin-left:10px;" type="text" placeholder="Select Location " class="border iw m-1 border-secondary  rounded p-1" /> -->
-
-                                                <!-- <input style="width:241px;" type="text" placeholder="Enter Number " class="border  m-1 border-secondary  rounded p-1" />
+                    <!-- <input style="width:241px;" type="text" placeholder="Enter Number " class="border  m-1 border-secondary  rounded p-1" />
             </div> -->
-                                                <!-- <button class="btn-sm" type="button" style="margin-top:106px; ">Submit</button> -->
-
-                                                <button type="btn" class="close"
-                                                    data-dismiss="modal">&times;</button>
+                    <!-- <button class="btn-sm" type="button" style="margin-top:106px; ">Submit</button> -->
+                                                <button type="btn" class="close" data-dismiss="modal">&times;</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!--  -->
                 <div class="card-body" style="width: -webkit-fill-available;">
                     <table id="example" class="display nowrap" style="width:100%">
@@ -196,14 +178,11 @@
                                 <th>Phone Number</th>
                                 <th>E-mail</th>
                                 <th>City</th>
-
                                 <th>Status</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody>
-
                             @php
                                 $i = 1;
                             @endphp
@@ -229,11 +208,8 @@
 
                                                 </div>
                                             </div>
-
                                         </td> --}}
                                     <td>
-
-
                                         @if ($company->status == 'Active')
                                             <div class="dropdown">
                                                 <button class="btn btn-success dropdown-toggle" type="button"
@@ -245,7 +221,6 @@
                                                     aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item"
                                                         href="{{ url('updateStatusCompany/Deactive/' . $company->id) }}">Deactive</a>
-
                                                 </div>
                                             </div>
                                         @elseif ($company->status == 'Deactive')
@@ -264,7 +239,6 @@
                                             </div>
                                         @endif
                                     </td>
-
                                     <td> <i class="fa-solid fa-pen-to-square text-success"
                                         <i class="fa-solid fa-pen-to-square text-success"
                                         style="cursor: pointer"
@@ -276,26 +250,18 @@
                                             onclick="{document.getElementById('id1').value={{ $company->id }}}""></i>
                                     </td>
                                 </tr>
-
                                 @php
                                     $i++;
                                 @endphp
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
         <!-- /.container-fluid -->
-
     </div>
     <!-- End of Main Content -->
-
-
-
-
             <!-- Modal -->
             <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -308,25 +274,20 @@
                             </button>
                         </div>
                         <div class="modal-body">
-
                             <form action="{{ url('/company/update') }}" method="post">
-
                                 @csrf
                                 <div class="form-group">
                                   <label for="recipient-name" class="col-form-label">Name:</label>
                                   <input type="text" class="form-control" id="name" name="name">
                                 </div>
-
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Email:</label>
                                     <input type="text" class="form-control" id="email" name="email">
                                   </div>
-
                                   <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Phone:</label>
                                     <input type="text" class="form-control" id="mobile_no" name="mobile_no">
                                   </div>
-
                                   <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">City:</label>
                                     <input type="text" class="form-control" id="city" name="city">
@@ -341,16 +302,7 @@
                     </div>
                 </div>
             </div>
-
             {{-- end model  --}}
-
-
-
-
-
-
-
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -376,16 +328,11 @@
             </div>
         </div>
     </div>
-
     {{-- end model  --}}
-
 </div>
 <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
-
-
 <script>
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap5'
@@ -394,8 +341,6 @@
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('endDate').setAttribute('max', currentDate);
+    document.getElementById('startdate').setAttribute('max', currentDate);
 </script>
-
-
-
 @include('include.footer')

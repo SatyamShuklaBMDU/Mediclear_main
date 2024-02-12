@@ -341,7 +341,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 <script>
-    // Initialize datepickers
     $('#datepicker1, #datepicker2, #datepicker3').datepicker({
         format: 'dd-mm-yyyy',
         autoclose: true
@@ -355,6 +354,7 @@
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('endDate').setAttribute('max', currentDate);
+    document.getElementById('startdate').setAttribute('max', currentDate);
 </script>
 
 @include('include.footer')

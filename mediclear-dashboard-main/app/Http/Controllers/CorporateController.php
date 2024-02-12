@@ -14,15 +14,9 @@ class CorporateController extends Controller
         ->get();
         return view('dashboard.corporateId',compact('corporate'));
     }
-
-
-
-
-
-
     public function filterCorporateID(Request $req){
-$start=$req->start;
-$end=$req->end;
+        $start=$req->start;
+        $end=$req->end;
         $corporate=CorporateID::whereDate('created_at', '>=', $start)
         ->whereDate('created_at', '<=', $end)
         ->orderBy('created_at', 'desc')

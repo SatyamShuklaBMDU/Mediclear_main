@@ -13,10 +13,6 @@
 
 
 <style>
-
-
-
-
     .dt-button{
         background-color: #1cc88a !important;
         background-image: linear-gradient(180deg,#1cc88a 10%,#13855c 100%) !important;
@@ -26,14 +22,10 @@
 
     }
     </style>
-
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <h3 class="h3 mb-2 text-gray-800">Feedback</h3>
-
                     <form action="{{ url('/add-feedback') }}" method="POST">
                         @csrf
                         <div class="row dashboard-header">
@@ -63,6 +55,9 @@
                                                     type="submit">Filter</button>
                                             </div>
                                         </form>
+                                        <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
+                                            <a href="{{ url('/feedback') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
+                                        </div>
                                         <div class="row">
                                         </div>
 <div class="card-body" style="width: -webkit-fill-available;">
@@ -144,6 +139,7 @@
             <script>
                 var currentDate = new Date().toISOString().split('T')[0];
                 document.getElementById('enddate').setAttribute('max', currentDate);
+                document.getElementById('startdate').setAttribute('max', currentDate);
             </script>
             {{-- end model  --}}
 {{-- // start footer --}}

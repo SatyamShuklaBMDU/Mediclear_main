@@ -14,15 +14,10 @@ class CorporateBatchController extends Controller
 {
     public function corporateBatch()
     {
-
         $companyDetails = Company::select('id', 'name')->where('status', 'Active')->get();
-
         $corporateBatch = CorporateBatch::with(['corprateBelongCompany'])->orderBy('id', 'DESC')->get();
-
         return view('dashboard.corporatebatch', ['corporateBatch' => $corporateBatch, 'companyDetails' => $companyDetails]);
     }
-
-
     public function corporatefilter(Request $request)
     {
         $validate = Validator::make($request->all(), [
@@ -32,10 +27,7 @@ class CorporateBatchController extends Controller
         if ($validate->fails()) {
             return back()->withErrors($validate)->withInput();
         }
-
-
         $companyDetails = Company::select('id', 'name')->get();
-
         $corporatefilterBatchFilter = CorporateBatch::select(
             'corporatebatchs.id as corporatebatchs_id',
             'company.name as company_name',
@@ -48,60 +40,34 @@ class CorporateBatchController extends Controller
             ->whereDate('corporatebatchs.created_at', '>=', $request->fromdate)
             ->whereDate('corporatebatchs.created_at', '<=', $request->todate)
             ->get();
-
-
-
         $corporatefilterBatchFilterdate['fromdate'] = $request->fromdate;
         $corporatefilterBatchFilterdate['todate'] = $request->todate;
-
         return view('dashboard.corporatebatch', ['corporatefilterBatchFilterdate' => $corporatefilterBatchFilterdate, 'companyDetails' => $companyDetails, 'corporatefilterBatchFilter' => $corporatefilterBatchFilter]);
-
-
-
-
-
     }
-
-
-
-
     public function corporateBatchCompanyData(Request $request)
     {
         $company_data = Company::where('id', $request->id)->get();
         return response()->json(['company_data' => $company_data]);
     }
-
     public function corporateBatchSave(Request $request)
     {
         $validate = Validator::make($request->all(), [
-
             'company_corporate_batch_no' => ['required', 'string', Rule::unique('corporatebatchs', 'batch_no')],
         ]);
 
         if ($validate->fails()) {
-
-
             return redirect('/corporate-batch')->withErrors($validate)->withInput();
         }
-
-
-
         $input = [
             'batch_no' => $request->company_corporate_batch_no,
             'test' => $request->company_test,
             'company_id' => $request->company_id,
         ];
-
-
         $corporateBatchData = CorporateBatch::create($input);
-
         if ($corporateBatchData) {
             return redirect('/corporate-batch')->with('message', 'User Batch Added Successfully');
         }
-
-
     }
-
     public function corporateBatchEdit(Request $request)
     {
         // $corporateBatch = CorporateBatch::where('id', $request->id)->get();
@@ -109,13 +75,7 @@ class CorporateBatchController extends Controller
             ->join('company', 'company.id', '=', 'corporatebatchs.company_id')
             ->where('corporatebatchs.id', '=', $request->id)
             ->get();
-
         $corporateBatch[0]->corporatebatchs_id = (float) $request->id;
-
-
-
-
-
         return $corporateBatch;
     }
 

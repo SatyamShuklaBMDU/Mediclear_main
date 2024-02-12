@@ -236,10 +236,18 @@
             }
         });
 
+        if ($("#alluser").is(":checked")) {
+            $("input[type=checkbox]").prop('checked', true);
+        }      
+
+        $("#alluser").click(function(){ 
+                
+        $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+
+        });
 
 
-
-
+        
 
     });
 </script>

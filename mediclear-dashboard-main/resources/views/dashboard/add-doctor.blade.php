@@ -184,11 +184,9 @@
                                 <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item"
                                         href="{{ url('updateStatusDoctor/Active/' . $doctor->id) }}">Active</a>
-
                                 </div>
                             </div>
                         @endif
-
                     </td>
                     <td> <i class="fa-solid fa-pen-to-square text-success" style="cursor: pointer"
                             data-toggle="modal" data-target="#exampleModal1" style="font-size:1rem;"
@@ -321,5 +319,6 @@
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('enddate').setAttribute('max', currentDate);
+    document.getElementById('startdate').setAttribute('max', currentDate);
 </script>
 @include('include.footer')

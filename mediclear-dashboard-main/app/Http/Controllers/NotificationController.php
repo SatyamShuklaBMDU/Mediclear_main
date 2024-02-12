@@ -21,8 +21,13 @@ class NotificationController extends Controller
     //
 
     public function customerNotification(){
+        
+          
         $notification=Notification_for::orderBy('id','desc')->get();
+      
         return view('dashboard.notification',compact('notification'));
+        
+       
     }
     public function deleteNotification(Request $request){
         Notification_for::where('id',$request->id)->delete();
@@ -216,7 +221,16 @@ public function showBannerAPI(Request $request){
     return response()->json(['banner'=>$imgobject,'status'=>true],200);
 }
 
-
+public function filterNotification(Request $request){
+    
+    if($request->filterVal=='all'){
+        $notification=Notification_for::orderBy('id','desc')->get();
+    }else{
+    $notification=Notification_for::where('for',$request->filterVal)->orderBy('id','desc')->get(); 
+   
+    }
+    return response()->json(['notifications' => $notification, 'status' => "success"]);
+}
 
 
 

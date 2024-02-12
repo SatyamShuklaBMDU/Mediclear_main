@@ -21,32 +21,28 @@ use Yajra\DataTables\Facades\DataTables;
 class VertigoReportController extends Controller
 {
     public function pdf(Request $request)
-{
-    // Receive modal content from AJAX request
-    $modalContent = $request->input('modalContent');
-
-    // Include modal content in the data array
-    $data = [
-        'title' => 'My PDF Title',
-        'content' => 'This is the content of my PDF.',
-        'modalContent' => $modalContent,
-    ];
-    $pdf = new Dompdf();
-    $pdf->loadHtml(view('dashboard.vertigo.pdf', $data));
-    $pdf->setPaper('A4', 'portrait');
-    $pdf->render();
-    $pdfContent = $pdf->output();
-
-    $fileName = 'my_pdf_file.pdf';
-
-    return response()->streamDownload(
-        function () use ($pdfContent) {
-            echo $pdfContent;
-        },
-        $fileName
-    );
-}
-
+    {
+        // Receive modal content from AJAX request
+        $modalContent = $request->input('modalContent');
+        // Include modal content in the data array
+        $data = [
+            'title' => 'My PDF Title',
+            'content' => 'This is the content of my PDF.',
+            'modalContent' => $modalContent,
+        ];
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('dashboard.vertigo.pdf', $data));
+        $pdf->setPaper('A4', 'portrait');
+        $pdf->render();
+        $pdfContent = $pdf->output();
+        $fileName = 'my_pdf_file.pdf';
+        return response()->streamDownload(
+            function () use ($pdfContent) {
+                echo $pdfContent;
+            },
+            $fileName
+        );
+    }
     public function show()
     {
         return QrCode::generate(
@@ -56,10 +52,7 @@ class VertigoReportController extends Controller
     public function customersvertigoreports(Request $request)
     {
         if ($request->ajax()) {
-
             $medicalmodel = 'App\\\\Models\\\\CustomerBatch';
-
-
             $customerBatch = CustomerBatch::select(
                 'customerbatchs.id as batch_id',
                 'customers.name as name',
@@ -75,13 +68,7 @@ class VertigoReportController extends Controller
                 ->join('customers', 'customerbatchs.customer_id', '=', 'customers.id')
                 ->orderBy('customerbatchs.created_at', 'DESC')
                 ->get();
-
-
-
             $data = $customerBatch;
-
-
-
             return DataTables::of($data)
                 ->addIndexColumn()
 
@@ -98,41 +85,22 @@ class VertigoReportController extends Controller
         }
         return view('dashboard.vertigo.customervertigoreport');
     }
-
-
     public function corporatevertigoreports(Request $request)
     {
         if ($request->ajax()) {
-
             $medicalmodel = 'App\\\\Models\\\\CorporateBatch';
-
-
             $corporateBatch = CorporateBatch::select(
                 'corporatebatchs.id as batch_id',
                 'company.name as company_name',
                 'company.email as company_email',
                 'corporatebatchs.batch_no as company_batch_no',
                 'corporatebatchs.test as total_test',
-
                 DB::raw("DATE_FORMAT(corporatebatchs.created_at ,'%d/%m/%Y') AS date"),
                 DB::raw("(SELECT COUNT(*) as count FROM medical_details WHERE cusmerbatchdetails_id=corporatebatchs.id AND cusmerbatchdetails_type='$medicalmodel')AS count")
-
-
-
             )
                 ->join('company', 'corporatebatchs.company_id', '=', 'company.id')
                 ->orderBy('corporatebatchs.created_at', 'DESC')
                 ->get();
-
-
-
-
-
-
-
-
-
-
             $data = $corporateBatch;
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -149,8 +117,6 @@ class VertigoReportController extends Controller
         }
         return view('dashboard.vertigo.corporatevertigoreport');
     }
-
-
     public function customerconsumervertigoreports(Request $request)
     {
         if ($request->ajax()) {
@@ -198,8 +164,6 @@ class VertigoReportController extends Controller
         $certificationNumber = MedicalDetail::select('certification_number')->get();
         return view('dashboard.vertigo.customer-consumervertigoreport', ['certificationNumber' => $certificationNumber]);
     }
-
-
     public function corporateconsumervertigoreports(Request $request)
     {
         if ($request->ajax()) {
@@ -294,87 +258,51 @@ class VertigoReportController extends Controller
     }
     public function doctordatabasesid(Request $request)
     {
-       
-
         $doctordata = Doctor::select('sign', 'seal_of_doctor', 'registration_number', 'id')->where('id', $request->id)->get();
         return $doctordata;
-
-
-
     }
-
-
-
     public function doctorfinalresult(Request $request)
-    {
-
-        
+    { 
         // $request->validate([
         //     'ResultCount' => [new CountResultGivenByDoctor($request->consumerid)],
            
         // ]);
-
-       
-       
-      
         $validator = Validator::make($request->all(), [
             'ResultCount' => ['required',new CountResultGivenByDoctor($request->consumerId)],
            
         ]);
-
-
         if ($validator->fails()) {
             return response()->json([
                 "status" => "error",
                 "message" => $validator->errors()
             ], 403);
         }
-
-
-
-
-
         $doctorFinalReport = MedicalDetail::where('id', $request->consumerId)->update([
             'doctorid' => $request->doctorId,
             'doctor_final_result' => $request->doctorFinalResult,
             'doctor_submit_date'=>Carbon::now()->format('Y-m-d')
-
         ]);
-
         $consumerFinalVerticoDataByDoctor=MedicalDetail::select('certification_number',
         'doctor_final_result','consumer_name','consumer_addhar_number' ,'doctor_submit_date',
         'consumer_dob' ,'doctor_final_result','gender')
         ->where('id',$request->consumerId)
         ->get();
-
         $sendData=[];
         foreach($consumerFinalVerticoDataByDoctor as $k=>$value){
             $sendData['certification_number']=$value->certification_number;
-
             $blurredAadhar = 'xxxx-xxxx-' . substr($value->consumer_addhar_number, -4);
-
             $sendData['consumer_addharnumber']=$blurredAadhar;
-
             $carbonDate = Carbon::createFromFormat('Y-m-d', $value->doctor_submit_date);
-
             $consumerDob=Carbon::createFromFormat('Y-m-d', $value->consumer_dob);
             $formatedConsumerDob= $consumerDob->format('d-M-Y');
-
-
             $formattedDate = $carbonDate->format('d-M-Y');
-
             $carbonDate->addYear(); 
             $lastValidDate = $carbonDate->format('d-M-Y');
-
-
-           
-
             $sendData['doctor_submit_date']=$formattedDate;
             $sendData['lastvalid_date']=$lastValidDate; 
             $sendData['consumerdob']= $formatedConsumerDob;
             $sendData['consumername']=$value->consumer_name;
             $sendData['gender']=$value->gender;
-
             if($value->doctor_final_result=='1'){
                 $sendData['result']="FIT";
             }elseif($value->doctor_final_result=='0'){
@@ -382,28 +310,15 @@ class VertigoReportController extends Controller
             }elseif($value->doctor_final_result=='-1'){
                 $sendData['result']="Temorarily UNFIT";
             }          
-
         }
-
-
         $consumerQrData = 'Name:' . $sendData['consumername'] . ' ' 
                      .'AdharNumber:' .$sendData['consumer_addharnumber'] .' '
                      .'DOB:'  .$sendData['consumerdob'] .' ' 
                     .'Valid up To:' .$sendData['lastvalid_date'] .' ' 
                     .'Gender:' .$sendData['gender'] .' ' 
                      .'Final Vertico Report:'  .$sendData['result'] .' ' ;
-
-
           $qrcodeConsumer=  QrCode::size(256)->generate( $consumerQrData);
-
           return  $qrcodeConsumer;
-
-
-
-
     }
-
-
-
 }
 
