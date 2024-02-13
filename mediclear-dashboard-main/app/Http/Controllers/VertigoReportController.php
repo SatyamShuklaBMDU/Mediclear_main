@@ -262,11 +262,7 @@ class VertigoReportController extends Controller
         return $doctordata;
     }
     public function doctorfinalresult(Request $request)
-    { 
-        // $request->validate([
-        //     'ResultCount' => [new CountResultGivenByDoctor($request->consumerid)],
-           
-        // ]);
+    {
         $validator = Validator::make($request->all(), [
             'ResultCount' => ['required',new CountResultGivenByDoctor($request->consumerId)],
            

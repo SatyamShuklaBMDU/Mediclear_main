@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\MedicalDetail;
 use App\Models\Test;
 use Carbon\Carbon;
@@ -802,5 +803,74 @@ class TestController extends Controller
         }
 
     }
+    public function certificationreport(Request $request)
+    {
+        try {
+            $value = MedicalDetail::select(
+                'certification_number',
+                'doctor_final_result',
+                'consumer_name',
+                'consumer_addhar_number',
+                'doctor_submit_date',
+                'consumer_dob',
+                'doctor_final_result',
+                'gender',
+                'consumer_profile_image_name',
+                'cusmerbatchdetails_type'
+            )
+            ->where('certification_number', $request->certification)
+            ->first();
 
+            if (!$value) {
+                return response()->json(['error' => 'Medical detail not found for the given certification number'], 404);
+            }
+
+            $company_name = '';
+            if ($value->cusmerbatchdetails_type == "App\Models\CorporateBatch") {
+                $corporate = DB::table('medical_details')
+                    ->select('medical_details.cusmerbatchdetails_id', 'corporatebatchs.company_id')
+                    ->join('corporatebatchs', 'corporatebatchs.id', '=', 'medical_details.cusmerbatchdetails_id')
+                    ->first();
+                
+                if ($corporate) {
+                    $company = Company::find($corporate->company_id);
+                    $company_name = $company->name;
+                }
+            }
+
+            $sendData = [];
+            $sendData['certification_number'] = $request->certification;
+            $blurredAadhar = 'xxxx-xxxx-' . substr($value->consumer_addhar_number, -4);
+            $sendData['consumer_addharnumber'] = $blurredAadhar;
+            $carbonDate = Carbon::createFromFormat('Y-m-d', $value->doctor_submit_date);
+            $formattedDate = $carbonDate->format('d-M-Y');
+            $carbonDate->addYear(); 
+            $lastValidDate = $carbonDate->format('d-M-Y');
+            $sendData['doctor_submit_date'] = $formattedDate;
+            $sendData['lastvalid_date'] = $lastValidDate; 
+            $sendData['consumername'] = $value->consumer_name;
+            $sendData['company_name'] = $company_name;
+            $sendData['gender'] = $value->gender;
+            $sendData['profile_pic'] = $value->consumer_profile_image_name;
+
+            switch ($value->doctor_final_result) {
+                case '1':
+                    $sendData['result'] = "FIT";
+                    break;
+                case '0':
+                    $sendData['result'] = "UNFIT";
+                    break;
+                case '-1':
+                    $sendData['result'] = "Temporarily UNFIT";
+                    break;
+                default:
+                    $sendData['result'] = "Unknown";
+                    break;
+            }
+
+            return response()->json(['data' => $sendData], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while processing the request.', 'message' => $e->getMessage()], 500);
+        }
+    }
 }

@@ -54,6 +54,7 @@ Route::post('/videonystagmography', [TestController::class, 'videonystagmography
 Route::post('/flatfoot', [TestController::class, 'flatfoot'])->middleware('auth:sanctum');
 Route::post('/bppv', [TestController::class, 'bppv'])->middleware('auth:sanctum');
 Route::post('/fukuda', [TestController::class, 'fukuda'])->middleware('auth:sanctum');
+Route::post('/get-report',[TestController::class,'certificationreport']);
 //Notification
 Route::post('/notification', [NotificationController::class, 'notification'])->middleware('auth:sanctum');
 Route::post('/newnotification', [NotificationController::class, 'newnotification'])->middleware('auth:sanctum');

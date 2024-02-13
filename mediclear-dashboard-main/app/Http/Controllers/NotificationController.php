@@ -21,13 +21,8 @@ class NotificationController extends Controller
     //
 
     public function customerNotification(){
-        
-          
         $notification=Notification_for::orderBy('id','desc')->get();
-      
-        return view('dashboard.notification',compact('notification'));
-        
-       
+        return view('dashboard.notification',compact('notification'));       
     }
     public function deleteNotification(Request $request){
         Notification_for::where('id',$request->id)->delete();
@@ -94,14 +89,10 @@ class NotificationController extends Controller
 
  public function notification(Request $req)
     {
-
         $status = $req->user()->status;
         if ($status == "Deactive") {
             return response()->json(['status' => false], 404);
         }
-
-
-
         $notifications = $req->user()->notifications;
 
 
@@ -222,20 +213,12 @@ public function showBannerAPI(Request $request){
 }
 
 public function filterNotification(Request $request){
-    
     if($request->filterVal=='all'){
         $notification=Notification_for::orderBy('id','desc')->get();
     }else{
     $notification=Notification_for::where('for',$request->filterVal)->orderBy('id','desc')->get(); 
-   
     }
+    // dd($notification);
     return response()->json(['notifications' => $notification, 'status' => "success"]);
 }
-
-
-
-
-
-
-
 }

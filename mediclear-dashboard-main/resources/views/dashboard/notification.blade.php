@@ -107,19 +107,17 @@
                 
                     
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)"     name="for" id="inlineRadio1" value="all">
-                        <label class="form-check-label" for="inlineRadio1">All</label>
+                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)" name="for" id="inlinefilterRadio1" value="all">
+                        <label class="form-check-label" for="inlinefilterRadio1">All</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)"   name="for" id="inlineRadio2" value="corporate">
-                        <label class="form-check-label" for="inlineRadio2">For Employee</label>
+                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)" name="for" id="inlinefilterRadio2" value="corporate">
+                        <label class="form-check-label" for="inlinefilterRadio2">For Employee</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)"  name="for" id="inlineRadio3" value="customer">
-                        <label class="form-check-label" for="inlineRadio3">For Customer</label>
+                        <input class="form-check-input checks" type="radio" onclick="filterDatas(this)" name="for" id="inlinefilterRadio3" value="customer">
+                        <label class="form-check-label" for="inlinefilterRadio3">For Customer</label>
                     </div>
-                    
-                    
                 </form>
             </div>
                 <!--end form-->
@@ -132,7 +130,6 @@
                             <th >Date</th>
                             <th >Subject</th>
                             <th >Messages</th>
-                            
                             {{-- <th >Action</th> --}}
                         </tr>
                     </thead>
@@ -140,7 +137,6 @@
                         @php
                             $i=1;
                         @endphp
-                       
                         @foreach ( $notification as $notify )
                         <tr>
                             <td >{{$i}}</td>
@@ -148,7 +144,6 @@
                             <td >{{$notify->created_at->format('m/d/Y')}}</td>
                             <td >{{$notify->subject}}</td>
                             <td >{{$notify->message}}</td>
-                            
                             {{-- <td class="text-center"><i class="fa-solid fa-trash text-danger"  onclick="{document.getElementById('id1').value={{ $notify->id }}}" data-toggle="modal" data-target="#exampleModal"></i></td> --}}
                         </tr>
                         @php
@@ -158,9 +153,27 @@
                     </tbody>
                 </table>
                 <!--end table-->
+                <!-- Add a separate table for filter data -->
+            <table id="filterDataTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>For</th>
+                        <th>Date</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filtered data will be displayed here -->
+                </tbody>
+            </table>
+
             </div>
         </div>
         <!-- 4-blocks row end -->
+        <!-- Add a div to display filter data -->
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -185,22 +198,8 @@
             </div>
         </div>
     </div>
-</div>
-
-{{-- end model  --}}
-
-
-
-
-
-
-
     </div>
-    <!-- Main content ends -->
-    <!-- Container-fluid ends -->
-
-
-
+    </div>
     <script>
    function resetFunction(){
     $("input[type=radio]").prop('checked', false);
@@ -208,53 +207,54 @@
 </script>
 <script>
     $(document).ready(function() {
-        var table = $('#notifications').DataTable({
-            scrollX: true,
-           
-            
+        var tableNotifications = $('#notifications').DataTable({
+            scrollX: true
         });
     });
-
-
     function filterDatas(element) {
-    var filterVal = element.value;
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $.ajax({
-        type: 'get',
-        url: "{{ url('filter_notification') }}",
-        data: {
-            filterVal: filterVal
-        },
-        success: function(data) {
-            console.log(data.notifications);
-            $("#filtervala").empty();
-            if (data.status == "success") {
-                let filterLength = data.notifications.length;
-                for (let i = 0; i < filterLength; i++) {
-                    var htmls = "<tr>";
-                    htmls += "<td>" + (i + 1) + "</td>";
-                    htmls += "<td>" + data.notifications[i].for + "</td>";
-                    htmls += "<td>" + data.notifications[i].created_at + "</td>";
-                    htmls += "<td>" + data.notifications[i].subject + "</td>";
-                    htmls += "<td>" + data.notifications[i].message + "</td>";
-                    htmls += "</tr>";
-                    $("#filtervala").append(htmls);
-                }
+        var filterVal = element.value;
+        var tbody = document.querySelector('#filterDataTable tbody');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-        }
-    });
-}
-
+        });
+        $.ajax({
+            type: 'get',
+            url: "{{ url('filter_notification') }}",
+            data: {
+                filterVal: filterVal
+            },
+            success: function(data) {
+                if (data.status == "success") {
+                    $('#notifications').closest('.dataTables_wrapper').hide();
+                    tbody.innerHTML = '';
+                    $('#filterDataTable').show();
+                    let filterLength = data.notifications.length;
+                    for (let i = 0; i < filterLength; i++) {
+                        var htmls = "<tr>";
+                        htmls += "<td>" + (i + 1) + "</td>";
+                        htmls += "<td>" + data.notifications[i].for + "</td>";
+                        var createdAt = new Date(data.notifications[i].created_at);
+                        var date = createdAt.toLocaleDateString();
+                        htmls += "<td>" + date + "</td>";
+                        htmls += "<td>" + data.notifications[i].subject + "</td>";
+                        htmls += "<td>" + data.notifications[i].message + "</td>";
+                        htmls += "</tr>";
+                        $("#filterDataTable tbody").append(htmls);
+                    }
+                    if ($.fn.DataTable.isDataTable('#filterDataTable')) {
+                        $('#filterDataTable').DataTable().destroy();
+                    }
+                    $('#filterDataTable').DataTable({
+                        scrollX: true,
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
 </script>
-<!-- footer-file-start -->
 @include('include.footer')
-<!-- footer-file-start -->

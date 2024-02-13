@@ -2245,7 +2245,6 @@
                 {{-- <div id="c_pre-bp-chart-container" style="height: 400px;"></div> --}}
                 <div class="container">
                     <div class="row">
-
                     </div>
                     <div class="col-12 d-flex justify-content-center">
                         <button class="btn btn-primary" id="doctor"
@@ -2263,8 +2262,7 @@
 </button>
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" style="
-  max-width: 1000px;" role="document">
+    <div class="modal-dialog" style="max-width: 1000px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle"></h5>
@@ -2273,7 +2271,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <div class="container">
                     <form action="" id="consumer_pdf" class=" shadow-sm" style="border:2px solid #339999;">
                         <div class="top-section d-flex justify-content-around">
@@ -4058,17 +4055,9 @@
 
                     },
                     success: (data) => {
-
-
-
-
                         $(`#${button}`).css('background-color', '#4CC790');
-
                         $('#qrcolum').html(data);
-
                         Swal.fire("Saved!", "", "success");
-
-
                     },
                     error: (data) => {
 
