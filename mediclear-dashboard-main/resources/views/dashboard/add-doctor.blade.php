@@ -130,7 +130,7 @@
 </div>
 </div>
 <!--  -->
-<div class="card-body" style="OVERFLOW: scroll;">
+<div class="card-body">
     <table id="example" class="display nowrap" style="width:100%">
         <thead>
             <tr>

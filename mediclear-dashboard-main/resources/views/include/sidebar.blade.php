@@ -162,8 +162,8 @@
                 <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="customer.php">Customer</a>
-                        <a class="collapse-item" href="corporate.php">Company</a>
+                        <a class="collapse-item" href="{{Route('customer-account-section')}}">Customer</a>
+                        <a class="collapse-item" href="{{Route('company-account-section')}}">Company</a>
                     </div>
                 </div>
             </li>

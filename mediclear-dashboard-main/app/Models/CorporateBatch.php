@@ -28,10 +28,7 @@ class CorporateBatch extends Model
 
     public function corprateBelongCompany()
     {
-
-
         return $this->belongsTo(Company::class, 'company_id', 'id');
-
     }
 
     public function getbatchdetails()

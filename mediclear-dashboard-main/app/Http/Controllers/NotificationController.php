@@ -24,6 +24,15 @@ class NotificationController extends Controller
         $notification=Notification_for::orderBy('id','desc')->get();
         return view('dashboard.notification',compact('notification'));       
     }
+    public function customerNotificationFilterByDate(Request $request){
+        $start = $request->start;
+        $end = $request->end;
+        $notification = Notification_for::whereDate('created_at', '>=', $start)
+            ->whereDate('created_at', '<=', $end)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('dashboard.notification', compact('notification', 'start', 'end'));
+    }
     public function deleteNotification(Request $request){
         Notification_for::where('id',$request->id)->delete();
         return redirect()->back()->with('message','Delete successful!');

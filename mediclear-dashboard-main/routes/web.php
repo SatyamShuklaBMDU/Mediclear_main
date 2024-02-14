@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Company;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ComplaintController;
@@ -98,6 +99,7 @@ Route::middleware('auth')->group(function () {
     // Notifications
     Route::middleware('permission:notification')->group(function () {
         Route::get('/customer-notification', [NotificationController::class, 'customerNotification']);
+        Route::post('/customer-notification-filter', [NotificationController::class, 'customerNotificationFilterByDate']);
         Route::post('/sendNotification', [NotificationController::class, 'sendNotification']);
         Route::get('/filter_notification', [NotificationController::class, 'filterNotification']);
     });
@@ -118,6 +120,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/banner/update', [NotificationController::class, 'addBanner']);
     Route::get('/banners/delete/{id}', [NotificationController::class, 'deleteBanner']);
     // banner end
+    Route::get('/customer-account-section', [AccountController::class, 'CustomerSection'])->name('customer-account-section');
+    Route::post('/customer-account-section-filterdata', [AccountController::class, 'filterCustomer'])->name('customer-filter-account');
+    Route::post('/company-account-section-filterdata', [AccountController::class, 'filterCompany'])->name('Company-filter-account');
+    Route::get('/company-account-section', [AccountController::class, 'CompanySection'])->name('company-account-section');
     //corporate batch
      Route::middleware('permission:corporatebatch')->group(function () {
         Route::get('/corporate-batch', [CorporateBatchController::class, 'corporateBatch']);
