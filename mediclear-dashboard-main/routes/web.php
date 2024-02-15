@@ -17,9 +17,8 @@ use App\Http\Controllers\AdminManagesController;
 use App\Http\Controllers\CorporateHistory;
 use App\Http\Controllers\CustomerHistory;
 use App\Http\Controllers\ConsumerHistoryController;
-
-
 use App\Http\Controllers\CorporateBatchController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VertigoReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -147,35 +146,26 @@ Route::middleware('auth')->group(function () {
         Route::get('/qrcode', [VertigoReportController::class, 'show']);
         Route::post('/doctor-final-test-result', [VertigoReportController::class, 'doctorfinalresult'])->name('doctor-final-test-result');
     });
-
     // pdf 
     Route::post('/consumer-download-pdf', [VertigoReportController::class, 'pdf']);
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     //Admin Manges//
     Route::name('admin.')->namespace('Admin')->middleware('permission:adminmanages')->group(function () {
-
-
         Route::match(['get', 'post'], '/adminmanages', [AdminManagesController::class, 'adduser'])->name('addusers');
         Route::get('/showusers', [AdminManagesController::class, 'viewUserList'])->name('showuserlist');
         Route::post('/edit-users', [AdminManagesController::class, 'editUser'])->name('edituserlist');
         Route::post('/update-users', [AdminManagesController::class, 'updateUser'])->name('updateuserlist');
-
-
     });
-
-
     Route::get('/corporatehistory', [CorporateHistory::class, 'showCorporateHistory']);
-
     Route::get('/report', [CorporateHistory::class, 'showReport']);
-
-
     Route::get('/customerhistory', [CustomerHistory::class, 'showCustomerHistory']);
-
-
+    // Payment Route
+    Route::get('/get-customer-payment',[PaymentController::class,'getCustomer'])->name('customer-payment');
+    Route::get('/get-company-payment',[PaymentController::class,'getCompany'])->name('company-payment');
+    Route::post('/customer-payment-filterdata', [PaymentController::class, 'filterCustomer'])->name('customer-filter-payment');
+    Route::post('/company-payment-filterdata', [PaymentController::class, 'filterCompany'])->name('company-filter-payment');
 
 });
 

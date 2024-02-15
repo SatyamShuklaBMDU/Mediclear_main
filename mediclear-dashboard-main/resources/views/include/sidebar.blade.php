@@ -130,8 +130,8 @@
                     </div>
                 </li>
             @endif
-            <hr class="sidebar-divider my-0">
-            <!-- Nav Item - Utilities Collapse Menu -->
+            {{-- <hr class="sidebar-divider my-0"> --}}
+            {{-- <!-- Nav Item - Utilities Collapse Menu -->
             @if (
                 (in_array('payment', $Userpermission) && isset($Userpermission)) ||
                     (isset($Userpermission[0]) && $Userpermission[0] == 'all'))
@@ -144,12 +144,12 @@
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="customer-payment.php">Customer Payment</a>
-                            <a class="collapse-item" href="corporate-payment.php">Corporate Payment</a>
+                            <a class="collapse-item" href="{{Route('customer-payment')}}">Customer Payment</a>
+                            <a class="collapse-item" href="{{Route('company-payment')}}">Corporate Payment</a>
                         </div>
                     </div>
                 </li>
-            @endif
+            @endif --}}
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <!-- account seession -->

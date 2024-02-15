@@ -54,13 +54,13 @@ class CorporateBatchController extends Controller
         $validate = Validator::make($request->all(), [
             'company_corporate_batch_no' => ['required', 'string', Rule::unique('corporatebatchs', 'batch_no')],
         ]);
-
         if ($validate->fails()) {
             return redirect('/corporate-batch')->withErrors($validate)->withInput();
         }
         $input = [
             'batch_no' => $request->company_corporate_batch_no,
             'test' => $request->company_test,
+            'per_test_amount' =>$request->per_test_amount,
             'company_id' => $request->company_id,
         ];
         $corporateBatchData = CorporateBatch::create($input);
@@ -81,72 +81,42 @@ class CorporateBatchController extends Controller
 
     public function corporateBatchUpdate(Request $request)
     {
-
-
         $validate = Validator::make($request->all(), [
-
             'corporateBatchNo' => ['required', 'string', Rule::unique('corporatebatchs', 'batch_no')->ignore($request->corporateBatchId)],
         ]);
-
-
-
         // if ($validate->fails()) {
-
-
         //      return back()->withErrors($validate)->withInput();
         //  }
-
-
-
         $update = [
             'batch_no' => $request->corporateBatchNo,
             'test' => $request->corporateTest,
+            'per_test_amount' => $request->PerTestAmount,
             'company_id' => $request->companyId,
-
         ];
         $corporateBatchDataUpdate = CorporateBatch::where('id', $request->corporateBatchId)->update($update);
-
-
-
         $corporateBatchWithComapny = DB::table('corporatebatchs')
             ->join('company', 'company.id', '=', 'corporatebatchs.company_id')
             ->where('corporatebatchs.id', '=', $request->corporateBatchId)
             ->get();
-
-
         $corporateBatchWithComapny = CorporateBatch::select(
             'corporatebatchs.id as corporatebatchs_id',
             'company.name as company_name',
             'corporatebatchs.batch_no as corporatebatchs_batch_no',
             'corporatebatchs.test as test',
+            'corporatebatchs.per_test_amount as pertestamount',
             'company.mobile_no as mobile_no',
             'company.email as email',
             DB::raw("DATE_FORMAT(corporatebatchs.created_at ,'%d/%m/%Y') AS date")
         )->join('company', 'corporatebatchs.company_id', '=', 'company.id')
             ->where('corporatebatchs.id', '=', $request->corporateBatchId)
             ->get();
-
-
-
-
-
-
-
-
-
-
-
-
         if ($corporateBatchDataUpdate) {
             return response()->json([
                 'corporateBatchWithComapny' => $corporateBatchWithComapny,
                 'message' => 'Batch Data Update Sucessfully'
             ]);
         }
-
     }
-
-
     public function corporateBatchDelete(Request $request)
     {
         $delete = CorporateBatch::where('id', '=', $request->id)->delete();

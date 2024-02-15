@@ -15,10 +15,9 @@ class CustomerBatch extends Model
     protected $fillable = [
         'batch_no',
         'test',
+        'per_test_amount',
         'customer_id',
-
     ];
-
     public function customers()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');

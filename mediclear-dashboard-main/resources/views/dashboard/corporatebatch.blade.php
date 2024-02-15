@@ -259,24 +259,19 @@
 <script>
     ///updated corporate Batch/////////////////////////////////////////////////////
     function updatecorporateData(button) {
-
         var bacthId = button.id.replace("edit", "");
-
         console.log(bacthId);
         $('#myModal').show();
         $('#closeBatchEditForm').on('click', function() {
             console.log('hhjh');
             $('#myModal').hide();
             $('#currentselect').html('');
-
         })
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $.ajax({
             type: 'post',
             url: "{{ url('corporate-batch-edit') }}",
@@ -293,73 +288,48 @@
                 $('#editcompanyProfile').val(data[0].company_id)
                 // companyProfile
                 $('#myModal').show();
-
                 $('#userUpdateButton').click(function(event) {
                     event.preventDefault();
                     console.log('dddd');
-
-
                     let corporateBatchNo = $('#batch_no').val();
                     let corporateTest = $('#corporate_test').val();
+                    let PerTestAmount = $('#per_test_amount').val();
                     let corporateBatchId = $('#corporateBatchId').val();
                     let corporateId = $('#corporateId').val();
                     let companyId=$('#editcompanyProfile').val();
-                   
-
-
                     let formData = {
                         corporateBatchNo: corporateBatchNo,
                         corporateTest: corporateTest,
+                        PerTestAmount: PerTestAmount,
                         corporateBatchId: corporateBatchId,
                         corporateId: corporateId,
                         companyId:companyId
-
-
                     }
-
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-
                     $.ajax({
                         type: 'post',
                         url: "{{ url('corporate-batch-update') }}",
                         data: formData,
                         success: (data) => {
-                          
                             $('#myModal').hide();
                             let currentselect=$('#currentselect').html('');
                             $('#editcompanyProfile').val('')
-
-                         
-                            
-
                             let updatedCorporateBatchDataWithCompany = data['corporateBatchWithComapny'];
                             let updatedCorporteBatchId=data['corporateBatchWithComapny'][0].corporatebatchs_id;
-
-                         
-        
-
-                          
-
-
                             let updatedCompanyDate = data['corporateBatchWithComapny'][0].date;
-
-
                             let updatedCorporateBatchDataId =`tr${data['corporateBatchWithComapny'][0].corporatebatchs_id}`;
-                                
-
                             let thScopId = `row${data['corporateBatchWithComapny'][0].corporatebatchs_id}`;
-
                             let thScopIdInnerHTML = $(`#${thScopId}`).html();
-
                               let updatedhtml = ` <th  scope="row" id="${thScopId}" class="sorting_1">${thScopIdInnerHTML}</th>
                                       <td>${updatedCompanyDate}</td>
                                       <td>${data['corporateBatchWithComapny'][0].company_name}</td>
                                       <td>${data['corporateBatchWithComapny'][0].corporatebatchs_batch_no}</td>
                                       <td>${data['corporateBatchWithComapny'][0].test}</td>
+                                      <td>${data['corporateBatchWithComapny'][0].pertestamount}</td>
                                       <td>${data['corporateBatchWithComapny'][0].email}</td>
                                       <td>${data['corporateBatchWithComapny'][0].mobile_no}</td>
                                      <td>
@@ -370,29 +340,13 @@
                                               <i class="fa-solid fa-trash" style="font-size:1rem;"></i>
                                           </button>
                                       </td>`
-
-
-
                               $(`#${updatedCorporateBatchDataId}`).html(updatedhtml);
-
-
-
-
-
-
-
                         },
                         error: function(data) {
                             console.log(data);
 
                         }
-
-
-
-
-
                     });
-
                 });
 
 
@@ -447,7 +401,6 @@
 
 <div class="modal" id="myModal">
     <div class="modal-dialog">
-
         <div class="modal-content">
             <div class="container-fluid">
                 <div class="row">
@@ -457,36 +410,36 @@
                         <h4 class="mt-4">Edit User Profile</h4>
                     </div>
                 </div>
-
                 <!-- Modal Header -->
                 <div class="row dashboard-header" style="background: #e5e5e5;">
                     <div class="col-md-11  mx-auto">
                         <form class="notification-form shadow rounded" action="" method="post" id="userFormData">
                             <div class="form-group">
-
                                 <label for="batch_no">Batch No</label>
                                 <input type="text" name="batch_no" value="{{ old('batch_no') }}" class="form-control"
                                     id="batch_no" aria-describedby="textHelp" placeholder="please enter your batch id">
-
                                 @if ($errors->has('batch_no'))
                                     <span class="help-block">{{ $errors->first('batch_no') }}</span>
                                 @endif
-
                             </div>
-
                             <div class="form-group">
-
                                 <label for="corporate_test">corporate Test</label>
                                 <input type="text" name="cutomer_test" value="{{ old('cutomer_test') }}"
                                     class="form-control" id="corporate_test" aria-describedby="textHelp"
                                     placeholder="please enter your test">
-
                                 @if ($errors->has('corporate_test'))
                                     <span class="help-block">{{ $errors->first('batch_no') }}</span>
                                 @endif
-
                             </div>
-
+                            <div class="form-group">
+                                <label for="per_test_amount">Per Test Amount</label>
+                                <input type="text" name="per_test_amount" value="{{ old('per_test_amount') }}"
+                                    class="form-control" id="per_test_amount" aria-describedby="textHelp"
+                                    placeholder="please enter your Per Test Amount">
+                                @if ($errors->has('per_test_amount'))
+                                    <span class="help-block">{{ $errors->first('batch_no') }}</span>
+                                @endif
+                            </div>
                             <div class="form-group">
                                 <div class="main">
                                     <label for="">Company List </label>
@@ -504,28 +457,16 @@
                                     </select>
                                 </div>
                             </div>
-
-
-
-
-
-
                             <input type="hidden" id="corporateBatchId" name="corporateBatchId" value="">
-
                             <input type="hidden" id="corporateId" name="corporateId" value="">
-
-
                             <!-- <div class="col-md-4"> -->
-
                     </div>
                     <button type="submit" class="btn btn-dark btn-md" style="margin: 30px 0px 0px;"
                         id="userUpdateButton">Update corporate Batch
                     </button>
                 </div>
                 </form>
-
             </div>
-
         </div>
     </div>
 </div>
@@ -603,9 +544,6 @@ s
 
     <!-- Page Heading -->
     <h3 class="h3 mb-2 text-gray-800">Company Batch</h3>
-
-
-
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
             <li class="breadcrumb-item"><a href="#"><i class="fa-solid fa-house text-secondary"></i></a></li>
@@ -614,10 +552,6 @@ s
             <li class="breadcrumb-item active" aria-current="page">Company Batch</li>
         </ol>
     </nav>
-
-  
-
-
     <!--  3 -row start block -->
     <div class="row dashboard-header">
         <div class="col-md-12">
@@ -645,13 +579,11 @@ s
                                 
                             </div>
                         </div>
-
                         <!--  -->
                          <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
                             <button class="btn  bg-gradient-success text-white shadow-lg "
                                 type="submit">Filter</button>
                         </div>
-
                     </form>
                         <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
                             <button class="btn bg-gradient-success text-white shadow-lg "
@@ -661,10 +593,6 @@ s
                             <div class="Click-here"> <button class="btn    bg-gradient-success text-white shadow-lg"
                                     type="submit" style="padding: 4px 4px; font-size:17px; width:165px;"
                                     data-target=" #mymodel" data-toggle="modal"> Add Company</button>
-
-
-
-
                                 <!-- poppux box start -->
                                 <div class="modal mt-4" id="mymodel">
                                     <div class="modal-dialog m-auto">
@@ -695,12 +623,10 @@ s
                                                             </select>
                                                         </div>
                                                     </div> --}}
-
                                                     <div class="container">
                                                         <div class="main">
                                                             <label for="">Company List </label>
                                                             {{-- <input type="text" style="margin-right: 20px; margin-bottom:10px;" /> <br /> --}}
-
                                                             <select class="form-select"
                                                                 aria-label="Default select example"
                                                                 style="margin-right:40px;margin-bottom:10px;"
@@ -721,6 +647,8 @@ s
                                                     <label for="">Total Test </label>
                                                     <input type="text" name="company_test"
                                                         style="margin-left: 20px;margin-bottom:10px;" /> <br/>
+                                                    <label for="">Per Test Amount </label>
+                                                    <input type="text" name="per_test_amount" style="margin-left:20px;margin-bottom:10px;"/><br/>
                                                     <label for="">Email ID &nbsp;&nbsp;&nbsp;&nbsp;
                                                         &nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                     <input type="email" name="company_email" id="company_email"
@@ -734,25 +662,15 @@ s
                                                         ADD
                                                     </button>
                                                 </form>
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
- 
-
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!--  -->
-
-
 {{-- {{dd($corporateBatch)}}; --}}
 
                 <div class="card-body" style=" width: -webkit-fill-available;">
@@ -761,10 +679,10 @@ s
                             <tr style="border-bottom:3px solid black; font-weight:9px;">
                                 <th scope="col">Sr. No.</th>
                                 <th scope="col">Create Date</th>
-                                
                                 <th scope="col">Company Name</th>
                                 <th scope="col">Company Batch No.</th>
                                 <th scope="col">Total Test</th>
+                                <th scope="col">Per Test Amount</th>
                                 <th scope="col">Email ID</th>
                                 <th scope="col">Phone No.</th>
                                 {{-- <th scope="col">Status</th> --}}
@@ -775,14 +693,13 @@ s
                         <tbody>
                             @if(isset($corporatefilterBatchFilter))
                             @foreach($corporatefilterBatchFilter as $k=>$data)
-
                             <tr id="tr{{ $data->corporatebatchs_id }}">
                                 <th scope="row" id="row{{ $data->corporatebatchs_id }}">{{ ++$k }}</th>
                                 <td>{{ $data->date}}</td>
                                 <td>{{ $data->company_name }}</td>
                                 <td>{{ $data->corporatebatchs_batch_no }}</td>
-                                
                                 <td>{{ $data->test }}</td>
+                                <td>{{ $data->per_test_amount }}</td>
                                 <td>{{ $data->email }}</td>
                                 <td>{{ $data->mobile_no }}</td>
                                 <td>
@@ -796,12 +713,7 @@ s
                                     </button>
                                 </td>
                             </tr>
-
-
-
                             @endforeach
-
-
                             @endif
                             @if(isset($corporateBatch))
                             @foreach ($corporateBatch as $k => $batch)
@@ -811,6 +723,7 @@ s
                                     <td>{{ $batch->corprateBelongCompany->name }}</td>
                                     <td>{{ $batch->batch_no }}</td> 
                                     <td>{{ $batch->test }}</td>
+                                    <td>{{ $batch->per_test_amount }}</td>
                                     <td>{{$batch->corprateBelongCompany->email}}</td>
                                     <td>{{ $batch->corprateBelongCompany->mobile_no }}</td>
                                     
@@ -839,18 +752,11 @@ s
                                 </tr>
                             @endforeach
                             @endif
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
-
-
-
             <!-- datepicker code -->
-
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -862,21 +768,12 @@ s
                     format: 'dd-mm-yyyy',
                     autoclose: true
                 });
-
-
                 let html = $('#corporateProfile').html();
-
-
-
                 // $('#corporateProfile').change(function() {
                 //     console.log('helllo');
                 //     var selectedValue = $(this).val();
-
-
                 //     console.log('Selected Value: ' + selectedValue);
                 // });
-
-
                 function create_custom_dropdowns() {
                     $('select').each(function(i, select) {
                         if (!$(this).next().hasClass('dropdown-select')) {
@@ -900,9 +797,7 @@ s
                         '<div class="dd-search"><input id="txtSearchValue" autocomplete="off" onkeyup="filter()" class="dd-searchbox" type="text"></div>'
                     );
                 }
-
                 // Event listeners
-
                 // Open/close
                 $(document).on('click', '.dropdown-select', function(event) {
                     if ($(event.target).hasClass('dd-searchbox')) {
@@ -918,7 +813,6 @@ s
                         $(this).focus();
                     }
                 });
-
                 // Close when clicking outside
                 $(document).on('click', function(event) {
                     if ($(event.target).closest('.dropdown-select').length === 0) {
@@ -927,7 +821,6 @@ s
                     }
                     event.stopPropagation();
                 });
-
                 function filter() {
                     var valThis = $('#txtSearchValue').val();
                     $('.dropdown-select ul > li').each(function() {
@@ -941,14 +834,11 @@ s
                 $(document).on('click', '.dropdown-select .option', function(event) {
                     console.log(event);
                     let companyId = event.target.id;
-                   
-
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-
                     $.ajax({
                         type: 'post',
                         url: "{{ url('company-data-based-id') }}",
@@ -956,22 +846,13 @@ s
                             id: companyId
                         },
                         success: (data) => {
-
                              $('#company_id').val(data.company_data[0].id)
                              $('#company_email').val(data.company_data[0].email);
                              $('#company_mob').val(data.company_data[0].mobile_no);
-                        
-
-
-
                         },
                         error: (data) => {
-
                         }
-
                     });
-
-
                     $(this).closest('.list').find('.selected').removeClass('selected');
                     $(this).addClass('selected');
                     var text = $(this).data('display-text') || $(this).text();
@@ -979,7 +860,6 @@ s
                     $(this).closest('.dropdown-select').find('.current').text(text);
                     $(this).closest('.dropdown-select').prev('select').val($(this).data('value')).trigger('change');
                 });
-
                 // Keyboard events
                 $(document).on('keydown', '.dropdown-select', function(event) {
                     var focused_option = $($(this).find('.list .option:focus')[0] || $(this).find('.list .option.selected')[
@@ -1024,13 +904,4 @@ s
                     create_custom_dropdowns();
                 });
             </script>
-
-
-
-
-
-
-
-
-
             @include('include.footer')

@@ -35,27 +35,19 @@ class CustomerBatchController extends Controller
         ]);
 
         if ($validate->fails()) {
-
-
               return redirect('/customer-batch')->withErrors($validate)->withInput();
         }
-
         $input = [
             'batch_no' => $request->user_customer_batch_no,
             'test' => $request->user_test,
+            'per_test_amount' => $request->per_test_amount,
             'customer_id' => $request->customer_id,
         ];
-
-
         $customerBatchData = CustomerBatch::create($input);
-
         if ($customerBatchData) {
             return redirect('/customer-batch')->with('message', 'User Batch Added Successfully');
         }
-
-
     }
-
     public function customerBatchEdit(Request $request)
     {
         $customerBatch = CustomerBatch::where('id', $request->id)->get();
@@ -65,25 +57,18 @@ class CustomerBatchController extends Controller
     public function customerBatchUpdate(Request $request)
     {
         $validate = Validator::make($request->all(), [
-
             'customerBatchNo' => ['required', 'string', Rule::unique('customerbatchs', 'batch_no')->ignore($request->customerBatchId)],
         ]);
-
         if ($validate->fails()) {
-
-
             return back()->withErrors($validate)->withInput();
         }
-
         $update = [
             'batch_no' => $request->customerBatchNo,
             'test' => $request->customerTest,
-
+            'per_test_amount' => $request->perTestAmount,
         ];
         $customerBatchDataUpdate = CustomerBatch::where('id', $request->customerBatchId)->update($update);
-
         $updatedCustomerBatchData = CustomerBatch::where('id', $request->customerBatchId)->first();
-
         $customerProfile = Customer::where('id', $request->customerId)->first();
         if ($customerBatchDataUpdate) {
             return response()->json([

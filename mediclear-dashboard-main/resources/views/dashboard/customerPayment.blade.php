@@ -56,8 +56,8 @@
     }
 </style>
 <div class="container-fluid">
-    <h3 class="h3 mb-2 text-gray-800">Company Account Section</h3>
-    <form action="{{ route('Company-filter-account') }}" method="POST">
+    <h3 class="h3 mb-2 text-gray-800">Customer Payment</h3>
+    <form action="{{ route('customer-filter-payment') }}" method="POST">
         @csrf
         <div class="row dashboard-header">
             <div class="col-md-12">
@@ -70,25 +70,22 @@
                             <div class="col-sm-3 end-date">
                                 <p class="text-dark"><strong>Date From:</strong></p>
                                 <div class="input-group date d-flex" id="datepicker1">
-                                    <input type="date" class="form-control" name="start" id="startdate"
-                                        value="{{ $start ?? '' }}" placeholder="dd-mm-yyyy" />
+                                    <input type="date" class="form-control" name="start" id="startdate" value="{{ $start ??''}}" placeholder="dd-mm-yyyy"/>
                                 </div>
                             </div>
                             <div class="col-sm-3 end-date">
                                 <p class="text-dark"><strong>Date to:</strong></p>
                                 <div class="input-group date d-flex" id="datepicker2">
-                                    <input type="date" name="end" class="form-control" id="enddate"
-                                        value="{{ $end ?? '' }}" placeholder="dd-mm-yyyy" />
+                                    <input type="date" name="end" class="form-control" id="enddate" value="{{ $end ??''}}" placeholder="dd-mm-yyyy" />
                                 </div>
                             </div>
                             <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
-                                <button class="btn bg-gradient-success text-white shadow-lg"
-                                    type="submit">Filter</button>
+                                <button class="btn bg-gradient-success text-white shadow-lg" type="submit">Filter</button>
                             </div>
-                        </form>
-                        <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
-                            <a href="{{ route('company-account-section') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
-                        </div>
+    </form>
+    <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
+        <a href="{{ route('customer-payment') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
+    </div>
     <div class="row"></div>
     <div class="card-body" style="width: -webkit-fill-available;">
         <table id="example" class="display nowrap" style="width:100%">
@@ -97,48 +94,41 @@
                     <th>S No.</th>
                     <th>Batch Number</th>
                     <th>Total Reports/Tests</th>
-                    <th>Company Name</th>
-                    <th>Company Phone</th>
-                    <th>Company Email</th>
-                    <th>Per Tests Amount <i class="fa fa-inr"></i></th>
-                    <th>Total Amount</th>
+                    <th>Customer Name</th>
+                    <th>Customer Phone</th>
+                    <th>Customer Email</th>
                     <th>Status</th>
+                    <th>Per Tests Amount</th>
+                    <th>Total Amount</th>
                     <th>Report Status</th>
-                    <th>Payment Terms Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($company as $companies)
+                @foreach($customer as $customers)
                 <tr>
                     <td><b>{{$loop->iteration}}</b></td>
-                    <td class="col-2">{{$companies->batch_no}}</td>
-                    <td>{{$companies->test}}</td>
-                    <td>{{$companies->corprateBelongCompany->name??''}}</td>
-                    <td>{{$companies->corprateBelongCompany->mobile_no??''}}</td>
-                    <td>{{$companies->corprateBelongCompany->email??''}}</td>
-                    <td><input type="text" name="per_test_amount[]" class="form-control" value="{{$companies->per_test_amount}}" readonly></td>
-                    <td></td>
+                    <td class="col-2">{{$customers->batch_no}}</td>
+                    <td>{{$customers->test}}</td>
+                    <td>{{$customers->customers->name??''}}</td>
+                    <td>{{$customers->customers->mobile_no??''}}</td>
+                    <td>{{$customers->customers->email??''}}</td>
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 2" selected>Pending</option>
+                                <option value="Option 1" selected disabled>Select Status</option>
+                                <option value="Option 2">Pending</option>
                                 <option value="Option 3">Approved</option>
                             </select>
                         </div>
                     </td>
+                    <td>200.00</td>
+                    <td>4000.00</td>
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 2" selected>Hold</option>
+                                <option value="Option 1" selected disabled>Report Status</option>
+                                <option value="Option 2">Hold</option>
                                 <option value="Option 3">Send</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="select-dropdown">
-                            <select>
-                                <option value="Option 2" selected>Per Months</option>
-                                <option value="Option 3">Per Tests</option>
                             </select>
                         </div>
                     </td>
@@ -150,22 +140,6 @@
     </div>
 </div>
 <!-- 4-blocks row end -->
-{{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script> --}}
-<script>
-    $(document).ready(function () {
-        calculateTotal();
-        function calculateTotal() {
-            $('tbody tr').each(function () {
-                var perTestAmount = parseFloat($(this).find('input[name^="per_test_amount"]').val()) || 0;
-                var totalTests = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
-                var totalAmount = perTestAmount * totalTests;
-                $(this).find('td:nth-child(8)').text(totalAmount.toFixed(2));
-            });
-        }
-    });
-</script>
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('enddate').setAttribute('max', currentDate);

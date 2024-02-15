@@ -1,8 +1,6 @@
 {{-- start sidebar --}}
 @include('include.sidebar')
 {{-- end sidebar --}}
-
-
 @if (session()->has('message'))
     <script>
         alert('{{ session()->get('message') }}');
@@ -10,8 +8,6 @@
 
     {{ session()->forget('message') }}
 @endif
-
-
 <style>
     .dt-button {
         background-color: #1cc88a !important;
@@ -67,6 +63,7 @@
                     <th>Create Date</th>
                     <th>Subject</th>
                     <th>Message</th>
+                    <th>User Name</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -80,6 +77,7 @@
                         <td>{{ $feedback->created_at->format('d/m/Y') }}</td>
                         <td>{{ $feedback->subject }}</td>
                         <td>{{ $feedback->message }}</td>
+                        <td>{{ $name[$loop->index] }}</td>
                         <td class="text-center"><i class="fa-solid fa-trash text-danger" data-toggle="modal" data-target="#exampleModal" style="font-size:1rem; cursor: pointer;" onclick="{document.getElementById('id').value={{ $feedback->id }}}"></i></td>
                     </tr>
                     @php

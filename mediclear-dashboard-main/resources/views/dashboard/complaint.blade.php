@@ -65,6 +65,7 @@
                 <th>Create Date</th>
                 <th>Subject</th>
                 <th>Complaint</th>
+                <th>User Name</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -78,6 +79,7 @@
                 <td>{{$complaint->created_at->format('d/m/Y')}}</td>
                 <td>{{$complaint->subject}}</td>
                 <td>{{$complaint->message}}</td>
+                <td>{{ $name[$loop->index] }}</td>
                 <!-- <td><img src="./images/avatar-1.png"></td> -->
                 <td class="text-center"><i class="fa-solid fa-trash text-danger"  data-toggle="modal" data-target="#exampleModal" style="font-size:1rem; cursor: pointer;" onclick="{document.getElementById('id').value={{ $complaint->id }}}" ></i></td>
             </tr>

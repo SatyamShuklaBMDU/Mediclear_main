@@ -5,28 +5,21 @@
     body {
         background-image: none;
     }
-
     .table,
     th {
         font-size: 15px !important;
         font-family: 'Poppins', sans-serif !important;
     }
-
     .dt-button {
         background-color: #1cc88a !important;
         background-image: linear-gradient(180deg, #1cc88a 10%, #13855c 100%) !important;
         background-size: cover !important;
         color: #fff !important;
         border: none !important;
-
     }
-
-
-
     .content-wrapper {
         margin-left: 210px;
         font-size: 19px;
-
     }
 
     /*
@@ -259,25 +252,18 @@
 <script>
     ///updated Customer Batch/////////////////////////////////////////////////////
     function updateCustomerData(button) {
-
         var bacthId = button.id.replace("edit", "");
-
         console.log(bacthId);
-
         $('#myModal').show();
-
         $('#closeBatchEditForm').on('click', function() {
             console.log('hhjh');
             $('#myModal').hide();
-
         })
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $.ajax({
             type: 'post',
             url: "{{ url('customer-batch-edit') }}",
@@ -286,77 +272,54 @@
             },
             success: (data) => {
                 console.log(data[0]);
-
-
                 $('#batch_no').val(data[0].batch_no);
                 $('#customer_test').val(data[0].test);
+                $('#per_test_amount').val(data[0].per_test_amount);
                 $('#customerBatchId').val(data[0].id);
                 $('#customerId').val(data[0].customer_id);
-
-
-
                 $('#myModal').show();
-
                 $('#userUpdateButton').click(function(event) {
                     event.preventDefault();
                     console.log('dddd');
-
-
                     let customerBatchNo = $('#batch_no').val();
                     let customerTest = $('#customer_test').val();
+                    let perTestAmount = $('#per_test_amount').val();
                     let customerBatchId = $('#customerBatchId').val();
                     let customerId = $('#customerId').val()
-
-
                     let formData = {
                         customerBatchNo: customerBatchNo,
                         customerTest: customerTest,
+                        perTestAmount: perTestAmount,
                         customerBatchId: customerBatchId,
                         customerId: customerId,
-
-
                     }
-
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-
                     $.ajax({
                         type: 'post',
                         url: "{{ url('customer-batch-update') }}",
                         data: formData,
                         success: (data) => {
                             $('#myModal').hide();
-
-
                             let customerProfile = data['customerProfile'];
-                            let updatedCustomerBatchData = data[
-                                'updatedCustomerBatchData'];
-
-                            let parsedDate = moment.utc(updatedCustomerBatchData
-                                .created_at);
-
-
+                            let updatedCustomerBatchData = data['updatedCustomerBatchData'];
+                            let parsedDate = moment.utc(updatedCustomerBatchData.created_at);
                             let formattedDate = parsedDate.format("DD/MM/YYYY");
-
-
-                            let updatedCustomerBatchDataId =
-                                `tr${data.updatedCustomerBatchData.id}`;
-
+                            let updatedCustomerBatchDataId =`tr${data.updatedCustomerBatchData.id}`;
                             let thScopId = `row${updatedCustomerBatchData.id}`;
                             let thScopIdInnerHTML = $(`#${thScopId}`).html();
-
                             let updatedhtml = ` <th  scope="row" id="${thScopId}" class="sorting_1">${thScopIdInnerHTML}</th>
                                     <td>${formattedDate}</td>
                                     <td>${customerProfile.name}</td>
                                     <td>${customerProfile.user_id}</td>
                                     <td>${updatedCustomerBatchData.batch_no}</td>
                                     <td>${updatedCustomerBatchData.test}</td>
+                                    <td>${updatedCustomerBatchData.per_test_amount}</td>
                                     <td>${customerProfile.email}</td>
                                     <td>${customerProfile.mobile_no}</td>
-          
                                     <td>
                                         <button type="button" class="btn btn-primary" onclick="updateCustomerData(this)" id="edit${updatedCustomerBatchData.id}">
                                             <i class="fa-solid fa-pen-to-square" style="font-size:1rem;"></i>
@@ -365,39 +328,18 @@
                                             <i class="fa-solid fa-trash" style="font-size:1rem;"></i>
                                         </button>
                                     </td>`
-
-
-
                             $(`#${updatedCustomerBatchDataId}`).html(updatedhtml);
-
-
-
-
-
-
-
                         },
                         error: function(data) {
                             console.log(data);
-
                         }
-
-
-
-
-
                     });
-
                 });
-
-
             },
             error: function(data) {
                 console.log(data);
             }
-
         });
-
     };
     //////////////////Delete Batch/////////////////////////////////////////////////////////////
     function deleteCustomerData(button) {
@@ -410,7 +352,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
             $.ajax({
                 type: 'post',
                 url: "{{ url('customer-batch-delete') }}",
@@ -418,35 +359,19 @@
                     id: batchId
                 },
                 success: (data) => {
-
                     deleteId.attr("style", "@media print{display:none;}");
-
                     deleteId.hide();
                     location.reload();
-
-
                 },
                 error: (data) => {
                     console.log(data);
-
                 }
-
             });
-
-
         }
     }
-
-
-
-
 </script>
-
-
-
 <div class="modal" id="myModal">
     <div class="modal-dialog">
-
         <div class="modal-content">
             <div class="container-fluid">
                 <div class="row">
@@ -456,65 +381,52 @@
                         <h4 class="mt-4">Edit User Profile</h4>
                     </div>
                 </div>
-
                 <!-- Modal Header -->
                 <div class="row dashboard-header" style="background: #e5e5e5;">
                     <div class="col-md-11  mx-auto">
                         <form class="notification-form shadow rounded" action="" method="post" id="userFormData">
                             <div class="form-group">
-
                                 <label for="batch_no">Batch No</label>
                                 <input type="text" name="batch_no" value="{{ old('batch_no') }}" class="form-control"
                                     id="batch_no" aria-describedby="textHelp" placeholder="please enter your batch id">
-
                                 @if ($errors->has('batch_no'))
                                     <span class="help-block">{{ $errors->first('batch_no') }}</span>
                                 @endif
-
                             </div>
-
                             <div class="form-group">
-
                                 <label for="customer_test">Customer Test</label>
                                 <input type="text" name="cutomer_test" value="{{ old('cutomer_test') }}"
                                     class="form-control" id="customer_test" aria-describedby="textHelp"
                                     placeholder="please enter your test">
-
                                 @if ($errors->has('customer_test'))
                                     <span class="help-block">{{ $errors->first('batch_no') }}</span>
                                 @endif
-
-
-
-
                             </div>
-
+                            <div class="form-group">
+                                <label for="per_test_amount">Per Test Amount</label>
+                                <input type="text" name="per_test_amount" value="{{ old('per_test_amount') }}"
+                                    class="form-control" id="per_test_amount" aria-describedby="textHelp"
+                                    placeholder="please enter your Per Test Amount">
+                                @if ($errors->has('customer_test'))
+                                    <span class="help-block">{{ $errors->first('batch_no') }}</span>
+                                @endif
+                            </div>
                             <input type="hidden" id="customerBatchId" name="customerBatchId" value="">
-
                             <input type="hidden" id="customerId" name="customerId" value="">
-
-
                             <!-- <div class="col-md-4"> -->
-
                     </div>
                     <button type="submit" class="btn btn-dark btn-md" style="margin: 30px 0px 0px;"
                         id="userUpdateButton">Update Customer Batch
                     </button>
                 </div>
                 </form>
-
             </div>
-
         </div>
     </div>
 </div>
-
-
-
 {{--
         <!-- Main content starts -->
         <div class="container-fluid">
-s
             <div class="d-flex justify-content-between">
                 <div class="row">
                     <div class="col-sm-12 p-0">
@@ -554,37 +466,25 @@ s
 
                     </div>
                 </div>
-
             </div>
             <!--  -->
-
             <!-- end
         </div>
-
  --}}
-
-
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
         </div>
     @endif
-
     @if ($errors->has('user_customer_batch_no'))
         <div class="alert alert-danger">
             {{ $errors->first('user_customer_batch_no') }}
         </div>
     @endif
-
     <!-- Page Heading -->
     <h3 class="h3 mb-2 text-gray-800">Customer Batch</h3>
-
-
-
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
             <li class="breadcrumb-item"><a href="#"><i class="fa-solid fa-house text-secondary"></i></a></li>
@@ -593,10 +493,6 @@ s
             <li class="breadcrumb-item active" aria-current="page">Customer Batch</li>
         </ol>
     </nav>
-
-
-
-
     <!--  3 -row start block -->
     <div class="row dashboard-header">
         <div class="col-md-12">
@@ -610,30 +506,24 @@ s
                         </div>
                         <div class="col-sm-3 end-date">
                             <p class="text-dark"><strong>Date From:</strong></p>
-                            <div class="input-group date d-flex" id="">
-                                
+                            <div class="input-group date d-flex" id="">            
                                 <input type="date"  value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['fromdate']}}@endif" class="form-control" name="fromdate" id="fromdate" placeholder="dd-mm-yyyy" />
-                                
                             </div>
                         </div>
-
                         <!--  -->
                         <!--  -->
                         <!--  -->
                         <div class="col-sm-3 end-date">
                             <p class="text-dark"><strong>Date to:</strong></p>
                             <div class="input-group date d-flex" id="">
-                                <input type="date" value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['todate']}}@endif"     class="form-control" name="todate" id="todate" placeholder="dd-mm-yyyy" />
-                                
+                                <input type="date" value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['todate']}}@endif"     class="form-control" name="todate" id="todate" placeholder="dd-mm-yyyy" />       
                             </div>
                         </div>
-
                         <!--  -->
                         <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
                             <button class="btn  bg-gradient-success text-white shadow-lg "
                                 type="submit" id="filter">Filter</button>
                         </div>
-                      
                     </form>    
                         <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
                             <button class="btn bg-gradient-success text-white shadow-lg "
@@ -643,10 +533,6 @@ s
                             <div class="Click-here"> <button class="btn    bg-gradient-success text-white shadow-lg"
                                     type="submit" style="padding: 4px 4px; font-size:17px; width:165px;"
                                     data-target=" #mymodel" data-toggle="modal">+ Add Customer</button>
-
-
-
-
                                 <!-- poppux box start -->
                                 <div class="modal mt-4" id="mymodel">
                                     <div class="modal-dialog m-auto">
@@ -681,11 +567,11 @@ s
                                                     <input type="text" id="user_customer_batch_no"
                                                         name="user_customer_batch_no"
                                                         style="margin-right: 40px;margin-bottom:10px;" /> <br />
-
-
-
                                                     <label for="">Total Test </label>
                                                     <input type="text" name="user_test"
+                                                        style="margin-left: 20px;margin-bottom:10px;" /> <br />
+                                                    <label for="">Per Test Amount </label>
+                                                    <input type="text" name="per_test_amount"
                                                         style="margin-left: 20px;margin-bottom:10px;" /> <br />
                                                     <label for="">Address &nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                     <input type="text" name="user_address" id="user_address"
@@ -694,7 +580,7 @@ s
                                                         &nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                     <input type="email" name="user_email" id="user_email"
                                                         style="margin-bottom:10px;" />
-                                                    <br />
+                                                    <br/>
                                                     <label for="">Phone NO. &nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                     <input type="text" name="user_mob" id ="user_mob"
                                                         style="margin-bottom:10px;" />
@@ -703,27 +589,15 @@ s
                                                         ADD
                                                     </button>
                                                 </form>
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!--  -->
-
-
-
-
                 <div class="card-body" style=" width: -webkit-fill-available;">
                     <table class="display nowrap " id="example">
                         <thead class="text-white">
@@ -734,18 +608,16 @@ s
                                 <th scope="col"> Customer Id</th>
                                 <th scope="col">Customer Batch No.</th>
                                 <th scope="col">Total Test</th>
+                                <th scope="col">Per Test Amount</th>
                                 <th scope="col">Email ID</th>
                                 <th scope="col">Phone No.</th>
                                 {{-- <th scope="col">Status</th> --}}
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @if(isset($customerBatchFilter))
-                            
                             @foreach($customerBatchFilter as $k=> $batch)
-
                             <tr id="tr{{ $batch->customerbatchs_id }}">
                                 <th scope="row" id="row{{ $batch->id }}">{{ ++$k }}</th>
                                 <td>{{ $batch->date }}</td>
@@ -753,6 +625,7 @@ s
                                 <td>{{ $batch->user_id }}</td>
                                 <td>{{ $batch->customer_batch_no }}</td>
                                 <td>{{ $batch->test }}</td>
+                                <td>{{ $batch->per_test_amount }}</td>
                                 <td>{{ $batch->email }}</td>
                                 <td>{{ $batch->mobile_no }}</td>
                                 {{-- <td class="text-success" style="font-size:1rem;">
@@ -790,20 +663,9 @@ s
                                     <td>{{ $batch->customers->user_id }}</td>
                                     <td>{{ $batch->batch_no }}</td>
                                     <td>{{ $batch->test }}</td>
+                                    <td>{{ $batch->per_test_amount }}</td>
                                     <td>{{ $batch->customers->email }}</td>
                                     <td>{{ $batch->customers->mobile_no }}</td>
-                                    {{-- <td class="text-success" style="font-size:1rem;">
-                                        <div class="select">
-                                            <select name="format" id="format">
-                                                <option value="pdf"
-                                                    @if ($batch->customers->status == 'Active') {{ 'selected' }} @endif>Active
-                                                </option>
-                                                <option value="txt"
-                                                    @if ($batch->customers->status == 'Deactive') {{ 'selected' }} @endif>
-                                                    deactive</option>
-
-                                            </select>
-                                    </td> --}}
                                     <td>
                                         <button type="button" class="btn btn-primary"
                                             onclick="updateCustomerData(this)" id="edit{{ $batch->id }}">

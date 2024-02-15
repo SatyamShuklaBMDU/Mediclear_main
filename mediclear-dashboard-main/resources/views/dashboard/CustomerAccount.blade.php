@@ -280,11 +280,12 @@
                     <th>S No.</th>
                     <th>Batch Number</th>
                     <th>Total Reports/Tests</th>
+                    <th>Customer No.</th>
                     <th>Customer Name</th>
                     <th>Customer Phone</th>
                     <th>Customer Email</th>
                     <th>Status</th>
-                    <th>Per Tests Amount</th>
+                    <th>Per Tests Amount <i class="fa fa-inr"></i></th>
                     <th>Total Amount</th>
                     <th>Report Status</th>
                 </tr>
@@ -295,25 +296,24 @@
                     <td><b>{{$loop->iteration}}</b></td>
                     <td class="col-2">{{$customers->batch_no}}</td>
                     <td>{{$customers->test}}</td>
+                    <td>{{$customers->customers->user_id??''}}</td>
                     <td>{{$customers->customers->name??''}}</td>
                     <td>{{$customers->customers->mobile_no??''}}</td>
                     <td>{{$customers->customers->email??''}}</td>
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 1" selected disabled>Select Status</option>
-                                <option value="Option 2">Pending</option>
+                                <option value="Option 2" selected>Pending</option>
                                 <option value="Option 3">Approved</option>
                             </select>
                         </div>
                     </td>
-                    <td>200.00</td>
-                    <td>4000.00</td>
+                    <td><input type="text" name="per_test_amount[]" class="form-control" value="{{$customers->per_test_amount}}" readonly></td>
+                    <td></td>
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 1" selected disabled>Report Status</option>
-                                <option value="Option 2">Hold</option>
+                                <option value="Option 2" selected>Hold</option>
                                 <option value="Option 3">Send</option>
                             </select>
                         </div>
@@ -326,31 +326,19 @@
     </div>
 </div>
 <!-- 4-blocks row end -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure want to delete?
-                <form action="{{ url('/feedback/delete') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="id" id="id">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+   $(document).ready(function () {
+       calculateTotal();
+       function calculateTotal() {
+           $('tbody tr').each(function () {
+               var perTestAmount = parseFloat($(this).find('input[name^="per_test_amount"]').val()) || 0;
+               var totalTests = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
+               var totalAmount = perTestAmount * totalTests;
+               $(this).find('td:nth-child(10)').text(totalAmount.toFixed(2));
+           });
+       }
+   });
+</script>
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('enddate').setAttribute('max', currentDate);

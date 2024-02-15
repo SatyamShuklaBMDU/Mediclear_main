@@ -16,6 +16,7 @@ class CorporateBatch extends Model
     protected $fillable = [
         'batch_no',
         'test',
+        'per_test_amount',
         'corporate_id',
         'company_id'
 

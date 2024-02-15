@@ -56,8 +56,8 @@
     }
 </style>
 <div class="container-fluid">
-    <h3 class="h3 mb-2 text-gray-800">Company Account Section</h3>
-    <form action="{{ route('Company-filter-account') }}" method="POST">
+    <h3 class="h3 mb-2 text-gray-800">Company Payment</h3>
+    <form action="{{ route('company-filter-payment') }}" method="POST">
         @csrf
         <div class="row dashboard-header">
             <div class="col-md-12">
@@ -87,7 +87,7 @@
                             </div>
                         </form>
                         <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
-                            <a href="{{ route('company-account-section') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
+                            <a href="{{ route('company-payment') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
                         </div>
     <div class="row"></div>
     <div class="card-body" style="width: -webkit-fill-available;">
@@ -100,9 +100,9 @@
                     <th>Company Name</th>
                     <th>Company Phone</th>
                     <th>Company Email</th>
-                    <th>Per Tests Amount <i class="fa fa-inr"></i></th>
-                    <th>Total Amount</th>
                     <th>Status</th>
+                    <th>Per Tests Amount</th>
+                    <th>Total Amount</th>
                     <th>Report Status</th>
                     <th>Payment Terms Status</th>
                 </tr>
@@ -116,20 +116,22 @@
                     <td>{{$companies->corprateBelongCompany->name??''}}</td>
                     <td>{{$companies->corprateBelongCompany->mobile_no??''}}</td>
                     <td>{{$companies->corprateBelongCompany->email??''}}</td>
-                    <td><input type="text" name="per_test_amount[]" class="form-control" value="{{$companies->per_test_amount}}" readonly></td>
-                    <td></td>
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 2" selected>Pending</option>
+                                <option value="Option 1" selected disabled>Select Status</option>
+                                <option value="Option 2">Pending</option>
                                 <option value="Option 3">Approved</option>
                             </select>
                         </div>
                     </td>
+                    <td>200.00</td>
+                    <td>4000.00</td>
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 2" selected>Hold</option>
+                                <option value="Option 1" selected disabled>Report Status</option>
+                                <option value="Option 2">Hold</option>
                                 <option value="Option 3">Send</option>
                             </select>
                         </div>
@@ -137,7 +139,8 @@
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 2" selected>Per Months</option>
+                                <option value="Option 1" selected disabled>Select Payment</option>
+                                <option value="Option 2">Per Months</option>
                                 <option value="Option 3">Per Tests</option>
                             </select>
                         </div>
@@ -153,19 +156,6 @@
 {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script> --}}
-<script>
-    $(document).ready(function () {
-        calculateTotal();
-        function calculateTotal() {
-            $('tbody tr').each(function () {
-                var perTestAmount = parseFloat($(this).find('input[name^="per_test_amount"]').val()) || 0;
-                var totalTests = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
-                var totalAmount = perTestAmount * totalTests;
-                $(this).find('td:nth-child(8)').text(totalAmount.toFixed(2));
-            });
-        }
-    });
-</script>
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('enddate').setAttribute('max', currentDate);

@@ -3,13 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Complaint;
+use App\Models\CorporateID;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
 {
     public function showComplaint(){
         $complaint= Complaint::orderBy('created_at','desc')->get();
-        return view('dashboard.complaint',compact('complaint'));
+        $name = [];
+        foreach ($complaint as $com) {
+            $user = Customer::where('user_id', $com->user_id)->first();
+            if (!$user) {
+                $user = CorporateID::where('user_id', $com->user_id)->first();
+            }
+            if ($user) {
+                $name[] = $user->name;
+            } else {
+                $name[] = '';
+            }
+        }
+        return view('dashboard.complaint',compact('complaint','name'));
     }
     public function filterComplaint(Request $request)
     {
