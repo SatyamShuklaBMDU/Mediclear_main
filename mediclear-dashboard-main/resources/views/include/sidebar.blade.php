@@ -268,8 +268,8 @@
                 <div id="collapsehistory" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="report-history.php">Report History</a>
-                        <a class="collapse-item" href="payment-history.php">Payment History</a>
+                        <a class="collapse-item" href="{{url('/consumer-history')}}">Report History</a>
+                        <a class="collapse-item" href="{{Route('get-payment-history')}}">Payment History</a>
                     </div>
                 </div>
             </li>

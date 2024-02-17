@@ -5,7 +5,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
-{    /**
+{
+    /**
      * Run the migrations.
      *
      * @return void
@@ -13,9 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::table('customerbatchs', function (Blueprint $table) {
-            $table->string('per_test_amount')->after('test');
+            $table->string('recieved_payment')->after('per_test_amount')->nullable();
+            $table->string('pending_payment')->after('recieved_payment')->nullable();
+            $table->timestamp('date_of_approved')->nullable();
+            $table->boolean('report_status')->after('recieved_payment')->default(0);
         });
     }
+
     /**
      * Reverse the migrations.
      *

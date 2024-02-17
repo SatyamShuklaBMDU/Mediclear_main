@@ -16,6 +16,10 @@ class CustomerBatch extends Model
         'batch_no',
         'test',
         'per_test_amount',
+        'recieved_payment',
+        'report_status',
+        'pending_payment',
+        'date_of_approved',
         'customer_id',
     ];
     public function customers()

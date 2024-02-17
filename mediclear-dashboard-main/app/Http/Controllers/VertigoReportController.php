@@ -244,7 +244,6 @@ class VertigoReportController extends Controller
         // unfitRemark:unfitRemark,
         // testfeatures:"bp",
         // consumerid:consumerid
-        dd($request->all());
         $TestData = Test::where('medical_details_id', $request->consumerid)
             ->where('test_type_id', '1')
             ->where('test_status', '1')
@@ -265,7 +264,6 @@ class VertigoReportController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'ResultCount' => ['required',new CountResultGivenByDoctor($request->consumerId)],
-           
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -278,11 +276,7 @@ class VertigoReportController extends Controller
             'doctor_final_result' => $request->doctorFinalResult,
             'doctor_submit_date'=>Carbon::now()->format('Y-m-d')
         ]);
-        $consumerFinalVerticoDataByDoctor=MedicalDetail::select('certification_number',
-        'doctor_final_result','consumer_name','consumer_addhar_number' ,'doctor_submit_date',
-        'consumer_dob' ,'doctor_final_result','gender')
-        ->where('id',$request->consumerId)
-        ->get();
+        $consumerFinalVerticoDataByDoctor=MedicalDetail::select('certification_number','doctor_final_result','consumer_name','consumer_addhar_number' ,'doctor_submit_date','consumer_dob','doctor_final_result','gender')->where('id',$request->consumerId)->get();
         $sendData=[];
         foreach($consumerFinalVerticoDataByDoctor as $k=>$value){
             $sendData['certification_number']=$value->certification_number;

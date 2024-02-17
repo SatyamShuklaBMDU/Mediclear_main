@@ -179,57 +179,42 @@
     body {
         background-image: none;
     }
-
-
-
     .table,
     th {
         font-size: 15px !important;
         font-family: 'Poppins', sans-serif !important;
     }
-
     .dt-button {
         background-color: #1cc88a !important;
         background-image: linear-gradient(180deg, #1cc88a 10%, #13855c 100%) !important;
         background-size: cover !important;
         color: #fff !important;
         border: none !important;
-
     }
-
-
-
     .content-wrapper {
         margin-left: 210px;
         font-size: 19px;
-
     }
-
     /*
     .btn {
         background-color: #1cc88a;
     }
-
     .btn:hover {
         background-color: #01796F !important;
 
     } */
-
     .sidebar-right-trigger {
         display: none;
     }
-
     @media(max-width:34em) {
         .main {
             min-width: 150px;
             width: auto;
         }
     }
-
     select {
         display: none !important;
     }
-
     .dropdown-select {
         background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
         background-repeat: repeat-x;
@@ -260,22 +245,18 @@
         width: auto;
 
     }
-
     .dropdown-select:focus {
         background-color: #fff;
     }
-
     .dropdown-select:hover {
         background-color: #fff;
     }
-
     .dropdown-select:active,
     .dropdown-select.open {
         background-color: #fff !important;
         border-color: #bbb;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) inset;
     }
-
     .dropdown-select:after {
         height: 0;
         width: 0;
@@ -298,22 +279,18 @@
         -webkit-transform: rotate(-180deg);
         transform: rotate(-180deg);
     }
-
     .dropdown-select.open .list {
         -webkit-transform: scale(1);
         transform: scale(1);
         opacity: 1;
         pointer-events: auto;
     }
-
     .dropdown-select.open .option {
         cursor: pointer;
     }
-
     .dropdown-select.wide {
         width: 100%;
     }
-
     .dropdown-select.wide .list {
         left: 0 !important;
         right: 0 !important;
@@ -412,12 +389,10 @@
     .form-check-input {
         border: 1px solid #5a5c69 !important;
     }
-
-    .yellow {
+   .yellow {
         width: 400px;
         background-color: yellow;
     }
-
     /* boxes css */
     .container1 {
         width: 95%;
@@ -427,12 +402,10 @@
         margin: 20px auto;
         padding: 20px 0;
     }
-
     .container1 ul {
         padding: 0px;
         margin: 0px;
     }
-
     .container1 ul li {
         list-style-type: none;
         float: left;
@@ -442,8 +415,10 @@
         border: 2px solid black;
         margin: 40px 30px 0px 40px;
         line-height: 200px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: normal;
     }
-
     .container1 ul li .title {
         width: 100%;
         height: 50px;
@@ -452,7 +427,6 @@
         text-align: center;
         border: 2px solid rgb(135, 127, 127);
     }
-
     /* input[type="checkbox"] {
         transform: scale(2);
         border-radius: 0px !important;
@@ -462,9 +436,8 @@
     .footer {
         border: 2px solid black;
     }
-
     /* css for responsive */
-    @media (max-width: 992px) {
+    @media (max-width: 1000px) {
         .container1 ul li {
             width: 35%;
             height: 150px;
@@ -479,7 +452,7 @@
          padding: 5px 15px 0px;
          box-shadow: 0px 7px 6px 0px #00000014;
          }
-    /*  */
+    /*  */ 
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -1549,15 +1522,15 @@
                             {{ $data->certification_number }}</strong></p>
                                 <div class="row" id="radiobuttongraph">
                                    <div class="col-sm-1">
-                                      <div class="farq-points" style="text-align: right;float:left;">
+                                      <div class="farq-points" style="text-align:right;float:left;">
                                          <p class="text-danger"> 
-                                            <div class="my-2">250</div>
-                                            <div class="my-4 p-1">500</div>
-                                            <div class="my-4 p-2">1000</div>
-                                            <div class="my-3 p-1">2000</div>
-                                            <div class="my-4 p-2">4000</div>
-                                            <div class="my-3 p-2">6000</div>
-                                            <div class="my-4 p-1">8000</div>
+                                            <div class="my-2" style="padding-left:65px;">10</div>
+                                            <div class="my-4 p-1">20</div>
+                                            <div class="my-4 p-2">30</div>
+                                            <div class="my-3 p-1">40</div>
+                                            <div class="my-4 p-2">50</div>
+                                            <div class="my-3 p-2">60</div>
+                                            <div class="my-4 p-1">70</div>
                                         </p>
                                       </div>
                                    </div>
@@ -1791,10 +1764,10 @@
                                          <!-- radio end -->
                                       </div>
                                       <div class="bootom points">
-                                          <p class="text-success"> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;70
+                                          <p class="text-success"> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;250  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            500&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2000
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6000
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8000
                                           </span></p>
                                          </div>
                                    </div>
@@ -2184,54 +2157,46 @@
                                 </div>
                                 <div class="container d-flex justify-content-around">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="overallfit" value="1" disabled />
+                                        <input class="form-check-input" type="checkbox" id="overallfit" value="1" />
                                         <label class="form-check-label" for="inlineCheckbox1">FIT</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="overallunfit" value="0" disabled />
+                                        <input class="form-check-input" type="checkbox" id="overallunfit" value="0" />
                                         <label class="form-check-label" for="inlineCheckbox2">UNFIT</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="temporaeilyunfit" value="-1" disabled />
+                                        <input class="form-check-input" type="checkbox" id="temporaeilyunfit" value="-1" />
                                         <label class="form-check-label" for="inlineCheckbox3">Temorarily UNFIT</label>
                                     </div>
                                 </div>
                                 <input type="hidden" id="doctorId" />
                                 <div class="container1">
-                                    <div class="col-m"
+                                    <div class="col-md-12">
                                     <ul>
                                         <li class="text-center">
                                             <div class="title" id="">REGISTRATION NUMBER</div>
-                                            <div class="col-md-6" id="doctorregistration">
-                                            </div>
+                                            <div class="col-md-6" id="doctorregistration"></div>
                                         </li>
 
                                         <li class="text-center">
                                             <div class="title">SIGNATURE OF DOCTOR</div>
-                                            <div class="col-md-6" id="doctorsign">
-                                            </div>
+                                            <div class="col-md-6" id="doctorsign"></div>
                                         </li>
                                         <li class="text-center">
                                             <div class="title">SEAL OF DOCTOR</div>
-                                            <div class="col-md-6" id="doctorseal">
-                                            </div>
+                                            <div class="col-md-6" id="doctorseal"></div>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="container">
                                     <div class="main">
                                         <label for="">Assign Doctor Credential </label>
-                                        <select class="form-select" aria-label="Default select example"
-                                            style="margin-right:40px;margin-bottom:10px;" id="companyProfile"
-                                            name="company_id">
+                                        <select class="form-select" aria-label="Default select example" style="margin-right: 40px; margin-bottom: 10px; width: 300px; overflow: hidden;" id="companyProfile" name="company_id">
                                             @if (isset($doctordata))
                                                 <option selected disabled>Select Doctors</option>
                                                 @foreach ($doctordata as $k => $doctor)
-                                                    <option value={{ $doctor->id }}><strong>Doctor Name</strong>
-                                                        &nbsp; &nbsp;
-                                                        {{ $doctor->name }}
-                                                        &nbsp; &nbsp;<strong>Registration Number</strong> &nbsp;
-                                                        &nbsp;{{ $doctor->registration_number }}
+                                                    <option value={{ $doctor->id }}><p><strong>Doctor Name : {{ $doctor->name }}</strong></p>
+                                                        <strong>Registration Number : {{ $doctor->registration_number }}</strong> 
                                                     </option>
                                                 @endforeach
                                             @endif
@@ -3381,7 +3346,8 @@
                                         <b>Note:</b>   To verify the Medical Certification scan QR Code or email Us at
                                             <span class="text-danger">everify@mediclear.in</span>
                                         </p>
-                                    </div>
+                                    </div>   
+                                .   @endforeach
                                     </form>
                                 </div>
                                 <!--**********end col************ -->
@@ -3391,21 +3357,19 @@
                         <!--**********end container************ -->
                         </div>           
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="docotorFinalReportPDF()">Save PDF</button>
-                </div>
-                @endforeach
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="docotorFinalReportPDF()">Save PDF</button>
             </div>
         </div>
+    </div>
 </div>
 <script>
     function create_custom_dropdowns() {
         $('select').each(function(i, select) {
             if (!$(this).next().hasClass('dropdown-select')) {
                 $(this).after('<div class="dropdown-select wide ' + ($(this).attr('class') || '') +
-                    '" tabindex="0"><span class="current" id="currentselect"></span><div class="list"><ul></ul></div></div>'
-                );
+                    '" tabindex="0"><span class="current" id="currentselect"></span><div class="list"><ul></ul></div></div>');
                 var dropdown = $(this).next();
                 var options = $(select).find('option');
                 var selected = $(this).find('option:selected');
@@ -3477,9 +3441,9 @@
                 let registration_number = data[0].registration_number;
                 let doctorId = data[0].id;
                 var signHTML =
-                    ` <img src="{{ url('public/images/') }}/${sign}"  width="100px" class="img-fluid"  alt="">`;
+                    ` <img src="{{ asset('images/') }}/${sign}"  width="100px" class="img-fluid"  alt="">`;
                 var sealHTML =
-                    ` <img src="{{ url('public/images/') }}/${seal}" width="100px" class="img-fluid"  alt="">`;
+                    ` <img src="{{ asset('images/') }}/${seal}" width="100px" class="img-fluid"  alt="">`;
                 var registrationHTML =
                     ` ${registration_number}`;
                 console.log(signHTML);
@@ -4017,14 +3981,14 @@
             var doctorFinalResult = $(`#overallfit`).val();
         }
         if ($(`#overallunfit`).is(":checked")) {
-            var doctorFinalResult = $(`#overallfit`).val();
+            var doctorFinalResult = $(`#overallunfit`).val();
         }
         if ($(`#temporaeilyunfit`).is(":checked")) {
-            var doctorFinalResult = $(`#overallfit`).val();
+            var doctorFinalResult = $(`#temporaeilyunfit`).val();
         }
         var consumerId = $('#consumerId').val();
         var doctorId = $("#doctorId").val();
-        var ResultCount = 6;
+        var ResultCount = 8;
         swal.fire({
             title: 'Are you sure?',
             text: "It will permanently submit data of consumer !",
@@ -4051,8 +4015,7 @@
                         doctorId: doctorId,
                         doctorFinalResult: doctorFinalResult,
                         consumerId: consumerId,
-                        ResultCount: ResultCount
-
+                        ResultCount: ResultCount,
                     },
                     success: (data) => {
                         $(`#${button}`).css('background-color', '#4CC790');
@@ -4060,9 +4023,7 @@
                         Swal.fire("Saved!", "", "success");
                     },
                     error: (data) => {
-
                         console.log(data);
-
                         let ResultCountErrorMessage = data.responseJSON.message['ResultCount'][0];
                         Swal.fire({
                             icon: "error",
@@ -4457,7 +4418,7 @@
     }
     function doctorFinalResultSubmit() {
         let val = $('#doctorcount').val();
-        if (Number(val) == 6) {
+        if (Number(val) == 8) {
             if ($('#collapseten').attr('class') == 'accordion-collapse collapse') {
                 $('#doctorbutton').attr('data-bs-target', '#collapseten');
                 $('#collapseten').attr('class', 'accordion-collapse collapse show');

@@ -4,7 +4,6 @@ namespace App\Rules;
 use App\Models\Test;
 
 use Illuminate\Contracts\Validation\Rule;
-
 class CountResultGivenByDoctor implements Rule
 {
     /**
@@ -17,7 +16,6 @@ class CountResultGivenByDoctor implements Rule
     {
         $this->consumerId=$id;
     }
-
     /**
      * Determine if the validation rule passes.
      *
@@ -27,20 +25,14 @@ class CountResultGivenByDoctor implements Rule
      */
     public function passes($attribute, $value)
     {
-       
-      
-        $CountRisultGivenByDoctor=Test::where('medical_details_id',$this->consumerId)->where('test_type_id', '1')->where('test_status', '1')
-        ->where('test_results','!=',null)->count(); 
-
-        
+        $CountRisultGivenByDoctor=Test::where('medical_details_id',$this->consumerId)->where('test_type_id', '1')->where('test_status', '1')->where('test_results','!=',null)->count();
         return  $value==$CountRisultGivenByDoctor;
     }
-
     /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
+    * Get the validation error message.
+    *
+    * @return string
+    */
     public function message()
     {
         return 'Please submit all remaing test results of consumer!';

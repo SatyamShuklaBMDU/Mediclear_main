@@ -5,17 +5,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
-{    /**
+{
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::table('customerbatchs', function (Blueprint $table) {
-            $table->string('per_test_amount')->after('test');
+        Schema::table('medical_details', function (Blueprint $table) {
+            $table->boolean('isPrint')->default(0);
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -23,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('customerbatchs', function (Blueprint $table) {
+        Schema::table('medical_details', function (Blueprint $table) {
             //
         });
     }

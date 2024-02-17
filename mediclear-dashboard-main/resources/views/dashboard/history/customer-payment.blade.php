@@ -198,7 +198,6 @@
         border: none !important;
         /* display: none !important; */
     }
-
     .select-dropdown,
     .select-dropdown * {
         margin: 0;
@@ -206,13 +205,11 @@
         position: relative;
         box-sizing: border-box;
     }
-
     .select-dropdown {
         position: relative;
         background-color: #E6E6E6;
         border-radius: 4px;
     }
-
     .select-dropdown select {
         font-size: 1rem;
         font-weight: normal;
@@ -220,17 +217,14 @@
         padding: 8px 24px 8px 10px;
         border: none;
         background-color: transparent;
-        -webkit-appearance: none;
-        -moz-appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         appearance: none;
     }
-
-    .select-dropdown select:active,
-    .select-dropdown select:focus {
+    .select-dropdown select:active, .select-dropdown select:focus {
         outline: none;
         box-shadow: none;
     }
-
     .select-dropdown:after {
         content: "";
         position: absolute;
@@ -245,8 +239,8 @@
     }
 </style>
 <div class="container-fluid">
-    <h3 class="h3 mb-2 text-gray-800">Customer Account Section</h3>
-    <form action="{{ route('customer-filter-account') }}" method="POST">
+    <h3 class="h3 mb-2 text-gray-800">Customer Payment History</h3>
+    <form action="{{ route('Customer-filter-payment-history') }}" method="POST">
         @csrf
         <div class="row dashboard-header">
             <div class="col-md-12">
@@ -276,8 +270,7 @@
                             </div>
     </form>
     <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
-        <a href="{{ route('customer-account-section') }}"
-            class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
+        <a href="{{ route('customer-account-section') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
     </div>
     <div class="row"></div>
     <div class="card-body" style="width: -webkit-fill-available;">
@@ -287,58 +280,47 @@
                     <th>S No.</th>
                     <th>Batch Number</th>
                     <th>Total Reports/Tests</th>
+                    <th>Date of Approved</th>
                     <th>Customer No.</th>
                     <th>Customer Name</th>
                     <th>Customer Phone</th>
                     <th>Customer Email</th>
+                    <th>Status</th>
                     <th>Per Tests Amount <i class="fa fa-inr"></i></th>
                     <th>Total Amount</th>
-                    <th>Recieved Amount</th>
-                    <th>Pending Amount</th>
-                    <th>Status</th>
                     <th>Report Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($customer as $customers)
-                    <tr>
-                        <td><b>{{ $loop->iteration }}</b></td>
-                        <td class="col-2">{{ $customers->batch_no }}</td>
-                        <td>{{ $customers->test }}</td>
-                        <td>{{ $customers->customers->user_id ?? '' }}</td>
-                        <td>{{ $customers->customers->name ?? '' }}</td>
-                        <td>{{ $customers->customers->mobile_no ?? '' }}</td>
-                        <td>{{ $customers->customers->email ?? '' }}</td>
-                        <td><input type="text" name="per_test_amount[]" class="form-control"
-                                value="{{ $customers->per_test_amount }}" readonly></td>
-                        <td></td>
-                        <td><input type="text" name="recieved_amount[]" class="form-control received-amount"
-                                value="{{ $customers->recieved_payment }}"></td>
-                        <td><input type="text" name="pending_amount[]" class="form-control pending-amount"
-                                value="{{ $customers->pending_payment }}" readonly></td>
-                        <td>
-                            <div class="select-dropdown">
-                                <select id="payment-status" onchange="changestatus(this)">
-                                    <option disabled selected>Select Status</option>
-                                    <option id="payment_pending"
-                                        {{ $customers->payment_status == 0 ? 'selected' : '' }} value="0">Pending
-                                    </option>
-                                    <option id="payment_approved"
-                                        {{ $customers->payment_status == 1 ? 'selected' : '' }} value="1">Approved
-                                    </option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="select-dropdown">
-                                <select>
-                                    <option value="Option 2" selected>Hold</option>
-                                    <option value="Option 3">Send</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-                    <input type="hidden" name="consumerId" id="consumerId" value="{{ $customers->id }}">
+                @foreach($customer as $customers)
+                <tr>
+                    <td><b>{{$loop->iteration}}</b></td>
+                    <td class="col-2">{{$customers->batch_no}}</td>
+                    <td>{{$customers->test}}</td>
+                    <td>{{ \Carbon\Carbon::parse($customers->date_of_approved)->format('Y-m-d H:i:s') }}</td>
+                    <td>{{$customers->customers->user_id??''}}</td>
+                    <td>{{$customers->customers->name??''}}</td>
+                    <td>{{$customers->customers->mobile_no??''}}</td>
+                    <td>{{$customers->customers->email??''}}</td>
+                    <td>
+                        <div class="select-dropdown">
+                            <select>
+                                <option value="Option 2" selected>Pending</option>
+                                <option value="Option 3">Approved</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td><input type="text" name="per_test_amount[]" class="form-control" value="{{$customers->per_test_amount}}" readonly></td>
+                    <td>{{$customers->total_amount}}</td>
+                    <td>
+                        <div class="select-dropdown">
+                            <select>
+                                <option value="Option 2" selected>Hold</option>
+                                <option value="Option 3">Send</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
@@ -346,62 +328,19 @@
     </div>
 </div>
 <!-- 4-blocks row end -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-        calculateTotal();
-
-        function calculateTotal() {
-            $('tbody tr').each(function() {
-                var perTestAmount = parseFloat($(this).find('input[name^="per_test_amount"]').val()) ||
-                    0;
-                var totalTests = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
-                var totalAmount = perTestAmount * totalTests;
-                $(this).find('td:nth-child(9)').text(totalAmount.toFixed(2));
-            });
-        }
-        $('.received-amount').on('input', function() {
-            var row = $(this).closest('tr');
-            var receivedAmount = parseFloat($(this).val()) || 0;
-            var totalAmount = parseFloat(row.find('td:nth-child(9)').text()) || 0;
-            var pendingAmount = totalAmount - receivedAmount;
-            row.find('.pending-amount').val(pendingAmount.toFixed(2));
-        });
-    });
+   $(document).ready(function () {
+       calculateTotal();
+       function calculateTotal() {
+           $('tbody tr').each(function () {
+               var perTestAmount = parseFloat($(this).find('input[name^="per_test_amount"]').val()) || 0;
+               var totalTests = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
+               var totalAmount = perTestAmount * totalTests;
+               $(this).find('td:nth-child(10)').text(totalAmount.toFixed(2));
+           });
+       }
+   });
 </script>
-<script>
-    var consumerId = document.getElementById('consumerId').value;
-    function changestatus(selectElement) {
-        var row = $(selectElement).closest('tr');
-        var paymentStatus = $(selectElement).val();
-        var receivedAmount = $(row).find('.received-amount').val();
-        var pendingAmount = $(row).find('.pending-amount').val();
-      //   var customerId = $(row).find('#consumerId').val(); 
-        alert(customerId);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: '/save-customer-payment-details',
-            type: 'POST',
-            data: {
-                status: paymentStatus,
-                customer_id: customerId,
-                received_amount: receivedAmount,
-                pending_amount: pendingAmount
-            },
-            success: function(response) {
-                alert('Payment Status Changed');
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            }
-        });
-    }
-</script>
-
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('enddate').setAttribute('max', currentDate);

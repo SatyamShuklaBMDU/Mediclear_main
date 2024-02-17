@@ -12,28 +12,22 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerBatchController extends Controller
 {
-    //
-
     public function customerBatch()
     {
         $activeCustomerId = Customer::select('user_id')->where('status', 'Active')->get();
         $customerBatch = CustomerBatch::with('customers')->orderBy('id', 'DESC')->get();
         return view('dashboard.customerbatch', ['activeCustomerId' => $activeCustomerId, 'customerBatch' => $customerBatch]);
     }
-
     public function customerBatchUserData(Request $request)
     {
         $user_data = Customer::where('user_id', $request->id)->get();
         return response()->json(['user_data' => $user_data]);
     }
-
     public function customerBatchSave(Request $request)
     {
         $validate = Validator::make($request->all(), [
-
             'user_customer_batch_no' => ['required', 'string', Rule::unique('customerbatchs', 'batch_no')],
         ]);
-
         if ($validate->fails()) {
               return redirect('/customer-batch')->withErrors($validate)->withInput();
         }
@@ -53,7 +47,6 @@ class CustomerBatchController extends Controller
         $customerBatch = CustomerBatch::where('id', $request->id)->get();
         return $customerBatch;
     }
-
     public function customerBatchUpdate(Request $request)
     {
         $validate = Validator::make($request->all(), [
@@ -78,8 +71,6 @@ class CustomerBatchController extends Controller
             ]);
         }
     }
-
-
     public function customerBatchDelete(Request $request)
     {
         $delete = CustomerBatch::where('id', '=', $request->id)->delete();

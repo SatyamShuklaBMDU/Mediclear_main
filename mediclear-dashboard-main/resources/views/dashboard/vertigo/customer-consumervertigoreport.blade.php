@@ -26,15 +26,6 @@
                 <th> Test Status</th>
                 {{-- <th>Cunsumer Image</th> --}}
                 <th>Consumer Test Report</th>
-
-
-
-
-
-
-
-
-
             </tr>
         </thead>
         <tbody>
@@ -48,11 +39,8 @@
         let id = $('#consumer_id').val();
         var csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
         var table = $('.data-table').DataTable({
-
-
             processing: true,
             serverSide: true,
-
             ajax: {
                 url: "{{ route('consumer-customer-vertigo-report') }}",
                 type: "post",
@@ -63,7 +51,6 @@
             },
             columns: [{
                     data: 'DT_RowIndex',
-
                 },
                 {
                     data: 'date',
@@ -81,25 +68,18 @@
                     data: 'consumer_mob',
                     name: 'consumer_mob'
                 },
-
                 {
                     data: 'consumertestcount',
                     name: 'consumertestcount'
                 },
-
                 {
                     data: 'consumertest',
                     name: 'consumertest',
                     orderable: false,
                     searchable: false
                 },
-
-
             ]
         });
-
-
-
     });
 </script>
 

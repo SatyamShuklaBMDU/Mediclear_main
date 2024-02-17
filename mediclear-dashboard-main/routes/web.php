@@ -19,6 +19,7 @@ use App\Http\Controllers\CustomerHistory;
 use App\Http\Controllers\ConsumerHistoryController;
 use App\Http\Controllers\CorporateBatchController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentHistoryController;
 use App\Http\Controllers\VertigoReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -148,6 +149,7 @@ Route::middleware('auth')->group(function () {
     });
     // pdf 
     Route::post('/consumer-download-pdf', [VertigoReportController::class, 'pdf']);
+    Route::post('/update-print-status', [ConsumerHistoryController::class, 'updateprint']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -166,10 +168,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-company-payment',[PaymentController::class,'getCompany'])->name('company-payment');
     Route::post('/customer-payment-filterdata', [PaymentController::class, 'filterCustomer'])->name('customer-filter-payment');
     Route::post('/company-payment-filterdata', [PaymentController::class, 'filterCompany'])->name('company-filter-payment');
-
+    Route::post('/company-payment-history-filterdata', [PaymentHistoryController::class, 'filterCompany'])->name('Company-filter-payment-history');
+    Route::post('/customer-payment-history-filterdata', [PaymentHistoryController::class, 'filterCustomer'])->name('Customer-filter-payment-history');
+    Route::post('/save-customer-payment-details', [AccountController::class, 'updateCustomerPaymentDetails']);
+    Route::post('/save-company-payment-details', [AccountController::class, 'UpdateCompanyPayment']);
+    Route::get('/get-payment-history',[PaymentHistoryController::class,'showPaymentReport'])->name('get-payment-history');
+    Route::any('/consumer-payment-history-report/{consumertype?}',[PaymentHistoryController::class,'PaymentHistoryReport'])->name('consumer-payment-history-report');
 });
-
-
-
-
 require __DIR__ . '/auth.php';

@@ -41,7 +41,7 @@ class MedicalDetail extends Model
          'tendency_to_fall',
         'loss_of_balance_while_walking',
         'complaint',
-
+        'isPrint',
 
     ];
 

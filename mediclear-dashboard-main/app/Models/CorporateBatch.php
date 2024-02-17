@@ -18,8 +18,11 @@ class CorporateBatch extends Model
         'test',
         'per_test_amount',
         'corporate_id',
-        'company_id'
-
+        'recieved_payment',
+        'report_status',
+        'pending_payment',
+        'date_of_approved',
+        'company_id',
     ];
 
     public function corporates()
@@ -36,8 +39,4 @@ class CorporateBatch extends Model
     {
         return $this->morphMany(MedicalDetail::class, 'cusmerbatchdetails');
     }
-
-
-
-
 }
