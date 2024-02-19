@@ -38,8 +38,7 @@
               font-size: xx-large;
               text-align: center;
               /* width: 8px !important; */">
-                <a href=" {{ url('consumer-history-report/?consumertype=corporatehistory') }}">
-                    Corporate History </a>
+                <a href=" {{ url('consumer-history-report/?consumertype=corporatehistory') }}">Company History </a>
             </div>
             <div class="col"
                 style="

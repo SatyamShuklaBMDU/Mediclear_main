@@ -507,7 +507,7 @@
                         <div class="col-sm-3 end-date">
                             <p class="text-dark"><strong>Date From:</strong></p>
                             <div class="input-group date d-flex" id="">            
-                                <input type="date"  value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['fromdate']}}@endif" class="form-control" name="fromdate" id="fromdate" placeholder="dd-mm-yyyy" />
+                                <input type="date"  value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['fromdate']}}@endif" class="form-control" name="fromdate" id="startdate" placeholder="dd-mm-yyyy" />
                             </div>
                         </div>
                         <!--  -->
@@ -516,7 +516,7 @@
                         <div class="col-sm-3 end-date">
                             <p class="text-dark"><strong>Date to:</strong></p>
                             <div class="input-group date d-flex" id="">
-                                <input type="date" value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['todate']}}@endif"     class="form-control" name="todate" id="todate" placeholder="dd-mm-yyyy" />       
+                                <input type="date" value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['todate']}}@endif"     class="form-control" name="todate" id="enddate" placeholder="dd-mm-yyyy" />       
                             </div>
                         </div>
                         <!--  -->
@@ -532,7 +532,7 @@
                         <div class="col-sm-2" style="position: relative; top: 47px;">
                             <div class="Click-here"> <button class="btn    bg-gradient-success text-white shadow-lg"
                                     type="submit" style="padding: 4px 4px; font-size:17px; width:165px;"
-                                    data-target=" #mymodel" data-toggle="modal">+ Add Customer</button>
+                                    data-target=" #mymodel" data-toggle="modal"> Add Customer</button>
                                 <!-- poppux box start -->
                                 <div class="modal mt-4" id="mymodel">
                                     <div class="modal-dialog m-auto">
@@ -893,14 +893,8 @@
                 $(document).ready(function() {
                     create_custom_dropdowns();
                 });
+                var currentDate = new Date().toISOString().split('T')[0];
+                document.getElementById('enddate').setAttribute('max', currentDate);
+                document.getElementById('startdate').setAttribute('max', currentDate);
             </script>
-
-
-
-
-
-
-
-
-
-            @include('include.footer')
+           @include('include.footer')

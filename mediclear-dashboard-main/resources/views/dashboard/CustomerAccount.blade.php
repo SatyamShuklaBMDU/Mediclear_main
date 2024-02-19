@@ -243,6 +243,9 @@
         border-right: 5px solid transparent;
         border-left: 5px solid transparent;
     }
+    .hidden-column{
+      display: none;
+    }
 </style>
 <div class="container-fluid">
     <h3 class="h3 mb-2 text-gray-800">Customer Account Section</h3>
@@ -297,11 +300,12 @@
                     <th>Pending Amount</th>
                     <th>Status</th>
                     <th>Report Status</th>
+                    {{-- <th class="hidden-column">Column Header</th> --}}
                 </tr>
             </thead>
             <tbody>
                 @foreach ($customer as $customers)
-                    <tr>
+                    <tr data-consumer="{{$customers->id}}">
                         <td><b>{{ $loop->iteration }}</b></td>
                         <td class="col-2">{{ $customers->batch_no }}</td>
                         <td>{{ $customers->test }}</td>
@@ -337,8 +341,10 @@
                                 </select>
                             </div>
                         </td>
+                        {{-- <td class="hidden-column">
+                           <input type="hidden" name="consumerId[]" class="consumerId" value="{{ $customers->id }}">
+                       </td> --}}
                     </tr>
-                    <input type="hidden" name="consumerId" id="consumerId" value="{{ $customers->id }}">
                 @endforeach
             </tbody>
         </table>
@@ -348,60 +354,57 @@
 <!-- 4-blocks row end -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-        calculateTotal();
-
-        function calculateTotal() {
-            $('tbody tr').each(function() {
-                var perTestAmount = parseFloat($(this).find('input[name^="per_test_amount"]').val()) ||
-                    0;
-                var totalTests = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
-                var totalAmount = perTestAmount * totalTests;
-                $(this).find('td:nth-child(9)').text(totalAmount.toFixed(2));
-            });
-        }
-        $('.received-amount').on('input', function() {
-            var row = $(this).closest('tr');
-            var receivedAmount = parseFloat($(this).val()) || 0;
-            var totalAmount = parseFloat(row.find('td:nth-child(9)').text()) || 0;
-            var pendingAmount = totalAmount - receivedAmount;
-            row.find('.pending-amount').val(pendingAmount.toFixed(2));
-        });
-    });
+   function changestatus(selectElement) {
+       var row = $(selectElement).closest('tr');
+       var paymentStatus = $(selectElement).val();
+       var receivedAmount = $(row).find('.received-amount').val();
+       var pendingAmount = $(row).find('.pending-amount').val();
+       var csrfToken = $('meta[name="csrf-token"]').attr('content');
+       var customerId = $(row).data('consumer');
+       $.ajax({
+           url: '/save-customer-payment-details',
+           type: 'POST',
+           headers: {
+               'X-CSRF-TOKEN': csrfToken
+           },
+           data: {
+               status: paymentStatus,
+               customer_id: customerId,
+               received_amount: receivedAmount,
+               pending_amount: pendingAmount
+           },
+           success: function(response) {
+               alert('Payment Status Changed');
+               location.reload()
+           },
+           error: function(xhr, status, error) {
+               console.error(error);
+           }
+       });
+   }
 </script>
 <script>
-    var consumerId = document.getElementById('consumerId').value;
-    function changestatus(selectElement) {
-        var row = $(selectElement).closest('tr');
-        var paymentStatus = $(selectElement).val();
-        var receivedAmount = $(row).find('.received-amount').val();
-        var pendingAmount = $(row).find('.pending-amount').val();
-      //   var customerId = $(row).find('#consumerId').val(); 
-        alert(customerId);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: '/save-customer-payment-details',
-            type: 'POST',
-            data: {
-                status: paymentStatus,
-                customer_id: customerId,
-                received_amount: receivedAmount,
-                pending_amount: pendingAmount
-            },
-            success: function(response) {
-                alert('Payment Status Changed');
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            }
-        });
-    }
-</script>
+   $(document).ready(function() {
+       calculateTotal();
 
+       function calculateTotal() {
+           $('tbody tr').each(function() {
+               var perTestAmount = parseFloat($(this).find('input[name^="per_test_amount"]').val()) ||
+                   0;
+               var totalTests = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
+               var totalAmount = perTestAmount * totalTests;
+               $(this).find('td:nth-child(9)').text(totalAmount.toFixed(2));
+           });
+       }
+       $('.received-amount').on('input', function() {
+           var row = $(this).closest('tr');
+           var receivedAmount = parseFloat($(this).val()) || 0;
+           var totalAmount = parseFloat(row.find('td:nth-child(9)').text()) || 0;
+           var pendingAmount = totalAmount - receivedAmount;
+           row.find('.pending-amount').val(pendingAmount.toFixed(2));
+       });
+   });
+</script>
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('enddate').setAttribute('max', currentDate);

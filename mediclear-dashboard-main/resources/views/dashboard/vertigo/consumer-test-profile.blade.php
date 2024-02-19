@@ -453,6 +453,18 @@
          box-shadow: 0px 7px 6px 0px #00000014;
          }
     /*  */ 
+    .checked-blue {
+    position: relative;
+    }
+    .checked-blue::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px; /* Adjust the height as needed */
+        background-color: blue;
+        bottom: 0;
+        left: 0;
+    }
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -1903,7 +1915,7 @@
     </div>
 </div>
 {{-- end Rombergtest --}}
-{{-- ----------------------flatfoottest------------------------------------------------ --}}
+{{-- ----------------------flatfoottest-------------------------------}}
 @php
     if (isset($TestData['flatfoot'])) {
         $flatfootcheckupdata = json_decode($TestData['flatfoot'], true);
@@ -3505,7 +3517,7 @@
         create_custom_dropdowns();
     });
 </script>
-{{-- ---------------------------------------------------------------------------------------------- --}}
+{{--------------------------------------------------------------------------------------------}}
 </div>
 </div>
 @php

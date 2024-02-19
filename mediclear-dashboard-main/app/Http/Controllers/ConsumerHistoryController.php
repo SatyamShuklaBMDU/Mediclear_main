@@ -15,7 +15,7 @@ class ConsumerHistoryController extends Controller
     public function consumerHistoryReport(Request $request){
         if ($request->ajax()) {
             if($request->consumerType=='customerhistory'){
-             $data=  MedicalDetail::select('customerbatchs.batch_no as batch_no','medical_details.id as consumer_id','customers.name as customername','customers.email as customeremail',
+                $data = MedicalDetail::select('customerbatchs.batch_no as batch_no','medical_details.id as consumer_id','customers.name as customername','customers.email as customeremail',
                 'medical_details.certification_number as certification_number',
                 'customerbatchs.test as test','customerbatchs.payment_status as payment_status',
                 DB::raw("DATE_FORMAT(DATE_ADD(DATE_SUB(medical_details.doctor_submit_date, INTERVAL 1 YEAR), INTERVAL -1 DAY), '%d/%b/%Y') AS validupto"),
@@ -23,10 +23,11 @@ class ConsumerHistoryController extends Controller
                 ->join('customerbatchs','customerbatchs.id','=','medical_details.cusmerbatchdetails_id')
                 ->join('customers','customers.id','=','customerbatchs.customer_id')
                 ->where('doctor_final_result','!=',null)
+                ->where('customerbatchs.report_status', 1) // Filter by report_status = 1
                 ->orderBy('medical_details.doctor_submit_date', 'DESC')
-                ->get();
+                ->get();            
             }elseif($request->consumerType=='corporatehistory'){
-                $data=  MedicalDetail::select('corporatebatchs.batch_no as batch_no','medical_details.id as consumer_id','company.name as company_name','company.email as companyemail',
+                $data = MedicalDetail::select('corporatebatchs.batch_no as batch_no','medical_details.id as consumer_id','company.name as company_name','company.email as companyemail',
                 'medical_details.certification_number as certification_number',
                 'medical_details.isPrint as isPrint',
                 'corporatebatchs.test as test','corporatebatchs.payment_status as payment_status',
@@ -35,6 +36,7 @@ class ConsumerHistoryController extends Controller
                 ->join('corporatebatchs','corporatebatchs.id','=','medical_details.cusmerbatchdetails_id')
                 ->join('company','company.id','=','corporatebatchs.company_id')
                 ->where('doctor_final_result','!=',null)
+                ->where('corporatebatchs.report_status', 1) // Filter by report_status = 1
                 ->orderBy('medical_details.doctor_submit_date', 'DESC')
                 ->get();
             }

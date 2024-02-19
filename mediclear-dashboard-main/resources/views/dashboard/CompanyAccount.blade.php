@@ -111,8 +111,7 @@
             </thead>
             <tbody>
                 @foreach($company as $companies)
-                <input type="hidden" name="consumerId" id="consumerId" value="{{$companies->id}}">
-                <tr>
+                <tr data-consumer="{{$companies->id}}">
                     <td><b>{{$loop->iteration}}</b></td>
                     <td class="col-2">{{$companies->batch_no}}</td>
                     <td>{{$companies->test}}</td>
@@ -125,10 +124,10 @@
                     <td><input type="text" name="pending_amount[]" class="form-control pending-amount" value="{{$companies->pending_payment}}" readonly></td>
                     <td>
                      <div class="select-dropdown">
-                         <select id="payment-status">
+                         <select id="payment-status" onchange="changestatus(this)">
                              <option disabled {{ $companies->payment_status == -1 ? 'selected' : '' }} selected >Select Status</option>
-                             <option id="payment_pending" {{ $companies->payment_status == 0 ? 'selected' : '' }} value="0">Pending</option>
-                             <option id="payment_approved" {{ $companies->payment_status == 1 ? 'selected' : '' }} value="1">Approved</option>
+                             <option id="payment_pending" {{ $companies->payment_status == 0 ? 'selected' : '' }} value="0" >Pending</option>
+                             <option id="payment_approved" {{ $companies->payment_status == 1 ? 'selected' : '' }} value="1" >Approved</option>
                          </select>
                      </div>
                     </td>
@@ -173,42 +172,48 @@
         $('.received-amount').on('input', function () {
             var row = $(this).closest('tr');
             var receivedAmount = parseFloat($(this).val()) || 0;
-            var totalAmount = parseFloat(row.find('td:nth-child(9)').text()) || 0;
+            var totalAmount = parseFloat(row.find('td:nth-child(8)').text()) || 0;
             var pendingAmount = totalAmount - receivedAmount;
             row.find('.pending-amount').val(pendingAmount.toFixed(2));
         }); 
     });
 </script>
 <script>
-    $(document).ready(function () {
-       var customerId = $('#consumerId').val();
-     $('#payment-status').change(function () {
-         var paymentStatus = $(this).val();
-         var receivedAmount = $(this).closest('tr').find('.received-amount').val();
-         var pendingAmount = $(this).closest('tr').find('.pending-amount').val();
-         $.ajaxSetup({
-             headers: {
-                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             }
-         });
-         $.ajax({
-             url: '/save-company-payment-details',
-             type: 'POST',
-             data: {
-                 status: paymentStatus,
-                 customer_id: customerId,
-                 received_amount: receivedAmount,
-                 pending_amount: pendingAmount
-             },
-             success: function (response) {
-                alert('Payment Status Changed');
-             },
-             error: function (xhr, status, error) {
-             }
-         });
-     });
- });
- </script>
+        function changestatus(selectElement) {
+            var row = $(selectElement).closest('tr');
+            var paymentStatus = $(selectElement).val();
+            var receivedAmount = $(row).find('.received-amount').val();
+            var pendingAmount = $(row).find('.pending-amount').val();
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var customerId = $(row).data('consumer');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/save-company-payment-details',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                data: {
+                    status: paymentStatus,
+                    customer_id: customerId,
+                    received_amount: receivedAmount,
+                    pending_amount: pendingAmount
+                },
+                success: function (response) {
+                    alert('Payment Status Changed');
+                    location.reload()
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+</script>
+
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('enddate').setAttribute('max', currentDate);

@@ -566,7 +566,7 @@ s
                         <div class="col-sm-3 end-date">
                             <p class="text-dark"><strong>Date From:</strong></p>
                             <div class="input-group date d-flex" id="">
-                                <input type="date" value="@if(isset($corporatefilterBatchFilterdate)){{$corporatefilterBatchFilterdate['fromdate']}}@endif"  name="fromdate" class="form-control" id="fromdate" placeholder="dd-mm-yyyy" />
+                                <input type="date" value="@if(isset($corporatefilterBatchFilterdate)){{$corporatefilterBatchFilterdate['fromdate']}}@endif"  name="fromdate" class="form-control" id="startdate" placeholder="dd-mm-yyyy" />
                             </div>
                         </div> 
                         <!--  -->
@@ -575,8 +575,7 @@ s
                         <div class="col-sm-3 end-date">
                             <p class="text-dark"><strong>Date to:</strong></p>
                             <div class="input-group date d-flex" id="">
-                                <input type="date" value="@if(isset($corporatefilterBatchFilterdate)){{$corporatefilterBatchFilterdate['todate']}}@endif" name="todate" class="form-control" id="todate" placeholder="dd-mm-yyyy">
-                                
+                                <input type="date" value="@if(isset($corporatefilterBatchFilterdate)){{$corporatefilterBatchFilterdate['todate']}}@endif" name="todate" class="form-control" id="enddate" placeholder="dd-mm-yyyy">    
                             </div>
                         </div>
                         <!--  -->
@@ -903,5 +902,8 @@ s
                 $(document).ready(function() {
                     create_custom_dropdowns();
                 });
+                var currentDate = new Date().toISOString().split('T')[0];
+                document.getElementById('enddate').setAttribute('max', currentDate);
+                document.getElementById('startdate').setAttribute('max', currentDate);
             </script>
             @include('include.footer')

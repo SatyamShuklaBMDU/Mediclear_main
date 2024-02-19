@@ -33,7 +33,19 @@ class ComplaintController extends Controller
             ->whereDate('created_at', '<=', $end)
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('dashboard.complaint', compact('complaint', 'start', 'end'));
+            $name = [];
+        foreach ($complaint as $com) {
+            $user = Customer::where('user_id', $com->user_id)->first();
+            if (!$user) {
+                $user = CorporateID::where('user_id', $com->user_id)->first();
+            }
+            if ($user) {
+                $name[] = $user->name;
+            } else {
+                $name[] = '';
+            }
+        }
+        return view('dashboard.complaint', compact('complaint', 'start', 'end','name'));
     }
     public function deleteComplaint(Request $req){
          $result=Complaint::where('id',$req->id)->delete();

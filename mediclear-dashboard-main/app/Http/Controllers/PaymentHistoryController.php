@@ -29,9 +29,9 @@ class PaymentHistoryController extends Controller
         $start = $request->start;
         $end = $request->end;
         $company = CorporateBatch::where('payment_status','1')
-            ->whereDate('created_at', '>=', $start)
-            ->whereDate('created_at', '<=', $end)
-            ->orderBy('created_at', 'desc')
+            ->whereDate('date_of_approved', '>=', $start)
+            ->whereDate('date_of_approved', '<=', $end)
+            ->orderBy('date_of_approved', 'desc')
             ->get();
         return view('dashboard.history.company-payment', compact('company', 'start', 'end'));
     }
@@ -40,9 +40,9 @@ class PaymentHistoryController extends Controller
         $start = $request->start;
         $end = $request->end;
         $customer = CustomerBatch::where('payment_status','1')
-            ->whereDate('created_at', '>=', $start)
-            ->whereDate('created_at', '<=', $end)
-            ->orderBy('created_at', 'desc')
+            ->whereDate('date_of_approved', '>=', $start)
+            ->whereDate('date_of_approved', '<=', $end)
+            ->orderBy('date_of_approved', 'desc')
             ->get();
         return view('dashboard.history.customer-payment', compact('customer', 'start', 'end'));
     }

@@ -36,7 +36,19 @@ class FeedbackController extends Controller
             ->whereDate('created_at', '<=', $end)
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('dashboard.feedback', compact('feedback', 'start', 'end'));
+            $name = [];
+        foreach ($feedback as $feed) {
+            $user = Customer::where('user_id', $feed->user_id)->first();
+            if (!$user) {
+                $user = CorporateID::where('user_id', $feed->user_id)->first();
+            }
+            if ($user) {
+                $name[] = $user->name;
+            } else {
+                $name[] = '';
+            }
+        }
+        return view('dashboard.feedback', compact('feedback', 'start', 'end','name'));
     }
 
     public function deleteFeedback(Request $req)

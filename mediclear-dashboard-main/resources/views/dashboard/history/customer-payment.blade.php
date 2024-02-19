@@ -270,7 +270,7 @@
                             </div>
     </form>
     <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
-        <a href="{{ route('customer-account-section') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
+        <a href="{{ route('consumer-payment-history-report', ['consumertype' => 'customerhistory']) }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
     </div>
     <div class="row"></div>
     <div class="card-body" style="width: -webkit-fill-available;">
@@ -278,16 +278,16 @@
             <thead>
                 <tr>
                     <th>S No.</th>
+                    <th>Date of Approved</th>
                     <th>Batch Number</th>
                     <th>Total Reports/Tests</th>
-                    <th>Date of Approved</th>
                     <th>Customer No.</th>
                     <th>Customer Name</th>
                     <th>Customer Phone</th>
                     <th>Customer Email</th>
-                    <th>Status</th>
                     <th>Per Tests Amount <i class="fa fa-inr"></i></th>
                     <th>Total Amount</th>
+                    <th>Status</th>
                     <th>Report Status</th>
                 </tr>
             </thead>
@@ -295,28 +295,28 @@
                 @foreach($customer as $customers)
                 <tr>
                     <td><b>{{$loop->iteration}}</b></td>
+                    <td>{{ \Carbon\Carbon::parse($customers->date_of_approved)->format('d-m-Y') }}</td>
                     <td class="col-2">{{$customers->batch_no}}</td>
                     <td>{{$customers->test}}</td>
-                    <td>{{ \Carbon\Carbon::parse($customers->date_of_approved)->format('Y-m-d H:i:s') }}</td>
                     <td>{{$customers->customers->user_id??''}}</td>
                     <td>{{$customers->customers->name??''}}</td>
                     <td>{{$customers->customers->mobile_no??''}}</td>
                     <td>{{$customers->customers->email??''}}</td>
+                    <td><input type="text" class="form-control" value="{{$customers->per_test_amount}}" readonly/></td>
+                    <td>{{$customers->recieved_payment}}</td>
+                    <td>
+                     <div class="select-dropdown">
+                         <select>
+                             {{-- <option value="Option 2" {{ $customers->payment_status == 0 ? 'selected' : '' }} selected>Pending</option> --}}
+                             <option value="Option 3" {{ $customers->payment_status == 1 ? 'selected' : '' }}>Approved</option>
+                         </select>
+                     </div>
+                 </td>
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 2" selected>Pending</option>
-                                <option value="Option 3">Approved</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td><input type="text" name="per_test_amount[]" class="form-control" value="{{$customers->per_test_amount}}" readonly></td>
-                    <td>{{$customers->total_amount}}</td>
-                    <td>
-                        <div class="select-dropdown">
-                            <select>
-                                <option value="Option 2" selected>Hold</option>
-                                <option value="Option 3">Send</option>
+                                {{-- <option value="Option 2" selected>Hold</option> --}}
+                                <option value="Option 3" selected>Send</option>
                             </select>
                         </div>
                     </td>
@@ -328,7 +328,7 @@
     </div>
 </div>
 <!-- 4-blocks row end -->
-<script>
+{{-- <script>
    $(document).ready(function () {
        calculateTotal();
        function calculateTotal() {
@@ -340,7 +340,7 @@
            });
        }
    });
-</script>
+</script> --}}
 <script>
     var currentDate = new Date().toISOString().split('T')[0];
     document.getElementById('enddate').setAttribute('max', currentDate);

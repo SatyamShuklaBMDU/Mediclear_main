@@ -21,6 +21,7 @@ use App\Http\Controllers\CorporateBatchController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentHistoryController;
 use App\Http\Controllers\VertigoReportController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,12 +38,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('/cleareverything', function () {
+    $clearcache = Artisan::call('cache:clear');
+    echo "Cache cleared<br>";
+    $clearview = Artisan::call('view:clear');
+    echo "View cleared<br>";
+    $clearconfig = Artisan::call('config:cache');
+    echo "Config cleared<br>";
+    $cleardebugbar = Artisan::call('optimize:clear');
+    echo "Debug Bar cleared<br>";
+});
 Route::get('/user-reset-password/{token}', [PasswordResetLinkController::class, 'resetPassword'])->name('resetuserpassword');
 Route::post('/make-reset-password', [PasswordResetLinkController::class, 'resetPasswordPost'])->name('reset.password.post');
 Route::get('/dashbord', function () {
     return view('dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashbord');
-Route::get('/consumer-history', [ConsumerHistoryController::class, 'showReport']);
+Route::get('/consumer-history', [ConsumerHistoryController::class, 'showRep
+ort']);
 Route::any('/consumer-history-report/{consumertype?}',[ConsumerHistoryController::class,'consumerHistoryReport'])->name('consumer-history-report');
 
 Route::middleware('auth')->group(function () {

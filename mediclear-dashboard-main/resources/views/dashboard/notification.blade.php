@@ -95,14 +95,14 @@
                                             <p class="text-dark"><strong>Date From:</strong></p>
                                             <div class="input-group date d-flex" id="datepicker1">
                                                 <input type="date" class="form-control" name="start" id="startdate"
-                                                    value="" placeholder="dd-mm-yyyy" />
+                                                    value="{{$start??''}}" placeholder="dd-mm-yyyy" />
                                             </div>
                                         </div>
                                         <div class="col-sm-3 end-date">
                                             <p class="text-dark"><strong>Date to:</strong></p>
                                             <div class="input-group date d-flex" id="datepicker2">
                                                 <input type="date" name="end" class="form-control" id="enddate"
-                                                    value="" placeholder="dd-mm-yyyy" />
+                                                    value="{{$end??''}}" placeholder="dd-mm-yyyy" />
                                             </div>
                                         </div>
                                         <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">

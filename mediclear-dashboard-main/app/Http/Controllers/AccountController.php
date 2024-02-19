@@ -11,12 +11,12 @@ class AccountController extends Controller
 {
     public function CustomerSection()
     {
-        $customer = CustomerBatch::all();
+        $customer = CustomerBatch::where('payment_status', '0')->orWhere('payment_status','-1')->get();
         return view('dashboard.CustomerAccount',compact('customer'));
     }
     public function CompanySection()
     {
-        $company = CorporateBatch::all();
+        $company = CorporateBatch::where('payment_status','0')->orWhere('payment_status','-1')->get();
         return view('dashboard.CompanyAccount',compact('company'));
     }
     public function filterCustomer(Request $request)
@@ -54,6 +54,7 @@ class AccountController extends Controller
         $customerBatch->pending_payment = $pendingAmount;
         $customerBatch->payment_status = $status;
         if ($status == 1) {
+            $customerBatch->report_status = '1';
             $customerBatch->date_of_approved = Carbon::now(); 
         }
         $customerBatch->save();
@@ -77,6 +78,7 @@ class AccountController extends Controller
         $customerBatch->payment_status = $status;
 
         if ($status == 1) {
+            $customerBatch->report_status = '1';
             $customerBatch->date_of_approved = Carbon::now();
         }
 

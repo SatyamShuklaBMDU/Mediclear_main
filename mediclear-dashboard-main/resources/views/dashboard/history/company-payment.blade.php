@@ -87,7 +87,7 @@
                             </div>
                         </form>
                         <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
-                            <a href="{{ route('company-account-section') }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
+                            <a href="{{ route('consumer-payment-history-report', ['consumertype' => 'corporatehistory']) }}" class="btn bg-gradient-success text-white shadow-lg ">Reset</a>
                         </div>
     <div class="row"></div>
     <div class="card-body" style="width: -webkit-fill-available;">
@@ -95,6 +95,7 @@
             <thead>
                 <tr>
                     <th>S No.</th>
+                    <th>Date of Approved</th>
                     <th>Batch Number</th>
                     <th>Total Reports/Tests</th>
                     <th>Company Name</th>
@@ -104,13 +105,13 @@
                     <th>Total Amount</th>
                     <th>Status</th>
                     <th>Report Status</th>
-                    <th>Payment Terms Status</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($company as $companies)
                 <tr>
                     <td><b>{{$loop->iteration}}</b></td>
+                    <td>{{ \Carbon\Carbon::parse($companies->date_of_approved)->format('d-m-Y') }}</td>
                     <td class="col-2">{{$companies->batch_no}}</td>
                     <td>{{$companies->test}}</td>
                     <td>{{$companies->corprateBelongCompany->name??''}}</td>
@@ -121,24 +122,15 @@
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 2" selected>Pending</option>
-                                <option value="Option 3">Approved</option>
+                                {{-- <option value="Option 2" {{ $companies->payment_status == 0 ? 'selected' : '' }} selected>Pending</option> --}}
+                                <option value="Option 3" {{ $companies->payment_status == 1 ? 'selected' : '' }}>Approved</option>
                             </select>
                         </div>
                     </td>
                     <td>
                         <div class="select-dropdown">
                             <select>
-                                <option value="Option 2" selected>Hold</option>
-                                <option value="Option 3">Send</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="select-dropdown">
-                            <select>
-                                <option value="Option 2" selected>Per Months</option>
-                                <option value="Option 3">Per Tests</option>
+                                <option value="Option 3" selected>Send</option>
                             </select>
                         </div>
                     </td>
@@ -161,7 +153,7 @@
                 var perTestAmount = parseFloat($(this).find('input[name^="per_test_amount"]').val()) || 0;
                 var totalTests = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
                 var totalAmount = perTestAmount * totalTests;
-                $(this).find('td:nth-child(8)').text(totalAmount.toFixed(2));
+                $(this).find('td:nth-child(9)').text(totalAmount.toFixed(2));
             });
         }
     });
