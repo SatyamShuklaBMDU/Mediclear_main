@@ -281,7 +281,10 @@ class TestController extends Controller
                 'q4' => 'required',
                 'q5' => 'required',
                 'q6' => 'required',
-
+                'q7' => 'required',
+                'q8' => 'required',
+                'q9' => 'required',
+                'q10' => 'required',
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -308,7 +311,7 @@ class TestController extends Controller
 
                 [
 
-                    'data' => json_encode(['q1' => $request->q1, 'q2' => $request->q2, 'q3' => $request->q3, 'q4' => $request->q4, 'q5' => $request->q5, 'q6' => $request->q6]),
+                    'data' => json_encode(['q1' => $request->q1, 'q2' => $request->q2, 'q3' => $request->q3, 'q4' => $request->q4, 'q5' => $request->q5, 'q6' => $request->q6, 'q7' => $request->q7, 'q8' => $request->q8, 'q9' => $request->q9, 'q10' => $request->q10]),
                     'test_status' => '1',
                 ]
             );
@@ -323,7 +326,6 @@ class TestController extends Controller
             ]);
 
             DB::commit();
-
             $result = 0;
             if ($request->q1 == 'true') {
                 $result = $result + 1;
@@ -343,10 +345,19 @@ class TestController extends Controller
             if ($request->q6 == 'true') {
                 $result = $result + 1;
             }
-// dd($result);
-
-            $percentage = ($result / 6) * 100;
-
+            if ($request->q7 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q8 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q9 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q10 == 'true') {
+                $result = $result + 1;
+            }
+            $percentage = ($result / 10) * 100;
             if ($test) {
                 return response()->json([
                     "status" => "success",
@@ -355,7 +366,6 @@ class TestController extends Controller
                     "percentage" => $percentage,
                     "verified" => "You gave test and your profile  is verified",
                     "consumer_test_report" => $test,
-
                 ], 200);
             } else {
                 return response()->json([
@@ -363,9 +373,7 @@ class TestController extends Controller
                     "message" => "Something went wrong!",
                 ], 500);
             }
-
         } catch (\Exception $e) {
-
             DB::rollBack();
             return Response::json(
                 array(
@@ -392,7 +400,10 @@ class TestController extends Controller
                 'q4' => 'required',
                 'q5' => 'required',
                 'q6' => 'required',
-
+                'q7' => 'required',
+                'q8' => 'required',
+                'q9' => 'required',
+                'q10' => 'required',
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -414,7 +425,7 @@ class TestController extends Controller
             $test = Test::updateOrCreate(
                 ['features' => 'eyedistance', 'medical_details_id' => $request->medical_details_id, 'test_type_id' => $request->test_type_id],
                 [
-                    'data' => json_encode(['q1' => $request->q1, 'q2' => $request->q2, 'q3' => $request->q3, 'q4' => $request->q4, 'q5' => $request->q5, 'q6' => $request->q6]),
+                    'data' => json_encode(['q1' => $request->q1, 'q2' => $request->q2, 'q3' => $request->q3, 'q4' => $request->q4, 'q5' => $request->q5, 'q6' => $request->q6, 'q7' => $request->q7, 'q8' => $request->q8, 'q9' => $request->q9, 'q10' => $request->q10]),
                     'test_status' => '1',
                 ]
             );
@@ -445,7 +456,19 @@ class TestController extends Controller
             if ($request->q6 == 'true') {
                 $result = $result + 1;
             }
-            $percentage = ($result / 6) * 100;
+            if ($request->q7 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q8 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q9 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q10 == 'true') {
+                $result = $result + 1;
+            }
+            $percentage = ($result / 10) * 100;
             if ($test) {
                 return response()->json([
                     "status" => "success",
@@ -647,7 +670,6 @@ class TestController extends Controller
 
     public function fukuda(Request $request)
     {
-
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
@@ -820,31 +842,27 @@ class TestController extends Controller
             )
             ->where('certification_number', $request->certification)
             ->first();
-
             if (!$value) {
                 return response()->json(['error' => 'Medical detail not found for the given certification number'], 404);
             }
-
             $company_name = '';
             if ($value->cusmerbatchdetails_type == "App\Models\CorporateBatch") {
                 $corporate = DB::table('medical_details')
                     ->select('medical_details.cusmerbatchdetails_id', 'corporatebatchs.company_id')
                     ->join('corporatebatchs', 'corporatebatchs.id', '=', 'medical_details.cusmerbatchdetails_id')
                     ->first();
-                
                 if ($corporate) {
                     $company = Company::find($corporate->company_id);
                     $company_name = $company->name;
                 }
             }
-
             $sendData = [];
             $sendData['certification_number'] = $request->certification;
             $blurredAadhar = 'xxxx-xxxx-' . substr($value->consumer_addhar_number, -4);
             $sendData['consumer_addharnumber'] = $blurredAadhar;
             $carbonDate = Carbon::createFromFormat('Y-m-d', $value->doctor_submit_date);
             $formattedDate = $carbonDate->format('d-M-Y');
-            $carbonDate->addYear(); 
+            $carbonDate->addYear()->subDay();
             $lastValidDate = $carbonDate->format('d-M-Y');
             $sendData['doctor_submit_date'] = $formattedDate;
             $sendData['lastvalid_date'] = $lastValidDate; 
@@ -852,7 +870,6 @@ class TestController extends Controller
             $sendData['company_name'] = $company_name;
             $sendData['gender'] = $value->gender;
             $sendData['profile_pic'] = $value->consumer_profile_image_name;
-
             switch ($value->doctor_final_result) {
                 case '1':
                     $sendData['result'] = "FIT";
@@ -867,7 +884,6 @@ class TestController extends Controller
                     $sendData['result'] = "Unknown";
                     break;
             }
-
             return response()->json(['data' => $sendData], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while processing the request.', 'message' => $e->getMessage()], 500);

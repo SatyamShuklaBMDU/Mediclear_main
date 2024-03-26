@@ -5,12 +5,15 @@
         padding: 40px;
         margin: 40px 0px 40px 0px;
     }
+
     .content-wrapper {
         margin-left: 210px;
     }
+
     .sidebar-right-trigger {
         display: none;
     }
+
     /* .form-check-label {
         margin-bottom: 0;
         width: 30rem;
@@ -18,6 +21,7 @@
     .Modules {
         flex-wrap: wrap;
     }
+
     .field-icon {
         float: right;
         margin-left: -25px;
@@ -94,7 +98,8 @@
                             let UserTotalPermissionLength = userTotalPermission.length;
                             let UserPermissionString = "";
                             for (let i = 0; i < UserTotalPermissionLength; i++) {
-                                UserPermissionString = userTotalPermission[i] + ',' +UserPermissionString;
+                                UserPermissionString = userTotalPermission[i] + ',' +
+                                    UserPermissionString;
                             }
                             console.log(UserPermissionString);
                             console.log($(`#${updatedUserDataId}`).html());
@@ -145,7 +150,8 @@
                             <div class="form-group">
 
                                 <label for="userStatus">User Status</label>
-                                <select class="form-select" aria-label="Default select example" name="status" id="userStatus">
+                                <select class="form-select" aria-label="Default select example" name="status"
+                                    id="userStatus">
                                     <option value="1">Active</option>
                                     <option value="0">Deactive</option>
                                 </select>
@@ -305,13 +311,11 @@
 
 </div>
 <script type="text/javascript">
-    $(document).ready(function() { 
-        $("#alluser").click(function(){         
-        $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
-
+    $(document).ready(function() {
+        $("#alluser").click(function() {
+            $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
         });
     });
 </script>
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

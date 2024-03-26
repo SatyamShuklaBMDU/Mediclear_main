@@ -42,15 +42,12 @@
 
 <!-- headr-file-end-->
 <div class="content-wrapper">
-    <!-- Container-fluid starts -->
-    <!-- Main content starts -->
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
         </div>
     @endif
     <div class="container-fluid">
-
         <div class="row">
             <div class="main-header">
                 <h4 class="mt-4">Manage Admins</h4>
@@ -97,7 +94,6 @@
                     </div>
                     <h6>Assign Modules</h6>
                     <div class="col-md-12  Modules d-flex justify-content-around">
-
                         <div class="form-check" style="">
                             <input class="form-check-input" type="checkbox" value="alluser" id="alluser"
                                 name="permission[]" checked>
@@ -119,9 +115,6 @@
                                 ADD Company
                             </label>
                         </div>
-
-                        <!-- <div class="col-md-4"> -->
-
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="corporateid" id="corporateid"
                                 name="permission[]">
@@ -145,8 +138,6 @@
                                 Customer Batch
                             </label>
                         </div>
-
-
                         <!-- <div class="col-md-4"> -->
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="notification" id="notification"
@@ -163,8 +154,6 @@
                             </label>
                         </div>
                     </div>
-
-
                     <div class="col-md-12 d-flex justify-content-around">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="vertigoreport" id="vertigoreport"
@@ -180,8 +169,6 @@
                                 Admin Manages
                             </label>
                         </div>
-
-
                         <!-- <div class="col-md-4"> -->
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="feedback" id="feedback"
@@ -198,23 +185,11 @@
                             </label>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-                    <button type="submit" class="btn btn-dark btn-md" style="    margin: 30px 0px 0px;">Assign
-                        Roles</button>
+                    <button type="submit" class="btn btn-dark btn-md" style="margin:30px 0px 0px;">Assign Roles</button>
+                </form>
             </div>
-            </form>
-
         </div>
     </div>
-
-
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -238,16 +213,16 @@
 
         if ($("#alluser").is(":checked")) {
             $("input[type=checkbox]").prop('checked', true);
-        }      
+        }
 
-        $("#alluser").click(function(){ 
-                
-        $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+        $("#alluser").click(function() {
+
+            $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
 
         });
 
 
-        
+
 
     });
 </script>

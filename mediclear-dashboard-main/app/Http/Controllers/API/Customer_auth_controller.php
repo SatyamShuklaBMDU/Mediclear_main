@@ -48,9 +48,7 @@ class Customer_auth_controller extends Controller
 
 
         if (!isset($admin) || !Hash::check($request->password, $admin->password)) {
-
             return response()->json(['Unauthorized' => ['error' => 'The provided credentials are incorrect.']], 401);
-
         } else {
             $status = $admin->status;
             if ($status == 'Deactive') {
@@ -59,7 +57,6 @@ class Customer_auth_controller extends Controller
                 ], 401);
                 ;
             }
-
             $exists = DB::table('customerbatchs')->where('customer_id', $admin->id)->exists();
             $success['token'] = $admin->createToken('mobile', ['role:customer'])->plainTextToken;
             $success['name'] = $admin->name;
@@ -70,22 +67,13 @@ class Customer_auth_controller extends Controller
             $success['pin_code'] = ($admin->pin_code == null) ? ("Please entere the pin_code") : ($admin->pin_code);
             $success['state'] = ($admin->state == null) ? ("Please entere the state name") : ($admin->state);
             $success['city'] = ($admin->city == null) ? ("Please entere the city name") : ($admin->city);
-
-
             return response()->json([
                 'data' => $success,
                 'status' => true,
                 'type' => 'customer',
                 'message' => 'User login successfully'
             ], 200);
-
-
-
         }
-
-
-
-
     }
 
 

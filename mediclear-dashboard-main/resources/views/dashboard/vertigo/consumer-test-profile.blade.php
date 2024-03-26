@@ -482,87 +482,16 @@
         $companyName = $company->name;
     @endphp
 @endforeach
-@php
-    $testResults = $Testresult->all();
-    $bpUnfitChecked = false;
-    $bpfitChecked = false;
-    $hearingUnfitChecked = false;
-    $hearingfitChecked = false;
-    $eyedistanceUnfitChecked = false;
-    $eyedistancefitChecked = false;
-    $eyecheckupUnfitChecked = false;
-    $eyecheckupfitChecked = false;
-    $bppvUnfitChecked = false;
-    $bppvfitChecked = false;
-    $fukudaUnfitChecked = false;
-    $fukudafitChecked = false;
-    $flatfootUnfitChecked = false;
-    $flatfootfitChecked = false;
-    $rtunfitChecked = false;
-    $rtfitChecked = false;
-@endphp
-@foreach ($Testresult as $feature => $test_result)
-    @if ($feature == 'bp')
-        @if ($test_result == 0)
-            @php $bpUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $bpfitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'hearing')
-        @if ($test_result == 0)
-            @php $hearingUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $hearingfitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'eyedistance')
-        @if ($test_result == 0)
-            @php $eyedistanceUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $eyedistancefitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'eyecheckup')
-        @if ($test_result == 0)
-            @php $eyecheckupUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $eyecheckupfitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'bppv')
-        @if ($test_result == 0)
-            @php $bppvUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $bppvfitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'fukuda')
-        @if ($test_result == 0)
-            @php $fukudaUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $fukudafitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'flatfoot')
-        @if ($test_result == 0)
-            @php $flatfootUnfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $flatfootfitChecked = true; @endphp
-        @endif
-    @elseif ($feature == 'rt')
-        @if ($test_result == 0)
-            @php $rtunfitChecked = true; @endphp
-        @elseif ($test_result == 1)
-            @php $rtfitChecked = true; @endphp
-        @endif
-    @endif
-@endforeach
 <div class="accordion px-4 mb-2" id="accordionExample">
     <h1 class="text-start report-examina mt-3 mb-3 text-success"> Report Examination Sheet </h1>
     <div class="accordion-item">
-        <h2 class="accordion-header " id="headingThree">
+        <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed bg-light text-dark" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 Vertigo Report Examination Sheet
             </button>
         </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample">
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 @foreach ($examnationDetailsBeforeMedicalTest as $k => $data)
                     <div class="container">
@@ -603,26 +532,21 @@
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <div class="col-md-12 my-2">Gender</div>
-
+                            
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            @if ($data->gender == 'male') checked @disabled(true) @disabled(true) @endif
-                                            value="male" />
-
+                                            value="male" {{ $data->gender == 'male' ? 'checked disabled' : 'disabled' }}/>
                                         <label class="form-check-label" for="inlineCheckbox1">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                            value="female"
-                                            @if ($data->gender == 'female') checked @disabled(true) @disabled(true) @endif />
+                                            value="female" {{ $data->gender == 'female' ? 'checked disabled' : 'disabled' }} />
                                         <label class="form-check-label" for="inlineCheckbox2">Female</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                            value="others"
-                                            @if ($data->gender == 'others') checked @disabled(true) @disabled(true) @endif />
-                                        <label class="form-check-label" for="inlineCheckbox3">Others
-                                        </label>
+                                            value="others" {{ $data->gender == 'others' ? 'checked disabled' : 'disabled' }} />
+                                        <label class="form-check-label" for="inlineCheckbox3">Others</label>
                                     </div>
                                 </div>
                             </div>
@@ -632,146 +556,88 @@
                                     To be filled by the candidate before Medical Examination :
                                 </h4>
                                 <p>
-                                    A. When you are "dizzy" do you experience any of the following
-                                    symptoms ? (check yes or no)
+                                    A. When you are "dizzy" do you experience any of the following symptoms? (check yes or no)
                                 </p>
                                 <div class="row choice">
                                     <div class="col-md-6"></div>
                                     <div class="col-md-6 d-flex">
-                                        <div class="text-success"><strong>Yes</strong> </div>
+                                        <div class="text-success"><strong>Yes</strong></div>
                                         <div class="ml-4 text-danger"><strong>No</strong></div>
                                     </div>
                                 </div>
                                 <!-- question start  -->
                                 <div class="row my-2">
                                     <div class="col-6">
-                                        <p> 1. Light-headness or swimmimg sensation in the head?</p>
+                                        <p> 1. Light-headedness or swimming sensation in the head?</p>
                                     </div>
                                     <div class="col-4 d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->light_hedness_or_swim_sensation_in_the_head == 'yes') checked @disabled(true) @disabled(true) @endif />
-                                        </div>
-                                        <div class="form-check ml-4">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                @if ($data->light_hedness_or_swim_sensation_in_the_head == 'no') checked @disabled(true) @disabled(true) @endif
-                                                value="option1" />
+                                            <div class="form-check-label" style="color: {{ $data->light_hedness_or_swim_sensation_in_the_head == 'yes' ? 'green' : 'red' }};font-weight: bold;"> {{ $data->light_hedness_or_swim_sensation_in_the_head == 'yes' ? 'Yes' : 'No' }} </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row my-2">
                                     <div class="col-6">
-                                        <p>2. Blacking out or loss of conciousness?</p>
-
+                                        <p>2. Blacking out or loss of consciousness?</p>
                                     </div>
                                     <div class="col-4 d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->blacking_out_or_loss_of_consciousness == 'yes') checked @disabled(true) @disabled(true) @endif />
-                                        </div>
-                                        <div class="form-check ml-4">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->blacking_out_or_loss_of_consciousness == 'no') checked @disabled(true) @disabled(true) @endif />
+                                            <div class="form-check-label" style="color: {{ $data->blacking_out_or_loss_of_consciousness == 'yes' ? 'green' : 'red' }};font-weight: bold;"> {{ $data->blacking_out_or_loss_of_consciousness == 'yes' ? 'Yes' : 'No' }} </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row my-2">
                                     <div class="col-6">
-                                        <p>3. Object stunning or tuning around you?
-                                        </p>
+                                        <p>3. Object spinning or turning around you?</p>
                                     </div>
                                     <div class="col-4 d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->object_spinning_or_turning_around_you == 'yes') checked @disabled(true) @disabled(true) @endif />
-                                        </div>
-                                        <div class="form-check ml-4">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->object_spinning_or_turning_around_you == 'no') checked @disabled(true) @disabled(true) @endif />
+                                            <div class="form-check-label" style="color: {{ $data->object_spinning_or_turning_around_you == 'yes' ? 'green' : 'red' }};font-weight: bold;"> {{ $data->object_spinning_or_turning_around_you == 'yes' ? 'Yes' : 'No' }} </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row my-2">
                                     <div class="col-6">
-                                        <p>4. Nausea or vomiting?
-                                        </p>
+                                        <p>4. Nausea or vomiting?</p>
                                     </div>
                                     <div class="col-4 d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->nausea_or_vomiting == 'yes') checked  @disabled(true) @endif />
-                                        </div>
-                                        <div class="form-check ml-4">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->nausea_or_vomiting == 'no') checked  @disabled(true) @endif />
+                                            <div class="form-check-label" style="color: {{ $data->nausea_or_vomiting == 'yes' ? 'green' : 'red' }};font-weight: bold;"> {{ $data->nausea_or_vomiting == 'yes' ? 'Yes' : 'No' }} </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row my-2">
                                     <div class="col-6">
-                                        <p>
-                                            5. tingling in your fingers, toes or around your mouth?
-                                        </p>
+                                        <p>5. Tingling in your fingers, toes or around your mouth?</p>
                                     </div>
                                     <div class="col-4 d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->tingling_in_your_fingers_toes_around_your_mouth == 'yes') checked  @disabled(true) @endif />
-                                        </div>
-                                        <div class="form-check ml-4">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->tingling_in_your_fingers_toes_around_your_mouth == 'no') checked  @disabled(true) @endif />
+                                            <div class="form-check-label" style="color: {{ $data->tingling_in_your_fingers_toes_around_your_mouth == 'yes' ? 'green' : 'red' }};font-weight: bold;"> {{ $data->tingling_in_your_fingers_toes_around_your_mouth == 'yes' ? 'Yes' : 'No' }} </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row my-2">
                                     <div class="col-6">
-                                        <p>
-                                            6. Does changes of position make you dizzy?
-                                        </p>
+                                        <p>6. Does changes of position make you dizzy?</p>
                                     </div>
                                     <div class="col-4 d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->does_changes_of_position_make_you_dizzy == 'yes') checked  @disabled(true) @endif />
-                                        </div>
-                                        <div class="form-check ml-4">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->does_changes_of_position_make_you_dizzy == 'no') checked  @disabled(true) @endif />
+                                            <div class="form-check-label" style="color: {{ $data->does_changes_of_position_make_you_dizzy == 'yes' ? 'green' : 'red' }};font-weight: bold;"> {{ $data->does_changes_of_position_make_you_dizzy == 'yes' ? 'Yes' : 'No' }} </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row my-2">
                                     <div class="col-6">
-                                        <p>
-                                            7. When you are dizzy must support yourself when standing?
-                                        </p>
+                                        <p>7. When you are dizzy must support yourself when standing?</p>
                                     </div>
                                     <div class="col-4 d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->when_you_are_dizzy_must_support_yourself_when_standing == 'yes') checked  @disabled(true) @endif />
-                                        </div>
-                                        <div class="form-check ml-4">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
-                                                @if ($data->when_you_are_dizzy_must_support_yourself_when_standing == 'no') checked @disabled(true) @endif />
+                                            <div class="form-check-label" style="color: {{ $data->when_you_are_dizzy_must_support_yourself_when_standing == 'yes' ? 'green' : 'red' }};font-weight: bold;"> {{ $data->when_you_are_dizzy_must_support_yourself_when_standing == 'yes' ? 'Yes' : 'No' }} </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                             @if (!isset($data->post_mediacal_history_disease))
                                 @php $postMedicalHistory=[]; @endphp
                             @endif
@@ -798,7 +664,7 @@
                                             <label class="form-check-label" for="inlineCheckbox1">Heart
                                                 disease</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
+                                                value="option1" disabled
                                                 @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
                                                     @if (in_array(1, $postMedicalHistory)) checked @disabled(true) @endif
                                                 @else
@@ -807,20 +673,20 @@
                                                 />
                                         </div>
                                         <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="inlineCheckbox2">Hypertension</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                                value="option2"
+                                                value="option2" disabled
                                                 @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
                                                     @if (in_array(2, $postMedicalHistory)) checked @disabled(true) @endif
                                                 @else
                                                      $postMedicalHistory = []; 
                                                 @endif />
-                                            <label class="form-check-label" for="inlineCheckbox2">Hypertension</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Kidney
                                                 disease</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
                                                     @if (in_array(3, $postMedicalHistory)) checked @disabled(true) @endif
                                                 @else
@@ -831,7 +697,7 @@
                                             <label class="form-check-label" for="inlineCheckbox3">Thyroid
                                                 disease</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
                                                     @if (in_array(4, $postMedicalHistory)) checked @disabled(true) @endif
                                                 @else
@@ -842,7 +708,7 @@
                                             <label class="form-check-label" for="inlineCheckbox3">Migrain
                                                 headaches</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($postMedicalHistory) && is_array($postMedicalHistory))
                                                     @if (in_array(5, $postMedicalHistory)) checked @disabled(true) @endif
                                                 @else
@@ -874,7 +740,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
+                                                value="option1" disabled
                                                 @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
                                                     @if (in_array(1, $defficulting_in_hearing)) checked @disabled(true) @endif
                                                 @else
@@ -883,10 +749,9 @@
                                                 />
                                         </div>
                                         <div class="form-check form-check-inline">
-
                                             <label class="form-check-label" for="inlineCheckbox2">No</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                                value="option2"
+                                                value="option2" disabled
                                                 @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
                                                     @if (in_array(2, $defficulting_in_hearing)) checked @disabled(true) @endif
                                                 @else
@@ -896,7 +761,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Left ears</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
                                                     @if (in_array(3, $defficulting_in_hearing)) checked @disabled(true) @endif
                                                 @else
@@ -906,7 +771,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Both ears</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
                                                     @if (in_array(4, $defficulting_in_hearing)) checked @disabled(true) @endif
                                                 @else
@@ -916,7 +781,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Right ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
                                                     @if (in_array(5, $defficulting_in_hearing)) checked @disabled(true) @endif
                                                 @else
@@ -927,7 +792,7 @@
                                             <label class="form-check-label" for="inlineCheckbox3">associated with
                                                 attack</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($defficulting_in_hearing) && is_array($defficulting_in_hearing))
                                                     @if (in_array(6, $defficulting_in_hearing)) checked @disabled(true) @endif
                                                 @else
@@ -952,7 +817,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
+                                                value="option1" disabled
                                                 @if (isset($noise_in_ears) && is_array($noise_in_ears))
                                                     @if (in_array(1, $noise_in_ears)) checked @disabled(true) @endif
                                                 @else
@@ -962,7 +827,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox2">No</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                                value="option2"
+                                                value="option2" disabled
                                                 @if (isset($noise_in_ears) && is_array($noise_in_ears))
                                                     @if (in_array(2, $noise_in_ears)) checked @disabled(true) @endif
                                                 @else
@@ -972,7 +837,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Left ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($noise_in_ears) && is_array($noise_in_ears))
                                                     @if (in_array(3, $noise_in_ears)) checked @disabled(true) @endif
                                                 @else
@@ -982,7 +847,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Both ears</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($noise_in_ears) && is_array($noise_in_ears))
                                                     @if (in_array(4, $noise_in_ears)) checked @disabled(true) @endif
                                                 @else
@@ -992,7 +857,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Right ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($noise_in_ears) && is_array($noise_in_ears))
                                                     @if (in_array(5, $noise_in_ears)) checked @disabled(true) @endif
                                                 @else
@@ -1003,7 +868,7 @@
                                             <label class="form-check-label" for="inlineCheckbox3">associated with
                                                 attack</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($noise_in_ears) && is_array($noise_in_ears))
                                                     @if (in_array(6, $noise_in_ears)) checked @disabled(true) @endif
                                                 @else
@@ -1034,7 +899,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                                value="option1"
+                                                value="option1" disabled
                                                 @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
                                                     @if (in_array(1, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
                                                 @else
@@ -1044,7 +909,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox2">No</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                                value="option2"
+                                                value="option2" disabled
                                                 @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
                                                     @if (in_array(2, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
                                                 @else
@@ -1054,7 +919,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Left ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
                                                     @if (in_array(3, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
                                                 @else
@@ -1064,7 +929,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Both ears</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
                                                     @if (in_array(4, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
                                                 @else
@@ -1074,7 +939,7 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label" for="inlineCheckbox3">Right ear</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                                 @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
                                                     @if (in_array(5, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
                                                 @else
@@ -1085,7 +950,7 @@
                                             <label class="form-check-label" for="inlineCheckbox3">associated with
                                                 attack</label>
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                                value="option3"
+                                                value="option3" disabled
                                             @if (isset($fullness_or_stuffiness_in_your_ears) && is_array($fullness_or_stuffiness_in_your_ears))
                                                 @if (in_array(6, $fullness_or_stuffiness_in_your_ears)) checked @disabled(true) @endif
                                             @else
@@ -1119,7 +984,7 @@
                                 <div class="row my-4">
                                     <div class="col-6">1. Giddiness</div>
                                     <div class="col-4">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" disabled
                                         @if (isset($complaints) && is_array($complaints))
                                             @if (in_array(1, $complaints)) checked @disabled(true) @endif
                                         @else
@@ -1131,7 +996,7 @@
                                     <div class="col-6">2. Vertigo</div>
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            value="option1"
+                                            value="option1" disabled
                                             @if (isset($complaints) && is_array($complaints))
                                                 @if (in_array(2, $complaints)) checked @disabled(true) @endif
                                             @else
@@ -1143,7 +1008,7 @@
                                     <div class="col-6">3. Nausea</div>
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            value="option1"
+                                            value="option1" disabled
                                             @if (isset($complaints) && is_array($complaints))
                                                 @if (in_array(3, $complaints)) checked @disabled(true) @endif
                                             @else
@@ -1155,7 +1020,7 @@
                                     <div class="col-6">4. Seizure Disorder (Epilespy)</div>
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            value="option1"
+                                            value="option1" disabled
                                             @if (isset($complaints) && is_array($complaints))
                                                 @if (in_array(4, $complaints)) checked @disabled(true) @endif
                                             @else
@@ -1167,7 +1032,7 @@
                                     <div class="col-6">5. Acrophobia</div>
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            value="option1"
+                                            value="option1" disabled
                                             @if (isset($complaints) && is_array($complaints))
                                                 @if (in_array(5, $complaints)) checked @disabled(true) @endif
                                             @else
@@ -1179,7 +1044,7 @@
                                     <div class="col-6">6. Assthama / COPD</div>
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            value="option1"
+                                            value="option1" disabled
                                             @if (isset($complaints) && is_array($complaints))
                                                 @if (in_array(6, $complaints)) checked @disabled(true) @endif
                                             @else
@@ -1193,7 +1058,7 @@
                                     </div>
                                     <div class="col-4">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                            value="option1"
+                                            value="option1" disabled    
                                             @if (isset($complaints) && is_array($complaints))
                                                 @if (in_array(7, $complaints)) checked @disabled(true) @endif
                                             @else
@@ -1221,9 +1086,7 @@
                                 <!--</div>-->
                             </div>
                         </form>
-                        <!-- form close -->
                     </div>
-                    <!-- containe close -->
             </div>
         </div>
     </div>
@@ -1329,34 +1192,46 @@
                                             $count = null;
                                         }
                                         if ($count == 1) {
-                                            $percentage = 18;
-                                            $color = 'pink';
+                                            $percentage = 10;
+                                            $color = 'Pink';
                                         } elseif ($count == 2) {
-                                            $percentage = 35;
-                                            $color = 'orange';
+                                            $percentage = 20;
+                                            $color = 'Orange';
                                         } elseif ($count == 3) {
-                                            $percentage = 50;
-                                            $color = 'yellow';
+                                            $percentage = 30;
+                                            $color = 'Yellow';
                                         } elseif ($count == 4) {
-                                            $percentage = 68;
-                                            $color = 'skyblue';
+                                            $percentage = 40;
+                                            $color = 'SkyBlue';
                                         } elseif ($count == 5) {
-                                            $percentage = 75;
-                                            $color = 'blue';
+                                            $percentage = 50;
+                                            $color = 'Blue';
                                         } elseif ($count == 6) {
+                                            $percentage = 60;
+                                            $color = 'Aqua';
+                                        } elseif ($count == 7) {
+                                            $percentage = 70;
+                                            $color = 'Cyan';
+                                        } elseif ($count == 8) {
+                                            $percentage = 80;
+                                            $color = 'MediumPurple';
+                                        } elseif ($count == 9) {
+                                            $percentage = 90;
+                                            $color = 'Teal';
+                                        } elseif ($count == 10) {
                                             $percentage = 100;
-                                            $color = 'green';
+                                            $color = 'LimeGreen';
                                         } elseif ($count == 0) {
                                             $percentage = 0;
-                                            $color = 'red';
+                                            $color = 'Red';
                                         }
                                     @endphp
                                     <div class="single-chart" id="eyeblindness">
-                                        <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                        <svg viewBox="0 0 36 36" class="circular-chart" style="fill: transparent; width: 100%; height: 100%;">
                                             <path class="circle-bg"
                                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                             <path class="circle" stroke-dasharray="{{ $percentage }}, 100"
-                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="stroke: {{ $color }}; stroke-linecap: round; stroke-width: 2;"/>
                                             <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
                                         </svg>
                                     </div>
@@ -1411,7 +1286,7 @@
             <button class="accordion-button collapsed"
                 @if (isset($TestData['eyedistance'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
                 type="button" data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false"
-                aria-controls="collapsesix" id="eyecheckupbutton">
+                aria-controls="collapsesix" id="eyedistancebutton">
                 Check For Eye Distance Test
             </button>
         </h2>
@@ -1438,35 +1313,47 @@
                                             $count = null;
                                         }
                                         if ($count == 1) {
-                                            $percentage = 18;
-                                            $color = 'pink';
+                                            $distancepercentage = 10;
+                                            $distancecolor = 'Pink';
                                         } elseif ($count == 2) {
-                                            $percentage = 35;
-                                            $color = 'orange';
+                                            $distancepercentage = 20;
+                                            $distancecolor = 'Orange';
                                         } elseif ($count == 3) {
-                                            $percentage = 50;
-                                            $color = 'yellow';
+                                            $distancepercentage = 30;
+                                            $distancecolor = 'Yellow';
                                         } elseif ($count == 4) {
-                                            $percentage = 68;
-                                            $color = 'skyblue';
+                                            $distancepercentage = 40;
+                                            $distancecolor = 'SkyBlue';
                                         } elseif ($count == 5) {
-                                            $percentage = 75;
-                                            $color = 'blue';
+                                            $distancepercentage = 50;
+                                            $distancecolor = 'Blue';
                                         } elseif ($count == 6) {
-                                            $percentage = 100;
-                                            $color = 'green';
+                                            $distancepercentage = 60;
+                                            $distancecolor = 'Aqua';
+                                        } elseif ($count == 7) {
+                                            $distancepercentage = 70;
+                                            $distancecolor = 'Cyan';
+                                        } elseif ($count == 8) {
+                                            $distancepercentage = 80;
+                                            $distancecolor = 'MediumPurple';
+                                        } elseif ($count == 9) {
+                                            $distancepercentage = 90;
+                                            $distancecolor = 'Teal';
+                                        } elseif ($count == 10) {
+                                            $distancepercentage = 100;
+                                            $distancecolor = 'LimeGreen';
                                         } elseif ($count == 0) {
-                                            $percentage = 0;
-                                            $color = 'red';
+                                            $distancepercentage = 0;
+                                            $distancecolor = 'Red';
                                         }
                                     @endphp
                                     <div class="single-chart" id="eyedistance">
-                                        <svg viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                        <svg viewBox="0 0 36 36" class="circular-chart" style="fill: transparent; width: 100%; height: 100%;">
                                             <path class="circle-bg"
                                                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                            <path class="circle" stroke-dasharray="{{ $percentage }}, 100"
-                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                            <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
+                                            <path class="circle" stroke-dasharray="{{ $distancepercentage }}, 100"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="stroke: {{ $distancecolor }}; stroke-linecap: round; stroke-width: 2;"/>
+                                            <text x="18" y="20.35" class="percentage">{{ $distancepercentage }}%</text>
                                         </svg>
                                     </div>
                                 </div>
@@ -1519,7 +1406,7 @@
             <button class="accordion-button collapsed"
                 @if (isset($TestData['hearingtest'])) @else style="background-color:#e5533c;color:#f8f9fc" @endif
                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseHearing" aria-expanded="false"
-                aria-controls="collapseHearing" id="hearingbutton">
+                aria-controls="collapseHearing" id="hearingtestbutton">
                 Check For Hearing Test
             </button>
         </h2>
@@ -1532,258 +1419,228 @@
                     <input type="hidden" id="consumerid" value="{{ request()->get('id') }}" />
                     <p class="text-success pt-3 pb-3"><strong> Consumer Certificate Number --
                             {{ $data->certification_number }}</strong></p>
-                                <div class="row" id="radiobuttongraph">
-                                   <div class="col-sm-1">
-                                      <div class="farq-points" style="text-align:right;float:left;">
-                                         <p class="text-danger"> 
-                                            <div class="my-2" style="padding-left:65px;">10</div>
-                                            <div class="my-4 p-1">20</div>
-                                            <div class="my-4 p-2">30</div>
-                                            <div class="my-3 p-1">40</div>
-                                            <div class="my-4 p-2">50</div>
-                                            <div class="my-3 p-2">60</div>
-                                            <div class="my-4 p-1">70</div>
+                            <div class="row" id="radiobuttongraph">
+                                <div class="col-sm-1">
+                                    <div class="farq-points" style="text-align:right;float:left;">
+                                        <p class="text-danger">
+                                        <div class="my-2" style="padding-left:65px;">10</div>
+                                        <div class="my-4 p-1">20</div>
+                                        <div class="my-4 p-2">30</div>
+                                        <div class="my-3 p-1">40</div>
+                                        <div class="my-4 p-2">50</div>
+                                        <div class="my-3 p-2">60</div>
                                         </p>
-                                      </div>
-                                   </div>
-                                   <div class="col-sm-11">
-                                      <div class="hearing-graph">
-                                         <form class="p-0">
+                                    </div>
+                                </div>
+                                <div class="col-sm-11">
+                                    <div class="hearing-graph">
+                                        <form class="p-0">
                                             <div class="form-group">
-                                               <div class="form-check form-check-inline mx-4">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option1" value="1">
-                                                  <label class="form-check-label" for="field1Option1">100 Fq</label>
-                                               </div>
-                                               <div class="form-check form-check-inline mx-4">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option2" value="8">
-                                                  <label class="form-check-label" for="field1Option2">200 Fq</label>
-                                               </div>
-                                               <div class="form-check form-check-inline mx-4">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option3" value="15">
-                                                  <label class="form-check-label" for="field1Option3">300 Fq</label>
-                                               </div>
-                                               <div class="form-check form-check-inline mx-4">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option4" value="22">
-                                                  <label class="form-check-label" for="field1Option4">400 Fq</label>
-                                               </div>
-                                               <div class="form-check form-check-inline mx-4">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option5" value="29">
-                                                  <label class="form-check-label" for="field1Option5">500 Fq</label>
-                                               </div>
-                                               <div class="form-check form-check-inline mx-4">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option6" value="36">
-                                                  <label class="form-check-label" for="field1Option6">600 Fq</label>
-                                               </div>
-                                               <div class="form-check form-check-inline mx-4">
-                                                  <input class="form-check-input" type="radio" name="field1" id="field1Option7" value="43">
-                                                  <label class="form-check-label" for="field1Option7">700 Fq</label>
-                                               </div>
-                                               <hr>
-                                               <div class="form-group">
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option1" value="2">
-                                                     <label class="form-check-label" for="field2Option1">100 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option2" value="9">
-                                                     <label class="form-check-label" for="field2Option2">200 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option3" value="16">
-                                                     <label class="form-check-label" for="field2Option3">300 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option4" value="23">
-                                                     <label class="form-check-label" for="field2Option4">400 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option5" value="30">
-                                                     <label class="form-check-label" for="field2Option5">500 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option6" value="37">
-                                                     <label class="form-check-label" for="field2Option6">600 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field2" id="field2Option7" value="44">
-                                                     <label class="form-check-label" for="field2Option7">700 Fq</label>
-                                                  </div>
-                                                  <!-- Add more options if needed -->
-                                               </div>
-                                               <hr>
-                                               <div class="form-group">
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option1" value="3">
-                                                     <label class="form-check-label" for="field3Option1">100 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option2" value="10">
-                                                     <label class="form-check-label" for="field3Option2">200 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option3" value="17">
-                                                     <label class="form-check-label" for="field3Option3">300 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option4" value="24">
-                                                     <label class="form-check-label" for="field3Option4">400 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option5" value="31">
-                                                     <label class="form-check-label" for="field3Option5">500 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option6" value="38">
-                                                     <label class="form-check-label" for="field3Option6">600 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field3" id="field3Option7" value="45">
-                                                     <label class="form-check-label" for="field3Option7">700 Fq</label>
-                                                  </div>
-                                                  <!-- Add more options if needed -->
-                                               </div>
-                                               <hr>
-                                               <div class="form-group">
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option1" value="4">
-                                                     <label class="form-check-label" for="field4Option1">100 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option2" value="11">
-                                                     <label class="form-check-label" for="field4Option2">200 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option3" value="18">
-                                                     <label class="form-check-label" for="field4Option3">300 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option4" value="25">
-                                                     <label class="form-check-label" for="field4Option4">400 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option5" value="32">
-                                                     <label class="form-check-label" for="field4Option5">500 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option6" value="39">
-                                                     <label class="form-check-label" for="field4Option6">600 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field4" id="field4Option7" value="46">
-                                                     <label class="form-check-label" for="field4Option7">700 Fq</label>
-                                                  </div>
-                                                  <!-- Add more options if needed -->
-                                               </div>
-                                               <hr>
-                                               <div class="form-group">
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option1" value="5">
-                                                     <label class="form-check-label" for="field5Option1">100 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option2" value="12">
-                                                     <label class="form-check-label" for="field5Option2">200 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option3" value="19">
-                                                     <label class="form-check-label" for="field5Option3">300 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option4" value="26">
-                                                     <label class="form-check-label" for="field5Option4">400 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option5" value="33">
-                                                     <label class="form-check-label" for="field5Option5">500 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option6" value="40">
-                                                     <label class="form-check-label" for="field5Option6">600 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field5" id="field5Option7" value="47">
-                                                     <label class="form-check-label" for="field5Option7">700 Fq</label>
-                                                  </div>
-                                                  <!-- Add more options if needed -->
-                                               </div>
-                                               <hr>
-                                               <div class="form-group">
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option1" value="6">
-                                                     <label class="form-check-label" for="field6Option1">100 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option2" value="13">
-                                                     <label class="form-check-label" for="field6Option2">200 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option3" value="20">
-                                                     <label class="form-check-label" for="field6Option3">300 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option4" value="27">
-                                                     <label class="form-check-label" for="field6Option4">400 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option5" value="34">
-                                                     <label class="form-check-label" for="field6Option5">500 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option6" value="41">
-                                                     <label class="form-check-label" for="field6Option6">600 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field6" id="field6Option7" value="48">
-                                                     <label class="form-check-label" for="field6Option7">700 Fq</label>
-                                                  </div>
-                                                  <!-- Add more options if needed -->
-                                               </div>
-                                               <hr>
-                                               <div class="form-group">
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option1" value="7">
-                                                     <label class="form-check-label" for="field7Option1">100 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option2" value="14">
-                                                     <label class="form-check-label" for="field7Option2">200 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option3" value="21">
-                                                     <label class="form-check-label" for="field7Option3">300 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option4" value="28">
-                                                     <label class="form-check-label" for="field7Option4">400 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option5" value="35">
-                                                     <label class="form-check-label" for="field7Option5">500 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option6" value="42">
-                                                     <label class="form-check-label" for="field7Option6">600 Fq</label>
-                                                  </div>
-                                                  <div class="form-check form-check-inline mx-4">
-                                                     <input class="form-check-input" type="radio" name="field7" id="field7Option7" value="49">
-                                                     <label class="form-check-label" for="field7Option7">700 Fq</label>
-                                                  </div>
-                                                  <!-- Add more options if needed -->
-                                               </div>
-                                               <!-- Repeat the above structure for each field -->
-                                         </form>
-                                         </div>
-                                         <!-- radio end -->
-                                      </div>
-                                      <div class="bootom points">
-                                          <p class="text-success"> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;250  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            500&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2000
+                                                <div class="form-check form-check-inline mx-4">
+                                                    <input class="form-check-input" type="radio" name="field1" id="field1Option1" value="1">
+                                                    <label class="form-check-label" for="field1Option1">100 Fq</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mx-4">
+                                                    <input class="form-check-input" type="radio" name="field1" id="field1Option2" value="7">
+                                                    <label class="form-check-label" for="field1Option2">200 Fq</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mx-4">
+                                                    <input class="form-check-input" type="radio" name="field1" id="field1Option3" value="13">
+                                                    <label class="form-check-label" for="field1Option3">300 Fq</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mx-4">
+                                                    <input class="form-check-input" type="radio" name="field1" id="field1Option4" value="19">
+                                                    <label class="form-check-label" for="field1Option4">400 Fq</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mx-4">
+                                                    <input class="form-check-input" type="radio" name="field1" id="field1Option5" value="25">
+                                                    <label class="form-check-label" for="field1Option5">500 Fq</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mx-4">
+                                                    <input class="form-check-input" type="radio" name="field1" id="field1Option6" value="31">
+                                                    <label class="form-check-label" for="field1Option6">600 Fq</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mx-4">
+                                                    <input class="form-check-input" type="radio" name="field1" id="field1Option7" value="37">
+                                                    <label class="form-check-label" for="field1Option7">700 Fq</label>
+                                                </div>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field2" id="field2Option1" value="2">
+                                                        <label class="form-check-label" for="field2Option1">100 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field2" id="field2Option2" value="8">
+                                                        <label class="form-check-label" for="field2Option2">200 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field2" id="field2Option3" value="14">
+                                                        <label class="form-check-label" for="field2Option3">300 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field2" id="field2Option4" value="20">
+                                                        <label class="form-check-label" for="field2Option4">400 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field2" id="field2Option5" value="26">
+                                                        <label class="form-check-label" for="field2Option5">500 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field2" id="field2Option6" value="32">
+                                                        <label class="form-check-label" for="field2Option6">600 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field2" id="field2Option7" value="38">
+                                                        <label class="form-check-label" for="field2Option7">700 Fq</label>
+                                                    </div>
+                                                    <!-- Add more options if needed -->
+                                                </div>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field3" id="field3Option1" value="3">
+                                                        <label class="form-check-label" for="field3Option1">100 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field3" id="field3Option2" value="9">
+                                                        <label class="form-check-label" for="field3Option2">200 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field3" id="field3Option3" value="15">
+                                                        <label class="form-check-label" for="field3Option3">300 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field3" id="field3Option4" value="21">
+                                                        <label class="form-check-label" for="field3Option4">400 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field3" id="field3Option5" value="27">
+                                                        <label class="form-check-label" for="field3Option5">500 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field3" id="field3Option6" value="33">
+                                                        <label class="form-check-label" for="field3Option6">600 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field3" id="field3Option7" value="39">
+                                                        <label class="form-check-label" for="field3Option7">700 Fq</label>
+                                                    </div>
+                                                    <!-- Add more options if needed -->
+                                                </div>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field4" id="field4Option1" value="4">
+                                                        <label class="form-check-label" for="field4Option1">100 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field4" id="field4Option2" value="10">
+                                                        <label class="form-check-label" for="field4Option2">200 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field4" id="field4Option3" value="16">
+                                                        <label class="form-check-label" for="field4Option3">300 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field4" id="field4Option4" value="22">
+                                                        <label class="form-check-label" for="field4Option4">400 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field4" id="field4Option5" value="28">
+                                                        <label class="form-check-label" for="field4Option5">500 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field4" id="field4Option6" value="34">
+                                                        <label class="form-check-label" for="field4Option6">600 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field4" id="field4Option7" value="40">
+                                                        <label class="form-check-label" for="field4Option7">700 Fq</label>
+                                                    </div>
+                                                    <!-- Add more options if needed -->
+                                                </div>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field5" id="field5Option1" value="5">
+                                                        <label class="form-check-label" for="field5Option1">100 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field5" id="field5Option2" value="11">
+                                                        <label class="form-check-label" for="field5Option2">200 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field5" id="field5Option3" value="17">
+                                                        <label class="form-check-label" for="field5Option3">300 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field5" id="field5Option4" value="23">
+                                                        <label class="form-check-label" for="field5Option4">400 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field5" id="field5Option5" value="28">
+                                                        <label class="form-check-label" for="field5Option5">500 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field5" id="field5Option6" value="35">
+                                                        <label class="form-check-label" for="field5Option6">600 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field5" id="field5Option7" value="41">
+                                                        <label class="form-check-label" for="field5Option7">700 Fq</label>
+                                                    </div>
+                                                    <!-- Add more options if needed -->
+                                                </div>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field6" id="field6Option1" value="6">
+                                                        <label class="form-check-label" for="field6Option1">100 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field6" id="field6Option2" value="12">
+                                                        <label class="form-check-label" for="field6Option2">200 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field6" id="field6Option3" value="18">
+                                                        <label class="form-check-label" for="field6Option3">300 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field6" id="field6Option4" value="24">
+                                                        <label class="form-check-label" for="field6Option4">400 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field6" id="field6Option5" value="30">
+                                                        <label class="form-check-label" for="field6Option5">500 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field6" id="field6Option6" value="36">
+                                                        <label class="form-check-label" for="field6Option6">600 Fq</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline mx-4">
+                                                        <input class="form-check-input" type="radio" name="field6" id="field6Option7" value="42">
+                                                        <label class="form-check-label" for="field6Option7">700 Fq</label>
+                                                    </div>
+                                                    <!-- Add more options if needed -->
+                                                </div>
+                                                <!-- Repeat the above structure for each field -->
+                                        </form>
+                                    </div>
+                                    <!-- radio end -->
+                                </div>
+                                <div class="bootom points">
+                                    <p class="text-success">
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;250
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            500&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2000
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6000
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8000
-                                          </span></p>
-                                         </div>
-                                   </div>
-                                   </div>
+                                        </span></p>
+                                </div>
+                            </div>
+                            </div>
                                 </div>
                 @if (isset($TestData['hearingtest']))
                     <div class="container">
@@ -2693,6 +2550,76 @@
 {{-- ---------------------------------------------------------------------------------------------- --}}
 {{-- ------------------------------ Vertigo Test Report PDF------------------------------------------------------------------------ --}}
 <!-- Button trigger modal -->
+@php
+    $testResults = $Testresult->all();
+    $bpUnfitChecked = false;
+    $bpfitChecked = false;
+    $hearingUnfitChecked = false;
+    $hearingfitChecked = false;
+    $eyedistanceUnfitChecked = false;
+    $eyedistancefitChecked = false;
+    $eyecheckupUnfitChecked = false;
+    $eyecheckupfitChecked = false;
+    $bppvUnfitChecked = false;
+    $bppvfitChecked = false;
+    $fukudaUnfitChecked = false;
+    $fukudafitChecked = false;
+    $flatfootUnfitChecked = false;
+    $flatfootfitChecked = false;
+    $rtunfitChecked = false;
+    $rtfitChecked = false;
+@endphp
+@foreach ($Testresult as $feature => $test_result)
+    @if ($feature == 'bp')
+        @if ($test_result == 0)
+            @php $bpUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $bpfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'hearing')
+        @if ($test_result == 0)
+            @php $hearingUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $hearingfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'eyedistance')
+        @if ($test_result == 0)
+            @php $eyedistanceUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyedistancefitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'eyecheckup')
+        @if ($test_result == 0)
+            @php $eyecheckupUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $eyecheckupfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'bppv')
+        @if ($test_result == 0)
+            @php $bppvUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $bppvfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'fukuda')
+        @if ($test_result == 0)
+            @php $fukudaUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $fukudafitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'flatfoot')
+        @if ($test_result == 0)
+            @php $flatfootUnfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $flatfootfitChecked = true; @endphp
+        @endif
+    @elseif ($feature == 'rt')
+        @if ($test_result == 0)
+            @php $rtunfitChecked = true; @endphp
+        @elseif ($test_result == 1)
+            @php $rtfitChecked = true; @endphp
+        @endif
+    @endif
+@endforeach
 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalVertigo">
     Vertico Test Report
 </button>
@@ -2807,7 +2734,7 @@
                                         <div class="col-md-4">
                                             <div class="form-check">
                                                 <input class="form-check-input fit" type="radio" name="bpfit"
-                                                    value="fit" disabled id="fitRadio">
+                                                    value="fit" @if($bpfitChecked) checked @endif disabled id="fitRadio">
                                                 <label for="fitRadio">
                                                     Fit
                                                 </label>
@@ -2816,7 +2743,7 @@
                                         <div class="col-md-4">
                                             <div class="form-check">
                                                 <input class="form-check-input unfit" type="radio"
-                                                    name="bpunfit" id="unfitRadio" disabled value="unfit">
+                                                    name="bpunfit" @if($bpUnfitChecked) checked @endif id="unfitRadio" disabled value="unfit">
                                                 <label for="unfitRadio">
                                                     Unfit
                                                 </label>
@@ -2846,7 +2773,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled id="modalfithearing"
-                                                            name="hearingfit" value="fit"
+                                                            name="hearingfit" @if($hearingfitChecked) checked @endif value="fit"
                                                             class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
@@ -2856,7 +2783,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled id="modalunfithearing"
-                                                                name="hearingunfit" value="unfit"
+                                                                name="hearingunfit" @if($hearingUnfitChecked) checked @endif value="unfit"
                                                                 class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
@@ -2877,11 +2804,11 @@
                                         <p class="text-success">For the Color Blindness</p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="eye-percentage">
-                                                <svg id="eyeblindnessmodal" viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                                <svg id="eyeblindnessmodal" viewBox="0 0 36 36" class="circular-chart" style="fill: transparent; width: 100%; height: 100%;">
                                                     <path class="circle-bg"
                                                         d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                                     <path class="circle" stroke-dasharray="{{ $percentage }}, 100"
-                                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="stroke: {{ $color }}; stroke-linecap: round; stroke-width: 2;"/>
                                                     <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
                                                 </svg>
                                             </div>
@@ -2893,7 +2820,7 @@
                                                             <div class="form-check">
                                                             <input type="radio" disabled
                                                             id="modalfiteyeblindness" name="eyeblindnessfit"
-                                                            value="fit" class="form-check-input fit">
+                                                            value="fit" @if($eyecheckupfitChecked) checked @endif class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
                                                             </label>
@@ -2903,7 +2830,7 @@
                                                             <div class="form-check">    
                                                             <input type="radio" disabled
                                                             id="modalunfiteyeblindness"
-                                                            name="eyeblindnessunfit" value="unfit"
+                                                            name="eyeblindnessunfit" @if($eyecheckupUnfitChecked) checked @endif value="unfit"
                                                             class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
@@ -2925,12 +2852,12 @@
                                         <p class="text-success ">For the Eye Distance</p>
                                         <div class="col-md-12 p-3 shadow-lg bg-light">
                                             <div class="eye-distance-percentage">
-                                                <svg id="eyedistancemodal" viewBox="0 0 36 36" class="circular-chart {{ $color }}">
+                                                <svg id="eyedistancemodal" viewBox="0 0 36 36" class="circular-chart" style="fill: transparent; width: 100%; height: 100%;">
                                                     <path class="circle-bg"
                                                         d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                                    <path class="circle" stroke-dasharray="{{ $percentage }}, 100"
-                                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                                    <text x="18" y="20.35" class="percentage">{{ $percentage }}%</text>
+                                                    <path class="circle" stroke-dasharray="{{ $distancepercentage }}, 100"
+                                                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="stroke: {{ $distancecolor }}; stroke-linecap: round; stroke-width: 2;"/>
+                                                    <text x="18" y="20.35" class="percentage">{{ $distancepercentage }}%</text>
                                                 </svg>
                                             </div>
                                             <div class="row">
@@ -2941,7 +2868,7 @@
                                                             <div class="form-check">
                                                             <input type="radio" disabled
                                                             id="modalfiteyedistance" name="eyedistancefit"
-                                                            value="fit" class="form-check-input fit">
+                                                            value="fit" @if($eyedistancefitChecked) checked @endif class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
                                                             </label>
@@ -2951,7 +2878,7 @@
                                                             <div class="form-check">
                                                             <input type="radio" disabled
                                                             id="modalunfiteyedistance"
-                                                            name="eyedistanceunfit" value="unfit"
+                                                            name="eyedistanceunfit" @if($eyedistanceUnfitChecked) checked @endif value="unfit"
                                                             class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
@@ -2991,7 +2918,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="rtfootfit"
-                                                            value="fit" id="rtfit" class="form-check-input fit">
+                                                            value="fit" id="rtfit" @if($rtfitChecked) checked @endif class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
                                                             </label>
@@ -2999,7 +2926,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-check">
-                                                            <input type="radio" id="rtunfit" disabled name="rtfootunfit"
+                                                            <input type="radio" @if($rtunfitChecked) checked @endif id="rtunfit" disabled name="rtfootunfit"
                                                             value="unfit" class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
@@ -3017,22 +2944,6 @@
                                                     <div class="row">
                                                         <p><b class="text-success">II.</b>Stand on One Feet<b
                                                                 class="text-danger">(Right)</b></p>
-                                                        {{-- <div class="col-md-6">
-                                                            <label class="fit">
-                                                                Fit
-                                                                <input type="radio" name="rightfoot"
-                                                                    value="fit" class="fit">
-                                                                <span class="checkmark"></span>
-                                                            </label>
-                                                        </div> --}}
-                                                        {{-- <div class="col-md-6">
-                                                            <label class="fit">
-                                                                Unfit
-                                                                <input type="radio" name="rightfoot"
-                                                                    value="unfit" class="unfit">
-                                                                <span class="checkmark"></span>
-                                                            </label>
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                                 <!-- hello there  -->
@@ -3040,22 +2951,6 @@
                                                     <div class="row">
                                                         <p><b class="text-success">II.</b>Stand on both Feet<b
                                                                 class="text-danger">(Closed Eyes)</b></p>
-                                                        {{-- <div class="col-md-6">
-                                                            <label class="fit">
-                                                                Fit
-                                                                <input type="radio" name="bothfoot"
-                                                                    value="fit" class="fit">
-                                                                <span class="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <label class="unfit">
-                                                                Unfit
-                                                                <input type="radio" name="bothfoot"
-                                                                    value="unfit" class="unfit">
-                                                                <span class="checkmark"></span>
-                                                            </label>
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -3082,7 +2977,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="flatfit"
-                                                            value="fit" id="flatfit" class="form-check-input fit">
+                                                            value="fit" @if($flatfootfitChecked) checked @endif id="flatfit" class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
                                                             </label>
@@ -3091,7 +2986,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="flatunfit"
-                                                            value="unfit" id="flatUnfit" class="form-check-input unfit">
+                                                            value="unfit" id="flatUnfit" @if($flatfootUnfitChecked) checked @endif class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
                                                             </label>
@@ -3121,7 +3016,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="bppvfit"
-                                                            value="fit" class="form-check-input fit">
+                                                            value="fit" @if($bppvfitChecked) checked @endif class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
                                                         </label>
@@ -3130,7 +3025,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="bppvunfit"
-                                                            value="unfit" class="form-check-input unfit">
+                                                            value="unfit" @if($bppvUnfitChecked) checked @endif class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
                                                             </label>
@@ -3164,7 +3059,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="fukudafit"
-                                                            value="fit" class="form-check-input fit">
+                                                            value="fit" @if($fukudafitChecked) checked @endif class="form-check-input fit">
                                                             <label class="fit">
                                                                 Fit
                                                         </label>
@@ -3173,7 +3068,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-check">
                                                             <input type="radio" disabled name="fukudaunfit"
-                                                            value="unfit" class="form-check-input unfit">
+                                                            value="unfit" @if($fukudaUnfitChecked) checked @endif class="form-check-input unfit">
                                                             <label class="fit">
                                                                 Unfit
                                                             </label>
@@ -3241,7 +3136,6 @@
                                         </div>
                                         <div class="blank"></div>
                                     </div>
-                                    
                                         <p class="h3 text-dark text-center my-3">
                                         <u>Certification Of Vertigo Examination</u>
                                         </p>
@@ -3262,7 +3156,7 @@
                                                 <td>Name</td>
                                                 <td>{{ $data->consumer_name }}</td>
                                                 <td>Valid Till-</td>
-                                                <td></td>
+                                                <td>{{ }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
@@ -3574,51 +3468,36 @@
     @endphp
 @endif
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+{{-- <script>
     $(document).ready(function() {
-        @if($bpUnfitChecked)
-            $('#unfitRadio').prop('checked', true);
-        @elseif($bpfitChecked)
-            $('#fitRadio').prop('checked', true);
-        @endif
-        @if($hearingUnfitChecked)
-            $('#modalunfithearing').prop('checked', true);
-        @elseif($hearingfitChecked)
-            $('#modalfithearing').prop('checked', true);
-        @endif
-        @if($eyedistanceUnfitChecked)
-            $('#eyedistancefit').prop('checked', true);
-        @elseif($eyedistancefitChecked)
-            $('#eyedistanceunfit').prop('checked', true);
-        @endif
-        @if($eyecheckupUnfitChecked)
-            $('#eyeblindnessfit').prop('checked', true);
-        @elseif($eyecheckupfitChecked)
-            $('#eyeblindnessunfit').prop('checked', true);
-        @endif
-        @if($bppvUnfitChecked)
-            $('#bppvunfit').prop('checked', true);
-        @elseif($bppvfitChecked)
-            $('#bppvfit').prop('checked', true);
-        @endif
-        @if($fukudaUnfitChecked)
-            $('#fukudaunfit').prop('checked', true);
-        @elseif($fukudaUnfitChecked)
-            $('#fukudafit').prop('checked', true);
-        @endif
-        @if($rtunfitChecked)
-            $('#rtunfit').prop('checked', true);
-        @elseif($rtfitChecked)
-            $('#rtfit').prop('checked', true);
-        @endif
-        @if($flatfootUnfitChecked)
-            $('#flatUnfit').prop('checked', true);
-        @elseif($flatfootfitChecked)
-            $('#flatfit').prop('checked', true);
-        @endif
-        $('#radiobuttongraph').clone().appendTo('#hearingdata');
+        // Step 1: General Information
+        var bpdatamodal = {!! json_encode(isset($TestData['bp']) ? json_decode($TestData['bp'], true) : null) !!};
+
+        $('#fitRadio').prop('checked', bpdatamodal && bpdatamodal['pre_lower_bp'] ? true : false);
+        $('#unfitRadio').prop('checked', bpdatamodal && bpdatamodal['pre_upper_bp'] ? true : false);
+
+        // Step 2: Hearing Checkup
+        $('#modalfithearing').prop('checked', {!! json_encode($hearingfitChecked) !!});
+        $('#modalunfithearing').prop('checked', {!! json_encode($hearingUnfitChecked) !!});
+        
+        // Step 3: Eye Color Blindness Test
+        $('#modalfiteyeblindness').prop('checked', {!! json_encode($eyecheckupfitChecked) !!});
+        $('#modalunfiteyeblindness').prop('checked', {!! json_encode($eyecheckupUnfitChecked) !!});
+
+        // Step 4: Eye Distance Test
+        $('#modalfiteyedistance').prop('checked', {!! json_encode($eyedistancefitChecked) !!});
+        $('#modalunfiteyedistance').prop('checked', {!! json_encode($eyedistanceUnfitChecked) !!});
+
+        // Step 7: BPPV Procedure
+        $('#bppvfit').prop('checked', {!! json_encode($bppvfitChecked) !!});
+        $('#bppvunfit').prop('checked', {!! json_encode($bppvUnfitChecked) !!});
+
+        // Step 8: Fukuda-Unterberger
+        $('#fukudafit').prop('checked', {!! json_encode($fukudafitChecked) !!});
+        $('#fukudaunfit').prop('checked', {!! json_encode($fukudaUnfitChecked) !!});
     });
-</script>
+</script> --}}
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>

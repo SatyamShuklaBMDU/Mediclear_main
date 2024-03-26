@@ -53,10 +53,8 @@ Route::post('/make-reset-password', [PasswordResetLinkController::class, 'resetP
 Route::get('/dashbord', function () {
     return view('dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashbord');
-Route::get('/consumer-history', [ConsumerHistoryController::class, 'showRep
-ort']);
+Route::get('/consumer-history', [ConsumerHistoryController::class, 'showReport']);
 Route::any('/consumer-history-report/{consumertype?}',[ConsumerHistoryController::class,'consumerHistoryReport'])->name('consumer-history-report');
-
 Route::middleware('auth')->group(function () {
     //company routes
     Route::middleware('permission:corporateid')->group(function () {
