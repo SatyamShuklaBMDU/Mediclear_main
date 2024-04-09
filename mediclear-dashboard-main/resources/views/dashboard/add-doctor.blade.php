@@ -47,7 +47,15 @@
 
     <!-- Page Heading -->
     <h3 class="h3 mb-2 text-gray-800">Doctor</h3>
-
+    @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     <!-- DataTales Example -->
 
     <form action="{{ url('/add-docter') }}" method="POST">

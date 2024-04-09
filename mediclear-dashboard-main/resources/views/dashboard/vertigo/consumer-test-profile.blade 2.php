@@ -498,11 +498,6 @@
         margin-bottom: 36px !important;
     }
 </style>
-@if (session('message'))
-    <script>
-        alert('{{ session('message') }}');
-    </script>
-@endif
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -1052,7 +1047,7 @@
                                 <!-- buttons -->
                                 <div class="col-md-6 text-center">
                                     <label for="file" class="file text-center"><span class="image text-dark"><img
-                                                src="{{ url('public/sign/' . $data->consumer_sign_image_name) }}"
+                                                src="{{ url('/sign/' . $data->consumer_sign_image_name) }}"
                                                 width="100px" /></span></label>
                                     <input type="file" id="file" />
                                 </div>
@@ -1127,19 +1122,14 @@
                                 <textarea class="form-control" id="bpunfitRemark" rows="3"></textarea>
                             </div>
                         </div>
-                        <form id="yourFormId" action="{{ route('test_again') }}" method="POST">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-dark" id="bp" type="button" onclick="saveResult(this)">Submit</button>
+                            <button class="btn btn-dark" id="bp" onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
-                            @csrf <!-- Add this line if you're using CSRF protection -->
-                             <input type="hidden" id="" name="mediId" value="{{$medical_id}}">
-                             <input type="hidden" name="featureId" value="bp">
-                            <button class="btn btn-danger" type="submit" id="bp_test_again">Please test again</button>
+                            <button class="btn btn-warning" id="bp_test_again">Please Test Again</button>
                             &nbsp;&nbsp;
-                            <button onclick="generatePDF()" type="button"><i class="fa fa-print text-success"
+                            <button onclick="generatePDF()"><i class="fa fa-print text-success"
                                     style="font-size:36px"></i></button>
                         </div>
-                            </form>
                     </div>
                 @endif
             </div>
@@ -1253,20 +1243,15 @@
                                 <textarea class="form-control" id="eyecheckupunfitRemark" rows="3"></textarea>
                             </div>
                         </div>
-                            <form id="yourFormId" action="{{ route('test_again') }}" method="POST">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" id="eyecheckup" type="button"
+                            <button class="btn btn-primary" id="eyecheckup"
                                 onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
-                            @csrf <!-- Add this line if you're using CSRF protection -->
-                             <input type="hidden" id="" name="mediId" value="{{$medical_id}}">
-                             <input type="hidden" name="featureId" value="eyecheckup">
-                            <button class="btn btn-danger" type="submit" id="eyecheckup_test_again">Please test again</button>
+                            <button class="btn btn-danger" id="eyecheckup_test_again">Please test again</button>
                             &nbsp;&nbsp;
-                            <button onclick="eyegeneratePDF()" class="btn btn-danger btn-sm" type="button"><i class="fa fa-print"
+                            <button onclick="eyegeneratePDF()" class="btn btn-danger  btn-sm"><i class="fa fa-print"
                                     style="font-size:36px"></i></button>
                         </div>
-                            </form>
                     </div>
                 @endif
             </div>
@@ -1438,20 +1423,15 @@
                                 <textarea class="form-control" id="eyedistanceunfitRemark" rows="3"></textarea>
                             </div>
                         </div>
-                        <form id="yourFormId" action="{{ route('test_again') }}" method="POST">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" id="eyedistance" type="button"
+                            <button class="btn btn-primary" id="eyedistance"
                                 onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
-                            @csrf <!-- Add this line if you're using CSRF protection -->
-                             <input type="hidden" id="" name="mediId" value="{{$medical_id}}">
-                             <input type="hidden" name="featureId" value="eyedistance">
-                            <button class="btn btn-danger" type="submit" id="eyedistance_test_again">Please test again</button>
+                            <button class="btn btn-danger" id="eyedistance_test_again">Please test again</button>
                             &nbsp;&nbsp;
-                            <button onclick="eyedistancepdf()" class="btn btn-danger btn-sm" type="button"><i class="fa fa-print"
+                            <button onclick="eyedistancepdf()" class="btn btn-danger  btn-sm"><i class="fa fa-print"
                                     style="font-size:36px"></i></button>
                         </div>
-                            </form>
                     </div>
                 @endif
             </div>
@@ -1710,20 +1690,14 @@
                             <textarea class="form-control" id="hearingtestunfitRemark" rows="3"></textarea>
                         </div>
                     </div>
-                    <form id="yourFormId" action="{{ route('test_again') }}" method="POST">
-                        <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" id="hearingtest" type="button"
-                                onclick="saveResult(this)">Submit</button>
-                            &nbsp;&nbsp;
-                            @csrf <!-- Add this line if you're using CSRF protection -->
-                             <input type="hidden" id="" name="mediId" value="{{$medical_id}}">
-                             <input type="hidden" name="featureId" value="hearingtest">
-                            <button class="btn btn-danger" type="submit" id="hearingtest_test_again">Please test again</button>
-                            &nbsp;&nbsp;
-                            <button onclick="generateHearingtestPDF()" type="button" class="btn btn-danger  btn-sm"><i class="fa fa-print"
-                                    style="font-size:36px"></i></button>
-                        </div>
-                            </form>
+                    <div class="col-12 d-flex justify-content-center">
+                        <button class="btn btn-dark" id="hearingtest" onclick="saveResult(this)">Submit</button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-warning" id="hearing_test_again">Please Test Again</button>
+                        &nbsp;&nbsp;
+                        <button onclick="generateHearingtestPDF()"><i class="fa fa-print text-success"
+                                style="font-size:36px"></i></button>
+                    </div>
                 </div>
             @endif
         </div>
@@ -1814,18 +1788,13 @@
                                 <textarea class="form-control" id="rtunfitRemark" rows="3"></textarea>
                             </div>
                         </div>
-                        <form id="yourFormId" action="{{ route('test_again') }}" method="POST">
                         <div class="col-12 d-flex justify-content-center">
-                            @csrf <!-- Add this line if you're using CSRF protection -->
-                            <button class="btn btn-primary" id="rt" type="button"
+                            <button class="btn btn-primary" id="rt"
                                 onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
-                             <input type="hidden" id="" name="mediId" value="{{$medical_id}}">
-                             <input type="hidden" name="featureId" value="rt">
-                            <button class="btn btn-danger" type="submit" id="rt_test_again">Please test again</button>
+                            <button class="btn btn-danger" id="rt_test_again">Please test again</button>
                             &nbsp;&nbsp;
                         </div>
-                            </form>
                     </div>
                 @endif
             </div>
@@ -1890,21 +1859,16 @@
 
 
                         </div>
-                        <form id="yourFormId" action="{{ route('test_again') }}" method="POST">
                         <div class="col-12 d-flex justify-content-center">
-                            &nbsp;&nbsp;
-                            @csrf <!-- Add this line if you're using CSRF protection -->
-                             <input type="hidden" id="" name="mediId" value="{{$medical_id}}">
-                             <input type="hidden" name="featureId" value="flatfoot">
-                            <button class="btn btn-primary" id="flatfoot" type="button"
+                            <button class="btn btn-primary" id="flatfoot"
                                 onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
                             <button class="btn btn-danger" id="flatfoot_test_again">Please test again</button>
                             &nbsp;&nbsp;
-                            <button onclick="flatfootgeneratePDF()" type="button" class="btn btn-danger  btn-sm"><i
+                            <button onclick="flatfootgeneratePDF()" class="btn btn-danger  btn-sm"><i
                                     class="fa fa-print" style="font-size:36px"></i></button>
+
                         </div>
-                            </form>
                     </div>
                 @endif
 
@@ -1972,17 +1936,13 @@
                                 <textarea class="form-control" id="bppvunfitRemark" rows="3"></textarea>
                             </div>
                         </div>
-                        <form id="yourFormId" action="{{ route('test_again') }}" method="POST">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" id="bppv" type="button"
+                            <button class="btn btn-primary" id="bppv"
                                 onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
-                            @csrf <!-- Add this line if you're using CSRF protection -->
-                             <input type="hidden" id="" name="mediId" value="{{$medical_id}}">
-                             <input type="hidden" name="featureId" value="bppv">
-                            <button class="btn btn-danger" type="submit" id="bppv_test_again">Please test again</button>
+                            <button class="btn btn-danger" id="bppv_test_again">Please test again</button>
+                            &nbsp;&nbsp;
                         </div>
-                            </form>
                     </div>
                 @endif
             </div>
@@ -2048,18 +2008,13 @@
                                 <textarea class="form-control" id="fukudaunfitRemark" rows="3"></textarea>
                             </div>
                         </div>
-                        <form id="yourFormId" action="{{ route('test_again') }}" method="POST">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-primary" id="fukuda" type="button"
+                            <button class="btn btn-primary" id="fukuda"
                                 onclick="saveResult(this)">Submit</button>
                             &nbsp;&nbsp;
-                            @csrf <!-- Add this line if you're using CSRF protection -->
-                             <input type="hidden" id="" name="mediId" value="{{$medical_id}}">
-                             <input type="hidden" name="featureId" value="fukuda">
-                            <button class="btn btn-danger" type="submit" id="fukuda_test_again">Please test again</button>
+                            <button class="btn btn-danger" id="fukuda_test_again">Please test again</button>
                             &nbsp;&nbsp;
                         </div>
-                            </form>
                     </div>
                 @endif
             </div>
@@ -4635,7 +4590,6 @@
             WinPrint.close();
         }, 1000);
     }
-
     function docotorFinalReportPDF() {
         var prtContent = document.getElementById("doctorreportfinal");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
@@ -4650,7 +4604,6 @@
             WinPrint.close();
         }, 1000);
     }
-
     function consumerfinalPDf() {
         var prtContent = document.getElementById("consumer_pdf");
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');

@@ -509,6 +509,9 @@
                             <div class="input-group date d-flex" id="">            
                                 <input type="date"  value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['fromdate']}}@endif" class="form-control" name="fromdate" id="startdate" placeholder="dd-mm-yyyy" />
                             </div>
+                            @error('fromdate')
+                                    <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <!--  -->
                         <!--  -->
@@ -516,8 +519,11 @@
                         <div class="col-sm-3 end-date">
                             <p class="text-dark"><strong>Date to:</strong></p>
                             <div class="input-group date d-flex" id="">
-                                <input type="date" value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['todate']}}@endif"     class="form-control" name="todate" id="enddate" placeholder="dd-mm-yyyy" />       
+                                <input type="date" value="@if(isset($customerBatchFilterdate)){{$customerBatchFilterdate['todate']}}@endif" class="form-control" name="todate" id="enddate" placeholder="dd-mm-yyyy" />       
                             </div>
+                            @error('todate')
+                                    <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <!--  -->
                         <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
@@ -604,8 +610,8 @@
                             <tr style="border-bottom:3px solid black; font-weight:9px;">
                                 <th scope="col">Sr. No.</th>
                                 <th scope="col">Create Date</th>
-                                <th scope="col"> Customer Name</th>
-                                <th scope="col"> Customer Id</th>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">Customer Id</th>
                                 <th scope="col">Customer Batch No.</th>
                                 <th scope="col">Total Test</th>
                                 <th scope="col">Per Test Amount</th>
@@ -697,8 +703,6 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
             <script>
-
-                
     //       $('#filter').on('click',function(){
     //             console.log('klk');
         

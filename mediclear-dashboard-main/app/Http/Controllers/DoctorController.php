@@ -16,6 +16,16 @@ class DoctorController extends Controller
         return view('dashboard.add-doctor',compact('doctor'));
     }
     public function filterDocter(Request $request){
+        $request->validate([
+            'start' => 'required|date',
+            'end' => 'required|date|after_or_equal:start',
+        ], [
+            'start.required' => 'Start date is required.',
+            'end.required' => 'End date is required.',
+            'start.date' => 'Start date must be a valid date format.',
+            'end.date' => 'End date must be a valid date format.',
+            'end.after_or_equal' => 'End date must be equal to or after the start date.',
+        ]);
         $start=$request->start;
         $end=$request->end;
         $doctor=Doctor::whereDate('created_at', '>=', $start)
@@ -28,16 +38,26 @@ class DoctorController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'required',
-            // 'user_id' => 'required|unique:corporate_i_d_s',
-            // 'address' => 'required',
-            'mobile_no' => 'required|numeric|unique:doctors|digits:10',
+            'mobile_no' => 'required|numeric|unique:doctors|digits:10|regex:/^[6-9]\d{9}$/',
             'email' => 'required|email|unique:doctors',
             'post' => 'required',
             'registration_number' => 'required|unique:doctors',
+            'sign' => 'required|image|mimes:png,jpg,jpeg|max:2048', // Adjust max file size as needed
+            'seal' => 'required|image|mimes:png,jpg,jpeg|max:2048', // Adjust max file size as needed
+        ], [
+            'mobile_no.regex' => 'The mobile number must start with a digit between 6 and 9.',
+            'sign.required' => 'Signature is required.',
+            'sign.image' => 'The signature must be an image file (PNG, JPG).',
+            'sign.mimes' => 'The signature must be a PNG or JPG image.',
+            'sign.max' => 'The signature may not be greater than 2MB in size.',
+            'seal.required' => 'Seal of doctor is required.',
+            'seal.image' => 'The seal must be an image file (PNG, JPG).',
+            'seal.mimes' => 'The seal must be a PNG or JPG image.',
+            'seal.max' => 'The seal may not be greater than 2MB in size.',
         ]);
+        
         if ($validate->fails()) {
-            // return back()->withErrors($validate)->withInput();
-            return back()->withErrors($validate);
+            return back()->withErrors($validate)->withInput();
         }
         if (empty($request->sign)) {
             return redirect()->back()->with('message', "Signature is required");

@@ -68,6 +68,15 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ url('/corporateID') }}" method="post">
                 @csrf
                 <!--  3 -row start block -->
@@ -99,6 +108,9 @@
                                             <input type="date" name="start" class="form-control" id="startdate"
                                                 value="{{ $start ?? '' }}" placeholder="dd-mm-yyyy" />
                                         </div>
+                                        @error('start')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <!--  -->
@@ -110,6 +122,9 @@
                                             <input type="date" class="form-control" name="end" id="endDate"
                                                 value="{{ $end ?? '' }}" placeholder="dd-mm-yyyy" />
                                         </div>
+                                        @error('end')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">

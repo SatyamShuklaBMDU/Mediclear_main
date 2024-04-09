@@ -150,7 +150,7 @@ class VertigoReportController extends Controller
                     return $actionBtn;
                 })->addIndexColumn()
                 ->addColumn('consumertestcount', function ($row) {
-                    if ($row->count == 8) {
+                    if ($row->count == 9) {
                         $actionBtn = '<a type="button" href="javascript:void(0)" class="btn bg-success btn-sm" style="color:white">Complete</a>';
                         return $actionBtn;
                     } else {
@@ -220,7 +220,7 @@ class VertigoReportController extends Controller
         $consumer_id = $request->get('id'); 
         $corporateCompanyBatchName=MedicalDetail::select('name','batch_no')->join('corporatebatchs','corporatebatchs.id','=','medical_details.cusmerbatchdetails_id')->join('company','company.id','=','corporatebatchs.company_id')->where('medical_details.id',$consumer_id)->get();
         $examnationDetailsBeforeMedicalTest = MedicalDetail::where('id', $consumer_id)->get();
-        $TestData = Test::where('medical_details_id', $consumer_id)->where('test_type_id', '1')->where('test_status', '1')->whereIn('features', ['bp', 'eyecheckup', 'rt', 'flatfoot', 'bppv', 'fukuda','hearingtest','eyedistance'])->pluck('data', 'features');
+        $TestData = Test::where('medical_details_id', $consumer_id)->where('test_type_id', '1')->where('test_status', '1')->whereIn('features', ['bp', 'eyecheckup', 'rt', 'flatfoot', 'bppv', 'fukuda','hearingtest','eyedistance','righteyedistance'])->pluck('data', 'features');
         $Testresult = Test::where('medical_details_id', $consumer_id)->where('test_type_id', '1')->where('test_status', '1')->pluck('test_results', 'features');
         $testremark=[];
         foreach($Testresult as $feature => $testresults){
@@ -236,7 +236,7 @@ class VertigoReportController extends Controller
         $doctordata = Doctor::select('registration_number', 'name', 'id')->where('status', 'Active')->get();
         $AssignDoctor = MedicalDetail::select('doctors.sign as doctorsign', 'doctors.seal_of_doctor as doctorseal', 'doctors.registration_number as doctorregistration','doctor_final_result')->where('medical_details.id', $consumer_id)->join('doctors', 'medical_details.doctorid', '=', 'doctors.id')->get();
         $CountRisultGivenByDoctor=Test::where('medical_details_id',$consumer_id)->where('test_type_id', '1')->where('test_status', '1')->where('test_results','!=',null)->count(); 
-        return view('dashboard.vertigo.consumer-test-profile', ['examnationDetailsBeforeMedicalTest' => $examnationDetailsBeforeMedicalTest, 'TestData' => $TestData, 'Testresult' => $Testresult, 'doctordata' => $doctordata, 'AssignDoctor' => $AssignDoctor,'CountRisultGivenByDoctor'=> $CountRisultGivenByDoctor,'corporateCompanyBatchName'=>$corporateCompanyBatchName,'testremarks'=>$testremark]);
+        return view('dashboard.vertigo.consumer-test-profile', ['examnationDetailsBeforeMedicalTest' => $examnationDetailsBeforeMedicalTest, 'TestData' => $TestData, 'Testresult' => $Testresult, 'doctordata' => $doctordata, 'AssignDoctor' => $AssignDoctor,'CountRisultGivenByDoctor'=> $CountRisultGivenByDoctor,'corporateCompanyBatchName'=>$corporateCompanyBatchName,'testremarks'=>$testremark,'medical_id'=>$consumer_id]);
     }
     public function consumertestresult(Request $request)
     {
@@ -309,6 +309,15 @@ class VertigoReportController extends Controller
                      .'Final Vertico Report:'  .$sendData['result'] .' ' ;
           $qrcodeConsumer=  QrCode::size(256)->generate( $consumerQrData);
           return  $qrcodeConsumer;
+    }
+    public function test_again(Request $request){
+        if($request->featureId == 'eyedistance'){
+            Test::where('medical_details_id',$request->mediId)->where('features',$request->featureId)->delete();
+            Test::where('medical_details_id',$request->mediId)->where('features','righteyedistance')->delete();
+        }else{
+            Test::where('medical_details_id',$request->mediId)->where('features',$request->featureId)->delete();
+        }
+       return back()->with('message','Perform Test Again');
     }
 }
 

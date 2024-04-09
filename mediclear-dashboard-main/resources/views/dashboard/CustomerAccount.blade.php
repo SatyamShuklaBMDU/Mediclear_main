@@ -265,6 +265,9 @@
                                     <input type="date" class="form-control" name="start" id="startdate"
                                         value="{{ $start ?? '' }}" placeholder="dd-mm-yyyy" />
                                 </div>
+                                @error('start')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-sm-3 end-date">
                                 <p class="text-dark"><strong>Date to:</strong></p>
@@ -272,6 +275,9 @@
                                     <input type="date" name="end" class="form-control" id="enddate"
                                         value="{{ $end ?? '' }}" placeholder="dd-mm-yyyy" />
                                 </div>
+                                @error('end')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
                                 <button class="btn bg-gradient-success text-white shadow-lg"
@@ -362,7 +368,7 @@
        var csrfToken = $('meta[name="csrf-token"]').attr('content');
        var customerId = $(row).data('consumer');
        $.ajax({
-           url: '/save-customer-payment-details',
+           url: '{{url('/save-customer-payment-details')}}',
            type: 'POST',
            headers: {
                'X-CSRF-TOKEN': csrfToken

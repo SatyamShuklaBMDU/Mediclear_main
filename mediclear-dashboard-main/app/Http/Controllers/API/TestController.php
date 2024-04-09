@@ -241,7 +241,6 @@ class TestController extends Controller
             ], 200);
 
         } catch (\Exception $e) {
-
             DB::rollBack();
             return Response::json(
                 array(
@@ -261,7 +260,6 @@ class TestController extends Controller
         $test = Test::where('medical_details_id', $request->medical_details_id)->where('test_type_id', $request->test_type_id)->where('features', $request->features)->pluck('test_status');
         if (!isset($test[0])) {
             return '0';
-
         } elseif ($test[0] == '0') {
             return '0';
         } elseif ($test[0] == '1') {
@@ -297,7 +295,6 @@ class TestController extends Controller
                 ->where('medical_details_id', $request->medical_details_id)
                 ->where('test_status', '1')
                 ->latest()->first();
-
             if ($latestTestData) {
                 return response()->json([
                     'status' => 'forbidden',
@@ -305,7 +302,6 @@ class TestController extends Controller
                     'message' => 'You are not allowed for test again',
                 ], 403);
             }
-
             $test = Test::updateOrCreate(
                 ['features' => 'eyecheckup', 'medical_details_id' => $request->medical_details_id, 'test_type_id' => $request->test_type_id],
 
@@ -402,8 +398,6 @@ class TestController extends Controller
                 'q6' => 'required',
                 'q7' => 'required',
                 'q8' => 'required',
-                'q9' => 'required',
-                'q10' => 'required',
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -425,11 +419,10 @@ class TestController extends Controller
             $test = Test::updateOrCreate(
                 ['features' => 'eyedistance', 'medical_details_id' => $request->medical_details_id, 'test_type_id' => $request->test_type_id],
                 [
-                    'data' => json_encode(['q1' => $request->q1, 'q2' => $request->q2, 'q3' => $request->q3, 'q4' => $request->q4, 'q5' => $request->q5, 'q6' => $request->q6, 'q7' => $request->q7, 'q8' => $request->q8, 'q9' => $request->q9, 'q10' => $request->q10]),
+                    'data' => json_encode(['q1' => $request->q1, 'q2' => $request->q2, 'q3' => $request->q3, 'q4' => $request->q4, 'q5' => $request->q5, 'q6' => $request->q6, 'q7' => $request->q7, 'q8' => $request->q8]),
                     'test_status' => '1',
                 ]
             );
-            // dd($test);
             $current_timestamp = Carbon::now()->timestamp;
             $certification_no = 'CN' . $current_timestamp . rand(100, 100000);
             $updateMedicalStatusOfConsumer = MedicalDetail::where('id', $request->medical_details_id)->where('consumer_status', '0')->where('certification_number', null)->update([
@@ -462,13 +455,110 @@ class TestController extends Controller
             if ($request->q8 == 'true') {
                 $result = $result + 1;
             }
-            if ($request->q9 == 'true') {
+            $percentage = ($result / 8) * 100;
+            if ($test) {
+                return response()->json([
+                    "status" => "success",
+                    "message" => "Eye Distance test added successfully!",
+                    "consumer_status" => "1",
+                    "percentage" => $percentage,
+                    "verified" => "You gave test and your profile  is verified",
+                    "consumer_test_report" => $test,
+
+                ], 200);
+            } else {
+                return response()->json([
+                    "status" => "error",
+                    "message" => "Something went wrong!",
+                ], 500);
+            }
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            return response()->json(
+                array(
+                    'status' => 'error',
+                    'code' => 404,
+                    'message' => $e->getMessage(),
+                ),
+                404
+            );
+        }
+    }
+    public function righteyedistance(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $validator = Validator::make($request->all(), [
+                'medical_details_id' => 'required',
+                'test_type_id' => 'required',
+                'q1' => 'required',
+                'q2' => 'required',
+                'q3' => 'required',
+                'q4' => 'required',
+                'q5' => 'required',
+                'q6' => 'required',
+                'q7' => 'required',
+                'q8' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    "status" => "error",
+                    "message" => $validator->errors(),
+                ], 403);
+            }
+            $latestTestData = Test::where('features', 'righteyedistance')
+                ->where('medical_details_id', $request->medical_details_id)
+                ->where('test_status', '1')
+                ->latest()->first();
+            if ($latestTestData) {
+                return response()->json([
+                    'status' => 'forbidden',
+                    'code' => 403,
+                    'message' => 'You are not allowed for test again',
+                ], 403);
+            }
+            $test = Test::updateOrCreate(
+                ['features' => 'righteyedistance', 'medical_details_id' => $request->medical_details_id, 'test_type_id' => $request->test_type_id],
+                [
+                    'data' => json_encode(['q1' => $request->q1, 'q2' => $request->q2, 'q3' => $request->q3, 'q4' => $request->q4, 'q5' => $request->q5, 'q6' => $request->q6, 'q7' => $request->q7, 'q8' => $request->q8]),
+                    'test_status' => '1',
+                ]
+            );
+            $current_timestamp = Carbon::now()->timestamp;
+            $certification_no = 'CN' . $current_timestamp . rand(100, 100000);
+            $updateMedicalStatusOfConsumer = MedicalDetail::where('id', $request->medical_details_id)->where('consumer_status', '0')->where('certification_number', null)->update([
+                'consumer_status' => '1',
+                'certification_number' => $certification_no,
+            ]);
+            DB::commit();
+            $result = 0;
+            if ($request->q1 == 'true') {
                 $result = $result + 1;
             }
-            if ($request->q10 == 'true') {
+            if ($request->q2 == 'true') {
                 $result = $result + 1;
             }
-            $percentage = ($result / 10) * 100;
+            if ($request->q3 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q4 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q5 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q6 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q7 == 'true') {
+                $result = $result + 1;
+            }
+            if ($request->q8 == 'true') {
+                $result = $result + 1;
+            }
+            $percentage = ($result / 8) * 100;
             if ($test) {
                 return response()->json([
                     "status" => "success",

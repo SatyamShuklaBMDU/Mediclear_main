@@ -29,12 +29,9 @@ class Customer extends Authenticatable
         'password',
     ];
     
-      public function customerbatches()
+    public function customerbatches()
     {
-
-
         return $this->hasMany(CustomerBatch::class, 'customer_id', 'id');
-
     }
 
 }

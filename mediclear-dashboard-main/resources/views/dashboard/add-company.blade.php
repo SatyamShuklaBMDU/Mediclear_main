@@ -57,7 +57,15 @@
 
     <!-- Page Heading -->
     <h3 class="h3 mb-2 text-gray-800">Company</h3>
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <!-- DataTales Example -->
     <form action="{{ url('/add-company') }}" method="post">
         @csrf
@@ -90,6 +98,9 @@
                                     <input type="date" name="start" value="{{ $start ?? '' }}"
                                         class="form-control" id="startdate" placeholder="dd-mm-yyyy" />
                                 </div>
+                                @error('start')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <!--  -->
                             <!--  -->
@@ -99,8 +110,10 @@
                                 <div class="input-group date d-flex" id="datepicker2">
                                     <input type="date" name="end" value="{{ $end ?? '' }}"
                                         class="form-control" id="endDate" placeholder="dd-mm-yyyy" />
-
                                 </div>
+                                @error('end')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <!--  -->
                             <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">
@@ -109,7 +122,7 @@
                             </div>
     </form>
     <div class="col-md-1 " style="margin-left: -12px;  margin-top:47px;">
-        <a href="{{ url('/add-company') }}" class="btn text-white  shadow-lg bg-gradient-success ">Reset</a>
+        <a href="{{ url('/add-company') }}" class="btn text-white shadow-lg bg-gradient-success">Reset</a>
     </div>
     <div class="col-sm-2" style="position: relative; top: 47px;">
         <div class="Click-here"> <button class="btn  bg-gradient-success   text-white shadow-lg" type="button"
@@ -134,7 +147,7 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <input type="email" required style="margin-bottom:10px;" name="email" /> <br />
                                 <label for="">Phone NO. &nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <input type="text" required style="margin-bottom:10px;" name="mobile_no" /> <br />
+                                <input type="text" style="margin-bottom:10px;" name="mobile_no" /> <br />
                                 <button type="submit" class="btn text-white bg-gradient-success"
                                     style="margin-left: 378px">
                                     ADD
@@ -211,7 +224,9 @@
                     <td>
                         @if ($company->status == 'Active')
                             <div class="dropdown">
-                                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-success dropdown-toggle" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
                                     Active
                                 </button>
                                 <div class="dropdown-menu animated--fade-in bg-danger"

@@ -42,18 +42,19 @@ Route::post('/forbiddenlity-add-consumer', [MedicaldetailsController::class,'che
 Route::post('/edit-consumer-medical-data', [MedicaldetailsController::class,'editconsumerdetails'])->middleware('auth:sanctum');
 Route::post('/corporate-company-list', [MedicaldetailsController::class,'companywithbatch'])->middleware('auth:sanctum');
 Route::post('/consumer-medical-data-delete', [MedicaldetailsController::class,'deleteConsumerMedicaldata'])->middleware('auth:sanctum');
-
+Route::any('/test-result',[CompanyController::class,'testResult']);
 ///Testing
-Route::post('/bpdata', [TestController::class, 'bp']);
-Route::post('/rombergTest', [TestController::class, 'rombergTest']);
-Route::post('/check-access-test', [TestController::class, 'checkaccesoftest']);
-Route::post('/eyecheckup', [TestController::class, 'eyecheckup']);
-Route::post('/eyedistance', [TestController::class, 'eyedistance']);
-Route::post('/hearingdata', [TestController::class, 'hearingData']);
-Route::post('/videonystagmography', [TestController::class, 'videonystagmography']);
-Route::post('/flatfoot', [TestController::class, 'flatfoot']);
-Route::post('/bppv', [TestController::class, 'bppv']);
-Route::post('/fukuda', [TestController::class, 'fukuda']);
+Route::post('/bpdata', [TestController::class, 'bp'])->middleware('auth:sanctum');
+Route::post('/rombergTest', [TestController::class, 'rombergTest'])->middleware('auth:sanctum');
+Route::post('/check-access-test', [TestController::class, 'checkaccesoftest'])->middleware('auth:sanctum');
+Route::post('/eyecheckup', [TestController::class, 'eyecheckup'])->middleware('auth:sanctum');
+Route::post('/eyedistance', [TestController::class, 'eyedistance'])->middleware('auth:sanctum');
+Route::post('/righteyedistance', [TestController::class, 'righteyedistance'])->middleware('auth:sanctum');
+Route::post('/hearingdata', [TestController::class, 'hearingData'])->middleware('auth:sanctum');
+Route::post('/videonystagmography', [TestController::class, 'videonystagmography'])->middleware('auth:sanctum');
+Route::post('/flatfoot', [TestController::class, 'flatfoot'])->middleware('auth:sanctum');
+Route::post('/bppv', [TestController::class, 'bppv'])->middleware('auth:sanctum');
+Route::post('/fukuda', [TestController::class, 'fukuda'])->middleware('auth:sanctum');
 Route::post('/get-report',[TestController::class,'certificationreport']);
 //Notification
 Route::post('/notification', [NotificationController::class, 'notification'])->middleware('auth:sanctum');

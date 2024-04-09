@@ -82,13 +82,16 @@ class CustomerBatchController extends Controller
     }
     public function customerfilterData(Request $request)
     {
-         $validate = Validator::make($request->all(), [
-            'fromdate' => ['required'],
-            'todate' => ['required'],
+        $request->validate([
+            'fromdate' => 'required|date',
+            'todate' => 'required|date|after_or_equal:fromdate',
+        ], [
+            'fromdate.required' => 'From date is required.',
+            'todate.required' => 'To date is required.',
+            'fromdate.date' => 'From date must be a valid date format.',
+            'todate.date' => 'To date must be a valid date format.',
+            'todate.after_or_equal' => 'To date must be equal to or after the From date.',
         ]);
-        if ($validate->fails()) {
-            return back()->withErrors($validate)->withInput();
-        }
         $activeCustomerId = Customer::select('user_id')->where('status', 'Active')->get();
         // $customerBatch = CustomerBatch::with(['customers' => function ($query) use ($request) {
         //     $query->whereDate('customerbatchs.created_at', '>=', $request->fromdate)

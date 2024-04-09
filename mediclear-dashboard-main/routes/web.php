@@ -22,6 +22,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentHistoryController;
 use App\Http\Controllers\VertigoReportController;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -157,6 +158,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/qrcode', [VertigoReportController::class, 'show']);
         Route::post('/doctor-final-test-result', [VertigoReportController::class, 'doctorfinalresult'])->name('doctor-final-test-result');
     });
+    Route::post('test-again', [VertigoReportController::class, 'test_again'])->name('test_again');
     // pdf 
     Route::post('/consumer-download-pdf', [VertigoReportController::class, 'pdf']);
     Route::post('/update-print-status', [ConsumerHistoryController::class, 'updateprint']);

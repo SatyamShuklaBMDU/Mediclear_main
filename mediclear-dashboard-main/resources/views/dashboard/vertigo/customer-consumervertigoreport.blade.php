@@ -24,7 +24,6 @@
                 <th>Consumer Name</th>
                 <th>Consumer Mobile Number</th>
                 <th> Test Status</th>
-                {{-- <th>Cunsumer Image</th> --}}
                 <th>Consumer Test Report</th>
             </tr>
         </thead>

@@ -568,6 +568,9 @@ s
                             <div class="input-group date d-flex" id="">
                                 <input type="date" value="@if(isset($corporatefilterBatchFilterdate)){{$corporatefilterBatchFilterdate['fromdate']}}@endif"  name="fromdate" class="form-control" id="startdate" placeholder="dd-mm-yyyy" />
                             </div>
+                            @error('fromdate')
+                                    <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div> 
                         <!--  -->
                         <!--  -->
@@ -577,6 +580,9 @@ s
                             <div class="input-group date d-flex" id="">
                                 <input type="date" value="@if(isset($corporatefilterBatchFilterdate)){{$corporatefilterBatchFilterdate['todate']}}@endif" name="todate" class="form-control" id="enddate" placeholder="dd-mm-yyyy">    
                             </div>
+                            @error('todate')
+                                    <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <!--  -->
                          <div class="col-md-1 text-end" style="margin-left: 10px; margin-top:47px;">

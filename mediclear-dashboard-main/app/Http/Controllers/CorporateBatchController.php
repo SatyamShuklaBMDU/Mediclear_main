@@ -20,13 +20,16 @@ class CorporateBatchController extends Controller
     }
     public function corporatefilter(Request $request)
     {
-        $validate = Validator::make($request->all(), [
-            'fromdate' => ['required'],
-            'todate' => ['required'],
+        $request->validate([
+            'fromdate' => 'required|date',
+            'todate' => 'required|date|after_or_equal:fromdate',
+        ], [
+            'fromdate.required' => 'From date is required.',
+            'todate.required' => 'To date is required.',
+            'fromdate.date' => 'From date must be a valid date format.',
+            'todate.date' => 'To date must be a valid date format.',
+            'todate.after_or_equal' => 'To date must be equal to or after the From date.',
         ]);
-        if ($validate->fails()) {
-            return back()->withErrors($validate)->withInput();
-        }
         $companyDetails = Company::select('id', 'name')->get();
         $corporatefilterBatchFilter = CorporateBatch::select(
             'corporatebatchs.id as corporatebatchs_id',

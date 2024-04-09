@@ -15,6 +15,16 @@ class CorporateController extends Controller
         return view('dashboard.corporateId',compact('corporate'));
     }
     public function filterCorporateID(Request $req){
+        $req->validate([
+            'start' => 'required|date',
+            'end' => 'required|date|after_or_equal:start',
+        ], [
+            'start.required' => 'Start date is required.',
+            'end.required' => 'End date is required.',
+            'start.date' => 'Start date must be a valid date format.',
+            'end.date' => 'End date must be a valid date format.',
+            'end.after_or_equal' => 'End date must be equal to or after the start date.',
+        ]);
         $start=$req->start;
         $end=$req->end;
         $corporate=CorporateID::whereDate('created_at', '>=', $start)
@@ -29,21 +39,15 @@ class CorporateController extends Controller
 
 
     public function addCorporateID(Request $req){
-
-
         $this->validate($req, [
             'name' => 'required',
             'user_id' => 'required|unique:corporate_i_d_s',
-            // 'address' => 'required',
-            'mobile_no' => 'required|digits:10',
+            'mobile_no' => 'required|digits:10|regex:/^[6-9]\d{9}$/',
             'email' => 'required|email|unique:corporate_i_d_s',
-            'password'=>'required',
-            ]);
-
-
-
-
-
+            'password' => 'required',
+        ], [
+            'mobile_no.regex' => 'The mobile number must start with a digit between 6 and 9.',
+        ]);
             $result=CorporateID::create([
                 'name'=>$req->name,
                 'user_id'=>$req->user_id,
@@ -52,14 +56,10 @@ class CorporateController extends Controller
                 'password'=>bcrypt($req->password),
                 'status'=>'Active'
             ]);
-
-
             if($result){
                 return back()->with('message','Corporate ID Added Successfully');
             }else{
                 return back()->with('message','Failed');
-
-
             }
     }
 

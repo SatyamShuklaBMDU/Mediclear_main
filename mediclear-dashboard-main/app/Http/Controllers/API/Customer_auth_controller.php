@@ -41,12 +41,6 @@ class Customer_auth_controller extends Controller
         $adminauthentication = Auth::guard('customer-api')->attempt($credentials, $request->get('remember'));
         $admin = Auth::guard('customer-api')->user();
 
-
-
-
-
-
-
         if (!isset($admin) || !Hash::check($request->password, $admin->password)) {
             return response()->json(['Unauthorized' => ['error' => 'The provided credentials are incorrect.']], 401);
         } else {
@@ -127,7 +121,6 @@ class Customer_auth_controller extends Controller
         // Generate a unique ID (e.g., incrementing number)
         $nextId = Customer::all()->count();
         $$nextId = $nextId + 5;
-
         // Pad the ID with leading zeros
         $code .= str_pad($nextId, 6, '0', STR_PAD_LEFT);
 
@@ -147,13 +140,7 @@ class Customer_auth_controller extends Controller
 
     public function addcustomerprofiledata(Request $request)
     {
-
         try {
-
-
-
-
-
             if ($request->isMethod('get')) {
                 if (Auth::check()) {
                         if (Auth::user()->getMorphClass() == "App\Models\Customer") {
@@ -168,7 +155,7 @@ class Customer_auth_controller extends Controller
                     $userdata->pincode = Auth::user()->pin_code;
                     $userdata->state = Auth::user()->state;
                     $userdata->city = Auth::user()->city;
-                     $userdata->unique_id = Auth::user()->user_id;
+                    $userdata->unique_id = Auth::user()->user_id;
                     $userdata->type = $type;
                     $userdata->customer_profile_image = (Auth::user()->customer_profile_image_name == null) ? ("customer profile not updated") : asset('public' . '/customer' . '/' . Auth::user()->customer_profile_image_name);
                     // $userdata->customer_profile_image = asset('public' . '/customer' . '/' . Auth::user()->customer_profile_image_name);
