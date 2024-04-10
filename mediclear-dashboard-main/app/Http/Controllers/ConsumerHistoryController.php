@@ -18,7 +18,7 @@ class ConsumerHistoryController extends Controller
                 $data = MedicalDetail::select('customerbatchs.batch_no as batch_no','medical_details.id as consumer_id','customers.name as customername','customers.email as customeremail',
                 'medical_details.certification_number as certification_number',
                 'customerbatchs.test as test','customerbatchs.payment_status as payment_status',
-                DB::raw("DATE_FORMAT(DATE_ADD(DATE_SUB(medical_details.doctor_submit_date, INTERVAL 1 YEAR), INTERVAL -1 DAY), '%d/%b/%Y') AS validupto"),
+                DB::raw("DATE_FORMAT(DATE_ADD(DATE_SUB(medical_details.doctor_submit_date, INTERVAL -1 YEAR), INTERVAL -1 DAY), '%d/%b/%Y') AS validupto"),
                 DB::raw("DATE_FORMAT(medical_details.doctor_submit_date ,'%d/%b/%Y') AS submitdate"))
                 ->join('customerbatchs','customerbatchs.id','=','medical_details.cusmerbatchdetails_id')
                 ->join('customers','customers.id','=','customerbatchs.customer_id')
@@ -31,7 +31,7 @@ class ConsumerHistoryController extends Controller
                 'medical_details.certification_number as certification_number',
                 'medical_details.isPrint as isPrint',
                 'corporatebatchs.test as test','corporatebatchs.payment_status as payment_status',
-                DB::raw("DATE_FORMAT(DATE_ADD(DATE_SUB(medical_details.doctor_submit_date, INTERVAL 1 YEAR), INTERVAL -1 DAY), '%d/%b/%Y') AS validupto"),
+                DB::raw("DATE_FORMAT(DATE_ADD(DATE_SUB(medical_details.doctor_submit_date, INTERVAL -1 YEAR), INTERVAL -1 DAY), '%d/%b/%Y') AS validupto"),
                 DB::raw("DATE_FORMAT(medical_details.doctor_submit_date ,'%d/%b/%Y') AS submitdate"))
                 ->join('corporatebatchs','corporatebatchs.id','=','medical_details.cusmerbatchdetails_id')
                 ->join('company','company.id','=','corporatebatchs.company_id')
@@ -40,6 +40,7 @@ class ConsumerHistoryController extends Controller
                 ->orderBy('medical_details.doctor_submit_date', 'DESC')
                 ->get();
             }
+            // dd($data);
                 return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('payment_status', function ($row) {

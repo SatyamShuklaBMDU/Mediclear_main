@@ -1433,7 +1433,7 @@
                                     <label class="form-check-label" for="checkbox2">Unfit</label>
                                 </div>
                             </div>
-                            <div class="form-group" id="eyedistance_test_remark_result" style="display:none">
+                            <div class="form-group" id="eyedistance_test_remark_result">
                                 <label for="exampleFormControlTextarea1">Unfit Remark</label>
                                 <textarea class="form-control" id="eyedistanceunfitRemark" rows="3"></textarea>
                             </div>
@@ -3856,16 +3856,13 @@
     })
     $("#eyedistancecheckboxunfit").click(function() {
         if ($("#eyedistancecheckboxunfit").is(":checked ")) {
-            $("#eyedistance_test_remark_result").show();
             $("#eyedistancecheckboxfit").prop("checked", false);
         } else {
-            $("#eyedistance_test_remark_result").hide();
             $("#eyedistancecheckboxfit").prop("checked", true);
         }
     });
     $("#eyedistancecheckboxfit").click(function() {
         $("#eyedistancecheckboxunfit").prop("checked", false);
-        $("#eyedistance_test_remark_result").hide();
     })
     $("#rtcheckboxunfit").click(function() {
         if ($("#rtcheckboxunfit").is(":checked ")) {
@@ -4557,10 +4554,8 @@
 
     function verticoPDF() {
         var prtContent = document.getElementById("verticopdfreport");
-        var hearingcanvas = document.getElementById('modalHearingChartCanvas');
         var bpcanvas = document.getElementById('BpGraphModal');
         var bpdataUrl = bpcanvas.toDataURL('image/png');
-        var hearingdataUrl = hearingcanvas.toDataURL('image/png');
         var style = `<style>
                             .flex-wrapper {
                                 display: flex;
@@ -4622,7 +4617,6 @@
                         </style>`;
         var Total = style + prtContent.innerHTML;
         Total += '<img src="' + bpdataUrl + '" style="width:100%;">';
-        Total += '<img src="' + hearingdataUrl + '" style="width:100%;">';
         var WinPrint = window.open('', '', 'left=0,top=0,width=1200,height=1000,toolbar=0,scrollbars=0,status=0');
         var bootstrapCDN =
             '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">';
